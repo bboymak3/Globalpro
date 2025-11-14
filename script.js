@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
         offset: 100
     });
     
-    // Variables para el menú móvil
+    // ========== FUNCIONALIDAD DEL MENÚ MÓVIL ==========
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('overlay');
@@ -90,6 +90,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // ========== FUNCIONALIDAD DEL MENÚ DESKTOP ==========
+    // Cerrar dropdowns al hacer clic fuera
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.nav-item')) {
+            document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+                dropdown.style.opacity = '0';
+                dropdown.style.visibility = 'hidden';
+                dropdown.style.transform = 'translateY(10px)';
+            });
+        }
+    });
+    
     // Smooth scroll para enlaces internos
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -101,36 +113,4 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // Efecto de sombra en el navbar al hacer scroll
-    window.addEventListener('scroll', function() {
-        const navbar = document.querySelector('.main-nav');
-        if (window.scrollY > 50) {
-            navbar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
-        } else {
-            navbar.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-        }
-    });
-    
-    // Prevenir el comportamiento por defecto de los enlaces que no tienen href
-    document.querySelectorAll('a[href="#"]').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-        });
-    });
-});
-
-// Agregar clase no-scroll al body cuando el menú está abierto
-document.head.insertAdjacentHTML('beforeend', `
-<style>
-    body.no-scroll {
-        overflow: hidden;
-    }
-</style>
-`);
+                    top:

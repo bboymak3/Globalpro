@@ -1,136 +1,636 @@
-// Inicialización de AOS (Animate On Scroll)
-document.addEventListener('DOMContentLoaded', function() {
-    AOS.init({
-        duration: 800,
-        easing: 'ease-in-out',
-        once: true,
-        offset: 100
-    });
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GlobalPro Mecánica - Servicios de mecánica automotriz profesional en Santiago, Región Metropolitana. Reparación, mantenimiento y diagnóstico de vehículos.">
+    <meta name="keywords" content="mecánica automotriz, reparación de autos, mantenimiento vehicular, taller mecánico Santiago, diagnóstico automotriz, Chile">
+    <title>GlobalPro Mecánica | Servicios Profesionales de Mecánica Automotriz en Santiago</title>
     
-    // Variables para el menú móvil
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const overlay = document.getElementById('overlay');
-    const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    // Función para abrir/cerrar el menú móvil
-    function toggleMobileMenu() {
-        mobileMenu.classList.toggle('active');
-        overlay.classList.toggle('active');
-        document.body.classList.toggle('no-scroll');
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Nuestros estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- ========== MENÚ COMPLETO ========== -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <!-- Logo -->
+            <a href="https://globalpro.pages.dev/" class="logo">
+                <div class="logo-img">GP</div>
+                <div>
+                    <div class="logo-text">GLOBALPRO MECÁNICA</div>
+                    <div class="logo-subtext">SERVICIOS AUTOMOTRICES PROFESIONALES</div>
+                </div>
+            </a>
+            
+            <!-- Menú Desktop -->
+            <div class="desktop-menu">
+                <a href="#inicio" class="nav-link">Inicio</a>
+                
+                <!-- CATEGORÍA: Mecánica General -->
+                <div class="dropdown">
+                    <a href="#mecanica-general" class="nav-link dropdown-toggle">
+                        🔧 Mecánica General <span style="margin-left: 5px;">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/mecanica-general/integral/" class="dropdown-item">Mecánica General Integral</a>
+                        <a href="/mecanica-general/reparacion-autos/" class="dropdown-item">Reparación de Autos</a>
+                        <a href="/mecanica-general/mecanica-basica/" class="dropdown-item">Mecánica Básica Automotriz</a>
+                        <a href="/mecanica-general/reparacion-motores/" class="dropdown-item">Reparación de Motores</a>
+                        <a href="/mecanica-general/sistema-transmision/" class="dropdown-item">Sistema de Transmisión</a>
+                        <a href="/mecanica-general/reparacion-frenos/" class="dropdown-item">Reparación de Frenos</a>
+                        <a href="/mecanica-general/suspension-direccion/" class="dropdown-item">Suspensión y Dirección</a>
+                        <a href="/mecanica-general/escape-catalizador/" class="dropdown-item">Escape y Catalizador</a>
+                    </div>
+                </div>
+                
+                <!-- CATEGORÍA: Aire Acondicionado -->
+                <div class="dropdown">
+                    <a href="/aire-acondicionado/" class="nav-link dropdown-toggle">
+                        ❄️ Aire Acondicionado <span style="margin-left: 5px;">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/aire-acondicionado/reparacion/" class="dropdown-item">Reparación Aire Acondicionado</a>
+                        <a href="/aire-acondicionado/recarga-gas/" class="dropdown-item">Recarga de Gas Refrigerante</a>
+                        <a href="/aire-acondicionado/reparacion-compresores/" class="dropdown-item">Reparación de Compresores</a>
+                        <a href="/aire-acondicionado/limpieza-sistemas/" class="dropdown-item">Limpieza de Sistemas</a>
+                        <a href="/aire-acondicionado/reparacion-calefaccion/" class="dropdown-item">Reparación Calefacción</a>
+                        <a href="/aire-acondicionado/mantenimiento/" class="dropdown-item">Mantenimiento Aire Acondicionado</a>
+                        <a href="/aire-acondicionado/diagnostico-fugas/" class="dropdown-item">Diagnóstico de Fugas</a>
+                    </div>
+                </div>
+                
+                <!-- CATEGORÍA: Electricidad -->
+                <div class="dropdown">
+                    <a href="/electricidad/" class="nav-link dropdown-toggle">
+                        ⚡ Electricidad <span style="margin-left: 5px;">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/electricidad/automotriz/" class="dropdown-item">Electricidad Automotriz</a>
+                        <a href="/electricidad/electromecanica/" class="dropdown-item">Electromecánica Vehicular</a>
+                        <a href="/electricidad/reparacion-computadoras/" class="dropdown-item">Reparación Computadoras Auto</a>
+                        <a href="/electricidad/sistema-inyeccion/" class="dropdown-item">Sistema de Inyección</a>
+                        <a href="/electricidad/alternador-bateria/" class="dropdown-item">Alternador y Batería</a>
+                        <a href="/electricidad/reparacion-ecu/" class="dropdown-item">Reparación ECU</a>
+                        <a href="/electricidad/elevadores-electricos/" class="dropdown-item">Elevadores Eléctricos</a>
+                        <a href="/electricidad/instalacion-accesorios/" class="dropdown-item">Instalación Accesorios</a>
+                    </div>
+                </div>
+                
+                <!-- CATEGORÍA: Reparación de Culatas -->
+                <div class="dropdown">
+                    <a href="/reparacion-culatas/" class="nav-link dropdown-toggle">
+                        🔧 Culatas <span style="margin-left: 5px;">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/reparacion-culatas/reparacion/" class="dropdown-item">Reparación de Culatas</a>
+                        <a href="/reparacion-culatas/rectificacion/" class="dropdown-item">Rectificación de Culatas</a>
+                        <a href="/reparacion-culatas/cambio-empaquetadura/" class="dropdown-item">Cambio de Empaquetadura</a>
+                        <a href="/reparacion-culatas/puesta-punto/" class="dropdown-item">Puesta a Punto de Culatas</a>
+                        <a href="/reparacion-culatas/mantenimiento/" class="dropdown-item">Mantenimiento de Culatas</a>
+                    </div>
+                </div>
+                
+                <!-- CATEGORÍA: Servicios por Zona -->
+                <div class="dropdown">
+                    <a href="/servicios-por-zona/" class="nav-link dropdown-toggle">
+                        📍 Zonas Santiago <span style="margin-left: 5px;">▼</span>
+                    </a>
+                    <div class="dropdown-menu wide-menu">
+                        <div class="dropdown-columns">
+                            <div class="dropdown-column">
+                                <h6>Provincia de Santiago</h6>
+                                <a href="/zona/santiago-centro/" class="dropdown-item">Santiago Centro</a>
+                                <a href="/zona/providencia/" class="dropdown-item">Providencia</a>
+                                <a href="/zona/las-condes/" class="dropdown-item">Las Condes</a>
+                                <a href="/zona/nunoa/" class="dropdown-item">Ñuñoa</a>
+                                <a href="/zona/la-reina/" class="dropdown-item">La Reina</a>
+                                <a href="/zona/macul/" class="dropdown-item">Macul</a>
+                                <a href="/zona/penalolen/" class="dropdown-item">Peñalolén</a>
+                                <a href="/zona/la-florida/" class="dropdown-item">La Florida</a>
+                                <a href="/zona/maipu/" class="dropdown-item">Maipú</a>
+                                <a href="/zona/quilicura/" class="dropdown-item">Quilicura</a>
+                            </div>
+                            <div class="dropdown-column">
+                                <h6>Otras Provincias RM</h6>
+                                <a href="/zona/melipilla/" class="dropdown-item">Melipilla</a>
+                                <a href="/zona/talagante/" class="dropdown-item">Talagante</a>
+                                <a href="/zona/san-bernardo/" class="dropdown-item">San Bernardo</a>
+                                <a href="/zona/puente-alto/" class="dropdown-item">Puente Alto</a>
+                                <a href="/zona/pirque/" class="dropdown-item">Pirque</a>
+                                <a href="/zona/san-jose-de-maipo/" class="dropdown-item">San José de Maipo</a>
+                                <a href="/zona/buin/" class="dropdown-item">Buin</a>
+                                <a href="/zona/paine/" class="dropdown-item">Paine</a>
+                                <a href="/zona/colina/" class="dropdown-item">Colina</a>
+                                <a href="/zona/lampa/" class="dropdown-item">Lampa</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- WhatsApp -->
+                <a href="https://wa.me/56912345678" class="whatsapp-btn">
+                    <span>📱</span> WhatsApp
+                </a>
+            </div>
+            
+            <!-- Botón Hamburguesa -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Menú Móvil -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#inicio" class="mobile-nav-link">Inicio</a>
         
-        // Animación del botón hamburguesa
-        const spans = mobileMenuToggle.querySelectorAll('span');
-        if (mobileMenu.classList.contains('active')) {
-            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-            spans[1].style.opacity = '0';
-            spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-        } else {
-            spans[0].style.transform = 'none';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'none';
-        }
-    }
+        <!-- CATEGORÍA MÓVIL: Mecánica General -->
+        <div class="mobile-dropdown">
+            <div class="mobile-dropdown-toggle" data-target="mecanica-mobile">
+                🔧 Mecánica General <span>▼</span>
+            </div>
+            <div class="mobile-dropdown-menu" id="mecanica-mobile">
+                <a href="/mecanica-general/integral/" class="mobile-dropdown-item">Mecánica General Integral</a>
+                <a href="/mecanica-general/reparacion-autos/" class="mobile-dropdown-item">Reparación de Autos</a>
+                <a href="/mecanica-general/mecanica-basica/" class="mobile-dropdown-item">Mecánica Básica Automotriz</a>
+                <a href="/mecanica-general/reparacion-motores/" class="mobile-dropdown-item">Reparación de Motores</a>
+                <a href="/mecanica-general/sistema-transmision/" class="mobile-dropdown-item">Sistema de Transmisión</a>
+                <a href="/mecanica-general/reparacion-frenos/" class="mobile-dropdown-item">Reparación de Frenos</a>
+                <a href="/mecanica-general/suspension-direccion/" class="mobile-dropdown-item">Suspensión y Dirección</a>
+                <a href="/mecanica-general/escape-catalizador/" class="mobile-dropdown-item">Escape y Catalizador</a>
+            </div>
+        </div>
+        
+        <!-- CATEGORÍA MÓVIL: Aire Acondicionado -->
+        <div class="mobile-dropdown">
+            <div class="mobile-dropdown-toggle" data-target="aire-mobile">
+                ❄️ Aire Acondicionado <span>▼</span>
+            </div>
+            <div class="mobile-dropdown-menu" id="aire-mobile">
+                <a href="/aire-acondicionado/reparacion/" class="mobile-dropdown-item">Reparación Aire Acondicionado</a>
+                <a href="/aire-acondicionado/recarga-gas/" class="mobile-dropdown-item">Recarga de Gas Refrigerante</a>
+                <a href="/aire-acondicionado/reparacion-compresores/" class="mobile-dropdown-item">Reparación de Compresores</a>
+                <a href="/aire-acondicionado/limpieza-sistemas/" class="mobile-dropdown-item">Limpieza de Sistemas</a>
+                <a href="/aire-acondicionado/reparacion-calefaccion/" class="mobile-dropdown-item">Reparación Calefacción</a>
+                <a href="/aire-acondicionado/mantenimiento/" class="mobile-dropdown-item">Mantenimiento Aire Acondicionado</a>
+                <a href="/aire-acondicionado/diagnostico-fugas/" class="mobile-dropdown-item">Diagnóstico de Fugas</a>
+            </div>
+        </div>
+        
+        <!-- CATEGORÍA MÓVIL: Electricidad -->
+        <div class="mobile-dropdown">
+            <div class="mobile-dropdown-toggle" data-target="electricidad-mobile">
+                ⚡ Electricidad <span>▼</span>
+            </div>
+            <div class="mobile-dropdown-menu" id="electricidad-mobile">
+                <a href="/electricidad/automotriz/" class="mobile-dropdown-item">Electricidad Automotriz</a>
+                <a href="/electricidad/electromecanica/" class="mobile-dropdown-item">Electromecánica Vehicular</a>
+                <a href="/electricidad/reparacion-computadoras/" class="mobile-dropdown-item">Reparación Computadoras Auto</a>
+                <a href="/electricidad/sistema-inyeccion/" class="mobile-dropdown-item">Sistema de Inyección</a>
+                <a href="/electricidad/alternador-bateria/" class="mobile-dropdown-item">Alternador y Batería</a>
+                <a href="/electricidad/reparacion-ecu/" class="mobile-dropdown-item">Reparación ECU</a>
+                <a href="/electricidad/elevadores-electricos/" class="mobile-dropdown-item">Elevadores Eléctricos</a>
+                <a href="/electricidad/instalacion-accesorios/" class="mobile-dropdown-item">Instalación Accesorios</a>
+            </div>
+        </div>
+        
+        <!-- CATEGORÍA MÓVIL: Reparación de Culatas -->
+        <div class="mobile-dropdown">
+            <div class="mobile-dropdown-toggle" data-target="culatas-mobile">
+                🔧 Culatas <span>▼</span>
+            </div>
+            <div class="mobile-dropdown-menu" id="culatas-mobile">
+                <a href="/reparacion-culatas/reparacion/" class="mobile-dropdown-item">Reparación de Culatas</a>
+                <a href="/reparacion-culatas/rectificacion/" class="mobile-dropdown-item">Rectificación de Culatas</a>
+                <a href="/reparacion-culatas/cambio-empaquetadura/" class="mobile-dropdown-item">Cambio de Empaquetadura</a>
+                <a href="/reparacion-culatas/puesta-punto/" class="mobile-dropdown-item">Puesta a Punto de Culatas</a>
+                <a href="/reparacion-culatas/mantenimiento/" class="mobile-dropdown-item">Mantenimiento de Culatas</a>
+            </div>
+        </div>
+        
+        <!-- CATEGORÍA MÓVIL: Servicios por Zona -->
+        <div class="mobile-dropdown">
+            <div class="mobile-dropdown-toggle" data-target="zonas-mobile">
+                📍 Zonas Santiago <span>▼</span>
+            </div>
+            <div class="mobile-dropdown-menu" id="zonas-mobile">
+                <a href="/zona/santiago-centro/" class="mobile-dropdown-item">Santiago Centro</a>
+                <a href="/zona/providencia/" class="mobile-dropdown-item">Providencia</a>
+                <a href="/zona/las-condes/" class="mobile-dropdown-item">Las Condes</a>
+                <a href="/zona/nunoa/" class="mobile-dropdown-item">Ñuñoa</a>
+                <a href="/zona/la-reina/" class="mobile-dropdown-item">La Reina</a>
+                <a href="/zona/macul/" class="mobile-dropdown-item">Macul</a>
+                <a href="/zona/penalolen/" class="mobile-dropdown-item">Peñalolén</a>
+                <a href="/zona/la-florida/" class="mobile-dropdown-item">La Florida</a>
+                <a href="/zona/maipu/" class="mobile-dropdown-item">Maipú</a>
+                <a href="/zona/melipilla/" class="mobile-dropdown-item">Melipilla</a>
+                <a href="/zona/talagante/" class="mobile-dropdown-item">Talagante</a>
+                <a href="/zona/puente-alto/" class="mobile-dropdown-item">Puente Alto</a>
+            </div>
+        </div>
+        
+        <!-- WhatsApp Móvil -->
+        <div class="mobile-whatsapp">
+            <a href="https://wa.me/56912345678" class="whatsapp-btn">
+                <span>📱</span> WhatsApp
+            </a>
+        </div>
+    </div>
     
-    // Evento para el botón del menú móvil
-    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
-    
-    // Evento para el overlay (cerrar menú al hacer clic)
-    overlay.addEventListener('click', toggleMobileMenu);
-    
-    // Eventos para los dropdowns del menú móvil
-    mobileDropdownToggles.forEach(toggle => {
-        toggle.addEventListener('click', function() {
-            const targetId = this.getAttribute('data-target');
-            const targetMenu = document.getElementById(targetId);
-            
-            // Cerrar otros dropdowns abiertos
-            document.querySelectorAll('.mobile-dropdown-menu').forEach(menu => {
-                if (menu.id !== targetId && menu.classList.contains('active')) {
-                    menu.classList.remove('active');
-                }
-            });
-            
-            // Alternar el dropdown actual
-            targetMenu.classList.toggle('active');
-            
-            // Rotar la flecha
-            const arrow = this.querySelector('span');
-            if (targetMenu.classList.contains('active')) {
-                arrow.style.transform = 'rotate(180deg)';
-            } else {
-                arrow.style.transform = 'rotate(0deg)';
-            }
-        });
-    });
-    
-    // Cerrar menú al hacer clic en un enlace
-    const mobileLinks = document.querySelectorAll('.mobile-nav-link, .mobile-dropdown-item');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            mobileMenu.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.classList.remove('no-scroll');
-            
-            // Restablecer el botón hamburguesa
-            const spans = mobileMenuToggle.querySelectorAll('span');
-            spans[0].style.transform = 'none';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'none';
-            
-            // Cerrar todos los dropdowns
-            document.querySelectorAll('.mobile-dropdown-menu').forEach(menu => {
-                menu.classList.remove('active');
-            });
-            
-            // Restablecer flechas
-            document.querySelectorAll('.mobile-dropdown-toggle span').forEach(arrow => {
-                arrow.style.transform = 'rotate(0deg)';
-            });
-        });
-    });
-    
-    // Smooth scroll para enlaces internos
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // Efecto de sombra en el navbar al hacer scroll
-    window.addEventListener('scroll', function() {
-        const navbar = document.querySelector('.main-nav');
-        if (window.scrollY > 50) {
-            navbar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
-        } else {
-            navbar.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-        }
-    });
-    
-    // Prevenir el comportamiento por defecto de los enlaces que no tienen href
-    document.querySelectorAll('a[href="#"]').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-        });
-    });
-});
+    <!-- Overlay para cerrar menú -->
+    <div class="overlay" id="overlay"></div>
+    <!-- ========== FIN MENÚ ========== -->
 
-// Agregar clase no-scroll al body cuando el menú está abierto
-document.head.insertAdjacentHTML('beforeend', `
-<style>
-    body.no-scroll {
-        overflow: hidden;
-    }
-</style>
-`);
+    <!-- Hero Section -->
+    <section class="hero-section" id="inicio">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7" data-aos="fade-right">
+                    <span class="hero-badge">Especialistas en Mecánica Automotriz</span>
+                    <h1 class="hero-title">Servicios de Mecánica <span class="text-accent">Profesional</span> en Santiago</h1>
+                    <p class="hero-subtitle">En GlobalPro Mecánica ofrecemos servicios especializados en reparación, mantenimiento y diagnóstico de vehículos. Atención personalizada y garantía en todos nuestros trabajos en toda la Región Metropolitana.</p>
+                    
+                    <div class="stats-container" data-aos="fade-up" data-aos-delay="200">
+                        <div class="row text-center">
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <div class="stat-number">52</div>
+                                    <div class="stat-label">Comunas Atendidas</div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <div class="stat-number">+1500</div>
+                                    <div class="stat-label">Vehículos Reparados</div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <div class="stat-number">🔧</div>
+                                    <div class="stat-label">Expertos Mecánicos</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-group mt-4" role="group" data-aos="fade-up" data-aos-delay="300">
+                        <a href="https://wa.me/56912345678" class="btn btn-primary me-2">
+                            <i class="fab fa-whatsapp me-2"></i> Consulta por WhatsApp
+                        </a>
+                        <a href="#servicios" class="btn btn-outline-light">
+                            <i class="fas fa-tools me-2"></i> Ver Servicios
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-5" data-aos="fade-left" data-aos-delay="400">
+                    <div class="text-center">
+                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="GlobalPro Mecánica - Taller Especializado" class="img-fluid rounded shadow">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="servicios">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Nuestros Servicios de Mecánica en Santiago</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Mecánica General Integral</h3>
+                            <p>Ofrecemos servicios completos de mecánica automotriz para todo tipo de vehículos, desde reparaciones básicas hasta soluciones complejas.</p>
+                            <ul class="service-features">
+                                <li>Reparación de motores y transmisiones</li>
+                                <li>Sistema de frenos y suspensión</li>
+                                <li>Dirección y alineación</li>
+                                <li>Reparación de escapes y catalizadores</li>
+                                <li>Diagnóstico computarizado</li>
+                            </ul>
+                            <a href="#contacto" class="btn btn-sm btn-outline-primary mt-3">Solicitar Información</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-wind"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Aire Acondicionado y Climatización</h3>
+                            <p>Servicios especializados en sistemas de aire acondicionado y calefacción para garantizar tu comodidad en cualquier clima.</p>
+                            <ul class="service-features">
+                                <li>Recarga de gas refrigerante</li>
+                                <li>Reparación de compresores</li>
+                                <li>Limpieza de sistemas</li>
+                                <li>Diagnóstico de fugas</li>
+                                <li>Mantenimiento preventivo</li>
+                            </ul>
+                            <a href="#contacto" class="btn btn-sm btn-outline-primary mt-3">Solicitar Información</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Electricidad Automotriz</h3>
+                            <p>Diagnóstico y reparación de sistemas eléctricos y electrónicos de vehículos con tecnología de última generación.</p>
+                            <ul class="service-features">
+                                <li>Sistema de inyección electrónica</li>
+                                <li>Alternador y batería</li>
+                                <li>Reparación de ECU</li>
+                                <li>Instalación de accesorios</li>
+                                <li>Elevadores eléctricos</li>
+                            </ul>
+                            <a href="#contacto" class="btn btn-sm btn-outline-primary mt-3">Solicitar Información</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialties Section -->
+    <section class="specialties-section" id="especialidades">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Especialidad en Reparación de Culatas</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="specialty-content">
+                        <h3 class="specialty-title">Reparación y Mantenimiento Profesional de Culatas</h3>
+                        <p>En GlobalPro Mecánica somos especialistas en la reparación, rectificación y puesta a punto de culatas de motor. Contamos con tecnología de última generación y personal altamente calificado.</p>
+                        
+                        <div class="specialty-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <h5>Rectificación de Culatas</h5>
+                                    <p>Servicio profesional de rectificación para garantizar el perfecto funcionamiento</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <h5>Cambio de Empaquetadura</h5>
+                                    <p>Reemplazo profesional de empaquetaduras con materiales de alta calidad</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <h5>Puesta a Punto Completa</h5>
+                                    <p>Ajuste y calibración completa para óptimo rendimiento del motor</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <h5>Mantenimiento Preventivo</h5>
+                                    <p>Programas de mantenimiento para prevenir futuros problemas</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="#contacto" class="btn btn-primary mt-4">
+                            <i class="fas fa-tools me-2"></i> Solicitar Presupuesto
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="specialty-image">
+                        <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Reparación de Culatas - GlobalPro Mecánica" class="img-fluid rounded">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coverage Section -->
+    <section class="coverage-section" id="cobertura">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Cobertura en Toda la Región Metropolitana</h2>
+            <p class="text-center mb-5" data-aos="fade-up" data-aos-delay="100">Atendemos en las 52 comunas de la Región Metropolitana de Santiago con servicio a domicilio y taller propio</p>
+            
+            <div class="row" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-md-6">
+                    <div class="coverage-card">
+                        <h4><i class="fas fa-store me-2"></i> Taller Propio</h4>
+                        <p>Contamos con taller equipado con tecnología de última generación para reparaciones complejas</p>
+                        <ul>
+                            <li>Diagnóstico computarizado</li>
+                            <li>Equipos especializados</li>
+                            <li>Repuestos de calidad</li>
+                            <li>Garantía en todos los trabajos</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="coverage-card">
+                        <h4><i class="fas fa-truck me-2"></i> Servicio a Domicilio</h4>
+                        <p>Llevamos nuestro servicio hasta tu hogar o trabajo en toda la Región Metropolitana</p>
+                        <ul>
+                            <li>Diagnóstico inicial gratuito</li>
+                            <li>Reparaciones básicas in situ</li>
+                            <li>Traslado al taller si es necesario</li>
+                            <li>Cobertura en 52 comunas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="provinces-grid mt-5" data-aos="fade-up" data-aos-delay="300">
+                <h4 class="text-center mb-4">Provincias que Atendemos</h4>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="province-card">
+                            <h5>Santiago</h5>
+                            <p>32 comunas incluyendo Santiago Centro, Providencia, Las Condes, Ñuñoa, Maipú y más</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="province-card">
+                            <h5>Cordillera</h5>
+                            <p>Puente Alto, Pirque, San José de Maipo</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="province-card">
+                            <h5>Maipo</h5>
+                            <p>San Bernardo, Calera de Tango, Buin, Paine</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="province-card">
+                            <h5>Talagante</h5>
+                            <p>Talagante, El Monte, Isla de Maipo, Peñaflor</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="province-card">
+                            <h5>Melipilla</h5>
+                            <p>Melipilla, Alhué, Curacaví, María Pinto, San Pedro</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="province-card">
+                            <h5>Chacabuco</h5>
+                            <p>Colina, Lampa, Tiltil</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contacto">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Contáctenos en Santiago</h2>
+            <div class="row">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <p class="mb-4">¿Necesita servicios de mecánica en Santiago? Contáctenos para consultas sobre reparación, mantenimiento, diagnóstico o cualquier servicio automotriz.</p>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h5>WhatsApp Chile</h5>
+                                <p>+56 9 1234 5678</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h5>Ubicación</h5>
+                                <p>Cobertura en toda la Región Metropolitana de Santiago</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h5>Horario Chile</h5>
+                                <p>Lunes a Viernes 8:00 AM - 6:00 PM</p>
+                                <p>Sábados 9:00 AM - 2:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="https://wa.me/56912345678" class="btn btn-primary btn-lg me-3">
+                            <i class="fab fa-whatsapp me-2"></i> Consulta por WhatsApp
+                        </a>
+                        <a href="tel:+56912345678" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-phone me-2"></i> Llamar Ahora
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-left" data-aos-delay="200">
+                    <div class="text-center">
+                        <img src="https://images.unsplash.com/photo-1565689223820-b9fd35d51a0e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Contacto GlobalPro Mecánica" class="img-fluid rounded shadow">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="footer-logo">GLOBALPRO <span>MECÁNICA</span></div>
+                    <p class="mb-3">Taller especializado en servicios automotrices en Santiago. Reparación, mantenimiento y diagnóstico profesional con garantía en todos nuestros trabajos.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/56912345678" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Servicios</h5>
+                        <ul>
+                            <li><a href="#servicios">Mecánica General</a></li>
+                            <li><a href="/aire-acondicionado/">Aire Acondicionado</a></li>
+                            <li><a href="/electricidad/">Electricidad</a></li>
+                            <li><a href="/reparacion-culatas/">Reparación Culatas</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Zonas de Cobertura</h5>
+                        <ul>
+                            <li><a href="/zona/santiago-centro/">Santiago Centro</a></li>
+                            <li><a href="/zona/providencia/">Providencia</a></li>
+                            <li><a href="/zona/las-condes/">Las Condes</a></li>
+                            <li><a href="/zona/nunoa/">Ñuñoa</a></li>
+                            <li><a href="/zona/maipu/">Maipú</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-12">
+                    <div class="footer-links">
+                        <h5>Contacto Santiago</h5>
+                        <ul>
+                            <li><i class="fas fa-phone me-2"></i> +56 9 1234 5678</li>
+                            <li><i class="fas fa-map-marker-alt me-2"></i> Región Metropolitana</li>
+                            <li><i class="fas fa-clock me-2"></i> Lunes a Viernes 8:00-18:00</li>
+                            <li><i class="fas fa-clock me-2"></i> Sábados 9:00-14:00</li>
+                        </ul>
+                        <div class="mt-3">
+                            <span class="badge bg-success">Servicio en 52 comunas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="mb-0">&copy; 2024 GlobalPro Mecánica - Taller Especializado en Servicios Automotrices Santiago. Reparación, mantenimiento y diagnóstico profesional con cobertura en toda la Región Metropolitana.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/56912345678" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

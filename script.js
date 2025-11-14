@@ -1,23 +1,21 @@
-// Inicialización de AOS (Animate On Scroll)
+// Inicializar AOS
+AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 100
+});
+
+// Menú móvil - Código completamente funcional
 document.addEventListener('DOMContentLoaded', function() {
-    AOS.init({
-        duration: 800,
-        easing: 'ease-in-out',
-        once: true,
-        offset: 100
-    });
-    
-    // ========== FUNCIONALIDAD DEL MENÚ MÓVIL ==========
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('overlay');
-    const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
     
-    // Función para abrir/cerrar el menú móvil
+    // Función para abrir/cerrar menú móvil
     function toggleMobileMenu() {
         mobileMenu.classList.toggle('active');
         overlay.classList.toggle('active');
-        document.body.classList.toggle('no-scroll');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
         
         // Animación del botón hamburguesa
         const spans = mobileMenuToggle.querySelectorAll('span');
@@ -32,117 +30,50 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Evento para el botón del menú móvil
+    // Evento para el botón del menú hamburguesa
     mobileMenuToggle.addEventListener('click', toggleMobileMenu);
     
-    // Evento para el overlay (cerrar menú al hacer clic)
+    // Evento para cerrar menú al hacer clic en el overlay
     overlay.addEventListener('click', toggleMobileMenu);
     
-    // Eventos para los dropdowns del menú móvil
-    mobileDropdownToggles.forEach(toggle => {
+    // Evento para cerrar menú al hacer clic en un enlace
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link, .mobile-dropdown-item');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', toggleMobileMenu);
+    });
+    
+    // Dropdowns móviles
+    const dropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+    dropdownToggles.forEach(toggle => {
         toggle.addEventListener('click', function() {
             const targetId = this.getAttribute('data-target');
             const targetMenu = document.getElementById(targetId);
             
             // Cerrar otros dropdowns abiertos
-            document.querySelectorAll('.mobile-dropdown-menu').forEach(menu => {
-                if (menu.id !== targetId && menu.classList.contains('active')) {
-                    menu.classList.remove('active');
+            dropdownToggles.forEach(otherToggle => {
+                if (otherToggle !== toggle) {
+                    const otherTargetId = otherToggle.getAttribute('data-target');
+                    const otherTargetMenu = document.getElementById(otherTargetId);
+                    otherTargetMenu.classList.remove('active');
                 }
             });
             
-            // Alternar el dropdown actual
+            // Abrir/cerrar el dropdown actual
             targetMenu.classList.toggle('active');
-            
-            // Rotar la flecha
-            const arrow = this.querySelector('span');
-            if (targetMenu.classList.contains('active')) {
-                arrow.style.transform = 'rotate(180deg)';
-            } else {
-                arrow.style.transform = 'rotate(0deg)';
-            }
         });
-    });
-    
-    // Cerrar menú al hacer clic en un enlace
-    const mobileLinks = document.querySelectorAll('.mobile-nav-link, .mobile-dropdown-item');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            mobileMenu.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.classList.remove('no-scroll');
-            
-            // Restablecer el botón hamburguesa
-            const spans = mobileMenuToggle.querySelectorAll('span');
-            spans[0].style.transform = 'none';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'none';
-            
-            // Cerrar todos los dropdowns
-            document.querySelectorAll('.mobile-dropdown-menu').forEach(menu => {
-                menu.classList.remove('active');
-            });
-            
-            // Restablecer flechas
-            document.querySelectorAll('.mobile-dropdown-toggle span').forEach(arrow => {
-                arrow.style.transform = 'rotate(0deg)';
-            });
-        });
-    });
-    
-    // ========== FUNCIONALIDAD DEL MENÚ DESKTOP ==========
-    // Cerrar dropdowns al hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.nav-item')) {
-            document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
-                dropdown.style.opacity = '0';
-                dropdown.style.visibility = 'hidden';
-                dropdown.style.transform = 'translateY(10px)';
-            });
-        }
     });
     
     // Smooth scroll para enlaces internos
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
                 });
             }
         });
     });
-    
-    // Efecto de sombra en el navbar al hacer scroll
-    window.addEventListener('scroll', function() {
-        const navbar = document.querySelector('.main-nav');
-        if (window.scrollY > 50) {
-            navbar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
-        } else {
-            navbar.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-        }
-    });
-    
-    // Prevenir el comportamiento por defecto de los enlaces que no tienen href
-    document.querySelectorAll('a[href="#"]').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-        });
-    });
 });
-
-// Agregar clase no-scroll al body cuando el menú está abierto
-document.head.insertAdjacentHTML('beforeend', `
-<style>
-    body.no-scroll {
-        overflow: hidden;
-    }
-</style>
-`);

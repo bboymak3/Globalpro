@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es-VE">
+<html lang="es-CL">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Global Pro - Taller mecánico especializado en mantenimiento y reparación de vehículos. Servicio a domicilio, mecánica industrial y automotriz en toda Venezuela.">
-    <meta name="keywords" content="mantenimiento de vehículos, reparación de vehículos, mecanico cerca de mi, taller mecanico cerca de mi, mecanico a domicilio, mecanica automotriz, taller mecanico, mecanico a domicilio cerca de mi, mecanicos a domicilio, mecanica industrial, revision coche">
+    <meta name="description" content="Global Pro - Taller mecánico especializado en mantenimiento y reparación de vehículos en Santiago, Región Metropolitana. Servicio a domicilio, mecánica industrial y automotriz.">
+    <meta name="keywords" content="mantenimiento de vehículos, reparación de vehículos, mecanico cerca de mi, taller mecanico cerca de mi, mecanico a domicilio, mecanica automotriz, taller mecanico, Santiago, Región Metropolitana">
     <title>Global Pro | Taller Mecánico Especializado | Mantenimiento y Reparación de Vehículos</title>
     
     <!-- Bootstrap CSS -->
@@ -17,607 +17,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- Nuestros estilos -->
-    <style>
-        :root {
-            --primary: #e63946;
-            --secondary: #1d3557;
-            --accent: #f1faee;
-            --dark: #457b9d;
-            --light: #a8dadc;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
-            overflow-x: hidden;
-        }
-        
-        /* ========== NAVBAR ========== */
-        .main-nav {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: var(--secondary);
-        }
-        
-        .logo-img {
-            width: 50px;
-            height: 50px;
-            background-color: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-weight: bold;
-            margin-right: 10px;
-            font-size: 18px;
-        }
-        
-        .logo-text {
-            font-weight: 800;
-            font-size: 18px;
-            line-height: 1;
-        }
-        
-        .logo-subtext {
-            font-size: 12px;
-            color: var(--dark);
-        }
-        
-        .desktop-menu {
-            display: flex;
-            align-items: center;
-        }
-        
-        @media (max-width: 991px) {
-            .desktop-menu {
-                display: none;
-            }
-        }
-        
-        .nav-link {
-            color: var(--secondary);
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
-        
-        .nav-link:hover {
-            color: var(--primary);
-        }
-        
-        .dropdown {
-            position: relative;
-        }
-        
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-radius: 5px;
-            min-width: 220px;
-            padding: 10px 0;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s;
-            z-index: 100;
-        }
-        
-        .dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        
-        .dropdown-item {
-            display: block;
-            padding: 8px 20px;
-            color: var(--secondary);
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-        
-        .dropdown-item:hover {
-            background-color: #f8f9fa;
-            color: var(--primary);
-        }
-        
-        .whatsapp-btn {
-            background-color: #25D366;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            margin-left: 15px;
-        }
-        
-        .whatsapp-btn span {
-            margin-right: 5px;
-        }
-        
-        .mobile-menu-toggle {
-            display: none;
-            flex-direction: column;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .mobile-menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background-color: var(--secondary);
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-        
-        @media (max-width: 991px) {
-            .mobile-menu-toggle {
-                display: flex;
-            }
-        }
-        
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 80%;
-            height: 100vh;
-            background-color: white;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            padding: 80px 20px 20px;
-            transition: right 0.3s;
-            z-index: 999;
-            overflow-y: auto;
-        }
-        
-        .mobile-menu.active {
-            right: 0;
-        }
-        
-        .mobile-nav-link {
-            display: block;
-            padding: 12px 0;
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: 500;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .mobile-dropdown-toggle {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            color: var(--secondary);
-            font-weight: 500;
-            border-bottom: 1px solid #eee;
-            cursor: pointer;
-        }
-        
-        .mobile-dropdown-menu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s;
-        }
-        
-        .mobile-dropdown-menu.active {
-            max-height: 500px;
-        }
-        
-        .mobile-dropdown-item {
-            display: block;
-            padding: 10px 15px;
-            color: var(--secondary);
-            text-decoration: none;
-            border-bottom: 1px solid #f5f5f5;
-        }
-        
-        .mobile-whatsapp {
-            margin-top: 20px;
-            text-align: center;
-        }
-        
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 998;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-        }
-        
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        /* ========== HERO SECTION ========== */
-        .hero-section {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--dark) 100%);
-            color: white;
-            padding: 150px 0 80px;
-            margin-top: 80px;
-        }
-        
-        .hero-badge {
-            background-color: var(--primary);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-        
-        .hero-title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        
-        .text-accent {
-            color: var(--light);
-        }
-        
-        .hero-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        
-        .stats-container {
-            background-color: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 30px 0;
-        }
-        
-        .stat-item {
-            padding: 10px;
-        }
-        
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--light);
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary);
-            border-color: var(--primary);
-            padding: 12px 25px;
-            font-weight: 600;
-        }
-        
-        .btn-primary:hover {
-            background-color: #c1121f;
-            border-color: #c1121f;
-        }
-        
-        .btn-outline-light:hover {
-            background-color: rgba(255,255,255,0.1);
-        }
-        
-        /* ========== SERVICES SECTION ========== */
-        .services-section {
-            padding: 80px 0;
-            background-color: #f8f9fa;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-weight: 800;
-            color: var(--secondary);
-            margin-bottom: 50px;
-            font-size: 2.5rem;
-        }
-        
-        .service-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            height: 100%;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-        
-        .service-icon {
-            background-color: var(--secondary);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            font-size: 2.5rem;
-        }
-        
-        .service-content {
-            padding: 25px;
-        }
-        
-        .service-title {
-            font-weight: 700;
-            color: var(--secondary);
-            margin-bottom: 15px;
-        }
-        
-        .service-features {
-            list-style-type: none;
-            padding-left: 0;
-            margin-top: 20px;
-        }
-        
-        .service-features li {
-            padding: 5px 0;
-            position: relative;
-            padding-left: 25px;
-        }
-        
-        .service-features li:before {
-            content: "✓";
-            color: var(--primary);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-        
-        .btn-outline-primary {
-            color: var(--primary);
-            border-color: var(--primary);
-        }
-        
-        .btn-outline-primary:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        /* ========== CATEGORIES SECTION ========== */
-        .categories-section {
-            padding: 80px 0;
-        }
-        
-        .category-card {
-            background-color: white;
-            border-radius: 10px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-            height: 100%;
-        }
-        
-        .category-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .category-icon {
-            width: 70px;
-            height: 70px;
-            background-color: var(--light);
-            color: var(--secondary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 1.8rem;
-        }
-        
-        .category-title {
-            font-weight: 700;
-            color: var(--secondary);
-            margin-bottom: 15px;
-        }
-        
-        /* ========== ABOUT SECTION ========== */
-        .about-section {
-            padding: 80px 0;
-            background-color: #f8f9fa;
-        }
-        
-        .text-primary {
-            color: var(--primary) !important;
-        }
-        
-        .location-card {
-            background-color: white;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            margin-top: 30px;
-        }
-        
-        .about-image img {
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        /* ========== CONTACT SECTION ========== */
-        .contact-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--dark) 100%);
-            color: white;
-        }
-        
-        .contact-info {
-            margin-top: 30px;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 25px;
-        }
-        
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background-color: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            font-size: 1.2rem;
-        }
-        
-        /* ========== FOOTER ========== */
-        footer {
-            background-color: var(--secondary);
-            color: white;
-            padding: 60px 0 20px;
-        }
-        
-        .footer-logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
-        
-        .footer-logo span {
-            color: var(--light);
-        }
-        
-        .social-links {
-            display: flex;
-            margin-top: 20px;
-        }
-        
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10px;
-            color: white;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-        
-        .social-link:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .footer-links h5 {
-            color: var(--light);
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        
-        .footer-links ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        
-        .footer-links ul li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-links ul li a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links ul li a:hover {
-            color: white;
-        }
-        
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-            margin-top: 40px;
-            text-align: center;
-            color: rgba(255,255,255,0.5);
-            font-size: 0.9rem;
-        }
-        
-        /* ========== WHATSAPP FLOAT ========== */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 60px;
-            height: 60px;
-            background-color: #25D366;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            z-index: 100;
-            text-decoration: none;
-            transition: transform 0.3s;
-        }
-        
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            color: white;
-        }
-        
-        /* ========== RESPONSIVE ========== */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.2rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .nav-container {
-                padding: 15px 20px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- ========== MENÚ COMPLETO ========== -->
@@ -673,7 +73,7 @@
                         <a href="/servicio-domicilio/mecanico-domicilio/" class="dropdown-item">Mecánico a Domicilio</a>
                         <a href="/servicio-domicilio/emergencias-24h/" class="dropdown-item">Emergencias 24H</a>
                         <a href="/servicio-domicilio/diagnostico-domicilio/" class="dropdown-item">Diagnóstico a Domicilio</a>
-                        <a href="/servicio-domicilio/grúa-asistencia/" class="dropdown-item">Grúa y Asistencia</a>
+                        <a href="/servicio-domicilio/grua-asistencia/" class="dropdown-item">Grúa y Asistencia</a>
                     </div>
                 </div>
                 
@@ -708,7 +108,7 @@
                 </div>
                 
                 <!-- WhatsApp -->
-                <a href="https://wa.me/584245112587" class="whatsapp-btn">
+                <a href="https://wa.me/56912345678" class="whatsapp-btn">
                     <span>📱</span> WhatsApp
                 </a>
             </div>
@@ -763,7 +163,7 @@
                 <a href="/servicio-domicilio/mecanico-domicilio/" class="mobile-dropdown-item">Mecánico a Domicilio</a>
                 <a href="/servicio-domicilio/emergencias-24h/" class="mobile-dropdown-item">Emergencias 24H</a>
                 <a href="/servicio-domicilio/diagnostico-domicilio/" class="mobile-dropdown-item">Diagnóstico a Domicilio</a>
-                <a href="/servicio-domicilio/grúa-asistencia/" class="mobile-dropdown-item">Grúa y Asistencia</a>
+                <a href="/servicio-domicilio/grua-asistencia/" class="mobile-dropdown-item">Grúa y Asistencia</a>
             </div>
         </div>
         
@@ -799,7 +199,7 @@
         
         <!-- WhatsApp Móvil -->
         <div class="mobile-whatsapp">
-            <a href="https://wa.me/584245112587" class="whatsapp-btn">
+            <a href="https://wa.me/56912345678" class="whatsapp-btn">
                 <span>📱</span> WhatsApp
             </a>
         </div>
@@ -815,15 +215,15 @@
             <div class="row align-items-center">
                 <div class="col-lg-7" data-aos="fade-right">
                     <span class="hero-badge">Especialistas en Mecánica Automotriz</span>
-                    <h1 class="hero-title">Servicio Mecánico <span class="text-accent">Profesional</span> en Toda Venezuela</h1>
-                    <p class="hero-subtitle">En Global Pro ofrecemos servicios mecánicos especializados en mantenimiento y reparación de vehículos, mecánica a domicilio, diesel, eléctrica y más. Atención personalizada y seguimiento completo de su vehículo.</p>
+                    <h1 class="hero-title">Servicio Mecánico <span class="text-accent">Profesional</span> en Santiago</h1>
+                    <p class="hero-subtitle">En Global Pro ofrecemos servicios mecánicos especializados en mantenimiento y reparación de vehículos, mecánica a domicilio, diesel, eléctrica y más. Atención personalizada en toda la Región Metropolitana.</p>
                     
                     <div class="stats-container" data-aos="fade-up" data-aos-delay="200">
                         <div class="row text-center">
                             <div class="col-4">
                                 <div class="stat-item">
-                                    <div class="stat-number">24</div>
-                                    <div class="stat-label">Estados Atendidos</div>
+                                    <div class="stat-number">15+</div>
+                                    <div class="stat-label">Años de Experiencia</div>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -842,7 +242,7 @@
                     </div>
                     
                     <div class="btn-group mt-4" role="group" data-aos="fade-up" data-aos-delay="300">
-                        <a href="https://wa.me/584245112587" class="btn btn-primary me-2">
+                        <a href="https://wa.me/56912345678" class="btn btn-primary me-2">
                             <i class="fab fa-whatsapp me-2"></i> Consulta por WhatsApp
                         </a>
                         <a href="#servicios" class="btn btn-outline-light">
@@ -862,7 +262,7 @@
     <!-- Services Section -->
     <section class="services-section" id="servicios">
         <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Nuestros Servicios Mecánicos en Venezuela</h2>
+            <h2 class="section-title" data-aos="fade-up">Nuestros Servicios Mecánicos en Santiago</h2>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="service-card">
@@ -911,7 +311,7 @@
                         </div>
                         <div class="service-content">
                             <h3 class="service-title">Mecánico a Domicilio</h3>
-                            <p>Servicio de mecánica a domicilio para diagnóstico, reparaciones menores y emergencias vehiculares las 24 horas del día.</p>
+                            <p>Servicio de mecánica a domicilio para diagnóstico, reparaciones menores y emergencias vehiculares las 24 horas del día en Santiago.</p>
                             <ul class="service-features">
                                 <li>Diagnóstico a domicilio</li>
                                 <li>Reparaciones de emergencia</li>
@@ -1001,49 +401,41 @@
             <div class="row align-items-center">
                 <div class="col-lg-6" data-aos="fade-right">
                     <h2 class="section-title text-start">Sobre <span class="text-primary">Global Pro</span></h2>
-                    <p>En <strong class="text-primary">Global Pro</strong> somos un taller mecánico especializado con amplia experiencia en todo el territorio venezolano. Nuestro equipo de mecánicos está comprometido con ofrecer soluciones automotrices efectivas y personalizadas.</p>
+                    <p>En <strong class="text-primary">Global Pro</strong> somos un taller mecánico especializado con más de 15 años de experiencia en la Región Metropolitana. Nuestro equipo de mecánicos está comprometido con ofrecer soluciones automotrices efectivas y personalizadas.</p>
                     <p>Nos especializamos en mantenimiento preventivo, reparación de vehículos, mecánica diesel, eléctrica y servicio a domicilio las 24 horas. Entendemos la importancia de su vehículo y trabajamos para garantizar su óptimo funcionamiento.</p>
                     <p>Ofrecemos servicios integrales para automóviles, camionetas, camiones, motos y maquinaria industrial. Nuestro enfoque se centra en resultados concretos y satisfacción del cliente con garantía en todos nuestros trabajos.</p>
-                    <p>Si necesita servicio mecánico confiable en Venezuela, somos su taller de confianza para resolver cualquier problema automotriz con profesionalismo y eficiencia.</p>
+                    <p>Si necesita servicio mecánico confiable en Santiago, somos su taller de confianza para resolver cualquier problema automotriz con profesionalismo y eficiencia.</p>
                     
                     <div class="location-card" data-aos="fade-up" data-aos-delay="200">
-                        <h4 class="text-primary mb-3"><i class="fas fa-map-marker-alt me-2"></i> Cobertura Nacional en Venezuela</h4>
-                        <p>Atendemos vehículos en todos los estados de Venezuela:</p>
+                        <h4 class="text-primary mb-3"><i class="fas fa-map-marker-alt me-2"></i> Cobertura en Región Metropolitana</h4>
+                        <p>Atendemos en todas las comunas de Santiago:</p>
                         <div class="row">
                             <div class="col-md-6">
                                 <ul class="list-unstyled">
-                                    <li><i class="fas fa-check text-success me-2"></i> Amazonas</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Anzoátegui</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Apure</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Aragua</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Barinas</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Bolívar</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Carabobo</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Cojedes</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Delta Amacuro</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Falcón</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Guárico</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Lara</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Santiago Centro</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Providencia</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Las Condes</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Ñuñoa</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> La Reina</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Macul</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Peñalolén</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> La Florida</li>
                                 </ul>
                             </div>
                             <div class="col-md-6">
                                 <ul class="list-unstyled">
-                                    <li><i class="fas fa-check text-success me-2"></i> Mérida</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Miranda</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Monagas</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Nueva Esparta</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Portuguesa</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Sucre</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Táchira</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Trujillo</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Vargas (La Guaira)</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Yaracuy</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Zulia</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Distrito Capital</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Maipú</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Pudahuel</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Quilicura</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Huechuraba</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Recoleta</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Independencia</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Estación Central</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Y más...</li>
                                 </ul>
                             </div>
                         </div>
-                        <p class="text-primary fw-bold mt-3"><i class="fas fa-globe-americas me-2"></i> Servicio a domicilio disponible para todo el territorio nacional</p>
+                        <p class="text-primary fw-bold mt-3"><i class="fas fa-globe-americas me-2"></i> Servicio a domicilio disponible para toda la región</p>
                     </div>
                 </div>
                 <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
@@ -1058,10 +450,10 @@
     <!-- Contact Section -->
     <section class="contact-section" id="contacto">
         <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Contáctenos en Venezuela</h2>
+            <h2 class="section-title" data-aos="fade-up">Contáctenos en Santiago</h2>
             <div class="row">
                 <div class="col-lg-8" data-aos="fade-right">
-                    <p class="mb-4">¿Necesita servicio mecánico en Venezuela? Contáctenos para consultas sobre mantenimiento, reparación de vehículos, mecánica a domicilio o cualquier problema automotriz.</p>
+                    <p class="mb-4">¿Necesita servicio mecánico en Santiago? Contáctenos para consultas sobre mantenimiento, reparación de vehículos, mecánica a domicilio o cualquier problema automotriz.</p>
                     
                     <div class="contact-info">
                         <div class="contact-item">
@@ -1069,8 +461,8 @@
                                 <i class="fas fa-phone"></i>
                             </div>
                             <div>
-                                <h5>WhatsApp Venezuela</h5>
-                                <p>+58 424-5112587</p>
+                                <h5>WhatsApp Chile</h5>
+                                <p>+56 9 1234 5678</p>
                             </div>
                         </div>
                         
@@ -1080,7 +472,8 @@
                             </div>
                             <div>
                                 <h5>Ubicación</h5>
-                                <p>Cobertura en todos los estados de Venezuela</p>
+                                <p>Av. Principal 1234, Santiago Centro</p>
+                                <p>Región Metropolitana, Chile</p>
                             </div>
                         </div>
                         
@@ -1089,19 +482,19 @@
                                 <i class="fas fa-clock"></i>
                             </div>
                             <div>
-                                <h5>Horario Venezuela</h5>
-                                <p>Lunes a Viernes 7:00 AM - 7:00 PM</p>
-                                <p>Sábados 8:00 AM - 4:00 PM</p>
+                                <h5>Horario Chile</h5>
+                                <p>Lunes a Viernes 8:00 AM - 7:00 PM</p>
+                                <p>Sábados 9:00 AM - 2:00 PM</p>
                                 <p>Emergencias 24/7</p>
                             </div>
                         </div>
                     </div>
                     
                     <div class="mt-4">
-                        <a href="https://wa.me/584245112587" class="btn btn-primary btn-lg me-3">
+                        <a href="https://wa.me/56912345678" class="btn btn-primary btn-lg me-3">
                             <i class="fab fa-whatsapp me-2"></i> Consulta por WhatsApp
                         </a>
-                        <a href="tel:+584245112587" class="btn btn-outline-light btn-lg">
+                        <a href="tel:+56912345678" class="btn btn-outline-light btn-lg">
                             <i class="fas fa-phone me-2"></i> Llamar Ahora
                         </a>
                     </div>
@@ -1121,11 +514,11 @@
             <div class="row">
                 <div class="col-lg-4 mb-4 mb-lg-0">
                     <div class="footer-logo">GLOBAL <span>PRO</span></div>
-                    <p class="mb-3">Taller mecánico especializado en mantenimiento y reparación de vehículos en Venezuela. Servicio profesional en todos los estados del país con enfoque en resultados y satisfacción del cliente.</p>
+                    <p class="mb-3">Taller mecánico especializado en mantenimiento y reparación de vehículos en Santiago, Región Metropolitana. Servicio profesional con enfoque en resultados y satisfacción del cliente.</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="https://wa.me/584245112587" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/56912345678" class="social-link"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 
@@ -1155,69 +548,35 @@
                 
                 <div class="col-lg-4 col-md-12">
                     <div class="footer-links">
-                        <h5>Contacto Venezuela</h5>
+                        <h5>Contacto Chile</h5>
                         <ul>
-                            <li><i class="fas fa-phone me-2"></i> +58 424-5112587</li>
-                            <li><i class="fas fa-map-marker-alt me-2"></i> Cobertura Nacional</li>
-                            <li><i class="fas fa-clock me-2"></i> Lunes a Viernes 7:00-19:00</li>
-                            <li><i class="fas fa-clock me-2"></i> Sábados 8:00-16:00</li>
+                            <li><i class="fas fa-phone me-2"></i> +56 9 1234 5678</li>
+                            <li><i class="fas fa-map-marker-alt me-2"></i> Av. Principal 1234, Santiago</li>
+                            <li><i class="fas fa-clock me-2"></i> Lunes a Viernes 8:00-19:00</li>
+                            <li><i class="fas fa-clock me-2"></i> Sábados 9:00-14:00</li>
                             <li><i class="fas fa-exclamation-triangle me-2"></i> Emergencias 24/7</li>
                         </ul>
                         <div class="mt-3">
-                            <span class="badge bg-success">Servicio en 24 estados</span>
+                            <span class="badge bg-success">Servicio en RM</span>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p class="mb-0">&copy; 2024 Global Pro - Taller Mecánico Especializado Venezuela. Servicios de mantenimiento y reparación de vehículos, mecánica a domicilio en todo el territorio nacional.</p>
+                <p class="mb-0">&copy; 2024 Global Pro - Taller Mecánico Especializado Santiago. Servicios de mantenimiento y reparación de vehículos, mecánica a domicilio en toda la Región Metropolitana.</p>
             </div>
         </div>
     </footer>
 
     <!-- WhatsApp Float -->
-    <a href="https://wa.me/584245112587" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/56912345678" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // Inicializar AOS
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 100
-        });
-        
-        // Menú móvil
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const overlay = document.getElementById('overlay');
-            
-            mobileMenuToggle.addEventListener('click', function() {
-                mobileMenu.classList.toggle('active');
-                overlay.classList.toggle('active');
-            });
-            
-            overlay.addEventListener('click', function() {
-                mobileMenu.classList.remove('active');
-                overlay.classList.remove('active');
-            });
-            
-            // Dropdowns móviles
-            const dropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
-            dropdownToggles.forEach(toggle => {
-                toggle.addEventListener('click', function() {
-                    const targetId = this.getAttribute('data-target');
-                    const targetMenu = document.getElementById(targetId);
-                    targetMenu.classList.toggle('active');
-                });
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

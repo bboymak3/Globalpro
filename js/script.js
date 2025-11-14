@@ -113,4 +113,36 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 window.scrollTo({
-                    top:
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Efecto de sombra en el navbar al hacer scroll
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.main-nav');
+        if (window.scrollY > 50) {
+            navbar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+        } else {
+            navbar.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+        }
+    });
+    
+    // Prevenir el comportamiento por defecto de los enlaces que no tienen href
+    document.querySelectorAll('a[href="#"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+        });
+    });
+});
+
+// Agregar clase no-scroll al body cuando el menú está abierto
+document.head.insertAdjacentHTML('beforeend', `
+<style>
+    body.no-scroll {
+        overflow: hidden;
+    }
+</style>
+`);

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es-VE">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GlobalPro Mecánica - Servicios de mecánica automotriz profesional en toda Venezuela. Reparación, mantenimiento y diagnóstico de vehículos.">
+    <meta name="keywords" content="mecánica automotriz, reparación de autos, mantenimiento vehicular, taller mecánico, diagnóstico automotriz, Venezuela">
+    <title>GlobalPro Mecánica | Servicios Profesionales de Mecánica Automotriz en Venezuela</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Nuestros estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- ========== MENÚ COMPLETO ========== -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <!-- Logo -->
+            <a href="https://globalpro.pages.dev/" class="logo">
+                <div class="logo-img">GP</div>
+                <div>
+                    <div class="logo-text">GLOBALPRO MECÁNICA</div>
+                    <div class="logo-subtext">SERVICIOS AUTOMOTRICES PROFESIONALES</div>
+                </div>
+            </a>
+            
+            <!-- Menú Desktop -->
+            <div class="desktop-menu">
+                <a href="#inicio" class="nav-link">Inicio</a>
+                
+                <!-- CATEGORÍA: Mecánica General -->
+                <div class="dropdown">
+                    <a href="#mecanica-general" class="nav-link dropdown-toggle">
+                        🔧 Mecánica General <span style="margin-left: 5px;">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/mecanica-general/integral/" class="dropdown-item">Mecánica General Integral</a>
+                        <a href="/mecanica-general/reparacion-autos/" class="dropdown-item">Reparación de Autos</a>
+                        <a href="/mecanica-general/mecanica-basica/" class="dropdown-item">Mecánica Básica Automotriz</a>
+                        <a href="/mecanica-general/reparacion-motores/" class="dropdown-item">Reparación de Motores</a>
+                        <a href="/mecanica-general/sistema-transmision/" class="dropdown-item">Sistema de Transmisión</a>
+                        <a href="/mecanica-general/reparacion-frenos/" class="dropdown-item">Reparación de Frenos</a>
+                        <a href="/mecanica-general/suspension-direccion/" class="dropdown-item">Suspensión y Dirección</a>
+                        <a href="/mecanica-general/escape-catalizador/" class="dropdown-item">Escape y Catalizador</a>
+                    </div>
+                </div>
+                
+                <!-- CATEGORÍA: Aire Acondicionado -->
+                <div class="dropdown">
+                    <a href="/aire-acondicionado/" class="nav-link dropdown-toggle">
+                        ❄️ Aire Acondicionado <span style="margin-left: 5px;">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/aire-acondicionado/reparacion/" class="dropdown-item">Reparación Aire Acondicionado</a>
+                        <a href="/aire-acondicionado/recarga-gas/" class="dropdown-item">Recarga de Gas Refrigerante</a>
+                        <a href="/aire-acondicionado/reparacion-compresores/" class="dropdown-item">Reparación de Compresores</a>
+                        <a href="/aire-acondicionado/limpieza-sistemas/" class="dropdown-item">Limpieza de Sistemas</a>
+                        <a href="/aire-acondicionado/reparacion-calefaccion/" class="dropdown-item">Reparación Calefacción</a>
+                        <a href="/aire-acondicionado/mantenimiento/" class="dropdown-item">Mantenimiento Aire Acondicionado</a>
+                        <a href="/aire-acondicionado/diagnostico-fugas/" class="dropdown-item">Diagnóstico de Fugas</a>
+                    </div>
+                </div>
+                
+                <!-- CATEGORÍA: Electricidad -->
+                <div class="dropdown">
+                    <a href="/electricidad/" class="nav-link dropdown-toggle">
+                        ⚡ Electricidad <span style="margin-left: 5px;">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/electricidad/automotriz/" class="dropdown-item">Electricidad Automotriz</a>
+                        <a href="/electricidad/electromecanica/" class="dropdown-item">Electromecánica Vehicular</a>
+                        <a href="/electricidad/reparacion-computadoras/" class="dropdown-item">Reparación Computadoras Auto</a>
+                        <a href="/electricidad/sistema-inyeccion/" class="dropdown-item">Sistema de Inyección</a>
+                        <a href="/electricidad/alternador-bateria/" class="dropdown-item">Alternador y Batería</a>
+                        <a href="/electricidad/reparacion-ecu/" class="dropdown-item">Reparación ECU</a>
+                        <a href="/electricidad/elevadores-electricos/" class="dropdown-item">Elevadores Eléctricos</a>
+                        <a href="/electricidad/instalacion-accesorios/" class="dropdown-item">Instalación Accesorios</a>
+                    </div>
+                </div>
+                
+                <!-- CATEGORÍA: Marcas -->
+                <div class="dropdown">
+                    <a href="/marcas/" class="nav-link dropdown-toggle">
+                        🚗 Marcas <span style="margin-left: 5px;">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/marcas/volkswagen/" class="dropdown-item">Volkswagen</a>
+                        <a href="/marcas/mercedes-benz/" class="dropdown-item">Mercedes-Benz</a>
+                        <a href="/marcas/bmw/" class="dropdown-item">BMW</a>
+                        <a href="/marcas/audi/" class="dropdown-item">Audi</a>
+                        <a href="/marcas/chevrolet/" class="dropdown-item">Chevrolet</a>
+                        <a href="/marcas/ford/" class="dropdown-item">Ford</a>
+                        <a href="/marcas/jeep/" class="dropdown-item">Jeep</a>
+                        <a href="/marcas/toyota/" class="dropdown-item">Toyota</a>
+                        <a href="/marcas/nissan/" class="dropdown-item">Nissan</a>
+                        <a href="/marcas/honda/" class="dropdown-item">Honda</a>
+                        <a href="/marcas/mazda/" class="dropdown-item">Mazda</a>
+                    </div>
+                </div>
+                
+                <!-- CATEGORÍA: Especialidades -->
+                <div class="dropdown">
+                    <a href="/especialidades/" class="nav-link dropdown-toggle">
+                        🏍️ Especialidades <span style="margin-left: 5px;">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/especialidades/mecanica-diesel/" class="dropdown-item">Mecánica Diesel</a>
+                        <a href="/especialidades/mecanica-camiones/" class="dropdown-item">Mecánica de Camiones</a>
+                        <a href="/especialidades/mecanica-motos/" class="dropdown-item">Mecánica de Motos</a>
+                        <a href="/especialidades/mecanica-industrial/" class="dropdown-item">Mecánica Industrial</a>
+                        <a href="/especialidades/mecanica-pesada/" class="dropdown-item">Mecánica Pesada</a>
+                        <a href="/especialidades/mecanica-competicion/" class="dropdown-item">Mecánica de Competición</a>
+                        <a href="/especialidades/maquinaria-pesada/" class="dropdown-item">Maquinaria Pesada</a>
+                    </div>
+                </div>
+                
+                <!-- WhatsApp -->
+                <a href="https://wa.me/584245112587" class="whatsapp-btn">
+                    <span>📱</span> WhatsApp
+                </a>
+            </div>
+            
+            <!-- Botón Hamburguesa -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Menú Móvil -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#inicio" class="mobile-nav-link">Inicio</a>
+        
+        <!-- CATEGORÍA MÓVIL: Mecánica General -->
+        <div class="mobile-dropdown">
+            <div class="mobile-dropdown-toggle" data-target="mecanica-mobile">
+                🔧 Mecánica General <span>▼</span>
+            </div>
+            <div class="mobile-dropdown-menu" id="mecanica-mobile">
+                <a href="/mecanica-general/integral/" class="mobile-dropdown-item">Mecánica General Integral</a>
+                <a href="/mecanica-general/reparacion-autos/" class="mobile-dropdown-item">Reparación de Autos</a>
+                <a href="/mecanica-general/mecanica-basica/" class="mobile-dropdown-item">Mecánica Básica Automotriz</a>
+                <a href="/mecanica-general/reparacion-motores/" class="mobile-dropdown-item">Reparación de Motores</a>
+                <a href="/mecanica-general/sistema-transmision/" class="mobile-dropdown-item">Sistema de Transmisión</a>
+                <a href="/mecanica-general/reparacion-frenos/" class="mobile-dropdown-item">Reparación de Frenos</a>
+                <a href="/mecanica-general/suspension-direccion/" class="mobile-dropdown-item">Suspensión y Dirección</a>
+                <a href="/mecanica-general/escape-catalizador/" class="mobile-dropdown-item">Escape y Catalizador</a>
+            </div>
+        </div>
+        
+        <!-- CATEGORÍA MÓVIL: Aire Acondicionado -->
+        <div class="mobile-dropdown">
+            <div class="mobile-dropdown-toggle" data-target="aire-mobile">
+                ❄️ Aire Acondicionado <span>▼</span>
+            </div>
+            <div class="mobile-dropdown-menu" id="aire-mobile">
+                <a href="/aire-acondicionado/reparacion/" class="mobile-dropdown-item">Reparación Aire Acondicionado</a>
+                <a href="/aire-acondicionado/recarga-gas/" class="mobile-dropdown-item">Recarga de Gas Refrigerante</a>
+                <a href="/aire-acondicionado/reparacion-compresores/" class="mobile-dropdown-item">Reparación de Compresores</a>
+                <a href="/aire-acondicionado/limpieza-sistemas/" class="mobile-dropdown-item">Limpieza de Sistemas</a>
+                <a href="/aire-acondicionado/reparacion-calefaccion/" class="mobile-dropdown-item">Reparación Calefacción</a>
+                <a href="/aire-acondicionado/mantenimiento/" class="mobile-dropdown-item">Mantenimiento Aire Acondicionado</a>
+                <a href="/aire-acondicionado/diagnostico-fugas/" class="mobile-dropdown-item">Diagnóstico de Fugas</a>
+            </div>
+        </div>
+        
+        <!-- CATEGORÍA MÓVIL: Electricidad -->
+        <div class="mobile-dropdown">
+            <div class="mobile-dropdown-toggle" data-target="electricidad-mobile">
+                ⚡ Electricidad <span>▼</span>
+            </div>
+            <div class="mobile-dropdown-menu" id="electricidad-mobile">
+                <a href="/electricidad/automotriz/" class="mobile-dropdown-item">Electricidad Automotriz</a>
+                <a href="/electricidad/electromecanica/" class="mobile-dropdown-item">Electromecánica Vehicular</a>
+                <a href="/electricidad/reparacion-computadoras/" class="mobile-dropdown-item">Reparación Computadoras Auto</a>
+                <a href="/electricidad/sistema-inyeccion/" class="mobile-dropdown-item">Sistema de Inyección</a>
+                <a href="/electricidad/alternador-bateria/" class="mobile-dropdown-item">Alternador y Batería</a>
+                <a href="/electricidad/reparacion-ecu/" class="mobile-dropdown-item">Reparación ECU</a>
+                <a href="/electricidad/elevadores-electricos/" class="mobile-dropdown-item">Elevadores Eléctricos</a>
+                <a href="/electricidad/instalacion-accesorios/" class="mobile-dropdown-item">Instalación Accesorios</a>
+            </div>
+        </div>
+        
+        <!-- CATEGORÍA MÓVIL: Marcas -->
+        <div class="mobile-dropdown">
+            <div class="mobile-dropdown-toggle" data-target="marcas-mobile">
+                🚗 Marcas <span>▼</span>
+            </div>
+            <div class="mobile-dropdown-menu" id="marcas-mobile">
+                <a href="/marcas/volkswagen/" class="mobile-dropdown-item">Volkswagen</a>
+                <a href="/marcas/mercedes-benz/" class="mobile-dropdown-item">Mercedes-Benz</a>
+                <a href="/marcas/bmw/" class="mobile-dropdown-item">BMW</a>
+                <a href="/marcas/audi/" class="mobile-dropdown-item">Audi</a>
+                <a href="/marcas/chevrolet/" class="mobile-dropdown-item">Chevrolet</a>
+                <a href="/marcas/ford/" class="mobile-dropdown-item">Ford</a>
+                <a href="/marcas/jeep/" class="mobile-dropdown-item">Jeep</a>
+                <a href="/marcas/toyota/" class="mobile-dropdown-item">Toyota</a>
+                <a href="/marcas/nissan/" class="mobile-dropdown-item">Nissan</a>
+                <a href="/marcas/honda/" class="mobile-dropdown-item">Honda</a>
+                <a href="/marcas/mazda/" class="mobile-dropdown-item">Mazda</a>
+            </div>
+        </div>
+        
+        <!-- CATEGORÍA MÓVIL: Especialidades -->
+        <div class="mobile-dropdown">
+            <div class="mobile-dropdown-toggle" data-target="especialidades-mobile">
+                🏍️ Especialidades <span>▼</span>
+            </div>
+            <div class="mobile-dropdown-menu" id="especialidades-mobile">
+                <a href="/especialidades/mecanica-diesel/" class="mobile-dropdown-item">Mecánica Diesel</a>
+                <a href="/especialidades/mecanica-camiones/" class="mobile-dropdown-item">Mecánica de Camiones</a>
+                <a href="/especialidades/mecanica-motos/" class="mobile-dropdown-item">Mecánica de Motos</a>
+                <a href="/especialidades/mecanica-industrial/" class="mobile-dropdown-item">Mecánica Industrial</a>
+                <a href="/especialidades/mecanica-pesada/" class="mobile-dropdown-item">Mecánica Pesada</a>
+                <a href="/especialidades/mecanica-competicion/" class="mobile-dropdown-item">Mecánica de Competición</a>
+                <a href="/especialidades/maquinaria-pesada/" class="mobile-dropdown-item">Maquinaria Pesada</a>
+            </div>
+        </div>
+        
+        <!-- WhatsApp Móvil -->
+        <div class="mobile-whatsapp">
+            <a href="https://wa.me/584245112587" class="whatsapp-btn">
+                <span>📱</span> WhatsApp
+            </a>
+        </div>
+    </div>
+    
+    <!-- Overlay para cerrar menú -->
+    <div class="overlay" id="overlay"></div>
+    <!-- ========== FIN MENÚ ========== -->
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="inicio">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7" data-aos="fade-right">
+                    <span class="hero-badge">Especialistas en Mecánica Automotriz</span>
+                    <h1 class="hero-title">Servicios de Mecánica <span class="text-accent">Profesional</span> en Toda Venezuela</h1>
+                    <p class="hero-subtitle">En GlobalPro Mecánica ofrecemos servicios especializados en reparación, mantenimiento y diagnóstico de vehículos. Atención personalizada y garantía en todos nuestros trabajos.</p>
+                    
+                    <div class="stats-container" data-aos="fade-up" data-aos-delay="200">
+                        <div class="row text-center">
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <div class="stat-number">24</div>
+                                    <div class="stat-label">Estados Atendidos</div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <div class="stat-number">+1000</div>
+                                    <div class="stat-label">Vehículos Reparados</div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <div class="stat-number">🔧</div>
+                                    <div class="stat-label">Expertos Mecánicos</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-group mt-4" role="group" data-aos="fade-up" data-aos-delay="300">
+                        <a href="https://wa.me/584245112587" class="btn btn-primary me-2">
+                            <i class="fab fa-whatsapp me-2"></i> Consulta por WhatsApp
+                        </a>
+                        <a href="#servicios" class="btn btn-outline-light">
+                            <i class="fas fa-tools me-2"></i> Ver Servicios
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-5" data-aos="fade-left" data-aos-delay="400">
+                    <div class="text-center">
+                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="GlobalPro Mecánica - Taller Especializado" class="img-fluid rounded shadow">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="servicios">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Nuestros Servicios de Mecánica en Venezuela</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Mecánica General Integral</h3>
+                            <p>Ofrecemos servicios completos de mecánica automotriz para todo tipo de vehículos, desde reparaciones básicas hasta soluciones complejas.</p>
+                            <ul class="service-features">
+                                <li>Reparación de motores y transmisiones</li>
+                                <li>Sistema de frenos y suspensión</li>
+                                <li>Dirección y alineación</li>
+                                <li>Reparación de escapes y catalizadores</li>
+                                <li>Diagnóstico computarizado</li>
+                            </ul>
+                            <a href="#contacto" class="btn btn-sm btn-outline-primary mt-3">Solicitar Información</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-wind"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Aire Acondicionado y Climatización</h3>
+                            <p>Servicios especializados en sistemas de aire acondicionado y calefacción para garantizar tu comodidad en cualquier clima.</p>
+                            <ul class="service-features">
+                                <li>Recarga de gas refrigerante</li>
+                                <li>Reparación de compresores</li>
+                                <li>Limpieza de sistemas</li>
+                                <li>Diagnóstico de fugas</li>
+                                <li>Mantenimiento preventivo</li>
+                            </ul>
+                            <a href="#contacto" class="btn btn-sm btn-outline-primary mt-3">Solicitar Información</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Electricidad Automotriz</h3>
+                            <p>Diagnóstico y reparación de sistemas eléctricos y electrónicos de vehículos con tecnología de última generación.</p>
+                            <ul class="service-features">
+                                <li>Sistema de inyección electrónica</li>
+                                <li>Alternador y batería</li>
+                                <li>Reparación de ECU</li>
+                                <li>Instalación de accesorios</li>
+                                <li>Elevadores eléctricos</li>
+                            </ul>
+                            <a href="#contacto" class="btn btn-sm btn-outline-primary mt-3">Solicitar Información</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section" id="categorias">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Especialidades por Marca y Tipo</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-car-side"></i>
+                        </div>
+                        <h3 class="category-title">Volkswagen</h3>
+                        <p>Especialistas en reparación y mantenimiento de vehículos Volkswagen</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-car-alt"></i>
+                        </div>
+                        <h3 class="category-title">Mercedes-Benz</h3>
+                        <p>Servicios especializados para vehículos de lujo Mercedes-Benz</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <h3 class="category-title">BMW</h3>
+                        <p>Mecánica especializada en vehículos BMW y deportivos</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3 class="category-title">Mecánica Diesel</h3>
+                        <p>Reparación y mantenimiento de motores diesel</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-motorcycle"></i>
+                        </div>
+                        <h3 class="category-title">Mecánica de Motos</h3>
+                        <p>Servicios especializados para motocicletas de todas las marcas</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="category-title">Mecánica Industrial</h3>
+                        <p>Reparación y mantenimiento de maquinaria pesada e industrial</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="nosotros">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h2 class="section-title text-start">Sobre <span class="text-primary">GlobalPro Mecánica</span></h2>
+                    <p>En <strong class="text-primary">GlobalPro Mecánica</strong> somos un taller especializado con amplia experiencia en el sector automotriz venezolano. Nuestro equipo de mecánicos está comprometido con ofrecer soluciones efectivas y personalizadas.</p>
+                    <p>Nos especializamos en mecánica general, sistemas de aire acondicionado, electricidad automotriz y atención especializada por marca. Entendemos la complejidad de los sistemas automotrices modernos y trabajamos con tecnología actualizada.</p>
+                    <p>Ofrecemos servicios integrales que incluyen diagnóstico computarizado, reparación de motores, transmisiones, frenos, suspensión y todos los sistemas del vehículo. Nuestro enfoque se centra en resultados concretos y satisfacción del cliente.</p>
+                    <p>Si necesita servicios de mecánica confiable en Venezuela, somos su taller de confianza para resolver cualquier problema automotriz con profesionalismo y eficiencia.</p>
+                    
+                    <div class="location-card" data-aos="fade-up" data-aos-delay="200">
+                        <h4 class="text-primary mb-3"><i class="fas fa-map-marker-alt me-2"></i> Cobertura Nacional en Venezuela</h4>
+                        <p>Atendemos vehículos en todos los estados de Venezuela:</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check text-success me-2"></i> Amazonas</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Anzoátegui</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Apure</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Aragua</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Barinas</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Bolívar</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Carabobo</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Cojedes</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Delta Amacuro</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Falcón</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Guárico</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Lara</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check text-success me-2"></i> Mérida</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Miranda</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Monagas</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Nueva Esparta</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Portuguesa</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Sucre</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Táchira</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Trujillo</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Vargas (La Guaira)</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Yaracuy</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Zulia</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Distrito Capital</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="text-primary fw-bold mt-3"><i class="fas fa-globe-americas me-2"></i> Servicio a domicilio disponible en varias zonas</p>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="GlobalPro Mecánica - Taller Especializado" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contacto">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Contáctenos en Venezuela</h2>
+            <div class="row">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <p class="mb-4">¿Necesita servicios de mecánica en Venezuela? Contáctenos para consultas sobre reparación, mantenimiento, diagnóstico o cualquier servicio automotriz.</p>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h5>WhatsApp Venezuela</h5>
+                                <p>+58 424-5112587</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h5>Ubicación</h5>
+                                <p>Cobertura en todos los estados de Venezuela</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h5>Horario Venezuela</h5>
+                                <p>Lunes a Viernes 8:00 AM - 6:00 PM</p>
+                                <p>Sábados 9:00 AM - 1:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="https://wa.me/584245112587" class="btn btn-primary btn-lg me-3">
+                            <i class="fab fa-whatsapp me-2"></i> Consulta por WhatsApp
+                        </a>
+                        <a href="tel:+584245112587" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-phone me-2"></i> Llamar Ahora
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-left" data-aos-delay="200">
+                    <div class="text-center">
+                        <img src="https://images.unsplash.com/photo-1565689223820-b9fd35d51a0e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Contacto GlobalPro Mecánica" class="img-fluid rounded shadow">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="footer-logo">GLOBALPRO <span>MECÁNICA</span></div>
+                    <p class="mb-3">Taller especializado en servicios automotrices en Venezuela. Reparación, mantenimiento y diagnóstico profesional con garantía en todos nuestros trabajos.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/584245112587" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Servicios</h5>
+                        <ul>
+                            <li><a href="#servicios">Mecánica General</a></li>
+                            <li><a href="/aire-acondicionado/">Aire Acondicionado</a></li>
+                            <li><a href="/electricidad/">Electricidad</a></li>
+                            <li><a href="/especialidades/">Especialidades</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Marcas</h5>
+                        <ul>
+                            <li><a href="/marcas/volkswagen/">Volkswagen</a></li>
+                            <li><a href="/marcas/mercedes-benz/">Mercedes-Benz</a></li>
+                            <li><a href="/marcas/bmw/">BMW</a></li>
+                            <li><a href="/marcas/audi/">Audi</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer-links">
+                        <h5>Contacto Venezuela</h5>
+                        <ul>
+                            <li><i class="fas fa-phone me-2"></i> +58 424-5112587</li>
+                            <li><i class="fas fa-map-marker-alt me-2"></i> Cobertura Nacional</li>
+                            <li><i class="fas fa-clock me-2"></i> Lunes a Viernes 8:00-18:00</li>
+                            <li><i class="fas fa-clock me-2"></i> Sábados 9:00-13:00</li>
+                        </ul>
+                        <div class="mt-3">
+                            <span class="badge bg-success">Servicio en 24 estados</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="mb-0">&copy; 2024 GlobalPro Mecánica - Taller Especializado en Servicios Automotrices Venezuela. Reparación, mantenimiento y diagnóstico profesional con cobertura en todo el territorio nacional.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/584245112587" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -34,7 +34,7 @@
             background: #fafafa;
         }
         
-        /* ========== MENÚ FUNCIONAL ========== */
+        /* ========== MENÚ COMPLETO ========== */
         .navbar {
             background: #000000;
             padding: 15px 0;
@@ -60,6 +60,7 @@
             align-items: center;
             text-decoration: none;
             color: white;
+            z-index: 1002;
         }
         
         .logo-img {
@@ -90,6 +91,7 @@
             color: #FECACA;
         }
         
+        /* Menú Desktop */
         .desktop-menu {
             display: flex;
             gap: 20px;
@@ -168,6 +170,7 @@
             border-color: white;
         }
         
+        /* Menú Móvil */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -175,8 +178,124 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
+            z-index: 1002;
+            padding: 5px;
         }
         
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: #000000;
+            box-shadow: -5px 0 20px rgba(220, 38, 38, 0.3);
+            padding: 80px 20px 20px;
+            transition: right 0.3s ease;
+            z-index: 1001;
+            overflow-y: auto;
+            border-left: 3px solid #DC2626;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .mobile-nav-item {
+            border-bottom: 1px solid #333;
+        }
+        
+        .mobile-nav-link {
+            display: block;
+            padding: 15px 0;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .mobile-nav-link:hover {
+            color: #DC2626;
+        }
+        
+        .mobile-dropdown-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .mobile-dropdown-toggle:hover {
+            color: #DC2626;
+        }
+        
+        .mobile-dropdown-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: #1a1a1a;
+            margin: 0 -20px;
+            padding: 0 20px;
+            border-radius: 0 0 8px 8px;
+        }
+        
+        .mobile-dropdown-menu.active {
+            max-height: 500px;
+        }
+        
+        .mobile-dropdown-item {
+            display: block;
+            padding: 12px 15px;
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid #333;
+            transition: all 0.3s;
+        }
+        
+        .mobile-dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .mobile-dropdown-item:hover {
+            background: #DC2626;
+            color: white;
+            padding-left: 20px;
+        }
+        
+        .mobile-whatsapp {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            backdrop-filter: blur(3px);
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
         /* Hero Section */
         .hero-section {
             background: linear-gradient(135deg, #000000 0%, #7F1D1D 100%);
@@ -609,11 +728,15 @@
             .nav-container {
                 padding: 0 15px;
             }
+            
+            .mobile-menu {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- ========== MENÚ FUNCIONAL ========== -->
+    <!-- ========== MENÚ COMPLETO ========== -->
     <nav class="navbar">
         <div class="nav-container">
             <!-- Logo -->
@@ -679,12 +802,76 @@
                 </a>
             </div>
             
-            <!-- Botón Móvil -->
+            <!-- Botón Menú Móvil -->
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </nav>
+
+    <!-- Menú Móvil -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav">
+            <li class="mobile-nav-item">
+                <a href="#inicio" class="mobile-nav-link">Inicio</a>
+            </li>
+            
+            <li class="mobile-nav-item">
+                <div class="mobile-dropdown-toggle" data-target="servicios-mobile">
+                    Servicios Mecánicos <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="mobile-dropdown-menu" id="servicios-mobile">
+                    <li><a href="/servicios/mantenimiento/" class="mobile-dropdown-item">Mantenimiento de Vehículos</a></li>
+                    <li><a href="/servicios/reparacion/" class="mobile-dropdown-item">Reparación de Vehículos</a></li>
+                    <li><a href="/servicios/mecanica-automotriz/" class="mobile-dropdown-item">Mecánica Automotriz</a></li>
+                    <li><a href="/servicios/mecanica-industrial/" class="mobile-dropdown-item">Mecánica Industrial</a></li>
+                    <li><a href="/servicios/revision/" class="mobile-dropdown-item">Revisión de Coche</a></li>
+                </ul>
+            </li>
+            
+            <li class="mobile-nav-item">
+                <div class="mobile-dropdown-toggle" data-target="especializados-mobile">
+                    Servicios Especializados <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="mobile-dropdown-menu" id="especializados-mobile">
+                    <li><a href="/especializados/diesel/" class="mobile-dropdown-item">Mecánica Diesel</a></li>
+                    <li><a href="/especializados/electricidad/" class="mobile-dropdown-item">Electricidad Automotriz</a></li>
+                    <li><a href="/especializados/aire-acondicionado/" class="mobile-dropdown-item">Aire Acondicionado</a></li>
+                    <li><a href="/especializados/suspension/" class="mobile-dropdown-item">Suspensión y Frenos</a></li>
+                    <li><a href="/especializados/motos/" class="mobile-dropdown-item">Mecánica de Motos</a></li>
+                </ul>
+            </li>
+            
+            <li class="mobile-nav-item">
+                <div class="mobile-dropdown-toggle" data-target="domicilio-mobile">
+                    Servicio a Domicilio <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="mobile-dropdown-menu" id="domicilio-mobile">
+                    <li><a href="/domicilio/mecanico/" class="mobile-dropdown-item">Mecánico a Domicilio</a></li>
+                    <li><a href="/domicilio/emergencias/" class="mobile-dropdown-item">Emergencias 24H</a></li>
+                    <li><a href="/domicilio/diagnostico/" class="mobile-dropdown-item">Diagnóstico a Domicilio</a></li>
+                    <li><a href="/domicilio/grua/" class="mobile-dropdown-item">Grúa y Asistencia</a></li>
+                </ul>
+            </li>
+            
+            <li class="mobile-nav-item">
+                <a href="#marcas" class="mobile-nav-link">Marcas</a>
+            </li>
+            
+            <li class="mobile-nav-item">
+                <a href="#informacion" class="mobile-nav-link">Información</a>
+            </li>
+        </ul>
+        
+        <div class="mobile-whatsapp">
+            <a href="https://wa.me/56912345678" class="whatsapp-btn">
+                <i class="fab fa-whatsapp me-2"></i> WhatsApp Chile
+            </a>
+        </div>
+    </div>
+    
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
 
     <!-- Hero Section -->
     <section class="hero-section" id="inicio">
@@ -1045,11 +1232,11 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Script -->
+    <!-- Script COMPLETO -->
     <script>
-        // Script simple para los dropdowns - FUNCIONAL
+        // Script para los dropdowns desktop
         document.addEventListener('DOMContentLoaded', function() {
-            // Configurar todos los dropdowns
+            // Configurar todos los dropdowns desktop
             const dropdowns = document.querySelectorAll('.dropdown');
             
             dropdowns.forEach(dropdown => {
@@ -1061,6 +1248,53 @@
                 
                 dropdown.addEventListener('mouseleave', function() {
                     menu.style.display = 'none';
+                });
+            });
+
+            // Script para el menú móvil
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('overlay');
+            
+            // Función para toggle del menú móvil
+            function toggleMobileMenu() {
+                mobileMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+            }
+            
+            // Event listeners para móvil
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            overlay.addEventListener('click', toggleMobileMenu);
+            
+            // Dropdowns móviles
+            const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+            mobileDropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const targetMenu = document.getElementById(targetId);
+                    
+                    // Cerrar otros dropdowns
+                    mobileDropdownToggles.forEach(otherToggle => {
+                        if (otherToggle !== toggle) {
+                            const otherTargetId = otherToggle.getAttribute('data-target');
+                            const otherTargetMenu = document.getElementById(otherTargetId);
+                            otherTargetMenu.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle dropdown actual
+                    targetMenu.classList.toggle('active');
+                });
+            });
+            
+            // Cerrar menú al hacer clic en enlaces móviles
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link, .mobile-dropdown-item');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
                 });
             });
 

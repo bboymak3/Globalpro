@@ -13,985 +13,137 @@
     
     <style>
         :root {
-            --primary: #DC2626;  /* Rojo intenso */
-            --secondary: #000000; /* Negro */
-            --accent: #FEF2F2;   /* Rojo muy claro */
-            --dark: #7F1D1D;     /* Rojo oscuro */
-            --light: #FECACA;    /* Rojo claro */
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --primary: #DC2626;
+            --secondary: #000000;
+            --accent: #FEF2F2;
         }
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
-            overflow-x: hidden;
             padding-top: 80px;
             background: #fafafa;
-        }
-        
-        /* ========== MENÚ DESKTOP CORREGIDO ========== */
-        .navbar {
-            background: #000000;
-            box-shadow: 0 2px 20px rgba(220, 38, 38, 0.3);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            padding: 0;
-            border-bottom: 3px solid var(--primary);
-        }
-        
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-        }
-        
-        .logo-img {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary) 0%, #000000 100%);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-weight: bold;
-            margin-right: 10px;
-            font-size: 18px;
-            box-shadow: 0 3px 15px rgba(220, 38, 38, 0.4);
-            border: 2px solid var(--primary);
-        }
-        
-        .logo-text {
-            font-weight: 800;
-            font-size: 18px;
-            line-height: 1;
-            color: white;
-        }
-        
-        .logo-subtext {
-            font-size: 12px;
-            color: var(--light);
-        }
-        
-        /* Menú Desktop - CORREGIDO */
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .nav-item {
-            position: relative;
-            margin: 0 10px;
-        }
-        
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        
-        .nav-link:hover {
-            color: var(--primary);
-            background: rgba(220, 38, 38, 0.1);
-        }
-        
-        /* DROPDOWN DESKTOP - CÓDIGO SIMPLIFICADO */
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: #1a1a1a;
-            box-shadow: 0 5px 20px rgba(220, 38, 38, 0.3);
-            border-radius: 8px;
-            min-width: 240px;
-            padding: 10px 0;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            list-style: none;
-            border: 2px solid var(--primary);
-            z-index: 1000;
-        }
-        
-        .nav-item:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        
-        .dropdown-item {
-            display: block;
-            padding: 12px 20px;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-            border-left: 3px solid transparent;
-        }
-        
-        .dropdown-item:hover {
-            background: var(--primary);
-            color: white;
-            border-left-color: white;
-            padding-left: 25px;
-        }
-        
-        .whatsapp-btn {
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            margin-left: 15px;
-            transition: all 0.3s;
-            box-shadow: 0 3px 15px rgba(37, 211, 102, 0.4);
-            border: 2px solid transparent;
-        }
-        
-        .whatsapp-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.6);
-            color: white;
-            border-color: white;
-        }
-        
-        /* Menú Móvil */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-        }
-        
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: white;
-            margin: 3px 0;
-            transition: 0.3s;
-            border-radius: 2px;
-        }
-        
-        /* Mobile Menu */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 300px;
-            height: 100vh;
-            background: #000000;
-            box-shadow: -5px 0 20px rgba(220, 38, 38, 0.3);
-            padding: 80px 20px 20px;
-            transition: right 0.3s ease;
-            z-index: 999;
-            overflow-y: auto;
-            border-left: 3px solid var(--primary);
-        }
-        
-        .mobile-menu.active {
-            right: 0;
-        }
-        
-        .mobile-nav {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .mobile-nav-item {
-            border-bottom: 1px solid #333;
-        }
-        
-        .mobile-nav-link {
-            display: block;
-            padding: 15px 0;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-        
-        .mobile-nav-link:hover {
-            color: var(--primary);
-        }
-        
-        .mobile-dropdown-toggle {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        
-        .mobile-dropdown-toggle:hover {
-            color: var(--primary);
-        }
-        
-        .mobile-dropdown-menu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background: #1a1a1a;
-            margin: 0 -20px;
-            padding: 0 20px;
-            border-radius: 0 0 8px 8px;
-        }
-        
-        .mobile-dropdown-menu.active {
-            max-height: 500px;
-        }
-        
-        .mobile-dropdown-item {
-            display: block;
-            padding: 12px 15px;
-            color: white;
-            text-decoration: none;
-            border-bottom: 1px solid #333;
-            transition: all 0.3s;
-        }
-        
-        .mobile-dropdown-item:last-child {
-            border-bottom: none;
-        }
-        
-        .mobile-dropdown-item:hover {
-            background: var(--primary);
-            color: white;
-            padding-left: 20px;
-        }
-        
-        .mobile-whatsapp {
-            margin-top: 20px;
-            text-align: center;
-        }
-        
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 998;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            backdrop-filter: blur(3px);
-        }
-        
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        /* Responsive */
-        @media (max-width: 991px) {
-            .nav-menu {
-                display: none;
-            }
-            
-            .hamburger {
-                display: flex;
-            }
-            
-            .whatsapp-btn {
-                margin-left: 0;
-                margin-top: 10px;
-                justify-content: center;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .mobile-menu {
-                width: 100%;
-            }
-        }
-
-        /* Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, #000000 0%, var(--dark) 100%);
-            color: white;
-            padding: 100px 0 80px;
-            margin-top: -80px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(220,38,38,0.1)"/></svg>');
-            background-size: cover;
-        }
-        
-        .hero-badge {
-            background: var(--primary);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 15px rgba(220, 38, 38, 0.4);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .hero-title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        
-        .text-accent {
-            color: var(--primary);
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-        
-        .hero-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.95;
-        }
-        
-        .stats-container {
-            background: rgba(220, 38, 38, 0.15);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 30px 0;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(220, 38, 38, 0.3);
-        }
-        
-        .stat-item {
-            padding: 10px;
-        }
-        
-        .stat-number {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--primary);
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            font-weight: 500;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, #B91C1C 100%);
-            border: none;
-            padding: 12px 30px;
-            font-weight: 600;
-            border-radius: 8px;
-            color: white;
-            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6);
-            color: white;
-            border-color: white;
-        }
-        
-        .btn-outline-light {
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            color: white;
-            padding: 12px 30px;
-            font-weight: 600;
-            border-radius: 8px;
-            transition: all 0.3s;
-            background: transparent;
-        }
-        
-        .btn-outline-light:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* WhatsApp Float */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
-            z-index: 100;
-            text-decoration: none;
-            transition: all 0.3s;
-            border: 2px solid white;
-        }
-        
-        .whatsapp-float:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
-            color: white;
-        }
-
-        /* Secciones adicionales */
-        .services-section {
-            padding: 80px 0;
-            background: var(--accent);
-        }
-        
-        .section-title {
-            color: var(--secondary);
-            font-weight: 800;
-            margin-bottom: 50px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
-        
-        .service-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            border: 2px solid transparent;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary);
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(220, 38, 38, 0.2);
-            border-color: var(--primary);
-        }
-        
-        .service-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            color: white;
-            font-size: 1.8rem;
-            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.3);
-            border: 2px solid var(--primary);
-        }
-        
-        .service-title {
-            color: var(--secondary);
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        
-        .service-features {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-        
-        .service-features li {
-            padding: 5px 0;
-            position: relative;
-            padding-left: 25px;
-            color: var(--dark);
-        }
-        
-        .service-features li::before {
-            content: "✓";
-            color: var(--primary);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-        
-        .btn-outline-primary {
-            color: var(--primary);
-            border-color: var(--primary);
-            font-weight: 600;
-            transition: all 0.3s;
-            background: transparent;
-        }
-        
-        .btn-outline-primary:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Footer */
-        .footer {
-            background: #000000;
-            color: white;
-            padding: 60px 0 20px;
-            border-top: 3px solid var(--primary);
-        }
-        
-        .footer-logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            color: white;
-        }
-        
-        .footer-logo span {
-            color: var(--primary);
         }
     </style>
 </head>
 <body>
-    <!-- ========== MENÚ DESKTOP CORREGIDO ========== -->
-    <nav class="navbar">
-        <div class="nav-container">
+    <!-- ========== MENÚ SIMPLIFICADO Y FUNCIONAL ========== -->
+    <nav style="background: #000000; padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 1000; box-shadow: 0 2px 20px rgba(220, 38, 38, 0.3); border-bottom: 3px solid #DC2626;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center;">
+            
             <!-- Logo -->
-            <a href="/" class="logo">
-                <div class="logo-img">GP</div>
+            <a href="/" style="display: flex; align-items: center; text-decoration: none; color: white;">
+                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #DC2626 0%, #000000 100%); color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; margin-right: 10px; font-size: 18px; border: 2px solid #DC2626;">
+                    GP
+                </div>
                 <div>
-                    <div class="logo-text">GLOBAL PRO</div>
-                    <div class="logo-subtext">TALLER MECÁNICO CHILE</div>
+                    <div style="font-weight: 800; line-height: 1.2;">GLOBAL PRO</div>
+                    <div style="font-size: 0.8em; line-height: 1.2; color: #FECACA;">TALLER MECÁNICO CHILE</div>
                 </div>
             </a>
             
-            <!-- Menú Desktop - ESTRUCTURA SIMPLIFICADA -->
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#inicio" class="nav-link">Inicio</a>
-                </li>
+            <!-- Menú Principal -->
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <a href="#inicio" style="text-decoration: none; color: white; font-weight: 600; padding: 8px 12px; border-radius: 5px; transition: all 0.3s;">Inicio</a>
                 
-                <li class="nav-item">
-                    <a href="#servicios" class="nav-link">
-                        Servicios Mecánicos <i class="fas fa-chevron-down" style="margin-left: 5px; font-size: 12px;"></i>
+                <!-- Dropdown SERVICIOS MECÁNICOS -->
+                <div style="position: relative;">
+                    <a href="#servicios" style="text-decoration: none; color: white; font-weight: 600; padding: 8px 12px; border-radius: 5px; transition: all 0.3s; display: flex; align-items: center;">
+                        Servicios Mecánicos <span style="margin-left: 5px;">▼</span>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/servicios/mantenimiento/" class="dropdown-item">Mantenimiento de Vehículos</a></li>
-                        <li><a href="/servicios/reparacion/" class="dropdown-item">Reparación de Vehículos</a></li>
-                        <li><a href="/servicios/mecanica-automotriz/" class="dropdown-item">Mecánica Automotriz</a></li>
-                        <li><a href="/servicios/mecanica-industrial/" class="dropdown-item">Mecánica Industrial</a></li>
-                        <li><a href="/servicios/revision/" class="dropdown-item">Revisión de Coche</a></li>
-                    </ul>
-                </li>
+                    <div style="position: absolute; top: 100%; left: 0; background: #1a1a1a; box-shadow: 0 5px 20px rgba(220, 38, 38, 0.3); border-radius: 8px; min-width: 250px; padding: 10px 0; display: none; z-index: 1001; border: 2px solid #DC2626;">
+                        <a href="/servicios/mantenimiento/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Mantenimiento de Vehículos</a>
+                        <a href="/servicios/reparacion/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Reparación de Vehículos</a>
+                        <a href="/servicios/mecanica-automotriz/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Mecánica Automotriz</a>
+                        <a href="/servicios/mecanica-industrial/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Mecánica Industrial</a>
+                        <a href="/servicios/revision/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; transition: all 0.3s;">Revisión de Coche</a>
+                    </div>
+                </div>
                 
-                <li class="nav-item">
-                    <a href="#especializados" class="nav-link">
-                        Servicios Especializados <i class="fas fa-chevron-down" style="margin-left: 5px; font-size: 12px;"></i>
+                <!-- Dropdown SERVICIOS ESPECIALIZADOS -->
+                <div style="position: relative;">
+                    <a href="#especializados" style="text-decoration: none; color: white; font-weight: 600; padding: 8px 12px; border-radius: 5px; transition: all 0.3s; display: flex; align-items: center;">
+                        Servicios Especializados <span style="margin-left: 5px;">▼</span>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/especializados/diesel/" class="dropdown-item">Mecánica Diesel</a></li>
-                        <li><a href="/especializados/electricidad/" class="dropdown-item">Electricidad Automotriz</a></li>
-                        <li><a href="/especializados/aire-acondicionado/" class="dropdown-item">Aire Acondicionado</a></li>
-                        <li><a href="/especializados/suspension/" class="dropdown-item">Suspensión y Frenos</a></li>
-                        <li><a href="/especializados/motos/" class="dropdown-item">Mecánica de Motos</a></li>
-                    </ul>
-                </li>
+                    <div style="position: absolute; top: 100%; left: 0; background: #1a1a1a; box-shadow: 0 5px 20px rgba(220, 38, 38, 0.3); border-radius: 8px; min-width: 250px; padding: 10px 0; display: none; z-index: 1001; border: 2px solid #DC2626;">
+                        <a href="/especializados/diesel/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Mecánica Diesel</a>
+                        <a href="/especializados/electricidad/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Electricidad Automotriz</a>
+                        <a href="/especializados/aire-acondicionado/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Aire Acondicionado</a>
+                        <a href="/especializados/suspension/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Suspensión y Frenos</a>
+                        <a href="/especializados/motos/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; transition: all 0.3s;">Mecánica de Motos</a>
+                    </div>
+                </div>
                 
-                <li class="nav-item">
-                    <a href="#domicilio" class="nav-link">
-                        Servicio a Domicilio <i class="fas fa-chevron-down" style="margin-left: 5px; font-size: 12px;"></i>
+                <!-- Dropdown SERVICIO A DOMICILIO -->
+                <div style="position: relative;">
+                    <a href="#domicilio" style="text-decoration: none; color: white; font-weight: 600; padding: 8px 12px; border-radius: 5px; transition: all 0.3s; display: flex; align-items: center;">
+                        Servicio a Domicilio <span style="margin-left: 5px;">▼</span>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/domicilio/mecanico/" class="dropdown-item">Mecánico a Domicilio</a></li>
-                        <li><a href="/domicilio/emergencias/" class="dropdown-item">Emergencias 24H</a></li>
-                        <li><a href="/domicilio/diagnostico/" class="dropdown-item">Diagnóstico a Domicilio</a></li>
-                        <li><a href="/domicilio/grua/" class="dropdown-item">Grúa y Asistencia</a></li>
-                    </ul>
-                </li>
+                    <div style="position: absolute; top: 100%; left: 0; background: #1a1a1a; box-shadow: 0 5px 20px rgba(220, 38, 38, 0.3); border-radius: 8px; min-width: 250px; padding: 10px 0; display: none; z-index: 1001; border: 2px solid #DC2626;">
+                        <a href="/domicilio/mecanico/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Mecánico a Domicilio</a>
+                        <a href="/domicilio/emergencias/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Emergencias 24H</a>
+                        <a href="/domicilio/diagnostico/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Diagnóstico a Domicilio</a>
+                        <a href="/domicilio/grua/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; transition: all 0.3s;">Grúa y Asistencia</a>
+                    </div>
+                </div>
                 
-                <li class="nav-item">
-                    <a href="#marcas" class="nav-link">
-                        Marcas Especializadas <i class="fas fa-chevron-down" style="margin-left: 5px; font-size: 12px;"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/marcas/toyota/" class="dropdown-item">Toyota</a></li>
-                        <li><a href="/marcas/ford/" class="dropdown-item">Ford</a></li>
-                        <li><a href="/marcas/chevrolet/" class="dropdown-item">Chevrolet</a></li>
-                        <li><a href="/marcas/nissan/" class="dropdown-item">Nissan</a></li>
-                        <li><a href="/marcas/volkswagen/" class="dropdown-item">Volkswagen</a></li>
-                        <li><a href="/marcas/honda/" class="dropdown-item">Honda</a></li>
-                    </ul>
-                </li>
+                <a href="#marcas" style="text-decoration: none; color: white; font-weight: 600; padding: 8px 12px; border-radius: 5px; transition: all 0.3s;">Marcas</a>
+                <a href="#informacion" style="text-decoration: none; color: white; font-weight: 600; padding: 8px 12px; border-radius: 5px; transition: all 0.3s;">Información</a>
                 
-                <li class="nav-item">
-                    <a href="#informacion" class="nav-link">Información</a>
-                </li>
-                
-                <li class="nav-item">
-                    <a href="https://wa.me/56912345678" class="whatsapp-btn">
-                        <i class="fab fa-whatsapp me-2"></i> WhatsApp
-                    </a>
-                </li>
-            </ul>
-            
-            <!-- Botón Hamburguesa -->
-            <button class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+                <!-- WhatsApp -->
+                <a href="https://wa.me/56912345678" style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; display: flex; align-items: center; transition: all 0.3s;">
+                    <i class="fab fa-whatsapp" style="margin-right: 8px;"></i> WhatsApp
+                </a>
+            </div>
         </div>
     </nav>
-    
-    <!-- Menú Móvil -->
-    <div class="mobile-menu" id="mobileMenu">
-        <ul class="mobile-nav">
-            <li class="mobile-nav-item">
-                <a href="#inicio" class="mobile-nav-link">Inicio</a>
-            </li>
-            
-            <li class="mobile-nav-item">
-                <div class="mobile-dropdown-toggle" data-target="servicios-mobile">
-                    Servicios Mecánicos <i class="fas fa-chevron-down"></i>
-                </div>
-                <ul class="mobile-dropdown-menu" id="servicios-mobile">
-                    <li><a href="/servicios/mantenimiento/" class="mobile-dropdown-item">Mantenimiento de Vehículos</a></li>
-                    <li><a href="/servicios/reparacion/" class="mobile-dropdown-item">Reparación de Vehículos</a></li>
-                    <li><a href="/servicios/mecanica-automotriz/" class="mobile-dropdown-item">Mecánica Automotriz</a></li>
-                    <li><a href="/servicios/mecanica-industrial/" class="mobile-dropdown-item">Mecánica Industrial</a></li>
-                    <li><a href="/servicios/revision/" class="mobile-dropdown-item">Revisión de Coche</a></li>
-                </ul>
-            </li>
-            
-            <li class="mobile-nav-item">
-                <div class="mobile-dropdown-toggle" data-target="especializados-mobile">
-                    Servicios Especializados <i class="fas fa-chevron-down"></i>
-                </div>
-                <ul class="mobile-dropdown-menu" id="especializados-mobile">
-                    <li><a href="/especializados/diesel/" class="mobile-dropdown-item">Mecánica Diesel</a></li>
-                    <li><a href="/especializados/electricidad/" class="mobile-dropdown-item">Electricidad Automotriz</a></li>
-                    <li><a href="/especializados/aire-acondicionado/" class="mobile-dropdown-item">Aire Acondicionado</a></li>
-                    <li><a href="/especializados/suspension/" class="mobile-dropdown-item">Suspensión y Frenos</a></li>
-                    <li><a href="/especializados/motos/" class="mobile-dropdown-item">Mecánica de Motos</a></li>
-                </ul>
-            </li>
-            
-            <li class="mobile-nav-item">
-                <div class="mobile-dropdown-toggle" data-target="domicilio-mobile">
-                    Servicio a Domicilio <i class="fas fa-chevron-down"></i>
-                </div>
-                <ul class="mobile-dropdown-menu" id="domicilio-mobile">
-                    <li><a href="/domicilio/mecanico/" class="mobile-dropdown-item">Mecánico a Domicilio</a></li>
-                    <li><a href="/domicilio/emergencias/" class="mobile-dropdown-item">Emergencias 24H</a></li>
-                    <li><a href="/domicilio/diagnostico/" class="mobile-dropdown-item">Diagnóstico a Domicilio</a></li>
-                    <li><a href="/domicilio/grua/" class="mobile-dropdown-item">Grúa y Asistencia</a></li>
-                </ul>
-            </li>
-            
-            <li class="mobile-nav-item">
-                <div class="mobile-dropdown-toggle" data-target="marcas-mobile">
-                    Marcas Especializadas <i class="fas fa-chevron-down"></i>
-                </div>
-                <ul class="mobile-dropdown-menu" id="marcas-mobile">
-                    <li><a href="/marcas/toyota/" class="mobile-dropdown-item">Toyota</a></li>
-                    <li><a href="/marcas/ford/" class="mobile-dropdown-item">Ford</a></li>
-                    <li><a href="/marcas/chevrolet/" class="mobile-dropdown-item">Chevrolet</a></li>
-                    <li><a href="/marcas/nissan/" class="mobile-dropdown-item">Nissan</a></li>
-                    <li><a href="/marcas/volkswagen/" class="mobile-dropdown-item">Volkswagen</a></li>
-                    <li><a href="/marcas/honda/" class="mobile-dropdown-item">Honda</a></li>
-                </ul>
-            </li>
-            
-            <li class="mobile-nav-item">
-                <a href="#informacion" class="mobile-nav-link">Información</a>
-            </li>
-        </ul>
-        
-        <div class="mobile-whatsapp">
-            <a href="https://wa.me/56912345678" class="whatsapp-btn">
-                <i class="fab fa-whatsapp me-2"></i> WhatsApp Chile
-            </a>
-        </div>
-    </div>
-    
-    <!-- Overlay -->
-    <div class="overlay" id="overlay"></div>
 
-    <!-- Hero Section -->
-    <section class="hero-section" id="inicio">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-7">
-                    <span class="hero-badge">Especialistas en Mecánica Automotriz</span>
-                    <h1 class="hero-title">Servicio Mecánico <span class="text-accent">Profesional</span> en Santiago</h1>
-                    <p class="hero-subtitle">En Global Pro ofrecemos servicios mecánicos especializados en mantenimiento y reparación de vehículos en toda la Región Metropolitana. Más de 15 años de experiencia nos respaldan.</p>
-                    
-                    <div class="stats-container">
-                        <div class="row text-center">
-                            <div class="col-4">
-                                <div class="stat-item">
-                                    <div class="stat-number">15+</div>
-                                    <div class="stat-label">Años de Experiencia</div>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="stat-item">
-                                    <div class="stat-number">+5000</div>
-                                    <div class="stat-label">Vehículos Reparados</div>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="stat-item">
-                                    <div class="stat-number">🔧</div>
-                                    <div class="stat-label">Mecánicos Expertos</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="btn-group mt-4" role="group">
-                        <a href="https://wa.me/56912345678" class="btn btn-primary me-2">
-                            <i class="fab fa-whatsapp me-2"></i> Consulta por WhatsApp
-                        </a>
-                        <a href="#servicios" class="btn btn-outline-light">
-                            <i class="fas fa-tools me-2"></i> Ver Servicios
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="text-center">
-                        <img src="https://images.unsplash.com/photo-1603712610494-8b6b0c6c6b8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Global Pro - Taller Mecánico Especializado" class="img-fluid rounded shadow">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services-section" id="servicios">
-        <div class="container">
-            <h2 class="section-title">Nuestros Servicios Mecánicos</h2>
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-car"></i>
-                        </div>
-                        <h3 class="service-title">Mantenimiento de Vehículos</h3>
-                        <p>Ofrecemos mantenimiento preventivo y correctivo para todo tipo de vehículos, garantizando su óptimo funcionamiento.</p>
-                        <ul class="service-features">
-                            <li>Cambio de aceite y filtros</li>
-                            <li>Revisión de frenos y suspensión</li>
-                            <li>Alineación y balanceo</li>
-                            <li>Mantenimiento programado</li>
-                        </ul>
-                        <a href="#contacto" class="btn btn-outline-primary mt-3">Solicitar Información</a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <h3 class="service-title">Reparación de Vehículos</h3>
-                        <p>Diagnóstico y reparación especializada de fallas mecánicas, eléctricas y electrónicas con garantía de servicio.</p>
-                        <ul class="service-features">
-                            <li>Diagnóstico computarizado</li>
-                            <li>Reparación de motor</li>
-                            <li>Sistema eléctrico</li>
-                            <li>Frenos ABS</li>
-                        </ul>
-                        <a href="#contacto" class="btn btn-outline-primary mt-3">Solicitar Información</a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-home"></i>
-                        </div>
-                        <h3 class="service-title">Mecánico a Domicilio</h3>
-                        <p>Servicio de mecánica a domicilio para diagnóstico, reparaciones menores y emergencias vehiculares 24/7.</p>
-                        <ul class="service-features">
-                            <li>Diagnóstico a domicilio</li>
-                            <li>Reparaciones de emergencia</li>
-                            <li>Cambio de batería</li>
-                            <li>Servicio de grúa</li>
-                        </ul>
-                        <a href="#contacto" class="btn btn-outline-primary mt-3">Solicitar Información</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="footer-logo">GLOBAL <span>PRO</span></div>
-                    <p>Taller mecánico especializado con más de 15 años de experiencia en Santiago, Región Metropolitana.</p>
-                </div>
-                <div class="col-lg-6 text-lg-end">
-                    <p><strong>Contacto:</strong> +56 9 1234 5678</p>
-                    <p><strong>Email:</strong> contacto@globalpro.cl</p>
-                    <p><strong>Dirección:</strong> Av. Principal 1234, Santiago</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- WhatsApp Float -->
-    <a href="https://wa.me/56912345678" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- Script CORREGIDO - SIN CONFLICTOS -->
+    <!-- Script simple y confiable -->
     <script>
-        // SOLO manejo del menú móvil - Desktop funciona con CSS puro
         document.addEventListener('DOMContentLoaded', function() {
-            const hamburger = document.getElementById('hamburger');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const overlay = document.getElementById('overlay');
+            // Configurar todos los dropdowns
+            const dropdowns = document.querySelectorAll('div[style*="position: relative"]');
             
-            // Función para toggle del menú móvil
-            function toggleMobileMenu() {
-                mobileMenu.classList.toggle('active');
-                overlay.classList.toggle('active');
-                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+            dropdowns.forEach(dropdown => {
+                const menu = dropdown.querySelector('div[style*="position: absolute"]');
                 
-                // Animación del hamburguesa
-                const spans = hamburger.querySelectorAll('span');
-                if (mobileMenu.classList.contains('active')) {
-                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                    spans[1].style.opacity = '0';
-                    spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-                } else {
-                    spans[0].style.transform = 'none';
-                    spans[1].style.opacity = '1';
-                    spans[2].style.transform = 'none';
-                }
-            }
-            
-            // Event listeners solo para móvil
-            hamburger.addEventListener('click', toggleMobileMenu);
-            overlay.addEventListener('click', toggleMobileMenu);
-            
-            // Dropdowns móviles
-            const dropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
-            dropdownToggles.forEach(toggle => {
-                toggle.addEventListener('click', function() {
-                    const targetId = this.getAttribute('data-target');
-                    const targetMenu = document.getElementById(targetId);
-                    
-                    // Cerrar otros dropdowns
-                    dropdownToggles.forEach(otherToggle => {
-                        if (otherToggle !== toggle) {
-                            const otherTargetId = otherToggle.getAttribute('data-target');
-                            const otherTargetMenu = document.getElementById(otherTargetId);
-                            otherTargetMenu.classList.remove('active');
-                        }
-                    });
-                    
-                    // Toggle dropdown actual
-                    targetMenu.classList.toggle('active');
+                dropdown.addEventListener('mouseenter', function() {
+                    menu.style.display = 'block';
+                });
+                
+                dropdown.addEventListener('mouseleave', function() {
+                    menu.style.display = 'none';
                 });
             });
-            
-            // Cerrar menú al hacer clic en enlaces móviles
-            const mobileLinks = document.querySelectorAll('.mobile-nav-link, .mobile-dropdown-item');
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    mobileMenu.classList.remove('active');
-                    overlay.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                    
-                    // Reset hamburguesa
-                    const spans = hamburger.querySelectorAll('span');
-                    spans[0].style.transform = 'none';
-                    spans[1].style.opacity = '1';
-                    spans[2].style.transform = 'none';
-                });
-            });
-        });
 
-        // Smooth scroll para todos los enlaces
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+            // Smooth scroll para enlaces internos
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
             });
         });
     </script>
+
+    <!-- Resto del contenido... -->
+    <section id="inicio" style="padding: 100px 0; background: linear-gradient(135deg, #000000 0%, #7F1D1D 100%); color: white;">
+        <div class="container">
+            <h1>Global Pro - Taller Mecánico</h1>
+            <p>Servicios profesionales en Santiago</p>
+        </div>
+    </section>
+
+    <section id="servicios" style="padding: 80px 0; background: #FEF2F2;">
+        <div class="container">
+            <h2>Nuestros Servicios</h2>
+            <!-- Contenido de servicios -->
+        </div>
+    </section>
 </body>
 </html>

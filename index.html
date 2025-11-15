@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Pro - Taller Mecánico Chile</title>
+    <title>Global Pro - Taller Mecánico Especializado | Santiago, Chile</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,95 +16,1044 @@
             --primary: #DC2626;
             --secondary: #000000;
             --accent: #FEF2F2;
+            --dark: #7F1D1D;
+            --light: #FECACA;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            overflow-x: hidden;
             padding-top: 80px;
             background: #fafafa;
+        }
+        
+        /* ========== MENÚ FUNCIONAL ========== */
+        .navbar {
+            background: #000000;
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(220, 38, 38, 0.3);
+            border-bottom: 3px solid #DC2626;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #DC2626 0%, #000000 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 18px;
+            border: 2px solid #DC2626;
+            box-shadow: 0 3px 15px rgba(220, 38, 38, 0.4);
+        }
+        
+        .logo-text {
+            font-weight: 800;
+            line-height: 1.2;
+            font-size: 18px;
+        }
+        
+        .logo-subtext {
+            font-size: 0.8em;
+            line-height: 1.2;
+            color: #FECACA;
+        }
+        
+        .desktop-menu {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            background: rgba(220, 38, 38, 0.1);
+            color: #DC2626;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #1a1a1a;
+            box-shadow: 0 5px 20px rgba(220, 38, 38, 0.3);
+            border-radius: 8px;
+            min-width: 250px;
+            padding: 10px 0;
+            display: none;
+            z-index: 1001;
+            border: 2px solid #DC2626;
+        }
+        
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            text-decoration: none;
+            color: white;
+            border-bottom: 1px solid #333;
+            transition: all 0.3s;
+        }
+        
+        .dropdown-item:hover {
+            background: #DC2626;
+            color: white;
+            padding-left: 25px;
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+            box-shadow: 0 3px 15px rgba(37, 211, 102, 0.4);
+            border: 2px solid transparent;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.6);
+            color: white;
+            border-color: white;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #000000 0%, #7F1D1D 100%);
+            color: white;
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(220,38,38,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-badge {
+            background: #DC2626;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 15px rgba(220, 38, 38, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .text-accent {
+            color: #DC2626;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        .stats-container {
+            background: rgba(220, 38, 38, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+        }
+        
+        .stat-item {
+            padding: 10px;
+        }
+        
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #DC2626;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 8px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6);
+            color: white;
+            border-color: white;
+        }
+        
+        .btn-outline-light {
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            color: white;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s;
+            background: transparent;
+        }
+        
+        .btn-outline-light:hover {
+            background: #DC2626;
+            border-color: #DC2626;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Services Section */
+        .services-section {
+            padding: 80px 0;
+            background: #FEF2F2;
+        }
+        
+        .section-title {
+            color: #000000;
+            font-weight: 800;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #DC2626;
+            border-radius: 2px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #DC2626;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(220, 38, 38, 0.2);
+            border-color: #DC2626;
+        }
+        
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #DC2626 0%, #000000 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.3);
+            border: 2px solid #DC2626;
+        }
+        
+        .service-title {
+            color: #000000;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .service-features li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 25px;
+            color: #7F1D1D;
+        }
+        
+        .service-features li::before {
+            content: "✓";
+            color: #DC2626;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .btn-outline-primary {
+            color: #DC2626;
+            border-color: #DC2626;
+            font-weight: 600;
+            transition: all 0.3s;
+            background: transparent;
+        }
+        
+        .btn-outline-primary:hover {
+            background: #DC2626;
+            border-color: #DC2626;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Specialties Section */
+        .specialties-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            height: 100%;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(220, 38, 38, 0.2);
+            border-color: #DC2626;
+        }
+        
+        .category-icon {
+            width: 70px;
+            height: 70px;
+            background: #FEF2F2;
+            color: #DC2626;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+        }
+        
+        .category-title {
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+        
+        /* About Section */
+        .about-section {
+            padding: 80px 0;
+            background: #FEF2F2;
+        }
+        
+        .location-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #000000 0%, #7F1D1D 100%);
+            color: white;
+        }
+        
+        .contact-info {
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #000000;
+            color: white;
+            padding: 60px 0 20px;
+            border-top: 3px solid #DC2626;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .footer-logo span {
+            color: #DC2626;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-link:hover {
+            background: #DC2626;
+            color: white;
+        }
+        
+        .footer-links h5 {
+            color: #FECACA;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .footer-links ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links ul li a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            z-index: 100;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 2px solid white;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+            color: white;
+        }
+        
+        /* Responsive */
+        @media (max-width: 991px) {
+            .desktop-menu {
+                display: none !important;
+            }
+            
+            .mobile-menu-btn {
+                display: block !important;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 15px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- ========== MENÚ SIMPLIFICADO Y FUNCIONAL ========== -->
-    <nav style="background: #000000; padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 1000; box-shadow: 0 2px 20px rgba(220, 38, 38, 0.3); border-bottom: 3px solid #DC2626;">
-        <div style="max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center;">
-            
+    <!-- ========== MENÚ FUNCIONAL ========== -->
+    <nav class="navbar">
+        <div class="nav-container">
             <!-- Logo -->
-            <a href="/" style="display: flex; align-items: center; text-decoration: none; color: white;">
-                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #DC2626 0%, #000000 100%); color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; margin-right: 10px; font-size: 18px; border: 2px solid #DC2626;">
-                    GP
-                </div>
+            <a href="/" class="logo">
+                <div class="logo-img">GP</div>
                 <div>
-                    <div style="font-weight: 800; line-height: 1.2;">GLOBAL PRO</div>
-                    <div style="font-size: 0.8em; line-height: 1.2; color: #FECACA;">TALLER MECÁNICO CHILE</div>
+                    <div class="logo-text">GLOBAL PRO</div>
+                    <div class="logo-subtext">TALLER MECÁNICO CHILE</div>
                 </div>
             </a>
             
-            <!-- Menú Principal -->
-            <div style="display: flex; gap: 20px; align-items: center;">
-                <a href="#inicio" style="text-decoration: none; color: white; font-weight: 600; padding: 8px 12px; border-radius: 5px; transition: all 0.3s;">Inicio</a>
+            <!-- Menú Desktop -->
+            <div class="desktop-menu">
+                <a href="#inicio" class="nav-link">Inicio</a>
                 
                 <!-- Dropdown SERVICIOS MECÁNICOS -->
-                <div style="position: relative;">
-                    <a href="#servicios" style="text-decoration: none; color: white; font-weight: 600; padding: 8px 12px; border-radius: 5px; transition: all 0.3s; display: flex; align-items: center;">
+                <div class="dropdown">
+                    <a href="#servicios" class="nav-link">
                         Servicios Mecánicos <span style="margin-left: 5px;">▼</span>
                     </a>
-                    <div style="position: absolute; top: 100%; left: 0; background: #1a1a1a; box-shadow: 0 5px 20px rgba(220, 38, 38, 0.3); border-radius: 8px; min-width: 250px; padding: 10px 0; display: none; z-index: 1001; border: 2px solid #DC2626;">
-                        <a href="/servicios/mantenimiento/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Mantenimiento de Vehículos</a>
-                        <a href="/servicios/reparacion/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Reparación de Vehículos</a>
-                        <a href="/servicios/mecanica-automotriz/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Mecánica Automotriz</a>
-                        <a href="/servicios/mecanica-industrial/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Mecánica Industrial</a>
-                        <a href="/servicios/revision/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; transition: all 0.3s;">Revisión de Coche</a>
+                    <div class="dropdown-menu">
+                        <a href="/servicios/mantenimiento/" class="dropdown-item">Mantenimiento de Vehículos</a>
+                        <a href="/servicios/reparacion/" class="dropdown-item">Reparación de Vehículos</a>
+                        <a href="/servicios/mecanica-automotriz/" class="dropdown-item">Mecánica Automotriz</a>
+                        <a href="/servicios/mecanica-industrial/" class="dropdown-item">Mecánica Industrial</a>
+                        <a href="/servicios/revision/" class="dropdown-item">Revisión de Coche</a>
                     </div>
                 </div>
                 
                 <!-- Dropdown SERVICIOS ESPECIALIZADOS -->
-                <div style="position: relative;">
-                    <a href="#especializados" style="text-decoration: none; color: white; font-weight: 600; padding: 8px 12px; border-radius: 5px; transition: all 0.3s; display: flex; align-items: center;">
+                <div class="dropdown">
+                    <a href="#especializados" class="nav-link">
                         Servicios Especializados <span style="margin-left: 5px;">▼</span>
                     </a>
-                    <div style="position: absolute; top: 100%; left: 0; background: #1a1a1a; box-shadow: 0 5px 20px rgba(220, 38, 38, 0.3); border-radius: 8px; min-width: 250px; padding: 10px 0; display: none; z-index: 1001; border: 2px solid #DC2626;">
-                        <a href="/especializados/diesel/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Mecánica Diesel</a>
-                        <a href="/especializados/electricidad/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Electricidad Automotriz</a>
-                        <a href="/especializados/aire-acondicionado/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Aire Acondicionado</a>
-                        <a href="/especializados/suspension/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Suspensión y Frenos</a>
-                        <a href="/especializados/motos/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; transition: all 0.3s;">Mecánica de Motos</a>
+                    <div class="dropdown-menu">
+                        <a href="/especializados/diesel/" class="dropdown-item">Mecánica Diesel</a>
+                        <a href="/especializados/electricidad/" class="dropdown-item">Electricidad Automotriz</a>
+                        <a href="/especializados/aire-acondicionado/" class="dropdown-item">Aire Acondicionado</a>
+                        <a href="/especializados/suspension/" class="dropdown-item">Suspensión y Frenos</a>
+                        <a href="/especializados/motos/" class="dropdown-item">Mecánica de Motos</a>
                     </div>
                 </div>
                 
                 <!-- Dropdown SERVICIO A DOMICILIO -->
-                <div style="position: relative;">
-                    <a href="#domicilio" style="text-decoration: none; color: white; font-weight: 600; padding: 8px 12px; border-radius: 5px; transition: all 0.3s; display: flex; align-items: center;">
+                <div class="dropdown">
+                    <a href="#domicilio" class="nav-link">
                         Servicio a Domicilio <span style="margin-left: 5px;">▼</span>
                     </a>
-                    <div style="position: absolute; top: 100%; left: 0; background: #1a1a1a; box-shadow: 0 5px 20px rgba(220, 38, 38, 0.3); border-radius: 8px; min-width: 250px; padding: 10px 0; display: none; z-index: 1001; border: 2px solid #DC2626;">
-                        <a href="/domicilio/mecanico/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Mecánico a Domicilio</a>
-                        <a href="/domicilio/emergencias/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Emergencias 24H</a>
-                        <a href="/domicilio/diagnostico/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; border-bottom: 1px solid #333; transition: all 0.3s;">Diagnóstico a Domicilio</a>
-                        <a href="/domicilio/grua/" style="display: block; padding: 12px 20px; text-decoration: none; color: white; transition: all 0.3s;">Grúa y Asistencia</a>
+                    <div class="dropdown-menu">
+                        <a href="/domicilio/mecanico/" class="dropdown-item">Mecánico a Domicilio</a>
+                        <a href="/domicilio/emergencias/" class="dropdown-item">Emergencias 24H</a>
+                        <a href="/domicilio/diagnostico/" class="dropdown-item">Diagnóstico a Domicilio</a>
+                        <a href="/domicilio/grua/" class="dropdown-item">Grúa y Asistencia</a>
                     </div>
                 </div>
                 
-                <a href="#marcas" style="text-decoration: none; color: white; font-weight: 600; padding: 8px 12px; border-radius: 5px; transition: all 0.3s;">Marcas</a>
-                <a href="#informacion" style="text-decoration: none; color: white; font-weight: 600; padding: 8px 12px; border-radius: 5px; transition: all 0.3s;">Información</a>
+                <a href="#marcas" class="nav-link">Marcas</a>
+                <a href="#informacion" class="nav-link">Información</a>
                 
                 <!-- WhatsApp -->
-                <a href="https://wa.me/56912345678" style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; display: flex; align-items: center; transition: all 0.3s;">
-                    <i class="fab fa-whatsapp" style="margin-right: 8px;"></i> WhatsApp
+                <a href="https://wa.me/56912345678" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp me-2"></i> WhatsApp
                 </a>
             </div>
+            
+            <!-- Botón Móvil -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
 
-    <!-- Script simple y confiable -->
+    <!-- Hero Section -->
+    <section class="hero-section" id="inicio">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <span class="hero-badge">Especialistas en Mecánica Automotriz</span>
+                    <h1 class="hero-title">Servicio Mecánico <span class="text-accent">Profesional</span> en Santiago</h1>
+                    <p class="hero-subtitle">En Global Pro ofrecemos servicios mecánicos especializados en mantenimiento y reparación de vehículos en toda la Región Metropolitana. Más de 15 años de experiencia nos respaldan.</p>
+                    
+                    <div class="stats-container">
+                        <div class="row text-center">
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <div class="stat-number">15+</div>
+                                    <div class="stat-label">Años de Experiencia</div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <div class="stat-number">+5000</div>
+                                    <div class="stat-label">Vehículos Reparados</div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <div class="stat-number">🔧</div>
+                                    <div class="stat-label">Mecánicos Expertos</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-group mt-4" role="group">
+                        <a href="https://wa.me/56912345678" class="btn btn-primary me-2">
+                            <i class="fab fa-whatsapp me-2"></i> Consulta por WhatsApp
+                        </a>
+                        <a href="#servicios" class="btn btn-outline-light">
+                            <i class="fas fa-tools me-2"></i> Ver Servicios
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="text-center">
+                        <img src="https://images.unsplash.com/photo-1603712610494-8b6b0c6c6b8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Global Pro - Taller Mecánico Especializado" class="img-fluid rounded shadow">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="servicios">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios Mecánicos en Santiago</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h3 class="service-title">Mantenimiento de Vehículos</h3>
+                        <p>Ofrecemos mantenimiento preventivo y correctivo para todo tipo de vehículos, garantizando su óptimo funcionamiento y prolongando su vida útil.</p>
+                        <ul class="service-features">
+                            <li>Cambio de aceite y filtros</li>
+                            <li>Revisión de frenos y suspensión</li>
+                            <li>Alineación y balanceo</li>
+                            <li>Cambio de correas y tensores</li>
+                            <li>Mantenimiento programado</li>
+                        </ul>
+                        <a href="#contacto" class="btn btn-outline-primary mt-3">Solicitar Información</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="service-title">Reparación de Vehículos</h3>
+                        <p>Diagnóstico y reparación especializada de fallas mecánicas, eléctricas y electrónicas en todo tipo de vehículos con garantía de servicio.</p>
+                        <ul class="service-features">
+                            <li>Diagnóstico computarizado</li>
+                            <li>Reparación de motor y transmisión</li>
+                            <li>Sistema eléctrico y electrónico</li>
+                            <li>Reparación de frenos ABS</li>
+                            <li>Reparación de sistemas de inyección</li>
+                        </ul>
+                        <a href="#contacto" class="btn btn-outline-primary mt-3">Solicitar Información</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3 class="service-title">Mecánico a Domicilio</h3>
+                        <p>Servicio de mecánica a domicilio para diagnóstico, reparaciones menores y emergencias vehiculares las 24 horas del día en Santiago.</p>
+                        <ul class="service-features">
+                            <li>Diagnóstico a domicilio</li>
+                            <li>Reparaciones de emergencia</li>
+                            <li>Cambio de batería y llantas</li>
+                            <li>Servicio de grúa</li>
+                            <li>Asistencia en carretera</li>
+                        </ul>
+                        <a href="#contacto" class="btn btn-outline-primary mt-3">Solicitar Información</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialties Section -->
+    <section class="specialties-section" id="especializados">
+        <div class="container">
+            <h2 class="section-title">Áreas de Especialización Mecánica</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-oil-can"></i>
+                        </div>
+                        <h3 class="category-title">Mecánica Diesel</h3>
+                        <p>Especialistas en motores diesel para camiones, buses y vehículos pesados</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="category-title">Electricidad Automotriz</h3>
+                        <p>Diagnóstico y reparación de sistemas eléctricos y electrónicos vehiculares</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-wind"></i>
+                        </div>
+                        <h3 class="category-title">Aire Acondicionado</h3>
+                        <p>Mantenimiento y reparación de sistemas de aire acondicionado automotriz</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 class="category-title">Transmisiones</h3>
+                        <p>Reparación de cajas de cambios manuales y automáticas</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h3 class="category-title">Mecánica Industrial</h3>
+                        <p>Mantenimiento y reparación de maquinaria industrial y equipos pesados</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-motorcycle"></i>
+                        </div>
+                        <h3 class="category-title">Mecánica de Motos</h3>
+                        <p>Servicio especializado para motocicletas de todas las marcas y modelos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="informacion">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title text-start">Sobre <span style="color: #DC2626;">Global Pro</span></h2>
+                    <p>En <strong style="color: #DC2626;">Global Pro</strong> somos un taller mecánico especializado con más de 15 años de experiencia en la Región Metropolitana. Nuestro equipo de mecánicos está comprometido con ofrecer soluciones automotrices efectivas y personalizadas.</p>
+                    <p>Nos especializamos en mantenimiento preventivo, reparación de vehículos, mecánica diesel, eléctrica y servicio a domicilio las 24 horas. Entendemos la importancia de su vehículo y trabajamos para garantizar su óptimo funcionamiento.</p>
+                    <p>Ofrecemos servicios integrales para automóviles, camionetas, camiones, motos y maquinaria industrial. Nuestro enfoque se centra en resultados concretos y satisfacción del cliente con garantía en todos nuestros trabajos.</p>
+                    <p>Si necesita servicio mecánico confiable en Santiago, somos su taller de confianza para resolver cualquier problema automotriz con profesionalismo y eficiencia.</p>
+                    
+                    <div class="location-card">
+                        <h4 style="color: #DC2626; margin-bottom: 20px;"><i class="fas fa-map-marker-alt me-2"></i> Cobertura en Región Metropolitana</h4>
+                        <p>Atendemos en todas las comunas de Santiago:</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check text-success me-2"></i> Santiago Centro</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Providencia</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Las Condes</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Ñuñoa</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> La Reina</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Macul</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Peñalolén</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> La Florida</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check text-success me-2"></i> Maipú</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Pudahuel</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Quilicura</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Huechuraba</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Recoleta</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Independencia</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Estación Central</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Y más...</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="fw-bold mt-3" style="color: #DC2626;"><i class="fas fa-globe-americas me-2"></i> Servicio a domicilio disponible para toda la región</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Global Pro - Equipo Mecánico" class="img-fluid rounded shadow">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contacto">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Contáctenos en Santiago</h2>
+            <div class="row">
+                <div class="col-lg-8">
+                    <p class="mb-4">¿Necesita servicio mecánico en Santiago? Contáctenos para consultas sobre mantenimiento, reparación de vehículos, mecánica a domicilio o cualquier problema automotriz.</p>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h5>WhatsApp Chile</h5>
+                                <p>+56 9 1234 5678</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h5>Ubicación</h5>
+                                <p>Av. Principal 1234, Santiago Centro</p>
+                                <p>Región Metropolitana, Chile</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h5>Horario Chile</h5>
+                                <p>Lunes a Viernes 8:00 AM - 7:00 PM</p>
+                                <p>Sábados 9:00 AM - 2:00 PM</p>
+                                <p>Emergencias 24/7</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="https://wa.me/56912345678" class="btn btn-primary btn-lg me-3">
+                            <i class="fab fa-whatsapp me-2"></i> Consulta por WhatsApp
+                        </a>
+                        <a href="tel:+56912345678" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-phone me-2"></i> Llamar Ahora
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="text-center">
+                        <img src="https://images.unsplash.com/photo-1603712610494-8b6b0c6c6b8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Contacto Global Pro" class="img-fluid rounded shadow">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="footer-logo">GLOBAL <span>PRO</span></div>
+                    <p class="mb-3">Taller mecánico especializado en mantenimiento y reparación de vehículos en Santiago, Región Metropolitana. Servicio profesional con enfoque en resultados y satisfacción del cliente.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/56912345678" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Servicios Mecánicos</h5>
+                        <ul>
+                            <li><a href="#servicios">Mantenimiento</a></li>
+                            <li><a href="#servicios">Reparación</a></li>
+                            <li><a href="#servicios">Mecánica Automotriz</a></li>
+                            <li><a href="#servicios">Revisión de Coche</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Servicios Especializados</h5>
+                        <ul>
+                            <li><a href="#especializados">Mecánica Diesel</a></li>
+                            <li><a href="#especializados">Electricidad</a></li>
+                            <li><a href="#especializados">Aire Acondicionado</a></li>
+                            <li><a href="#especializados">Mecánica de Motos</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer-links">
+                        <h5>Contacto Chile</h5>
+                        <ul>
+                            <li><i class="fas fa-phone me-2"></i> +56 9 1234 5678</li>
+                            <li><i class="fas fa-map-marker-alt me-2"></i> Av. Principal 1234, Santiago</li>
+                            <li><i class="fas fa-clock me-2"></i> Lunes a Viernes 8:00-19:00</li>
+                            <li><i class="fas fa-clock me-2"></i> Sábados 9:00-14:00</li>
+                            <li><i class="fas fa-exclamation-triangle me-2"></i> Emergencias 24/7</li>
+                        </ul>
+                        <div class="mt-3">
+                            <span class="badge bg-danger">Servicio en RM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="mb-0">&copy; 2024 Global Pro - Taller Mecánico Especializado Santiago. Servicios de mantenimiento y reparación de vehículos, mecánica a domicilio en toda la Región Metropolitana.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/56912345678" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Script -->
     <script>
+        // Script simple para los dropdowns - FUNCIONAL
         document.addEventListener('DOMContentLoaded', function() {
             // Configurar todos los dropdowns
-            const dropdowns = document.querySelectorAll('div[style*="position: relative"]');
+            const dropdowns = document.querySelectorAll('.dropdown');
             
             dropdowns.forEach(dropdown => {
-                const menu = dropdown.querySelector('div[style*="position: absolute"]');
+                const menu = dropdown.querySelector('.dropdown-menu');
                 
                 dropdown.addEventListener('mouseenter', function() {
                     menu.style.display = 'block';
@@ -130,20 +1079,5 @@
             });
         });
     </script>
-
-    <!-- Resto del contenido... -->
-    <section id="inicio" style="padding: 100px 0; background: linear-gradient(135deg, #000000 0%, #7F1D1D 100%); color: white;">
-        <div class="container">
-            <h1>Global Pro - Taller Mecánico</h1>
-            <p>Servicios profesionales en Santiago</p>
-        </div>
-    </section>
-
-    <section id="servicios" style="padding: 80px 0; background: #FEF2F2;">
-        <div class="container">
-            <h2>Nuestros Servicios</h2>
-            <!-- Contenido de servicios -->
-        </div>
-    </section>
 </body>
 </html>

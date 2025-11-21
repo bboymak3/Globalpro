@@ -1,79 +1,41 @@
-// Inicializar AOS
-AOS.init({
-    duration: 1000,
-    once: true,
-    offset: 100
-});
+// Chatbot IA para GlobalPro 4x4 Chile
+const chatMessages = document.getElementById('chat-messages');
+const chatForm = document.getElementById('chat-input');
+const chatToggle = document.getElementById('chat-toggle');
+const bot = document.getElementById('chat-bot');
 
-// Menú móvil - Código completamente funcional
-document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const overlay = document.getElementById('overlay');
-    
-    // Función para abrir/cerrar menú móvil
-    function toggleMobileMenu() {
-        mobileMenu.classList.toggle('active');
-        overlay.classList.toggle('active');
-        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-        
-        // Animación del botón hamburguesa
-        const spans = mobileMenuToggle.querySelectorAll('span');
-        if (mobileMenu.classList.contains('active')) {
-            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-            spans[1].style.opacity = '0';
-            spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-        } else {
-            spans[0].style.transform = 'none';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'none';
-        }
-    }
-    
-    // Evento para el botón del menú hamburguesa
-    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
-    
-    // Evento para cerrar menú al hacer clic en el overlay
-    overlay.addEventListener('click', toggleMobileMenu);
-    
-    // Evento para cerrar menú al hacer clic en un enlace
-    const mobileLinks = document.querySelectorAll('.mobile-nav-link, .mobile-dropdown-item');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', toggleMobileMenu);
-    });
-    
-    // Dropdowns móviles
-    const dropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
-    dropdownToggles.forEach(toggle => {
-        toggle.addEventListener('click', function() {
-            const targetId = this.getAttribute('data-target');
-            const targetMenu = document.getElementById(targetId);
-            
-            // Cerrar otros dropdowns abiertos
-            dropdownToggles.forEach(otherToggle => {
-                if (otherToggle !== toggle) {
-                    const otherTargetId = otherToggle.getAttribute('data-target');
-                    const otherTargetMenu = document.getElementById(otherTargetId);
-                    otherTargetMenu.classList.remove('active');
-                }
-            });
-            
-            // Abrir/cerrar el dropdown actual
-            targetMenu.classList.toggle('active');
-        });
-    });
-    
-    // Smooth scroll para enlaces internos
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-});
+let visible = true;
+chatToggle.onclick = () => {
+  visible = !visible;
+  bot.style.display = visible ? 'flex' : 'none';
+  chatToggle.textContent = visible ? '−' : '+';
+};
+
+// Mensaje inicial
+addMessage('¡Hola! 👋 Soy tu asesor 4x4. ¿Qué modelo de Jeep tienes y qué accesorio buscas?', 'bot');
+
+chatForm.onsubmit = async (e) => {
+  e.preventDefault();
+  const input = document.getElementById('chat-text');
+  const msg = input.value.trim();
+  if(!msg) return;
+
+  addMessage(msg, 'user');
+  input.value = '';
+
+  const res = await fetch('https://chat.globalpro.pages.dev/chat', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({message: msg})
+  }).then(r => r.json()).catch(() => ({reply: 'Error de conexión. Escríbenos al WhatsApp +56912345678'}));
+
+  addMessage(res.reply, 'bot');
+};
+
+function addMessage(text, sender) {
+  const div = document.createElement('div');
+  div.className = sender === 'user' ? 'msg-user' : 'msg-bot';
+  div.textContent = text;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}

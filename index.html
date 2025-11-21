@@ -1,1395 +1,234 @@
 <!DOCTYPE html>
 <html lang="es-CL">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Pro - Taller Mecánico Especializado | Santiago, Chile</title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --primary: #DC2626;
-            --secondary: #000000;
-            --accent: #FEF2F2;
-            --dark: #7F1D1D;
-            --light: #FECACA;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
-            overflow-x: hidden;
-            padding-top: 80px;
-            background: #fafafa;
-        }
-        
-        /* ========== MENÚ COMPLETO ========== */
-        .navbar {
-            background: #000000;
-            padding: 15px 0;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(220, 38, 38, 0.3);
-            border-bottom: 3px solid #DC2626;
-        }
-        
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-            z-index: 1002;
-        }
-        
-        .logo-img {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #DC2626 0%, #000000 100%);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-weight: bold;
-            margin-right: 10px;
-            font-size: 18px;
-            border: 2px solid #DC2626;
-            box-shadow: 0 3px 15px rgba(220, 38, 38, 0.4);
-        }
-        
-        .logo-text {
-            font-weight: 800;
-            line-height: 1.2;
-            font-size: 18px;
-        }
-        
-        .logo-subtext {
-            font-size: 0.8em;
-            line-height: 1.2;
-            color: #FECACA;
-        }
-        
-        /* Menú Desktop */
-        .desktop-menu {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-        
-        .nav-link {
-            text-decoration: none;
-            color: white;
-            font-weight: 600;
-            padding: 8px 12px;
-            border-radius: 5px;
-            transition: all 0.3s;
-        }
-        
-        .nav-link:hover {
-            background: rgba(220, 38, 38, 0.1);
-            color: #DC2626;
-        }
-        
-        .dropdown {
-            position: relative;
-        }
-        
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: #1a1a1a;
-            box-shadow: 0 5px 20px rgba(220, 38, 38, 0.3);
-            border-radius: 8px;
-            min-width: 250px;
-            padding: 10px 0;
-            display: none;
-            z-index: 1001;
-            border: 2px solid #DC2626;
-        }
-        
-        .dropdown-item {
-            display: block;
-            padding: 12px 20px;
-            text-decoration: none;
-            color: white;
-            border-bottom: 1px solid #333;
-            transition: all 0.3s;
-        }
-        
-        .dropdown-item:hover {
-            background: #DC2626;
-            color: white;
-            padding-left: 25px;
-        }
-        
-        .dropdown-item:last-child {
-            border-bottom: none;
-        }
-        
-        .whatsapp-btn {
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s;
-            box-shadow: 0 3px 15px rgba(37, 211, 102, 0.4);
-            border: 2px solid transparent;
-        }
-        
-        .whatsapp-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.6);
-            color: white;
-            border-color: white;
-        }
-        
-        /* Menú Móvil */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 1002;
-            padding: 5px;
-        }
-        
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 300px;
-            height: 100vh;
-            background: #000000;
-            box-shadow: -5px 0 20px rgba(220, 38, 38, 0.3);
-            padding: 80px 20px 20px;
-            transition: right 0.3s ease;
-            z-index: 1001;
-            overflow-y: auto;
-            border-left: 3px solid #DC2626;
-        }
-        
-        .mobile-menu.active {
-            right: 0;
-        }
-        
-        .mobile-nav {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .mobile-nav-item {
-            border-bottom: 1px solid #333;
-        }
-        
-        .mobile-nav-link {
-            display: block;
-            padding: 15px 0;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-        
-        .mobile-nav-link:hover {
-            color: #DC2626;
-        }
-        
-        .mobile-dropdown-toggle {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        
-        .mobile-dropdown-toggle:hover {
-            color: #DC2626;
-        }
-        
-        .mobile-dropdown-menu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background: #1a1a1a;
-            margin: 0 -20px;
-            padding: 0 20px;
-            border-radius: 0 0 8px 8px;
-        }
-        
-        .mobile-dropdown-menu.active {
-            max-height: 500px;
-        }
-        
-        .mobile-dropdown-item {
-            display: block;
-            padding: 12px 15px;
-            color: white;
-            text-decoration: none;
-            border-bottom: 1px solid #333;
-            transition: all 0.3s;
-        }
-        
-        .mobile-dropdown-item:last-child {
-            border-bottom: none;
-        }
-        
-        .mobile-dropdown-item:hover {
-            background: #DC2626;
-            color: white;
-            padding-left: 20px;
-        }
-        
-        .mobile-whatsapp {
-            margin-top: 20px;
-            text-align: center;
-        }
-        
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            backdrop-filter: blur(3px);
-        }
-        
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, #000000 0%, #7F1D1D 100%);
-            color: white;
-            padding: 100px 0 80px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(220,38,38,0.1)"/></svg>');
-            background-size: cover;
-        }
-        
-        .hero-badge {
-            background: #DC2626;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 15px rgba(220, 38, 38, 0.4);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .hero-title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        
-        .text-accent {
-            color: #DC2626;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-        
-        .hero-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.95;
-        }
-        
-        .stats-container {
-            background: rgba(220, 38, 38, 0.15);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 30px 0;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(220, 38, 38, 0.3);
-        }
-        
-        .stat-item {
-            padding: 10px;
-        }
-        
-        .stat-number {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: #DC2626;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            font-weight: 500;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
-            border: none;
-            padding: 12px 30px;
-            font-weight: 600;
-            border-radius: 8px;
-            color: white;
-            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6);
-            color: white;
-            border-color: white;
-        }
-        
-        .btn-outline-light {
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            color: white;
-            padding: 12px 30px;
-            font-weight: 600;
-            border-radius: 8px;
-            transition: all 0.3s;
-            background: transparent;
-        }
-        
-        .btn-outline-light:hover {
-            background: #DC2626;
-            border-color: #DC2626;
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        /* Services Section */
-        .services-section {
-            padding: 80px 0;
-            background: #FEF2F2;
-        }
-        
-        .section-title {
-            color: #000000;
-            font-weight: 800;
-            margin-bottom: 50px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: #DC2626;
-            border-radius: 2px;
-        }
-        
-        .service-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            border: 2px solid transparent;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: #DC2626;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(220, 38, 38, 0.2);
-            border-color: #DC2626;
-        }
-        
-        .service-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #DC2626 0%, #000000 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            color: white;
-            font-size: 1.8rem;
-            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.3);
-            border: 2px solid #DC2626;
-        }
-        
-        .service-title {
-            color: #000000;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        
-        .service-features {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-        
-        .service-features li {
-            padding: 5px 0;
-            position: relative;
-            padding-left: 25px;
-            color: #7F1D1D;
-        }
-        
-        .service-features li::before {
-            content: "✓";
-            color: #DC2626;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-        
-        .btn-outline-primary {
-            color: #DC2626;
-            border-color: #DC2626;
-            font-weight: 600;
-            transition: all 0.3s;
-            background: transparent;
-        }
-        
-        .btn-outline-primary:hover {
-            background: #DC2626;
-            border-color: #DC2626;
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        /* Specialties Section */
-        .specialties-section {
-            padding: 80px 0;
-            background: white;
-        }
-        
-        .category-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            border: 2px solid transparent;
-            height: 100%;
-        }
-        
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(220, 38, 38, 0.2);
-            border-color: #DC2626;
-        }
-        
-        .category-icon {
-            width: 70px;
-            height: 70px;
-            background: #FEF2F2;
-            color: #DC2626;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 1.8rem;
-        }
-        
-        .category-title {
-            font-weight: 700;
-            color: #000000;
-            margin-bottom: 15px;
-        }
-        
-        /* About Section */
-        .about-section {
-            padding: 80px 0;
-            background: #FEF2F2;
-        }
-        
-        .location-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            margin-top: 30px;
-        }
-        
-        /* Contact Section */
-        .contact-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #000000 0%, #7F1D1D 100%);
-            color: white;
-        }
-        
-        .contact-info {
-            margin-top: 30px;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 25px;
-        }
-        
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            font-size: 1.2rem;
-        }
-        
-        /* Footer */
-        .footer {
-            background: #000000;
-            color: white;
-            padding: 60px 0 20px;
-            border-top: 3px solid #DC2626;
-        }
-        
-        .footer-logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            color: white;
-        }
-        
-        .footer-logo span {
-            color: #DC2626;
-        }
-        
-        .social-links {
-            display: flex;
-            margin-top: 20px;
-        }
-        
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10px;
-            color: white;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-        
-        .social-link:hover {
-            background: #DC2626;
-            color: white;
-        }
-        
-        .footer-links h5 {
-            color: #FECACA;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        
-        .footer-links ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        
-        .footer-links ul li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-links ul li a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links ul li a:hover {
-            color: white;
-        }
-        
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 20px;
-            margin-top: 40px;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
-        }
-        
-        /* WhatsApp Float */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
-            z-index: 100;
-            text-decoration: none;
-            transition: all 0.3s;
-            border: 2px solid white;
-        }
-        
-        .whatsapp-float:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
-            color: white;
-        }
-        
-        /* Culatas Section */
-        .culatas-section {
-            padding: 80px 0;
-            background: white;
-        }
-        
-        .culatas-content {
-            background: #FEF2F2;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            margin-bottom: 40px;
-        }
-        
-        /* Responsive */
-        @media (max-width: 991px) {
-            .desktop-menu {
-                display: none !important;
-            }
-            
-            .mobile-menu-btn {
-                display: block !important;
-            }
-            
-            .hero-title {
-                font-size: 2.2rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-container {
-                padding: 0 15px;
-            }
-            
-            .mobile-menu {
-                width: 100%;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GlobalPro 4x4 - Accesorios Jeep Hechos en Chile | Santiago</title>
+  <meta name="description" content="Parachoques, rock sliders, fenders y más para Jeep JL, JK, XJ, TJ. Fabricados en Chile con acero nacional. Envío a Santiago y regiones.">
+  <link rel="canonical" href="https://globalpro.pages.dev/"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "GlobalPro 4x4 Chile",
+    "image": "https://globalpro.pages.dev/assets/jeep-hero.webp",
+    "telephone": "+56912345678",
+    "email": "hola@globalpro4x4.cl",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Santiago",
+      "addressCountry": "CL"
+    },
+    "url": "https://globalpro.pages.dev",
+    "description": "Accesorios 4x4 Jeep hechos en Chile. Parachoques, rock sliders, fenders, kits DIY.",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    }
+  }
+  </script>
 </head>
 <body>
-    <!-- ========== MENÚ COMPLETO ========== -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <!-- Logo -->
-            <a href="/" class="logo">
-                <div class="logo-img">GP</div>
-                <div>
-                    <div class="logo-text">GLOBAL PRO</div>
-                    <div class="logo-subtext">TALLER MECÁNICO CHILE</div>
-                </div>
-            </a>
-            
-            <!-- Menú Desktop -->
-            <div class="desktop-menu">
-                <a href="#inicio" class="nav-link">Inicio</a>
-                
-                <!-- Dropdown SERVICIOS MECÁNICOS -->
-                <div class="dropdown">
-                    <a href="#servicios" class="nav-link">
-                        Servicios Mecánicos <span style="margin-left: 5px;">▼</span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a href="/servicios/mantenimiento/" class="dropdown-item">Mantenimiento de Vehículos</a>
-                        <a href="/servicios/reparacion/" class="dropdown-item">Reparación de Vehículos</a>
-                        <a href="/servicios/mecanica-automotriz/" class="dropdown-item">Mecánica Automotriz</a>
-                        <a href="/servicios/mecanica-industrial/" class="dropdown-item">Mecánica Industrial</a>
-                        <a href="/servicios/revision/" class="dropdown-item">Revisión de Coche</a>
-                    </div>
-                </div>
-                
-                <!-- Dropdown SERVICIOS ESPECIALIZADOS -->
-                <div class="dropdown">
-                    <a href="#especializados" class="nav-link">
-                        Servicios Especializados <span style="margin-left: 5px;">▼</span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a href="/especializados/diesel/" class="dropdown-item">Mecánica Diesel</a>
-                        <a href="/especializados/electricidad/" class="dropdown-item">Electricidad Automotriz</a>
-                        <a href="/especializados/aire-acondicionado/" class="dropdown-item">Aire Acondicionado</a>
-                        <a href="/especializados/suspension/" class="dropdown-item">Suspensión y Frenos</a>
-                        <a href="/especializados/motos/" class="dropdown-item">Mecánica de Motos</a>
-                    </div>
-                </div>
-                
-                <!-- Dropdown SERVICIO A DOMICILIO -->
-                <div class="dropdown">
-                    <a href="#domicilio" class="nav-link">
-                        Servicio a Domicilio <span style="margin-left: 5px;">▼</span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a href="/domicilio/mecanico/" class="dropdown-item">Mecánico a Domicilio</a>
-                        <a href="/domicilio/emergencias/" class="dropdown-item">Emergencias 24H</a>
-                        <a href="/domicilio/diagnostico/" class="dropdown-item">Diagnóstico a Domicilio</a>
-                        <a href="/domicilio/grua/" class="dropdown-item">Grúa y Asistencia</a>
-                    </div>
-                </div>
-                
-                <a href="#marcas" class="nav-link">Marcas</a>
-                <a href="#informacion" class="nav-link">Información</a>
-                
-                <!-- WhatsApp -->
-                <a href="https://wa.me/56912345678" class="whatsapp-btn">
-                    <i class="fab fa-whatsapp me-2"></i> WhatsApp
-                </a>
-            </div>
-            
-            <!-- Botón Menú Móvil -->
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </nav>
 
-    <!-- Menú Móvil -->
-    <div class="mobile-menu" id="mobileMenu">
-        <ul class="mobile-nav">
-            <li class="mobile-nav-item">
-                <a href="#inicio" class="mobile-nav-link">Inicio</a>
-            </li>
-            
-            <li class="mobile-nav-item">
-                <div class="mobile-dropdown-toggle" data-target="servicios-mobile">
-                    Servicios Mecánicos <i class="fas fa-chevron-down"></i>
-                </div>
-                <ul class="mobile-dropdown-menu" id="servicios-mobile">
-                    <li><a href="/servicios/mantenimiento/" class="mobile-dropdown-item">Mantenimiento de Vehículos</a></li>
-                    <li><a href="/servicios/reparacion/" class="mobile-dropdown-item">Reparación de Vehículos</a></li>
-                    <li><a href="/servicios/mecanica-automotriz/" class="mobile-dropdown-item">Mecánica Automotriz</a></li>
-                    <li><a href="/servicios/mecanica-industrial/" class="mobile-dropdown-item">Mecánica Industrial</a></li>
-                    <li><a href="/servicios/revision/" class="mobile-dropdown-item">Revisión de Coche</a></li>
-                </ul>
-            </li>
-            
-            <li class="mobile-nav-item">
-                <div class="mobile-dropdown-toggle" data-target="especializados-mobile">
-                    Servicios Especializados <i class="fas fa-chevron-down"></i>
-                </div>
-                <ul class="mobile-dropdown-menu" id="especializados-mobile">
-                    <li><a href="/especializados/diesel/" class="mobile-dropdown-item">Mecánica Diesel</a></li>
-                    <li><a href="/especializados/electricidad/" class="mobile-dropdown-item">Electricidad Automotriz</a></li>
-                    <li><a href="/especializados/aire-acondicionado/" class="mobile-dropdown-item">Aire Acondicionado</a></li>
-                    <li><a href="/especializados/suspension/" class="mobile-dropdown-item">Suspensión y Frenos</a></li>
-                    <li><a href="/especializados/motos/" class="mobile-dropdown-item">Mecánica de Motos</a></li>
-                </ul>
-            </li>
-            
-            <li class="mobile-nav-item">
-                <div class="mobile-dropdown-toggle" data-target="domicilio-mobile">
-                    Servicio a Domicilio <i class="fas fa-chevron-down"></i>
-                </div>
-                <ul class="mobile-dropdown-menu" id="domicilio-mobile">
-                    <li><a href="/domicilio/mecanico/" class="mobile-dropdown-item">Mecánico a Domicilio</a></li>
-                    <li><a href="/domicilio/emergencias/" class="mobile-dropdown-item">Emergencias 24H</a></li>
-                    <li><a href="/domicilio/diagnostico/" class="mobile-dropdown-item">Diagnóstico a Domicilio</a></li>
-                    <li><a href="/domicilio/grua/" class="mobile-dropdown-item">Grúa y Asistencia</a></li>
-                </ul>
-            </li>
-            
-            <li class="mobile-nav-item">
-                <a href="#marcas" class="mobile-nav-link">Marcas</a>
-            </li>
-            
-            <li class="mobile-nav-item">
-                <a href="#informacion" class="mobile-nav-link">Información</a>
-            </li>
-        </ul>
-        
-        <div class="mobile-whatsapp">
-            <a href="https://wa.me/56912345678" class="whatsapp-btn">
-                <i class="fab fa-whatsapp me-2"></i> WhatsApp Chile
-            </a>
-        </div>
-    </div>
-    
-    <!-- Overlay -->
-    <div class="overlay" id="overlay"></div>
-
-    <!-- Hero Section -->
-    <section class="hero-section" id="inicio">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-7">
-                    <span class="hero-badge">Especialistas en Mecánica Automotriz</span>
-                    <h1 class="hero-title">Servicio Mecánico <span class="text-accent">Profesional</span> en Santiago</h1>
-                    <p class="hero-subtitle">En Global Pro ofrecemos servicios mecánicos especializados en mantenimiento y reparación de vehículos en toda la Región Metropolitana. Más de 15 años de experiencia nos respaldan.</p>
-                    
-                    <div class="stats-container">
-                        <div class="row text-center">
-                            <div class="col-4">
-                                <div class="stat-item">
-                                    <div class="stat-number">15+</div>
-                                    <div class="stat-label">Años de Experiencia</div>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="stat-item">
-                                    <div class="stat-number">+5000</div>
-                                    <div class="stat-label">Vehículos Reparados</div>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="stat-item">
-                                    <div class="stat-number">🔧</div>
-                                    <div class="stat-label">Mecánicos Expertos</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="btn-group mt-4" role="group">
-                        <a href="https://wa.me/56912345678" class="btn btn-primary me-2">
-                            <i class="fab fa-whatsapp me-2"></i> Consulta por WhatsApp
-                        </a>
-                        <a href="#servicios" class="btn btn-outline-light">
-                            <i class="fas fa-tools me-2"></i> Ver Servicios
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="text-center">
-                        <img src="images/logo.jpg" alt="Global Pro - Taller Mecánico Especializado" class="img-fluid rounded shadow">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Culatas Section -->
-    <section class="culatas-section" id="culatas">
-        <div class="container">
-            <h2 class="section-title">Especialistas en Reparación y Mantenimiento de Culatas</h2>
-            
-            <div class="culatas-content">
-                <div class="row align-items-center mb-5">
-                    <div class="col-lg-6">
-                        <h3 class="service-title">Servicio Profesional de Culatas en Santiago</h3>
-                        <p>En <strong>Global Pro</strong> somos especialistas en la reparación y mantenimiento de culatas de motor para todo tipo de vehículos. Contamos con equipos de última generación y técnicos certificados para ofrecer el mejor servicio en Santiago y toda la Región Metropolitana.</p>
-                        <p>Nuestro taller está equipado con tecnología avanzada para el diagnóstico preciso de fallas en culatas, rectificado profesional y cambio de juntas con garantía en todos nuestros trabajos.</p>
-                        
-                        <h4 class="mt-4" style="color: #DC2626;">¿Problemas con su culata?</h4>
-                        <p>Si su vehículo presenta alguno de estos síntomas, podría necesitar reparación de culata:</p>
-                        <ul class="service-features">
-                            <li>Sobrecalentamiento del motor</li>
-                            <li>Pérdida de potencia</li>
-                            <li>Consumo excesivo de aceite</li>
-                            <li>Humo blanco en el escape</li>
-                            <li>Mezcla de agua y aceite</li>
-                            <li>Fugas de refrigerante</li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-6">
-                        <img src="images/image1.jpg" alt="Reparación de Culatas - Global Pro Santiago" class="img-fluid rounded shadow">
-                    </div>
-                </div>
-                
-                <div class="row mt-5">
-                    <div class="col-md-6">
-                        <h4 style="color: #DC2626;">Nuestros Servicios de Culatas</h4>
-                        <ul class="service-features">
-                            <li>Diagnóstico computarizado de fallas</li>
-                            <li>Rectificado y planificado de culatas</li>
-                            <li>Cambio de juntas de culata</li>
-                            <li>Pruebas de compresión y fugas</li>
-                            <li>Reparación de guías y asientos de válvulas</li>
-                            <li>Cambio de sellos y retenes</li>
-                            <li>Limpieza profesional de conductos</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <h4 style="color: #DC2626;">Ventajas de Nuestro Servicio</h4>
-                        <ul class="service-features">
-                            <li>Técnicos especializados con +15 años experiencia</li>
-                            <li>Equipos de última generación</li>
-                            <li>Repuestos de calidad garantizada</li>
-                            <li>Garantía en todos nuestros trabajos</li>
-                            <li>Presupuesto sin compromiso</li>
-                            <li>Servicio rápido y eficiente</li>
-                            <li>Atención personalizada</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="text-center mt-4">
-                    <a href="https://wa.me/56912345678" class="btn btn-primary btn-lg">
-                        <i class="fab fa-whatsapp me-2"></i> Consulta por Reparación de Culatas
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services-section" id="servicios">
-        <div class="container">
-            <h2 class="section-title">Nuestros Servicios Mecánicos en Santiago</h2>
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-car"></i>
-                        </div>
-                        <h3 class="service-title">Mantenimiento de Vehículos</h3>
-                        <p>Ofrecemos mantenimiento preventivo y correctivo para todo tipo de vehículos, garantizando su óptimo funcionamiento y prolongando su vida útil.</p>
-                        <ul class="service-features">
-                            <li>Cambio de aceite y filtros</li>
-                            <li>Revisión de frenos y suspensión</li>
-                            <li>Alineación y balanceo</li>
-                            <li>Cambio de correas y tensores</li>
-                            <li>Mantenimiento programado</li>
-                        </ul>
-                        <a href="#contacto" class="btn btn-outline-primary mt-3">Solicitar Información</a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <h3 class="service-title">Reparación de Vehículos</h3>
-                        <p>Diagnóstico y reparación especializada de fallas mecánicas, eléctricas y electrónicas en todo tipo de vehículos con garantía de servicio.</p>
-                        <ul class="service-features">
-                            <li>Diagnóstico computarizado</li>
-                            <li>Reparación de motor y transmisión</li>
-                            <li>Sistema eléctrico y electrónico</li>
-                            <li>Reparación de frenos ABS</li>
-                            <li>Reparación de sistemas de inyección</li>
-                        </ul>
-                        <a href="#contacto" class="btn btn-outline-primary mt-3">Solicitar Información</a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-home"></i>
-                        </div>
-                        <h3 class="service-title">Mecánico a Domicilio</h3>
-                        <p>Servicio de mecánica a domicilio para diagnóstico, reparaciones menores y emergencias vehiculares las 24 horas del día en Santiago.</p>
-                        <ul class="service-features">
-                            <li>Diagnóstico a domicilio</li>
-                            <li>Reparaciones de emergencia</li>
-                            <li>Cambio de batería y llantas</li>
-                            <li>Servicio de grúa</li>
-                            <li>Asistencia en carretera</li>
-                        </ul>
-                        <a href="#contacto" class="btn btn-outline-primary mt-3">Solicitar Información</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Specialties Section -->
-    <section class="specialties-section" id="especializados">
-        <div class="container">
-            <h2 class="section-title">Áreas de Especialización Mecánica</h2>
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-oil-can"></i>
-                        </div>
-                        <h3 class="category-title">Mecánica Diesel</h3>
-                        <p>Especialistas en motores diesel para camiones, buses y vehículos pesados</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <h3 class="category-title">Electricidad Automotriz</h3>
-                        <p>Diagnóstico y reparación de sistemas eléctricos y electrónicos vehiculares</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-wind"></i>
-                        </div>
-                        <h3 class="category-title">Aire Acondicionado</h3>
-                        <p>Mantenimiento y reparación de sistemas de aire acondicionado automotriz</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <h3 class="category-title">Transmisiones</h3>
-                        <p>Reparación de cajas de cambios manuales y automáticas</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-industry"></i>
-                        </div>
-                        <h3 class="category-title">Mecánica Industrial</h3>
-                        <p>Mantenimiento y reparación de maquinaria industrial y equipos pesados</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-motorcycle"></i>
-                        </div>
-                        <h3 class="category-title">Mecánica de Motos</h3>
-                        <p>Servicio especializado para motocicletas de todas las marcas y modelos</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about-section" id="informacion">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h2 class="section-title text-start">Sobre <span style="color: #DC2626;">Global Pro</span></h2>
-                    <p>En <strong style="color: #DC2626;">Global Pro</strong> somos un taller mecánico especializado con más de 15 años de experiencia en la Región Metropolitana. Nuestro equipo de mecánicos está comprometido con ofrecer soluciones automotrices efectivas y personalizadas.</p>
-                    <p>Nos especializamos en mantenimiento preventivo, reparación de vehículos, mecánica diesel, eléctrica y servicio a domicilio las 24 horas. Entendemos la importancia de su vehículo y trabajamos para garantizar su óptimo funcionamiento.</p>
-                    <p>Ofrecemos servicios integrales para automóviles, camionetas, camiones, motos y maquinaria industrial. Nuestro enfoque se centra en resultados concretos y satisfacción del cliente con garantía en todos nuestros trabajos.</p>
-                    <p>Si necesita servicio mecánico confiable en Santiago, somos su taller de confianza para resolver cualquier problema automotriz con profesionalismo y eficiencia.</p>
-                    
-                    <div class="location-card">
-                        <h4 style="color: #DC2626; margin-bottom: 20px;"><i class="fas fa-map-marker-alt me-2"></i> Cobertura en Región Metropolitana</h4>
-                        <p>Atendemos en todas las comunas de Santiago:</p>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <ul class="list-unstyled">
-                                    <li><i class="fas fa-check text-success me-2"></i> Santiago Centro</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Providencia</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Las Condes</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Ñuñoa</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> La Reina</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Macul</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Peñalolén</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> La Florida</li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <ul class="list-unstyled">
-                                    <li><i class="fas fa-check text-success me-2"></i> Maipú</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Pudahuel</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Quilicura</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Huechuraba</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Recoleta</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Independencia</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Estación Central</li>
-                                    <li><i class="fas fa-check text-success me-2"></i> Y más...</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <p class="fw-bold mt-3" style="color: #DC2626;"><i class="fas fa-globe-americas me-2"></i> Servicio a domicilio disponible para toda la región</p>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="about-image">
-                        <img src="images/image2.png" alt="Global Pro - Equipo Mecánico" class="img-fluid rounded shadow">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact-section" id="contacto">
-        <div class="container">
-            <h2 class="section-title" style="color: white;">Contáctenos en Santiago</h2>
-            <div class="row">
-                <div class="col-lg-8">
-                    <p class="mb-4">¿Necesita servicio mecánico en Santiago? Contáctenos para consultas sobre mantenimiento, reparación de vehículos, mecánica a domicilio o cualquier problema automotriz.</p>
-                    
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div>
-                                <h5>WhatsApp Chile</h5>
-                                <p>+56 9 1234 5678</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div>
-                                <h5>Ubicación</h5>
-                                <p>Av. Principal 1234, Santiago Centro</p>
-                                <p>Región Metropolitana, Chile</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div>
-                                <h5>Horario Chile</h5>
-                                <p>Lunes a Viernes 8:00 AM - 7:00 PM</p>
-                                <p>Sábados 9:00 AM - 2:00 PM</p>
-                                <p>Emergencias 24/7</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-4">
-                        <a href="https://wa.me/56912345678" class="btn btn-primary btn-lg me-3">
-                            <i class="fab fa-whatsapp me-2"></i> Consulta por WhatsApp
-                        </a>
-                        <a href="tel:+56912345678" class="btn btn-outline-light btn-lg">
-                            <i class="fas fa-phone me-2"></i> Llamar Ahora
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="text-center">
-                        <img src="images/og-image.jpg" alt="Contacto Global Pro" class="img-fluid rounded shadow">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <div class="footer-logo">GLOBAL <span>PRO</span></div>
-                    <p class="mb-3">Taller mecánico especializado en mantenimiento y reparación de vehículos en Santiago, Región Metropolitana. Servicio profesional con enfoque en resultados y satisfacción del cliente.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="https://wa.me/56912345678" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-                    <div class="footer-links">
-                        <h5>Servicios Mecánicos</h5>
-                        <ul>
-                            <li><a href="#servicios">Mantenimiento</a></li>
-                            <li><a href="#servicios">Reparación</a></li>
-                            <li><a href="#servicios">Mecánica Automotriz</a></li>
-                            <li><a href="#servicios">Revisión de Coche</a></li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-                    <div class="footer-links">
-                        <h5>Servicios Especializados</h5>
-                        <ul>
-                            <li><a href="#especializados">Mecánica Diesel</a></li>
-                            <li><a href="#especializados">Electricidad</a></li>
-                            <li><a href="#especializados">Aire Acondicionado</a></li>
-                            <li><a href="#especializados">Mecánica de Motos</a></li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-12">
-                    <div class="footer-links">
-                        <h5>Contacto Chile</h5>
-                        <ul>
-                            <li><i class="fas fa-phone me-2"></i> +56 9 1234 5678</li>
-                            <li><i class="fas fa-map-marker-alt me-2"></i> Av. Principal 1234, Santiago</li>
-                            <li><i class="fas fa-clock me-2"></i> Lunes a Viernes 8:00-19:00</li>
-                            <li><i class="fas fa-clock me-2"></i> Sábados 9:00-14:00</li>
-                            <li><i class="fas fa-exclamation-triangle me-2"></i> Emergencias 24/7</li>
-                        </ul>
-                        <div class="mt-3">
-                            <span class="badge bg-danger">Servicio en RM</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p class="mb-0">&copy; 2024 Global Pro - Taller Mecánico Especializado Santiago. Servicios de mantenimiento y reparación de vehículos, mecánica a domicilio en toda la Región Metropolitana.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- WhatsApp Float -->
-    <a href="https://wa.me/56912345678" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo">
+      <div class="logo-img">GP</div>
+      <div>
+        <div class="logo-text">GLOBALPRO 4X4</div>
+        <div class="logo-subtext">Accesorios Jeep Chile</div>
+      </div>
     </a>
 
-    <!-- Script COMPLETO -->
-    <script>
-        // Script para los dropdowns desktop
-        document.addEventListener('DOMContentLoaded', function() {
-            // Configurar todos los dropdowns desktop
-            const dropdowns = document.querySelectorAll('.dropdown');
-            
-            dropdowns.forEach(dropdown => {
-                const menu = dropdown.querySelector('.dropdown-menu');
-                
-                dropdown.addEventListener('mouseenter', function() {
-                    menu.style.display = 'block';
-                });
-                
-                dropdown.addEventListener('mouseleave', function() {
-                    menu.style.display = 'none';
-                });
-            });
+    <div class="desktop-menu">
+      <a href="#productos" class="nav-link">Productos</a>
+      <a href="#servicios" class="nav-link">Servicios</a>
+      <a href="#blog" class="nav-link">Blog</a>
+      <a href="https://wa.me/56912345678" class="whatsapp-btn">
+        <i class="fab fa-whatsapp me-2"></i> WhatsApp
+      </a>
+    </div>
 
-            // Script para el menú móvil
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const overlay = document.getElementById('overlay');
-            
-            // Función para toggle del menú móvil
-            function toggleMobileMenu() {
-                mobileMenu.classList.toggle('active');
-                overlay.classList.toggle('active');
-                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
-            }
-            
-            // Event listeners para móvil
-            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-            overlay.addEventListener('click', toggleMobileMenu);
-            
-            // Dropdowns móviles
-            const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
-            mobileDropdownToggles.forEach(toggle => {
-                toggle.addEventListener('click', function() {
-                    const targetId = this.getAttribute('data-target');
-                    const targetMenu = document.getElementById(targetId);
-                    
-                    // Cerrar otros dropdowns
-                    mobileDropdownToggles.forEach(otherToggle => {
-                        if (otherToggle !== toggle) {
-                            const otherTargetId = otherToggle.getAttribute('data-target');
-                            const otherTargetMenu = document.getElementById(otherTargetId);
-                            otherTargetMenu.classList.remove('active');
-                        }
-                    });
-                    
-                    // Toggle dropdown actual
-                    targetMenu.classList.toggle('active');
-                });
-            });
-            
-            // Cerrar menú al hacer clic en enlaces móviles
-            const mobileLinks = document.querySelectorAll('.mobile-nav-link, .mobile-dropdown-item');
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    mobileMenu.classList.remove('active');
-                    overlay.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                });
-            });
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</nav>
 
-            // Smooth scroll para enlaces internos
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        });
-    </script>
+<!-- HERO -->
+<section class="hero-section" id="inicio">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <span class="hero-badge">Accesorios 4x4 Hechos en Chile</span>
+        <h1 class="hero-title">Parachoques, Sliders y Fenders <span class="text-accent">para Jeep</span></h1>
+        <p class="hero-subtitle">Fabricamos con acero nacional. Envío a Santiago y regiones. Instalación disponible.</p>
+
+        <div class="stats-container">
+          <div class="row text-center">
+            <div class="col-4">
+              <div class="stat-item">
+                <div class="stat-number">3/16"</div>
+                <div class="stat-label">Acero Nacional</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="stat-item">
+                <div class="stat-number">+500</div>
+                <div class="stat-label">Jeeps Equipados</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="stat-item">
+                <div class="stat-number">🔧</div>
+                <div class="stat-label">Instalación Incluida</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-group mt-4">
+          <a href="https://wa.me/56912345678" class="btn btn-primary me-2">
+            <i class="fab fa-whatsapp me-2"></i> Cotizar por WhatsApp
+          </a>
+          <a href="#productos" class="btn btn-outline-light">
+            <i class="fas fa-shopping-cart me-2"></i> Ver Productos
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <img src="images/image1.jpg" alt="Jeep con accesorios 4x4" class="img-fluid rounded shadow">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTOS DESTACADOS -->
+<section class="services-section" id="productos">
+  <div class="container">
+    <h2 class="section-title">Accesorios Jeep Más Vendidos</h2>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3 class="service-title">Parachoques Delanteros</h3>
+          <p>Para Jeep JL, JK, XJ, TJ. Con soporte para winch y luces LED. Acero 3/16".</p>
+          <ul class="service-features">
+            <li>Modelos: Vanguard, Crusader, Mauler</li>
+            <li>Hi-Lift jack points integrados</li>
+            <li>Recubrimiento en polvo opcional</li>
+            <li>Bolt-on, sin perforar</li>
+          </ul>
+          <a href="https://wa.me/56912345678" class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-mountain"></i></div>
+          <h3 class="service-title">Rock Sliders</h3>
+          <p>Protección lateral para off-road. Resisten rocas y golpes. Instalación incluida.</p>
+          <ul class="service-features">
+            <li>Crusader y Classic Series</li>
+            <li>Tubos 1.75" x 0.120"</li>
+            <li>Puntos de gato integrados</li>
+            <li>Para JL, JK, XJ, TJ</li>
+          </ul>
+          <a href="https://wa.me/56912345678" class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-hammer"></i></div>
+          <h3 class="service-title">Kits DIY</h3>
+          <p>Arma tu propio parachoque. Incluye planos, piezas cortadas y soporte vía WhatsApp.</p>
+          <ul class="service-features">
+            <li>Para soldar en casa</li>
+            <li>Planos y manual incluido</li>
+            <li>Soporte WhatsApp 24/7</li>
+            <li>Envío a todo Chile</li>
+          </ul>
+          <a href="https://wa.me/56912345678" class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COTIZADOR -->
+<section class="contact-section" id="cotizar">
+  <div class="container">
+    <h2 class="section-title" style="color: white;">Cotiza tu Accesorio Jeep</h2>
+    <div class="row">
+      <div class="col-lg-8">
+        <form action="https://formsubmit.co/hola@globalpro4x4.cl" method="POST">
+          <input type="hidden" name="_next" value="https://globalpro.pages.dev/gracias.html"/>
+          <input type="hidden" name="_subject" value="Nueva cotización Jeep 4x4"/>
+
+          <label>Modelo de Jeep:</label>
+          <select name="modelo" class="form-control mb-3" required>
+            <option value="">Selecciona...</option>
+            <option>Wrangler JL</option>
+            <option>Wrangler JK</option>
+            <option>Cherokee XJ</option>
+            <option>Wrangler TJ</option>
+            <option>Gladiator JT</option>
+          </select>
+
+          <label>Accesorio:</label>
+          <select name="accesorio" class="form-control mb-3" required>
+            <option value="">Selecciona...</option>
+            <option>Parachoque Delantero</option>
+            <option>Rock Sliders</option>
+            <option>Fenders</option>
+            <option>Porta Rueda</option>
+            <option>Kit DIY</option>
+          </select>
+
+          <label>Región:</label>
+          <select name="region" class="form-control mb-3" required>
+            <option value="">Selecciona...</option>
+            <option>Metropolitana</option>
+            <option>Valparaíso</option>
+            <option>Biobío</option>
+            <option>Araucanía</option>
+            <option>Magallanes</option>
+          </select>
+
+          <label>Nombre:</label>
+          <input type="text" name="nombre" class="form-control mb-3" required/>
+
+          <label>WhatsApp:</label>
+          <input type="tel" name="whatsapp" class="form-control mb-3" required/>
+
+          <label>Mensaje (opcional):</label>
+          <textarea name="mensaje" class="form-control mb-3" rows="4"></textarea>
+
+          <button type="submit" class="btn btn-primary btn-lg">Enviar cotización</button>
+        </form>
+      </div>
+      <div class="col-lg-4">
+        <img src="https://images.unsplash.com/photo-1603481541919-3a4EB1D9D3F1?auto=format&fit=crop&w=800&q=80" alt="Jeep con accesorios" class="img-fluid rounded shadow">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHATBOT IA -->
+<script src="js/chatbot.js"></script>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/56912345678" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

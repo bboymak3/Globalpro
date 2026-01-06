@@ -3,26 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GlobalPro 4x4 - Accesorios Jeep Hechos en Chile | Santiago</title>
-  <meta name="description" content="Parachoques, rock sliders, fenders y más para Jeep JL, JK, XJ, TJ. Fabricados en Chile con acero nacional. Envío a Santiago y regiones.">
+  <title>GlobalPro - Taller Mecánico en Santiago | Servicio Automotriz Integral</title>
+  <meta name="description" content="Taller mecánico GlobalPro en Santiago. Expertos en mecánica automotriz, electromecánica, chapa y pintura. Ofrecemos servicio a domicilio en toda el Área Metropolitana. ¡Agenda tu cita!">
   <link rel="canonical" href="https://globalpro.pages.dev/"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <link rel="stylesheet" href="css/styles.css"/>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "GlobalPro 4x4 Chile",
-    "image": "https://globalpro.pages.dev/assets/jeep-hero.webp",
+    "name": "GlobalPro Taller Mecánico",
+    "image": "https://globalpro.pages.dev/images/image1.jpg",
     "telephone": "+56912345678",
-    "email": "hola@globalpro4x4.cl",
+    "email": "contacto@globalpro.cl",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Santiago",
       "addressCountry": "CL"
     },
     "url": "https://globalpro.pages.dev",
-    "description": "Accesorios 4x4 Jeep hechos en Chile. Parachoques, rock sliders, fenders, kits DIY.",
+    "description": "Taller mecánico especializado en servicio automotriz integral, mecánica general, electromecánica y más. Servicio a domicilio en el Área Metropolitana de Chile.",
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -35,28 +36,43 @@
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar">
-  <div class="nav-container">
-    <a href="/" class="logo">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container nav-container">
+    <a href="#inicio" class="logo">
       <div class="logo-img">GP</div>
       <div>
-        <div class="logo-text">GLOBALPRO 4X4</div>
-        <div class="logo-subtext">Accesorios Jeep Chile</div>
+        <div class="logo-text">GLOBALPRO</div>
+        <div class="logo-subtext">Taller Mecánico</div>
       </div>
     </a>
 
-    <div class="desktop-menu">
-      <a href="#productos" class="nav-link">Productos</a>
-      <a href="#servicios" class="nav-link">Servicios</a>
-      <a href="#blog" class="nav-link">Blog</a>
-      <a href="https://wa.me/56912345678" class="whatsapp-btn">
-        <i class="fab fa-whatsapp me-2"></i> WhatsApp
-      </a>
-    </div>
-
-    <button class="mobile-menu-btn" id="mobileMenuBtn">
-      <i class="fas fa-bars"></i>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
     </button>
+
+    <div class="collapse navbar-collapse desktop-menu" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#servicios">Servicios</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="comunasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Comunas
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="comunasDropdown" style="max-height: 400px; overflow-y: auto;">
+            <li><a class="dropdown-item" href="#contacto">Alhué</a></li><li><a class="dropdown-item" href="#contacto">Buin</a></li><li><a class="dropdown-item" href="#contacto">Calera de Tango</a></li><li><a class="dropdown-item" href="#contacto">Cerrillos</a></li><li><a class="dropdown-item" href="#contacto">Cerro Navia</a></li><li><a class="dropdown-item" href="#contacto">Colina</a></li><li><a class="dropdown-item" href="#contacto">Conchalí</a></li><li><a class="dropdown-item" href="#contacto">Curacaví</a></li><li><a class="dropdown-item" href="#contacto">El Bosque</a></li><li><a class="dropdown-item" href="#contacto">El Monte</a></li><li><a class="dropdown-item" href="#contacto">Estación Central</a></li><li><a class="dropdown-item" href="#contacto">Huechuraba</a></li><li><a class="dropdown-item" href="#contacto">Independencia</a></li><li><a class="dropdown-item" href="#contacto">Isla de Maipo</a></li><li><a class="dropdown-item" href="#contacto">La Cisterna</a></li><li><a class="dropdown-item" href="#contacto">La Florida</a></li><li><a class="dropdown-item" href="#contacto">La Granja</a></li><li><a class="dropdown-item" href="#contacto">La Pintana</a></li><li><a class="dropdown-item" href="#contacto">La Reina</a></li><li><a class="dropdown-item" href="#contacto">Las Condes</a></li><li><a class="dropdown-item" href="#contacto">Lampa</a></li><li><a class="dropdown-item" href="#contacto">Lo Barnechea</a></li><li><a class="dropdown-item" href="#contacto">Lo Espejo</a></li><li><a class="dropdown-item" href="#contacto">Lo Prado</a></li><li><a class="dropdown-item" href="#contacto">Macul</a></li><li><a class="dropdown-item" href="#contacto">Maipú</a></li><li><a class="dropdown-item" href="#contacto">María Pinto</a></li><li><a class="dropdown-item" href="#contacto">Melipilla</a></li><li><a class="dropdown-item" href="#contacto">Ñuñoa</a></li><li><a class="dropdown-item" href="#contacto">Padre Hurtado</a></li><li><a class="dropdown-item" href="#contacto">Paine</a></li><li><a class="dropdown-item" href="#contacto">Pedro Aguirre Cerda</a></li><li><a class="dropdown-item" href="#contacto">Peñaflor</a></li><li><a class="dropdown-item" href="#contacto">Peñalolén</a></li><li><a class="dropdown-item" href="#contacto">Pirque</a></li><li><a class="dropdown-item" href="#contacto">Providencia</a></li><li><a class="dropdown-item" href="#contacto">Pudahuel</a></li><li><a class="dropdown-item" href="#contacto">Puente Alto</a></li><li><a class="dropdown-item" href="#contacto">Quilicura</a></li><li><a class="dropdown-item" href="#contacto">Quinta Normal</a></li><li><a class="dropdown-item" href="#contacto">Recoleta</a></li><li><a class="dropdown-item" href="#contacto">Renca</a></li><li><a class="dropdown-item" href="#contacto">San Bernardo</a></li><li><a class="dropdown-item" href="#contacto">San Joaquín</a></li><li><a class="dropdown-item" href="#contacto">San José de Maipo</a></li><li><a class="dropdown-item" href="#contacto">San Miguel</a></li><li><a class="dropdown-item" href="#contacto">San Pedro</a></li><li><a class="dropdown-item" href="#contacto">San Ramón</a></li><li><a class="dropdown-item" href="#contacto">Santiago</a></li><li><a class="dropdown-item" href="#contacto">Talagante</a></li><li><a class="dropdown-item" href="#contacto">Tiltil</a></li><li><a class="dropdown-item" href="#contacto">Vitacura</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contacto">Agenda tu Cita</a>
+        </li>
+        <li class="nav-item">
+          <a href="https://wa.me/56912345678" class="whatsapp-btn" target="_blank">
+            <i class="fab fa-whatsapp me-2"></i> WhatsApp
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
 
@@ -65,163 +81,282 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-7">
-        <span class="hero-badge">Accesorios 4x4 Hechos en Chile</span>
-        <h1 class="hero-title">Parachoques, Sliders y Fenders <span class="text-accent">para Jeep</span></h1>
-        <p class="hero-subtitle">Fabricamos con acero nacional. Envío a Santiago y regiones. Instalación disponible.</p>
+        <span class="hero-badge">Servicio Automotriz Integral</span>
+        <h1 class="hero-title">Taller Mecánico Especialista en <span class="text-accent">Diagnóstico y Reparación</span></h1>
+        <p class="hero-subtitle">En GlobalPro, somos expertos en mecánica automotriz, electromecánica y mantenimiento. ¡Tu vehículo en las mejores manos! Servicio a domicilio en todo Santiago.</p>
 
         <div class="stats-container">
           <div class="row text-center">
             <div class="col-4">
               <div class="stat-item">
-                <div class="stat-number">3/16"</div>
-                <div class="stat-label">Acero Nacional</div>
+                <div class="stat-number">+1000</div>
+                <div class="stat-label">Autos Reparados</div>
               </div>
             </div>
             <div class="col-4">
               <div class="stat-item">
-                <div class="stat-number">+500</div>
-                <div class="stat-label">Jeeps Equipados</div>
+                <div class="stat-number">+15</div>
+                <div class="stat-label">Años de Experiencia</div>
               </div>
             </div>
             <div class="col-4">
               <div class="stat-item">
-                <div class="stat-number">🔧</div>
-                <div class="stat-label">Instalación Incluida</div>
+                <div class="stat-number">✓</div>
+                <div class="stat-label">Garantía de Servicio</div>
               </div>
             </div>
           </div>
         </div>
 
         <div class="btn-group mt-4">
-          <a href="https://wa.me/56912345678" class="btn btn-primary me-2">
-            <i class="fab fa-whatsapp me-2"></i> Cotizar por WhatsApp
+          <a href="#contacto" class="btn btn-primary me-2">
+            <i class="fas fa-calendar-check me-2"></i> Agendar Cita
           </a>
-          <a href="#productos" class="btn btn-outline-light">
-            <i class="fas fa-shopping-cart me-2"></i> Ver Productos
+          <a href="#servicios" class="btn btn-outline-light">
+            <i class="fas fa-wrench me-2"></i> Ver Servicios
           </a>
         </div>
       </div>
       <div class="col-lg-5">
-        <img src="images/image1.jpg" alt="Jeep con accesorios 4x4" class="img-fluid rounded shadow">
+        <img src="images/image1.jpg" alt="Taller mecánico profesional GlobalPro" class="img-fluid rounded shadow">
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRODUCTOS DESTACADOS -->
-<section class="services-section" id="productos">
+<!-- SERVICIOS DESTACADOS -->
+<section class="services-section" id="servicios">
   <div class="container">
-    <h2 class="section-title">Accesorios Jeep Más Vendidos</h2>
+    <h2 class="section-title">Nuestros Servicios de Mecánica Automotriz</h2>
+    <p class="section-subtitle">Ofrecemos una solución completa para el mantenimiento y reparación de tu vehículo, desde la mecánica básica hasta el diagnóstico avanzado.</p>
     <div class="row g-4">
       <div class="col-lg-4 col-md-6">
         <div class="service-card">
+          <div class="service-icon"><i class="fas fa-oil-can"></i></div>
+          <h3 class="service-title">Mecánica General y Mantenimiento</h3>
+          <p>Realizamos <strong>mantenimiento preventivo</strong>, <strong>engrase general</strong>, <strong>cambio de aceite</strong> y <strong>revisión técnica</strong> para mantener tu auto en óptimas condiciones.</p>
+          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Mecánica%20General%20y%20Mantenimiento." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-car-battery"></i></div>
+          <h3 class="service-title">Electromecánica y Electricidad</h3>
+          <p>Expertos en <strong>electricidad automotriz</strong>, <strong>reparación de ECU</strong>, <strong>diagnóstico de fallas eléctricas</strong> y <strong>sistema de inyección</strong>.</p>
+          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Electromecánica%20y%20Electricidad." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
           <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
-          <h3 class="service-title">Parachoques Delanteros</h3>
-          <p>Para Jeep JL, JK, XJ, TJ. Con soporte para winch y luces LED. Acero 3/16".</p>
-          <ul class="service-features">
-            <li>Modelos: Vanguard, Crusader, Mauler</li>
-            <li>Hi-Lift jack points integrados</li>
-            <li>Recubrimiento en polvo opcional</li>
-            <li>Bolt-on, sin perforar</li>
-          </ul>
-          <a href="https://wa.me/56912345678" class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+          <h3 class="service-title">Chapa y Pintura Automotriz</h3>
+          <p>Recuperamos la estética de tu vehículo con <strong>reparación de carrocería</strong>, <strong>chapa y pintura</strong>, y <strong>reparación de interiores y tapicería</strong>.</p>
+          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Chapa%20y%20Pintura." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
         </div>
       </div>
-
       <div class="col-lg-4 col-md-6">
         <div class="service-card">
-          <div class="service-icon"><i class="fas fa-mountain"></i></div>
-          <h3 class="service-title">Rock Sliders</h3>
-          <p>Protección lateral para off-road. Resisten rocas y golpes. Instalación incluida.</p>
-          <ul class="service-features">
-            <li>Crusader y Classic Series</li>
-            <li>Tubos 1.75" x 0.120"</li>
-            <li>Puntos de gato integrados</li>
-            <li>Para JL, JK, XJ, TJ</li>
-          </ul>
-          <a href="https://wa.me/56912345678" class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+          <div class="service-icon"><i class="fas fa-temperature-low"></i></div>
+          <h3 class="service-title">Aire Acondicionado y Calefacción</h3>
+          <p><strong>Reparación y mantenimiento de aire acondicionado auto</strong>. Carga de gas, reparación de <strong>compresor</strong>, <strong>radiador</strong> y <strong>calefacción</strong>.</p>
+          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Aire%20Acondicionado." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
         </div>
       </div>
-
       <div class="col-lg-4 col-md-6">
         <div class="service-card">
-          <div class="service-icon"><i class="fas fa-hammer"></i></div>
-          <h3 class="service-title">Kits DIY</h3>
-          <p>Arma tu propio parachoque. Incluye planos, piezas cortadas y soporte vía WhatsApp.</p>
-          <ul class="service-features">
-            <li>Para soldar en casa</li>
-            <li>Planos y manual incluido</li>
-            <li>Soporte WhatsApp 24/7</li>
-            <li>Envío a todo Chile</li>
-          </ul>
-          <a href="https://wa.me/56912345678" class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+          <div class="service-icon"><i class="fas fa-circle-stop"></i></div>
+          <h3 class="service-title">Frenos y Suspensión</h3>
+          <p>Garantizamos tu seguridad con la <strong>reparación de frenos</strong> (discos, pastillas), <strong>suspensión</strong> (amortiguadores) y <strong>dirección</strong>.</p>
+          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Frenos%20y%20Suspensión." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-cogs"></i></div>
+          <h3 class="service-title">Reparación de Transmisión</h3>
+          <p>Diagnóstico y reparación de <strong>transmisiones manuales y automáticas</strong>, <strong>embrague</strong>, <strong>caja de transferencia</strong> y <strong>diferencial</strong>.</p>
+          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Reparación%20de%20Transmisión." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-wind"></i></div>
+          <h3 class="service-title">Sistema de Escape y Turbos</h3>
+          <p>Reparación y mantenimiento de <strong>escapes de autos</strong>, <strong>reparación de turbos</strong>, <strong>catalizador</strong> y <strong>silenciador</strong> para optimizar el rendimiento.</p>
+          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Sistema%20de%20Escape%20y%20Turbos." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-gas-pump"></i></div>
+          <h3 class="service-title">Sistemas de Gas GNV/GLP</h3>
+          <p>Instalación, certificación y <strong>reparación de sistemas de gas para vehículos</strong>. Conversión y mantenimiento para un ahorro garantizado.</p>
+          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Sistemas%20de%20Gas%20GNV/GLP." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-tools"></i></div>
+          <h3 class="service-title">Diagnóstico Computarizado</h3>
+          <p>Utilizando tecnología de <strong>scanner automotriz</strong>, ofrecemos un <strong>diagnóstico avanzado de fallas</strong> para identificar y solucionar problemas a tiempo.</p>
+          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Diagnóstico%20Computarizado." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-home"></i></div>
+          <h3 class="service-title">Servicio a Domicilio</h3>
+          <p>No puedes venir? Nosotros vamos a ti. Ofrecemos <strong>servicio mecánico a domicilio</strong> y <strong>auxilio en carretera</strong> para tu total comodidad.</p>
+          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Servicio%20a%20Domicilio." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- COTIZADOR -->
-<section class="contact-section" id="cotizar">
+<!-- POR QUÉ ELEGIRNOS -->
+<section class="why-us-section py-5">
   <div class="container">
-    <h2 class="section-title" style="color: white;">Cotiza tu Accesorio Jeep</h2>
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <img src="images/image2.png" alt="Diagnóstico avanzado en el taller GlobalPro" class="img-fluid rounded shadow">
+      </div>
+      <div class="col-lg-6">
+        <h2 class="section-title">¿Por Qué Elegir GlobalPro?</h2>
+        <p class="section-subtitle">Somos más que un taller automotor, somos tu aliado en el cuidado de tu vehículo.</p>
+        <div class="row g-3 mt-2">
+          <div class="col-6">
+            <div class="d-flex align-items-start">
+              <i class="fas fa-check-circle text-primary me-3 mt-1"></i>
+              <div>
+                <h6 class="mb-1">Profesionalismo y Garantía</h6>
+                <p class="small text-muted mb-0">Trabajos garantizados con la más alta <strong>calidad de mano de obra</strong>.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-start">
+              <i class="fas fa-check-circle text-primary me-3 mt-1"></i>
+              <div>
+                <h6 class="mb-1">Tecnología de Punta</h6>
+                <p class="small text-muted mb-0"><strong>Diagnóstico avanzado</strong> con las mejores herramientas del mercado.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-start">
+              <i class="fas fa-check-circle text-primary me-3 mt-1"></i>
+              <div>
+                <h6 class="mb-1">Servicio a Domicilio</h6>
+                <p class="small text-muted mb-0">Cubrimos todo el <strong>Área Metropolitana</strong> con nuestro <strong>mecánico a domicilio</strong>.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-start">
+              <i class="fas fa-check-circle text-primary me-3 mt-1"></i>
+              <div>
+                <h6 class="mb-1">Atención Personalizada</h6>
+                <p class="small text-muted mb-0">Te explicamos cada reparación para que tomes la mejor decisión.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO / COTIZADOR -->
+<section class="contact-section" id="contacto">
+  <div class="container">
     <div class="row">
-      <div class="col-lg-8">
-        <form action="https://formsubmit.co/hola@globalpro4x4.cl" method="POST">
-          <input type="hidden" name="_next" value="https://globalpro.pages.dev/gracias.html"/>
-          <input type="hidden" name="_subject" value="Nueva cotización Jeep 4x4"/>
-
-          <label>Modelo de Jeep:</label>
-          <select name="modelo" class="form-control mb-3" required>
-            <option value="">Selecciona...</option>
-            <option>Wrangler JL</option>
-            <option>Wrangler JK</option>
-            <option>Cherokee XJ</option>
-            <option>Wrangler TJ</option>
-            <option>Gladiator JT</option>
-          </select>
-
-          <label>Accesorio:</label>
-          <select name="accesorio" class="form-control mb-3" required>
-            <option value="">Selecciona...</option>
-            <option>Parachoque Delantero</option>
-            <option>Rock Sliders</option>
-            <option>Fenders</option>
-            <option>Porta Rueda</option>
-            <option>Kit DIY</option>
-          </select>
-
-          <label>Región:</label>
-          <select name="region" class="form-control mb-3" required>
-            <option value="">Selecciona...</option>
-            <option>Metropolitana</option>
-            <option>Valparaíso</option>
-            <option>Biobío</option>
-            <option>Araucanía</option>
-            <option>Magallanes</option>
-          </select>
-
-          <label>Nombre:</label>
-          <input type="text" name="nombre" class="form-control mb-3" required/>
-
-          <label>WhatsApp:</label>
-          <input type="tel" name="whatsapp" class="form-control mb-3" required/>
-
-          <label>Mensaje (opcional):</label>
-          <textarea name="mensaje" class="form-control mb-3" rows="4"></textarea>
-
-          <button type="submit" class="btn btn-primary btn-lg">Enviar cotización</button>
+      <div class="col-lg-5 mb-4 mb-lg-0 text-white">
+        <h2 class="section-title text-white">Agenda tu Cita o Cotiza con Nosotros</h2>
+        <p class="text-white-50">¡No esperes más! Contáctanos para agendar tu <strong>mantenimiento</strong>, solicitar una <strong>cotización de reparación</strong> o pedir <strong>auxilio mecánico</strong>. Tu <strong>presupuesto de reparación</strong> está a solo un clic.</p>
+        <div class="contact-info">
+          <div class="d-flex align-items-center mb-3">
+            <i class="fas fa-map-marker-alt me-3 text-primary"></i>
+            <span>Servicio a domicilio en todo el Área Metropolitana</span>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <i class="fas fa-phone me-3 text-primary"></i>
+            <span>+56 9 1234 5678</span>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <i class="fas fa-envelope me-3 text-primary"></i>
+            <span>contacto@globalpro.cl</span>
+          </div>
+          <div class="d-flex align-items-center">
+            <i class="fas fa-clock me-3 text-primary"></i>
+            <span>Lun-Vie: 9:00 - 18:00 | Sáb: 9:00 - 14:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <form id="contactForm" class="contact-form needs-validation" novalidate>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="nombre" class="form-label">Nombre Completo</label>
+              <input type="text" class="form-control" id="nombre" required>
+            </div>
+            <div class="col-md-6">
+              <label for="telefono" class="form-label">Teléfono / WhatsApp</label>
+              <input type="tel" class="form-control" id="telefono" required>
+            </div>
+            <div class="col-12">
+              <label for="vehiculo" class="form-label">Vehículo (Marca/Modelo/Año)</label>
+              <input type="text" class="form-control" id="vehiculo" placeholder="Ej: Toyota Yaris 2020" required>
+            </div>
+            <div class="col-md-6">
+              <label for="servicio" class="form-label">Tipo de Servicio</label>
+              <select class="form-select" id="servicio" required>
+                <option value="" selected disabled>Selecciona un servicio...</option>
+                <option value="Mecánica General y Mantenimiento">Mecánica General y Mantenimiento</option>
+                <option value="Electromecánica y Electricidad">Electromecánica y Electricidad</option>
+                <option value="Chapa y Pintura">Chapa y Pintura</option>
+                <option value="Aire Acondicionado">Aire Acondicionado</option>
+                <option value="Frenos y Suspensión">Frenos y Suspensión</option>
+                <option value="Reparación de Transmisión">Reparación de Transmisión</option>
+                <option value="Diagnóstico Computarizado">Diagnóstico Computarizado</option>
+                <option value="Servicio a Domicilio">Servicio a Domicilio</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="comuna" class="form-label">Tu Comuna</label>
+              <select class="form-select" id="comuna" required>
+                <option value="" selected disabled>Selecciona tu comuna...</option>
+                <option value="Santiago">Santiago</option><option value="Providencia">Providencia</option><option value="Las Condes">Las Condes</option><option value="Vitacura">Vitacura</option><option value="La Reina">La Reina</option><option value="Peñalolén">Peñalolén</option><option value="La Florida">La Florida</option><option value="Puente Alto">Puente Alto</option><option value="Maipú">Maipú</option><option value="San Bernardo">San Bernardo</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label for="mensaje" class="form-label">Describe el problema o lo que necesitas</label>
+              <textarea class="form-control" id="mensaje" rows="4" placeholder="Ej: Mi auto no enciende..."></textarea>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary btn-lg w-100">
+                <i class="fab fa-whatsapp me-2"></i>Enviar por WhatsApp
+              </button>
+            </div>
+          </div>
         </form>
       </div>
-      <div class="col-lg-4">
-        <img src="https://images.unsplash.com/photo-1603481541919-3a4EB1D9D3F1?auto=format&fit=crop&w=800&q=80" alt="Jeep con accesorios" class="img-fluid rounded shadow">
-      </div>
     </div>
   </div>
 </section>
 
-<!-- CHATBOT IA -->
-<script src="js/chatbot.js"></script>
+<!-- FOOTER -->
+<footer class="bg-black text-white-50 py-4 text-center">
+  <div class="container">
+    <p class="mb-0">&copy; 2024 GlobalPro - Taller Mecánico. Todos los derechos reservados.</p>
+    <div class="mt-2">
+      <a href="#" class="text-white-50 me-3"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="text-white-50 me-3"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="text-white-50"><i class="fab fa-youtube"></i></a>
+    </div>
+  </div>
+</footer>
 
 <!-- WhatsApp Float -->
 <a href="https://wa.me/56912345678" class="whatsapp-float" target="_blank">
@@ -230,5 +365,7 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JS -->
+<script src="js/script.js"></script>
 </body>
 </html>

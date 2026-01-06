@@ -306,3 +306,179 @@ h1, h2, h3, h4, h5, h6 {
         padding: 25px;
     }
 }
+
+
+/* ========================================
+   ESTILOS PARA LA NUEVA SECCIÓN DE SERVICIOS ESPECIALIZADOS
+   ======================================== */
+.specialized-services-section {
+    background: linear-gradient(135deg, #0a2c3c 0%, #1a1a2e 100%);
+    color: #f0f0f0;
+}
+
+.specialized-services-section .main-title {
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #00d4ff, #0088cc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    text-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+    animation: titleGlow 3s infinite alternate;
+}
+
+.specialized-services-section .subtitle {
+    font-size: 1.4rem;
+    color: #aad3ff;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+.specialized-services-section .section-container {
+    display: grid;
+    gap: 30px;
+}
+
+.specialized-services-section .section-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+.specialized-services-section .section-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 15px 35px rgba(0, 100, 200, 0.2);
+}
+
+.specialized-services-section .section-card.active {
+    background: rgba(0, 100, 200, 0.1);
+    border-color: #00d4ff;
+}
+
+.specialized-services-section .section-header {
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.specialized-services-section .section-title {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    color: #00d4ff;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-shadow: 0 2px 10px rgba(0, 212, 255, 0.3);
+}
+
+.specialized-services-section .section-icon {
+    font-size: 1.8rem;
+    color: #00d4ff;
+    transition: transform 0.3s ease;
+}
+
+.specialized-services-section .section-card.active .section-icon {
+    transform: rotate(180deg);
+}
+
+.specialized-services-section .section-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 30px;
+    transition: all 0.5s ease-in-out;
+    opacity: 0;
+}
+
+.specialized-services-section .section-card.active .section-content {
+    max-height: 1000px;
+    padding: 30px;
+    opacity: 1;
+}
+
+.specialized-services-section .content-text {
+    font-size: 1.1rem;
+    color: #d0e4ff;
+    text-align: justify;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    border-left: 4px solid #00d4ff;
+}
+
+.specialized-services-section .highlight {
+    color: #00d4ff;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+}
+
+.specialized-services-section .keyword-tag {
+    display: inline-block;
+    background: rgba(0, 212, 255, 0.15);
+    color: #aad3ff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    margin: 5px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.specialized-services-section .keyword-tag:hover {
+    background: rgba(0, 212, 255, 0.25);
+    transform: scale(1.05);
+}
+
+.specialized-services-section .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    justify-content: center;
+}
+
+@keyframes titleGlow {
+    0% {
+        text-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+    }
+    100% {
+        text-shadow: 0 5px 25px rgba(0, 212, 255, 0.6), 0 0 30px rgba(0, 212, 255, 0.4);
+    }
+}
+
+@media (max-width: 768px) {
+    .specialized-services-section .main-title {
+        font-size: 2.2rem;
+    }
+    
+    .specialized-services-section .subtitle {
+        font-size: 1.1rem;
+        padding: 0 15px;
+    }
+    
+    .specialized-services-section .section-title {
+        font-size: 1.4rem;
+    }
+    
+    .specialized-services-section .section-header {
+        padding: 20px;
+    }
+    
+    .specialized-services-section .content-text {
+        padding: 15px;
+        font-size: 1rem;
+    }
+}

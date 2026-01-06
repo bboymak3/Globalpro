@@ -24,9 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Cierra el menú si se hace clic fuera de él (opcional, pero buena práctica)
+    // Cierra el menú si se hace clic fuera de él (¡CORREGIDO!)
     window.addEventListener('click', function(e) {
-        if (!desktopMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        // Añadimos las comprobaciones '&& desktopMenu' y '&& mobileMenuBtn'
+        if (desktopMenu && mobileMenuBtn && !desktopMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
             desktopMenu.classList.remove('show');
         }
     });
@@ -56,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 // Cierra el menú móvil si está abierto
-                if (desktopMenu.classList.contains('show')) {
+                if (desktopMenu) {
                     desktopMenu.classList.remove('show');
                 }
             }
@@ -96,39 +97,37 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Change Navbar Style on Scroll ---
     window.addEventListener('scroll', function() {
         const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 50) {
-            navbar.style.padding = '5px 0';
-        } else {
-            navbar.style.padding = '10px 0';
+        if (navbar) { // También añadimos una comprobación aquí por seguridad
+            if (window.scrollY > 50) {
+                navbar.style.padding = '5px 0';
+            } else {
+                navbar.style.padding = '10px 0';
+            }
         }
     });
 
     // ========================================
     // LÓGICA PARA EL ACORDEÓN DE SERVICIOS ESPECIALIZADOS
     // ========================================
-    // Función para alternar secciones
     function toggleSection(sectionNumber) {
         const allCards = document.querySelectorAll('.specialized-services-section .section-card');
         const clickedCard = allCards[sectionNumber - 1];
 
-        // Si la tarjeta clickeada ya está activa, la desactiva.
-        if (clickedCard.classList.contains('active')) {
-            clickedCard.classList.remove('active');
-        } else {
-            // Desactiva todas las demás tarjetas
-            allCards.forEach(card => card.classList.remove('active'));
-            // Activa la tarjeta clickeada
-            clickedCard.classList.add('active');
+        if (clickedCard) { // Comprobación de seguridad
+            if (clickedCard.classList.contains('active')) {
+                clickedCard.classList.remove('active');
+            } else {
+                allCards.forEach(card => card.classList.remove('active'));
+                clickedCard.classList.add('active');
+            }
         }
     }
 
-    // Asigna la función toggleSection a cada header de tarjeta
     const sectionHeaders = document.querySelectorAll('.specialized-services-section .section-header');
     sectionHeaders.forEach((header, index) => {
         header.addEventListener('click', () => toggleSection(index + 1));
     });
 
-    // Efecto de aparición al hacer scroll para las tarjetas
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -143,7 +142,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    // Aplicar animación a las secciones
     document.querySelectorAll('.specialized-services-section .section-card').forEach((section, index) => {
         section.style.opacity = '0';
         section.style.transform = 'translateY(20px)';

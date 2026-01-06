@@ -1,352 +1,308 @@
+/* --- Variables y Estilos Globales --- */
 :root {
-  --primary: #DC2626;
-  --secondary: #000000;
-  --accent: #FEF2F2;
-  --dark: #7F1D1D;
-  --light: #FECACA;
+    --primary-color: #0d6efd; /* Azul Bootstrap */
+    --secondary-color: #6c757d; /* Gris Bootstrap */
+    --accent-color: #ffc107;   /* Amarillo para resaltar */
+    --dark-color: #212529;
+    --light-color: #f8f9fa;
+    --font-family: 'Poppins', sans-serif;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #333;
-  overflow-x: hidden;
-  padding-top: 80px;
-  background: #fafafa;
+    font-family: var(--font-family);
+    color: var(--dark-color);
+    padding-top: 80px; /* Offset for fixed navbar */
 }
 
-/* NAVBAR */
-.navbar {
-  background: #000000;
-  padding: 15px 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  box-shadow: 0 2px 20px rgba(220, 38, 38, 0.3);
-  border-bottom: 3px solid #DC2626;
-}
-
-.nav-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: white;
-  z-index: 1002;
-}
-
-.logo-img {
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, #DC2626 0%, #000000 100%);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-weight: bold;
-  margin-right: 10px;
-  font-size: 18px;
-  border: 2px solid #DC2626;
-  box-shadow: 0 3px 15px rgba(220, 38, 38, 0.4);
-}
-
-.logo-text {
-  font-weight: 800;
-  line-height: 1.2;
-  font-size: 18px;
-}
-
-.logo-subtext {
-  font-size: 0.8em;
-  line-height: 1.2;
-  color: #FECACA;
-}
-
-.desktop-menu {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: white;
-  font-weight: 600;
-  padding: 8px 12px;
-  border-radius: 5px;
-  transition: all 0.3s;
-}
-
-.nav-link:hover {
-  background: rgba(220, 38, 38, 0.1);
-  color: #DC2626;
-}
-
-.whatsapp-btn {
-  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-  color: white;
-  padding: 12px 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  transition: all 0.3s;
-  box-shadow: 0 3px 15px rgba(37, 211, 102, 0.4);
-  border: 2px solid transparent;
-}
-
-.whatsapp-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(37, 211, 102, 0.6);
-  color: white;
-  border-color: white;
-}
-
-/* HERO */
-.hero-section {
-  background: linear-gradient(135deg, #000000 0%, #7F1D1D 100%);
-  color: white;
-  padding: 100px 0 80px;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-badge {
-  background: #DC2626;
-  color: white;
-  padding: 8px 20px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 600;
-  display: inline-block;
-  margin-bottom: 20px;
-  box-shadow: 0 3px 15px rgba(220, 38, 38, 0.4);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.hero-title {
-  font-size: 3rem;
-  font-weight: 800;
-  margin-bottom: 20px;
-  line-height: 1.2;
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
 }
 
 .text-accent {
-  color: #DC2626;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    color: var(--accent-color) !important;
+}
+
+/* --- Navbar --- */
+.navbar {
+    background-color: rgba(33, 37, 41, 0.95);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease-in-out;
+    padding: 10px 0;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+.logo-img {
+    background-color: var(--primary-color);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: 1.2rem;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.logo-subtext {
+    font-size: 0.8rem;
+    color: var(--accent-color);
+}
+
+.nav-link {
+    font-weight: 500;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--accent-color) !important;
+}
+
+.whatsapp-btn {
+    background-color: #25d366;
+    border-color: #25d366;
+    color: white;
+    font-weight: 500;
+    padding: 8px 20px;
+    border-radius: 50px;
+}
+
+.whatsapp-btn:hover {
+    background-color: #128c7e;
+    border-color: #128c7e;
+    color: white;
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/image1.jpg') no-repeat center center/cover;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    color: white;
+}
+
+.hero-badge {
+    background-color: var(--accent-color);
+    color: var(--dark-color);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.hero-title {
+    font-weight: 700;
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-top: 20px;
 }
 
 .hero-subtitle {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-  opacity: 0.95;
+    font-size: 1.2rem;
+    max-width: 500px;
+    margin: 20px 0;
 }
 
 .stats-container {
-  background: rgba(220, 38, 38, 0.15);
-  border-radius: 15px;
-  padding: 25px;
-  margin: 30px 0;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(220, 38, 38, 0.3);
+    margin-top: 40px;
+}
+
+.stat-item {
+    padding: 15px;
 }
 
 .stat-number {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: #DC2626;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-color);
 }
 
-.btn-primary {
-  background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
-  border: none;
-  padding: 12px 30px;
-  font-weight: 600;
-  border-radius: 8px;
-  color: white;
-  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
-  transition: all 0.3s;
-  border: 2px solid transparent;
+.stat-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6);
-  color: white;
-  border-color: white;
-}
-
-/* SERVICIOS / PRODUCTOS */
-.services-section {
-  padding: 80px 0;
-  background: #FEF2F2;
-}
-
-.service-card {
-  background: white;
-  border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s;
-  border: 2px solid transparent;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-.service-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: #DC2626;
-}
-
-.service-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(220, 38, 38, 0.2);
-  border-color: #DC2626;
-}
-
-.service-icon {
-  width: 70px;
-  height: 70px;
-  background: linear-gradient(135deg, #DC2626 0%, #000000 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  color: white;
-  font-size: 1.8rem;
-  box-shadow: 0 5px 15px rgba(220, 38, 38, 0.3);
-  border: 2px solid #DC2626;
-}
-
-.service-title {
-  color: #000000;
-  font-weight: 700;
-  margin-bottom: 15px;
-}
-
-.service-features {
-  list-style: none;
-  padding: 0;
-  margin: 20px 0;
-}
-
-.service-features li {
-  padding: 5px 0;
-  position: relative;
-  padding-left: 25px;
-  color: #7F1D1D;
-}
-
-.service-features li::before {
-  content: "✓";
-  color: #DC2626;
-  font-weight: bold;
-  position: absolute;
-  left: 0;
-}
-
-.btn-outline-primary {
-  color: #DC2626;
-  border-color: #DC2626;
-  font-weight: 600;
-  transition: all 0.3s;
-  background: transparent;
-}
-
-.btn-outline-primary:hover {
-  background: #DC2626;
-  border-color: #DC2626;
-  color: white;
-  transform: translateY(-2px);
-}
-
-/* COTIZADOR */
-.contact-section {
-  padding: 80px 0;
-  background: linear-gradient(135deg, #000000 0%, #7F1D1D 100%);
-  color: white;
+/* --- Sections --- */
+.services-section, .why-us-section {
+    padding: 80px 0;
 }
 
 .section-title {
-  color: #000000;
-  font-weight: 800;
-  margin-bottom: 50px;
-  text-align: center;
-  position: relative;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: #DC2626;
-  border-radius: 2px;
+.section-subtitle {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px auto;
+    color: var(--secondary-color);
 }
 
-/* WHATSAPP FLOAT */
+/* --- Service Cards --- */
+.service-card {
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.service-card .card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    background-color: var(--light-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+    transition: background-color 0.3s, color 0.3s;
+    margin: 0 auto 20px auto;
+}
+
+.service-card:hover .service-icon {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.service-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.service-card p {
+    text-align: center;
+    flex-grow: 1;
+}
+
+.service-card .btn {
+    align-self: center;
+}
+
+/* --- Contact Section --- */
+.contact-section {
+    background-color: var(--dark-color);
+    padding: 80px 0;
+    color: white;
+}
+
+.contact-form {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.contact-form .form-label {
+    color: var(--dark-color);
+    font-weight: 500;
+}
+
+.contact-form .form-control, .contact-form .form-select {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+}
+
+.contact-form .btn-primary {
+    background-color: #25d366;
+    border-color: #25d366;
+    font-weight: 600;
+}
+
+.contact-form .btn-primary:hover {
+    background-color: #128c7e;
+    border-color: #128c7e;
+}
+
+.contact-info .fas {
+    font-size: 1.2rem;
+}
+
+/* --- WhatsApp Float Button --- */
 .whatsapp-float {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;
-  box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
-  z-index: 100;
-  text-decoration: none;
-  transition: all 0.3s;
-  border: 2px solid white;
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
 }
 
 .whatsapp-float:hover {
-  transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
-  color: white;
+    transform: scale(1.1);
+    color: white;
 }
 
-/* RESPONSIVE */
-@media (max-width: 991px) {
-  .desktop-menu {
-    display: none !important;
-  }
-  .mobile-menu-btn {
-    display: block !important;
-  }
-  .hero-title {
-    font-size: 2.2rem;
-  }
-}
-
+/* --- Responsive --- */
 @media (max-width: 768px) {
-  .nav-container {
-    padding: 0 15px;
-  }
+    .hero-section {
+        text-align: center;
+        min-height: auto;
+        padding: 120px 0 80px 0;
+    }
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    .btn-group {
+        justify-content: center;
+    }
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 24px;
+    }
+    .contact-form {
+        padding: 25px;
+    }
 }

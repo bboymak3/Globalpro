@@ -1,41 +1,66 @@
-// Chatbot IA para GlobalPro 4x4 Chile
-const chatMessages = document.getElementById('chat-messages');
-const chatForm = document.getElementById('chat-input');
-const chatToggle = document.getElementById('chat-toggle');
-const bot = document.getElementById('chat-bot');
+document.addEventListener('DOMContentLoaded', function() {
 
-let visible = true;
-chatToggle.onclick = () => {
-  visible = !visible;
-  bot.style.display = visible ? 'flex' : 'none';
-  chatToggle.textContent = visible ? '−' : '+';
-};
+    // --- Smooth Scrolling for Navigation Links ---
+    const navLinks = document.querySelectorAll('.navbar a[href^="#"]');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Allow dropdown links to work normally
+            if (this.classList.contains('dropdown-toggle')) {
+                return;
+            }
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                const targetPosition = targetSection.offsetTop - navbarHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 
-// Mensaje inicial
-addMessage('¡Hola! 👋 Soy tu asesor 4x4. ¿Qué modelo de Jeep tienes y qué accesorio buscas?', 'bot');
+    // --- WhatsApp Form Submission ---
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
 
-chatForm.onsubmit = async (e) => {
-  e.preventDefault();
-  const input = document.getElementById('chat-text');
-  const msg = input.value.trim();
-  if(!msg) return;
+            if (contactForm.checkValidity()) {
+                const nombre = document.getElementById('nombre').value;
+                const telefono = document.getElementById('telefono').value;
+                const vehiculo = document.getElementById('vehiculo').value;
+                const servicio = document.getElementById('servicio').value;
+                const comuna = document.getElementById('comuna').value;
+                const mensaje = document.getElementById('mensaje').value;
 
-  addMessage(msg, 'user');
-  input.value = '';
+                const whatsappMessage = `Hola GlobalPro, quiero solicitar una cotización/agendar una cita:%0A%0A` +
+                    `*Nombre:* ${nombre}%0A` +
+                    `*Teléfono/WhatsApp:* ${telefono}%0A` +
+                    `*Vehículo:* ${vehiculo}%0A` +
+                    `*Comuna:* ${comuna}%0A` +
+                    `*Servicio Requerido:* ${servicio}%0A` +
+                    `*Mensaje:* ${mensaje}`;
 
-  const res = await fetch('https://chat.globalpro.pages.dev/chat', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({message: msg})
-  }).then(r => r.json()).catch(() => ({reply: 'Error de conexión. Escríbenos al WhatsApp +56912345678'}));
-
-  addMessage(res.reply, 'bot');
-};
-
-function addMessage(text, sender) {
-  const div = document.createElement('div');
-  div.className = sender === 'user' ? 'msg-user' : 'msg-bot';
-  div.textContent = text;
-  chatMessages.appendChild(div);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-}
+                const whatsappUrl = `https://wa.me/56912345678?text=${encodeURIComponent(whatsappMessage)}`;
+                window.open(whatsappUrl, '_blank');
+            }
+            contactForm.classList.add('was-validated');
+        });
+    }
+    
+    // --- Change Navbar Style on Scroll ---
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.style.backgroundColor = 'rgba(33, 37, 41, 1)';
+            navbar.style.padding = '5px 0';
+        } else {
+            navbar.style.backgroundColor = 'rgba(33, 37, 41, 0.95)';
+            navbar.style.padding = '10px 0';
+        }
+    });
+});

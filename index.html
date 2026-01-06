@@ -15,7 +15,7 @@
     "@type": "LocalBusiness",
     "name": "GlobalPro Taller Mecánico",
     "image": "https://globalpro.pages.dev/images/image1.jpg",
-    "telephone": "+56912345678",
+    "telephone": "+569 39026185",
     "email": "contacto@globalpro.cl",
     "address": {
       "@type": "PostalAddress",
@@ -35,9 +35,10 @@
 </head>
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-  <div class="container nav-container">
+<!-- NUEVO MENÚ RESPONSIVE -->
+<nav class="main-nav">
+  <div class="nav-container">
+    <!-- Logo -->
     <a href="#inicio" class="logo">
       <div class="logo-img">GP</div>
       <div>
@@ -45,33 +46,47 @@
         <div class="logo-subtext">Taller Mecánico</div>
       </div>
     </a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    
+    <!-- Botón para Móvil -->
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
     </button>
 
-    <div class="collapse navbar-collapse desktop-menu" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#servicios">Servicios</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="comunasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Comunas
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="comunasDropdown" style="max-height: 400px; overflow-y: auto;">
-            <li><a class="dropdown-item" href="#contacto">Alhué</a></li><li><a class="dropdown-item" href="#contacto">Buin</a></li><li><a class="dropdown-item" href="#contacto">Calera de Tango</a></li><li><a class="dropdown-item" href="#contacto">Cerrillos</a></li><li><a class="dropdown-item" href="#contacto">Cerro Navia</a></li><li><a class="dropdown-item" href="#contacto">Colina</a></li><li><a class="dropdown-item" href="#contacto">Conchalí</a></li><li><a class="dropdown-item" href="#contacto">Curacaví</a></li><li><a class="dropdown-item" href="#contacto">El Bosque</a></li><li><a class="dropdown-item" href="#contacto">El Monte</a></li><li><a class="dropdown-item" href="#contacto">Estación Central</a></li><li><a class="dropdown-item" href="#contacto">Huechuraba</a></li><li><a class="dropdown-item" href="#contacto">Independencia</a></li><li><a class="dropdown-item" href="#contacto">Isla de Maipo</a></li><li><a class="dropdown-item" href="#contacto">La Cisterna</a></li><li><a class="dropdown-item" href="#contacto">La Florida</a></li><li><a class="dropdown-item" href="#contacto">La Granja</a></li><li><a class="dropdown-item" href="#contacto">La Pintana</a></li><li><a class="dropdown-item" href="#contacto">La Reina</a></li><li><a class="dropdown-item" href="#contacto">Las Condes</a></li><li><a class="dropdown-item" href="#contacto">Lampa</a></li><li><a class="dropdown-item" href="#contacto">Lo Barnechea</a></li><li><a class="dropdown-item" href="#contacto">Lo Espejo</a></li><li><a class="dropdown-item" href="#contacto">Lo Prado</a></li><li><a class="dropdown-item" href="#contacto">Macul</a></li><li><a class="dropdown-item" href="#contacto">Maipú</a></li><li><a class="dropdown-item" href="#contacto">María Pinto</a></li><li><a class="dropdown-item" href="#contacto">Melipilla</a></li><li><a class="dropdown-item" href="#contacto">Ñuñoa</a></li><li><a class="dropdown-item" href="#contacto">Padre Hurtado</a></li><li><a class="dropdown-item" href="#contacto">Paine</a></li><li><a class="dropdown-item" href="#contacto">Pedro Aguirre Cerda</a></li><li><a class="dropdown-item" href="#contacto">Peñaflor</a></li><li><a class="dropdown-item" href="#contacto">Peñalolén</a></li><li><a class="dropdown-item" href="#contacto">Pirque</a></li><li><a class="dropdown-item" href="#contacto">Providencia</a></li><li><a class="dropdown-item" href="#contacto">Pudahuel</a></li><li><a class="dropdown-item" href="#contacto">Puente Alto</a></li><li><a class="dropdown-item" href="#contacto">Quilicura</a></li><li><a class="dropdown-item" href="#contacto">Quinta Normal</a></li><li><a class="dropdown-item" href="#contacto">Recoleta</a></li><li><a class="dropdown-item" href="#contacto">Renca</a></li><li><a class="dropdown-item" href="#contacto">San Bernardo</a></li><li><a class="dropdown-item" href="#contacto">San Joaquín</a></li><li><a class="dropdown-item" href="#contacto">San José de Maipo</a></li><li><a class="dropdown-item" href="#contacto">San Miguel</a></li><li><a class="dropdown-item" href="#contacto">San Pedro</a></li><li><a class="dropdown-item" href="#contacto">San Ramón</a></li><li><a class="dropdown-item" href="#contacto">Santiago</a></li><li><a class="dropdown-item" href="#contacto">Talagante</a></li><li><a class="dropdown-item" href="#contacto">Tiltil</a></li><li><a class="dropdown-item" href="#contacto">Vitacura</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#contacto">Agenda tu Cita</a>
-        </li>
-        <li class="nav-item">
-          <a href="https://wa.me/56912345678" class="whatsapp-btn" target="_blank">
-            <i class="fab fa-whatsapp me-2"></i> WhatsApp
-          </a>
-        </li>
-      </ul>
+    <!-- Menú Principal -->
+    <div class="desktop-menu" id="desktopMenu">
+      <a href="#inicio" class="nav-link">Inicio</a>
+      
+      <!-- Dropdown SERVICIOS -->
+      <div class="nav-dropdown">
+        <a href="#servicios" class="nav-link dropdown-toggle">Servicios</a>
+        <div class="dropdown-menu">
+          <a href="#servicios" class="dropdown-item">Mecánica General y Mantenimiento</a>
+          <a href="#servicios" class="dropdown-item">Electromecánica y Electricidad</a>
+          <a href="#servicios" class="dropdown-item">Chapa y Pintura Automotriz</a>
+          <a href="#servicios" class="dropdown-item">Aire Acondicionado y Calefacción</a>
+          <a href="#servicios" class="dropdown-item">Frenos y Suspensión</a>
+          <a href="#servicios" class="dropdown-item">Reparación de Transmisión</a>
+          <a href="#servicios" class="dropdown-item">Sistema de Escape y Turbos</a>
+          <a href="#servicios" class="dropdown-item">Sistemas de Gas GNV/GLP</a>
+          <a href="#servicios" class="dropdown-item">Diagnóstico Computarizado</a>
+          <a href="#servicios" class="dropdown-item">Servicio a Domicilio</a>
+        </div>
+      </div>
+      
+      <!-- Dropdown COMUNAS -->
+      <div class="nav-dropdown">
+        <a href="#contacto" class="nav-link dropdown-toggle">Comunas</a>
+        <div class="dropdown-menu">
+          <a href="#contacto" class="dropdown-item">Alhué</a><a href="#contacto" class="dropdown-item">Buin</a><a href="#contacto" class="dropdown-item">Calera de Tango</a><a href="#contacto" class="dropdown-item">Cerrillos</a><a href="#contacto" class="dropdown-item">Cerro Navia</a><a href="#contacto" class="dropdown-item">Colina</a><a href="#contacto" class="dropdown-item">Conchalí</a><a href="#contacto" class="dropdown-item">Curacaví</a><a href="#contacto" class="dropdown-item">El Bosque</a><a href="#contacto" class="dropdown-item">El Monte</a><a href="#contacto" class="dropdown-item">Estación Central</a><a href="#contacto" class="dropdown-item">Huechuraba</a><a href="#contacto" class="dropdown-item">Independencia</a><a href="#contacto" class="dropdown-item">Isla de Maipo</a><a href="#contacto" class="dropdown-item">La Cisterna</a><a href="#contacto" class="dropdown-item">La Florida</a><a href="#contacto" class="dropdown-item">La Granja</a><a href="#contacto" class="dropdown-item">La Pintana</a><a href="#contacto" class="dropdown-item">La Reina</a><a href="#contacto" class="dropdown-item">Las Condes</a><a href="#contacto" class="dropdown-item">Lampa</a><a href="#contacto" class="dropdown-item">Lo Barnechea</a><a href="#contacto" class="dropdown-item">Lo Espejo</a><a href="#contacto" class="dropdown-item">Lo Prado</a><a href="#contacto" class="dropdown-item">Macul</a><a href="#contacto" class="dropdown-item">Maipú</a><a href="#contacto" class="dropdown-item">María Pinto</a><a href="#contacto" class="dropdown-item">Melipilla</a><a href="#contacto" class="dropdown-item">Ñuñoa</a><a href="#contacto" class="dropdown-item">Padre Hurtado</a><a href="#contacto" class="dropdown-item">Paine</a><a href="#contacto" class="dropdown-item">Pedro Aguirre Cerda</a><a href="#contacto" class="dropdown-item">Peñaflor</a><a href="#contacto" class="dropdown-item">Peñalolén</a><a href="#contacto" class="dropdown-item">Pirque</a><a href="#contacto" class="dropdown-item">Providencia</a><a href="#contacto" class="dropdown-item">Pudahuel</a><a href="#contacto" class="dropdown-item">Puente Alto</a><a href="#contacto" class="dropdown-item">Quilicura</a><a href="#contacto" class="dropdown-item">Quinta Normal</a><a href="#contacto" class="dropdown-item">Recoleta</a><a href="#contacto" class="dropdown-item">Renca</a><a href="#contacto" class="dropdown-item">San Bernardo</a><a href="#contacto" class="dropdown-item">San Joaquín</a><a href="#contacto" class="dropdown-item">San José de Maipo</a><a href="#contacto" class="dropdown-item">San Miguel</a><a href="#contacto" class="dropdown-item">San Pedro</a><a href="#contacto" class="dropdown-item">San Ramón</a><a href="#contacto" class="dropdown-item">Santiago</a><a href="#contacto" class="dropdown-item">Talagante</a><a href="#contacto" class="dropdown-item">Tiltil</a><a href="#contacto" class="dropdown-item">Vitacura</a>
+        </div>
+      </div>
+      
+      <a href="#contacto" class="nav-link">Agenda tu Cita</a>
+      
+      <!-- WhatsApp -->
+      <a href="https://wa.me/56939026185" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp me-2"></i> WhatsApp
+      </a>
     </div>
   </div>
 </nav>
@@ -135,7 +150,7 @@
           <div class="service-icon"><i class="fas fa-oil-can"></i></div>
           <h3 class="service-title">Mecánica General y Mantenimiento</h3>
           <p>Realizamos <strong>mantenimiento preventivo</strong>, <strong>engrase general</strong>, <strong>cambio de aceite</strong> y <strong>revisión técnica</strong> para mantener tu auto en óptimas condiciones.</p>
-          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Mecánica%20General%20y%20Mantenimiento." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+          <a href="https://wa.me/56939026185?text=Hola,%20quiero%20cotizar%20por%20Mecánica%20General%20y%20Mantenimiento." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
@@ -143,7 +158,7 @@
           <div class="service-icon"><i class="fas fa-car-battery"></i></div>
           <h3 class="service-title">Electromecánica y Electricidad</h3>
           <p>Expertos en <strong>electricidad automotriz</strong>, <strong>reparación de ECU</strong>, <strong>diagnóstico de fallas eléctricas</strong> y <strong>sistema de inyección</strong>.</p>
-          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Electromecánica%20y%20Electricidad." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+          <a href="https://wa.me/56939026185?text=Hola,%20quiero%20cotizar%20por%20Electromecánica%20y%20Electricidad." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
@@ -151,7 +166,7 @@
           <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
           <h3 class="service-title">Chapa y Pintura Automotriz</h3>
           <p>Recuperamos la estética de tu vehículo con <strong>reparación de carrocería</strong>, <strong>chapa y pintura</strong>, y <strong>reparación de interiores y tapicería</strong>.</p>
-          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Chapa%20y%20Pintura." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+          <a href="https://wa.me/56939026185?text=Hola,%20quiero%20cotizar%20por%20Chapa%20y%20Pintura." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
@@ -159,7 +174,7 @@
           <div class="service-icon"><i class="fas fa-temperature-low"></i></div>
           <h3 class="service-title">Aire Acondicionado y Calefacción</h3>
           <p><strong>Reparación y mantenimiento de aire acondicionado auto</strong>. Carga de gas, reparación de <strong>compresor</strong>, <strong>radiador</strong> y <strong>calefacción</strong>.</p>
-          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Aire%20Acondicionado." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+          <a href="https://wa.me/56939026185?text=Hola,%20quiero%20cotizar%20por%20Aire%20Acondicionado." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
@@ -167,7 +182,7 @@
           <div class="service-icon"><i class="fas fa-circle-stop"></i></div>
           <h3 class="service-title">Frenos y Suspensión</h3>
           <p>Garantizamos tu seguridad con la <strong>reparación de frenos</strong> (discos, pastillas), <strong>suspensión</strong> (amortiguadores) y <strong>dirección</strong>.</p>
-          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Frenos%20y%20Suspensión." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+          <a href="https://wa.me/56939026185?text=Hola,%20quiero%20cotizar%20por%20Frenos%20y%20Suspensión." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
@@ -175,7 +190,7 @@
           <div class="service-icon"><i class="fas fa-cogs"></i></div>
           <h3 class="service-title">Reparación de Transmisión</h3>
           <p>Diagnóstico y reparación de <strong>transmisiones manuales y automáticas</strong>, <strong>embrague</strong>, <strong>caja de transferencia</strong> y <strong>diferencial</strong>.</p>
-          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Reparación%20de%20Transmisión." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+          <a href="https://wa.me/56939026185?text=Hola,%20quiero%20cotizar%20por%20Reparación%20de%20Transmisión." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
@@ -183,7 +198,7 @@
           <div class="service-icon"><i class="fas fa-wind"></i></div>
           <h3 class="service-title">Sistema de Escape y Turbos</h3>
           <p>Reparación y mantenimiento de <strong>escapes de autos</strong>, <strong>reparación de turbos</strong>, <strong>catalizador</strong> y <strong>silenciador</strong> para optimizar el rendimiento.</p>
-          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Sistema%20de%20Escape%20y%20Turbos." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+          <a href="https://wa.me/56939026185?text=Hola,%20quiero%20cotizar%20por%20Sistema%20de%20Escape%20y%20Turbos." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
@@ -191,7 +206,7 @@
           <div class="service-icon"><i class="fas fa-gas-pump"></i></div>
           <h3 class="service-title">Sistemas de Gas GNV/GLP</h3>
           <p>Instalación, certificación y <strong>reparación de sistemas de gas para vehículos</strong>. Conversión y mantenimiento para un ahorro garantizado.</p>
-          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Sistemas%20de%20Gas%20GNV/GLP." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+          <a href="https://wa.me/56939026185?text=Hola,%20quiero%20cotizar%20por%20Sistemas%20de%20Gas%20GNV/GLP." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
@@ -199,7 +214,7 @@
           <div class="service-icon"><i class="fas fa-tools"></i></div>
           <h3 class="service-title">Diagnóstico Computarizado</h3>
           <p>Utilizando tecnología de <strong>scanner automotriz</strong>, ofrecemos un <strong>diagnóstico avanzado de fallas</strong> para identificar y solucionar problemas a tiempo.</p>
-          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Diagnóstico%20Computarizado." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+          <a href="https://wa.me/56939026185?text=Hola,%20quiero%20cotizar%20por%20Diagnóstico%20Computarizado." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
@@ -207,7 +222,7 @@
           <div class="service-icon"><i class="fas fa-home"></i></div>
           <h3 class="service-title">Servicio a Domicilio</h3>
           <p>No puedes venir? Nosotros vamos a ti. Ofrecemos <strong>servicio mecánico a domicilio</strong> y <strong>auxilio en carretera</strong> para tu total comodidad.</p>
-          <a href="https://wa.me/56912345678?text=Hola,%20quiero%20cotizar%20por%20Servicio%20a%20Domicilio." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
+          <a href="https://wa.me/56939026185?text=Hola,%20quiero%20cotizar%20por%20Servicio%20a%20Domicilio." class="btn btn-outline-primary mt-3">Cotizar Ahora</a>
         </div>
       </div>
     </div>
@@ -281,7 +296,7 @@
           </div>
           <div class="d-flex align-items-center mb-3">
             <i class="fas fa-phone me-3 text-primary"></i>
-            <span>+56 9 1234 5678</span>
+            <span>+569 39026185</span>
           </div>
           <div class="d-flex align-items-center mb-3">
             <i class="fas fa-envelope me-3 text-primary"></i>
@@ -359,7 +374,7 @@
 </footer>
 
 <!-- WhatsApp Float -->
-<a href="https://wa.me/56912345678" class="whatsapp-float" target="_blank">
+<a href="https://wa.me/56939026185" class="whatsapp-float" target="_blank">
   <i class="fab fa-whatsapp"></i>
 </a>
 

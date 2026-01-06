@@ -35,10 +35,9 @@
 </head>
 <body>
 
-<!-- NUEVO MENÚ RESPONSIVE -->
-<nav class="main-nav">
-  <div class="nav-container">
-    <!-- Logo -->
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container nav-container">
     <a href="#inicio" class="logo">
       <div class="logo-img">GP</div>
       <div>
@@ -46,47 +45,33 @@
         <div class="logo-subtext">Taller Mecánico</div>
       </div>
     </a>
-    
-    <!-- Botón para Móvil -->
-    <button class="mobile-menu-btn" id="mobileMenuBtn">
-      <i class="fas fa-bars"></i>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Menú Principal -->
-    <div class="desktop-menu" id="desktopMenu">
-      <a href="#inicio" class="nav-link">Inicio</a>
-      
-      <!-- Dropdown SERVICIOS -->
-      <div class="nav-dropdown">
-        <a href="#servicios" class="nav-link dropdown-toggle">Servicios</a>
-        <div class="dropdown-menu">
-          <a href="#servicios" class="dropdown-item">Mecánica General y Mantenimiento</a>
-          <a href="#servicios" class="dropdown-item">Electromecánica y Electricidad</a>
-          <a href="#servicios" class="dropdown-item">Chapa y Pintura Automotriz</a>
-          <a href="#servicios" class="dropdown-item">Aire Acondicionado y Calefacción</a>
-          <a href="#servicios" class="dropdown-item">Frenos y Suspensión</a>
-          <a href="#servicios" class="dropdown-item">Reparación de Transmisión</a>
-          <a href="#servicios" class="dropdown-item">Sistema de Escape y Turbos</a>
-          <a href="#servicios" class="dropdown-item">Sistemas de Gas GNV/GLP</a>
-          <a href="#servicios" class="dropdown-item">Diagnóstico Computarizado</a>
-          <a href="#servicios" class="dropdown-item">Servicio a Domicilio</a>
-        </div>
-      </div>
-      
-      <!-- Dropdown COMUNAS -->
-      <div class="nav-dropdown">
-        <a href="#contacto" class="nav-link dropdown-toggle">Comunas</a>
-        <div class="dropdown-menu">
-          <a href="#contacto" class="dropdown-item">Alhué</a><a href="#contacto" class="dropdown-item">Buin</a><a href="#contacto" class="dropdown-item">Calera de Tango</a><a href="#contacto" class="dropdown-item">Cerrillos</a><a href="#contacto" class="dropdown-item">Cerro Navia</a><a href="#contacto" class="dropdown-item">Colina</a><a href="#contacto" class="dropdown-item">Conchalí</a><a href="#contacto" class="dropdown-item">Curacaví</a><a href="#contacto" class="dropdown-item">El Bosque</a><a href="#contacto" class="dropdown-item">El Monte</a><a href="#contacto" class="dropdown-item">Estación Central</a><a href="#contacto" class="dropdown-item">Huechuraba</a><a href="#contacto" class="dropdown-item">Independencia</a><a href="#contacto" class="dropdown-item">Isla de Maipo</a><a href="#contacto" class="dropdown-item">La Cisterna</a><a href="#contacto" class="dropdown-item">La Florida</a><a href="#contacto" class="dropdown-item">La Granja</a><a href="#contacto" class="dropdown-item">La Pintana</a><a href="#contacto" class="dropdown-item">La Reina</a><a href="#contacto" class="dropdown-item">Las Condes</a><a href="#contacto" class="dropdown-item">Lampa</a><a href="#contacto" class="dropdown-item">Lo Barnechea</a><a href="#contacto" class="dropdown-item">Lo Espejo</a><a href="#contacto" class="dropdown-item">Lo Prado</a><a href="#contacto" class="dropdown-item">Macul</a><a href="#contacto" class="dropdown-item">Maipú</a><a href="#contacto" class="dropdown-item">María Pinto</a><a href="#contacto" class="dropdown-item">Melipilla</a><a href="#contacto" class="dropdown-item">Ñuñoa</a><a href="#contacto" class="dropdown-item">Padre Hurtado</a><a href="#contacto" class="dropdown-item">Paine</a><a href="#contacto" class="dropdown-item">Pedro Aguirre Cerda</a><a href="#contacto" class="dropdown-item">Peñaflor</a><a href="#contacto" class="dropdown-item">Peñalolén</a><a href="#contacto" class="dropdown-item">Pirque</a><a href="#contacto" class="dropdown-item">Providencia</a><a href="#contacto" class="dropdown-item">Pudahuel</a><a href="#contacto" class="dropdown-item">Puente Alto</a><a href="#contacto" class="dropdown-item">Quilicura</a><a href="#contacto" class="dropdown-item">Quinta Normal</a><a href="#contacto" class="dropdown-item">Recoleta</a><a href="#contacto" class="dropdown-item">Renca</a><a href="#contacto" class="dropdown-item">San Bernardo</a><a href="#contacto" class="dropdown-item">San Joaquín</a><a href="#contacto" class="dropdown-item">San José de Maipo</a><a href="#contacto" class="dropdown-item">San Miguel</a><a href="#contacto" class="dropdown-item">San Pedro</a><a href="#contacto" class="dropdown-item">San Ramón</a><a href="#contacto" class="dropdown-item">Santiago</a><a href="#contacto" class="dropdown-item">Talagante</a><a href="#contacto" class="dropdown-item">Tiltil</a><a href="#contacto" class="dropdown-item">Vitacura</a>
-        </div>
-      </div>
-      
-      <a href="#contacto" class="nav-link">Agenda tu Cita</a>
-      
-      <!-- WhatsApp -->
-      <a href="https://wa.me/56939026185" class="whatsapp-btn" target="_blank">
-        <i class="fab fa-whatsapp me-2"></i> WhatsApp
-      </a>
+    <div class="collapse navbar-collapse desktop-menu" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#servicios">Servicios</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="comunasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Comunas
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="comunasDropdown" style="max-height: 400px; overflow-y: auto;">
+            <li><a class="dropdown-item" href="#contacto">Alhué</a></li><li><a class="dropdown-item" href="#contacto">Buin</a></li><li><a class="dropdown-item" href="#contacto">Calera de Tango</a></li><li><a class="dropdown-item" href="#contacto">Cerrillos</a></li><li><a class="dropdown-item" href="#contacto">Cerro Navia</a></li><li><a class="dropdown-item" href="#contacto">Colina</a></li><li><a class="dropdown-item" href="#contacto">Conchalí</a></li><li><a class="dropdown-item" href="#contacto">Curacaví</a></li><li><a class="dropdown-item" href="#contacto">El Bosque</a></li><li><a class="dropdown-item" href="#contacto">El Monte</a></li><li><a class="dropdown-item" href="#contacto">Estación Central</a></li><li><a class="dropdown-item" href="#contacto">Huechuraba</a></li><li><a class="dropdown-item" href="#contacto">Independencia</a></li><li><a class="dropdown-item" href="#contacto">Isla de Maipo</a></li><li><a class="dropdown-item" href="#contacto">La Cisterna</a></li><li><a class="dropdown-item" href="#contacto">La Florida</a></li><li><a class="dropdown-item" href="#contacto">La Granja</a></li><li><a class="dropdown-item" href="#contacto">La Pintana</a></li><li><a class="dropdown-item" href="#contacto">La Reina</a></li><li><a class="dropdown-item" href="#contacto">Las Condes</a></li><li><a class="dropdown-item" href="#contacto">Lampa</a></li><li><a class="dropdown-item" href="#contacto">Lo Barnechea</a></li><li><a class="dropdown-item" href="#contacto">Lo Espejo</a></li><li><a class="dropdown-item" href="#contacto">Lo Prado</a></li><li><a class="dropdown-item" href="#contacto">Macul</a></li><li><a class="dropdown-item" href="#contacto">Maipú</a></li><li><a class="dropdown-item" href="#contacto">María Pinto</a></li><li><a class="dropdown-item" href="#contacto">Melipilla</a></li><li><a class="dropdown-item" href="#contacto">Ñuñoa</a></li><li><a class="dropdown-item" href="#contacto">Padre Hurtado</a></li><li><a class="dropdown-item" href="#contacto">Paine</a></li><li><a class="dropdown-item" href="#contacto">Pedro Aguirre Cerda</a></li><li><a class="dropdown-item" href="#contacto">Peñaflor</a></li><li><a class="dropdown-item" href="#contacto">Peñalolén</a></li><li><a class="dropdown-item" href="#contacto">Pirque</a></li><li><a class="dropdown-item" href="#contacto">Providencia</a></li><li><a class="dropdown-item" href="#contacto">Pudahuel</a></li><li><a class="dropdown-item" href="#contacto">Puente Alto</a></li><li><a class="dropdown-item" href="#contacto">Quilicura</a></li><li><a class="dropdown-item" href="#contacto">Quinta Normal</a></li><li><a class="dropdown-item" href="#contacto">Recoleta</a></li><li><a class="dropdown-item" href="#contacto">Renca</a></li><li><a class="dropdown-item" href="#contacto">San Bernardo</a></li><li><a class="dropdown-item" href="#contacto">San Joaquín</a></li><li><a class="dropdown-item" href="#contacto">San José de Maipo</a></li><li><a class="dropdown-item" href="#contacto">San Miguel</a></li><li><a class="dropdown-item" href="#contacto">San Pedro</a></li><li><a class="dropdown-item" href="#contacto">San Ramón</a></li><li><a class="dropdown-item" href="#contacto">Santiago</a></li><li><a class="dropdown-item" href="#contacto">Talagante</a></li><li><a class="dropdown-item" href="#contacto">Tiltil</a></li><li><a class="dropdown-item" href="#contacto">Vitacura</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contacto">Agenda tu Cita</a>
+        </li>
+        <li class="nav-item">
+          <a href="https://wa.me/56939026185" class="whatsapp-btn" target="_blank">
+            <i class="fab fa-whatsapp me-2"></i> WhatsApp
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>

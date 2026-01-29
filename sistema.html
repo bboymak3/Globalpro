@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobalPro - Gestión de Taller</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .active-tab { border-bottom: 4px solid #eab308; color: #eab308; border-radius: 0; }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans min-h-screen">
+
+    <div class="container mx-auto p-4 max-w-5xl">
+        <header class="flex justify-between items-center mb-6 py-2 border-b border-gray-800">
+            <h1 class="text-2xl font-black italic text-yellow-500 tracking-tighter">GLOBALPRO <span class="text-white not-italic font-light text-sm">Taller</span></h1>
+            <div class="flex items-center gap-2">
+                <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+                <span class="text-xs text-gray-400">Sistema Activo</span>
+            </div>
+        </header>
+
+        <nav class="flex mb-6 bg-gray-800 rounded-xl p-1 shadow-inner">
+            <button id="tab-tec" onclick="showTab('tecnico')" class="flex-1 py-4 font-bold active-tab transition-all">🛠 REGISTRAR</button>
+            <button id="tab-adm" onclick="showTab('admin')" class="flex-1 py-4 font-bold text-gray-500 transition-all">📊 HISTORIAL</button>
+        </nav>
+
+        <section id="view-tecnico" class="space-y-4 animate-in fade-in duration-500">
+            <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 shadow-2xl">
+                <h2 class="text-lg font-bold mb-6 text-gray-300">Nuevo Servicio</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label class="text-xs text-yellow-600 font-bold ml-1 uppercase">Datos del Cliente</label>
+                        <input id="tec_nombre_usuario" type="text" placeholder="Nombre del Usuario" class="w-full mt-1 p-3 rounded-lg bg-gray-900 border border-gray-700 outline-none focus:border-yellow-500 transition">
+                    </div>
+                    <div>
+                        <label class="text-xs text-yellow-600 font-bold ml-1 uppercase">Teléfono de Contacto</label>
+                        <input id="tec_telefono" type="tel" placeholder="Ej: 3001234567" class="w-full mt-1 p-3 rounded-lg bg-gray-900 border border-gray-700 outline-none focus:border-yellow-500 transition">
+                    </div>
+                    <div>
+                        <label class="text-xs text-yellow-600 font-bold ml-1 uppercase">Placa del Vehículo</label>
+                        <input id="tec_placa" type="text" placeholder="ABC-123" class="w-full mt-1 p-3 rounded-lg bg-gray-900 border border-gray-700 outline-none focus:border-yellow-500 transition font-black uppercase text-yellow-500 text-xl text-center">
+                    </div>
+                    <div>
+                        <label class="text-xs text-yellow-600 font-bold ml-1 uppercase">Técnico Encargado</label>
+                        <input id="tec_tecnico" type="text" placeholder="Nombre del Mecánico" class="w-full mt-1 p-3 rounded-lg bg-gray-900 border border-gray-700 outline-none focus:border-yellow-500 transition">
+                    </div>
+                    <div>
+                        <label class="text-xs text-yellow-600 font-bold ml-1 uppercase">Kilometraje</label>
+                        <input id="tec_km" type="number" placeholder="000000" class="w-full mt-1 p-3 rounded-lg bg-gray-900 border border-gray-700 outline-none focus:border-yellow-500 transition">
+                    </div>
+                    <div>
+                        <label class="text-xs text-yellow-600 font-bold ml-1 uppercase">Insumo / Aceite</label>
+                        <select id="tec_aceite" class="w-full mt-1 p-3 rounded-lg bg-gray-900 border border-gray-700 outline-none focus:border-yellow-500 transition appearance-none">
+                            <option value="">Seleccione opción...</option>
+                            <option>Mineral 20W50</option>
+                            <option>Semi-Sintético 10W30</option>
+                            <option>Sintético 5W30</option>
+                            <option>Revisión General (Sin aceite)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-5">
+                    <label class="text-xs text-yellow-600 font-bold ml-1 uppercase">Notas y Exigibles</label>
+                    <textarea id="tec_notas" placeholder="Escribe aquí los detalles del servicio y pendientes..." class="w-full mt-1 p-4 rounded-lg bg-gray-900 border border-gray-700 h-32 outline-none focus:border-yellow-500 transition"></textarea>
+                </div>
+
+                <button onclick="enviarEvento()" class="w-full mt-8 bg-yellow-600 hover:bg-yellow-500 text-black font-black py-4 rounded-xl text-lg transition-transform active:scale-95 shadow-lg shadow-yellow-900/20">
+                    <i class="fas fa-save mr-2"></i> GUARDAR EN HISTORIAL
+                </button>
+            </div>
+        </section>
+
+        <section id="view-admin" class="hidden space-y-6 animate-in slide-in-from-right duration-300">
+            <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700">
+                <div class="flex gap-2">
+                    <input id="busqueda" type="text" placeholder="Buscar Placa o Celular..." class="flex-1 p-4 rounded-xl bg-gray-900 border border-gray-700 outline-none focus:ring-2 focus:ring-yellow-500">
+                    <button onclick="buscarHistorial()" class="bg-yellow-600 text-black px-6 rounded-xl font-bold hover:bg-yellow-500 transition">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="resultados" class="space-y-4">
+                <div class="text-center py-20 text-gray-600">
+                    <i class="fas fa-tools text-5xl mb-4 opacity-20"></i>
+                    <p>Ingresa una placa para ver el historial de eventos</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // REEMPLAZA ESTA URL CON LA QUE TE DA CLOUDFLARE AL PUBLICAR EL WORKER
+        const WORKER_URL = 'https://taller-api.TU-USUARIO.workers.dev';
+
+        function showTab(tab) {
+            document.getElementById('view-tecnico').classList.toggle('hidden', tab !== 'tecnico');
+            document.getElementById('view-admin').classList.toggle('hidden', tab !== 'admin');
+            document.getElementById('tab-tec').classList.toggle('active-tab', tab === 'tecnico');
+            document.getElementById('tab-adm').classList.toggle('active-tab', tab === 'admin');
+            document.getElementById('tab-tec').classList.toggle('text-gray-500', tab !== 'tecnico');
+            document.getElementById('tab-adm').classList.toggle('text-gray-500', tab !== 'admin');
+        }
+
+        async function enviarEvento() {
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "Guardando...";
+            btn.disabled = true;
+
+            const data = {
+                accion: "nuevo_evento",
+                nombre_usuario: document.getElementById('tec_nombre_usuario').value,
+                telefono: document.getElementById('tec_telefono').value,
+                placa: document.getElementById('tec_placa').value.toUpperCase().trim(),
+                tecnico: document.getElementById('tec_tecnico').value,
+                km: document.getElementById('tec_km').value,
+                aceite: document.getElementById('tec_aceite').value,
+                notas: document.getElementById('tec_notas').value
+            };
+
+            try {
+                const res = await fetch(WORKER_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(data)
+                });
+
+                if(res.ok) {
+                    alert("✅ Guardado correctamente.");
+                    document.querySelectorAll('input, textarea, select').forEach(el => el.value = "");
+                    showTab('admin');
+                }
+            } catch (e) {
+                alert("❌ Error de conexión: " + e.message);
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        async function buscarHistorial() {
+            const term = document.getElementById('busqueda').value.trim();
+            if(!term) return;
+
+            const contenedor = document.getElementById('resultados');
+            contenedor.innerHTML = "<p class='text-center animate-pulse'>Buscando historial...</p>";
+
+            try {
+                const res = await fetch(`${WORKER_URL}?buscar=${term}`);
+                const eventos = await res.json();
+                
+                contenedor.innerHTML = "";
+
+                if(!eventos || eventos.length === 0) {
+                    contenedor.innerHTML = "<div class='bg-red-900/20 border border-red-900 text-red-400 p-4 rounded-xl text-center'>No hay registros para esta placa.</div>";
+                    return;
+                }
+
+                eventos.forEach(ev => {
+                    const fecha = new Date(ev.fecha_hora).toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                    contenedor.innerHTML += `
+                        <div class="bg-gray-800 p-5 rounded-2xl border-l-4 border-yellow-600 shadow-lg">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <p class="text-[10px] uppercase tracking-widest text-yellow-600 font-bold">Fecha del Servicio</p>
+                                    <p class="text-sm font-medium text-white">${fecha}</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Responsable</p>
+                                    <p class="text-xs text-yellow-200">${ev.tecnico_nombre}</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 mb-4 bg-gray-900/50 p-3 rounded-lg border border-gray-700">
+                                <div>
+                                    <p class="text-[10px] text-gray-500 uppercase">Kilometraje</p>
+                                    <p class="font-bold text-white">${ev.kilometraje} km</p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-gray-500 uppercase">Aceite/Insumo</p>
+                                    <p class="font-bold text-white">${ev.tipo_aceite || 'N/A'}</p>
+                                </div>
+                            </div>
+                            <div class="text-sm text-gray-300 leading-relaxed italic bg-gray-900 p-3 rounded-lg">
+                                "${ev.notas_exigibles}"
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (e) {
+                contenedor.innerHTML = "<p class='text-center text-red-500'>Error al conectar con el servidor.</p>";
+            }
+        }
+    </script>
+</body>
+</html>

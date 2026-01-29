@@ -2,36 +2,26 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GlobalPro Taller</title>
+    <title>GlobalPro - Restaurado</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-900 text-white p-4">
-    <div class="max-w-md mx-auto bg-gray-800 p-6 rounded-lg shadow-xl border-t-4 border-yellow-500">
-        <h2 class="text-2xl font-bold text-center text-yellow-500 mb-6 font-mono">GLOBAL PRO</h2>
+    <div class="max-w-md mx-auto bg-gray-800 p-6 rounded-lg border-t-4 border-yellow-500">
+        <h2 class="text-xl font-bold text-center text-yellow-500 mb-4">GLOBAL PRO - REPARADO</h2>
         
-        <input type="text" id="placa" placeholder="Placa (Obligatorio)" class="w-full p-3 mb-3 bg-gray-700 rounded border border-gray-600 focus:border-yellow-500 outline-none uppercase">
-        <input type="text" id="nombre" placeholder="Nombre Cliente" class="w-full p-3 mb-3 bg-gray-700 rounded border border-gray-600 outline-none">
-        <input type="text" id="tecnico" placeholder="Nombre Técnico" class="w-full p-3 mb-3 bg-gray-700 rounded border border-gray-600 outline-none">
-        <input type="number" id="km" placeholder="Kilometraje" class="w-full p-3 mb-3 bg-gray-700 rounded border border-gray-600 outline-none">
-        <input type="text" id="aceite" placeholder="Tipo de Aceite" class="w-full p-3 mb-3 bg-gray-700 rounded border border-gray-600 outline-none">
-        <textarea id="notas" placeholder="Observaciones..." class="w-full p-3 mb-4 bg-gray-700 rounded border border-gray-600 h-24 outline-none"></textarea>
+        <input type="text" id="placa" placeholder="Placa" class="w-full p-3 mb-2 bg-gray-700 rounded border border-gray-600 uppercase">
+        <input type="text" id="nombre" placeholder="Cliente" class="w-full p-3 mb-2 bg-gray-700 rounded">
+        <input type="text" id="tecnico" placeholder="Técnico" class="w-full p-3 mb-2 bg-gray-700 rounded">
+        <input type="number" id="km" placeholder="KM" class="w-full p-3 mb-2 bg-gray-700 rounded">
+        <input type="text" id="aceite" placeholder="Aceite" class="w-full p-3 mb-2 bg-gray-700 rounded">
+        <textarea id="notas" placeholder="Notas" class="w-full p-3 mb-4 bg-gray-700 rounded h-20"></textarea>
         
-        <button onclick="guardar()" id="btn" class="w-full bg-yellow-500 text-black font-black py-4 rounded hover:bg-yellow-400 active:scale-95 transition">GUARDAR EN HISTORIAL</button>
-        
-        <hr class="my-6 border-gray-700">
-        
-        <div class="flex gap-2">
-            <input type="text" id="busqueda" placeholder="Buscar Placa" class="flex-1 p-3 bg-gray-700 rounded border border-gray-600 outline-none uppercase">
-            <button onclick="buscar()" class="bg-gray-600 px-4 rounded font-bold">🔍</button>
-        </div>
-        <div id="resultado" class="mt-4 space-y-3"></div>
+        <button onclick="guardar()" id="btn" class="w-full bg-yellow-500 text-black font-bold py-3 rounded">GUARDAR</button>
     </div>
 
     <script>
-        const API_URL = "https://taller.estilosgrado33.workers.dev";
-
+        const API = "https://taller.estilosgrado33.workers.dev";
         async function guardar() {
-            const btn = document.getElementById('btn');
             const data = {
                 placa: document.getElementById('placa').value,
                 nombre_usuario: document.getElementById('nombre').value,
@@ -40,44 +30,10 @@
                 aceite: document.getElementById('aceite').value,
                 notas: document.getElementById('notas').value
             };
-
-            if(!data.placa) return alert("Por favor ingresa la placa");
-            btn.disabled = true; btn.innerText = "ENVIANDO...";
-
-            try {
-                const res = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                if(res.ok) {
-                    alert("✅ Guardado con éxito");
-                    location.reload();
-                } else { alert("❌ Error en el servidor"); }
-            } catch(e) { alert("❌ Error de red: " + e.message);
-            } finally { btn.disabled = false; btn.innerText = "GUARDAR EN HISTORIAL"; }
-        }
-
-        async function buscar() {
-            const q = document.getElementById('busqueda').value;
-            const res = await fetch(`${API_URL}?buscar=${q}`);
-            const data = await res.json();
-            const contenedor = document.getElementById('resultado');
-            
-            if(data.length === 0) {
-                contenedor.innerHTML = "<p class='text-center text-gray-500'>No hay registros.</p>";
-                return;
-            }
-
-            contenedor.innerHTML = data.map(ev => `
-                <div class="bg-gray-900 p-3 rounded border-l-4 border-yellow-500 text-sm">
-                    <p class="text-yellow-500 font-bold">${new Date(ev.fecha_hora).toLocaleDateString()}</p>
-                    <p><strong>KM:</strong> ${ev.kilometraje}</p>
-                    <p><strong>Aceite:</strong> ${ev.tipo_aceite}</p>
-                    <p class="text-xs text-gray-400 mt-1 italic">${ev.notas_exigibles}</p>
-                </div>
-            `).join('');
+            if(!data.placa) return alert("Falta placa");
+            const res = await fetch(API, { method: 'POST', body: JSON.stringify(data) });
+            if(res.ok) { alert("Listo"); location.reload(); }
+            else { alert("Error 500: Revisa la DB"); }
         }
     </script>
 </body>

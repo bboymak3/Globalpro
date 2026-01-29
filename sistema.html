@@ -5,194 +5,123 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GlobalPro - Gestión de Taller</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .active-tab { border-bottom: 4px solid #eab308; color: #eab308; border-radius: 0; }
-    </style>
 </head>
 <body class="bg-gray-900 text-white font-sans min-h-screen">
 
-    <div class="container mx-auto p-4 max-w-5xl">
-        <header class="flex justify-between items-center mb-6 py-2 border-b border-gray-800">
-            <h1 class="text-2xl font-black italic text-yellow-500 tracking-tighter">GLOBALPRO <span class="text-white not-italic font-light text-sm">Taller</span></h1>
-            <div class="flex items-center gap-2">
-                <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
-                <span class="text-xs text-gray-400">Sistema Activo</span>
+    <nav class="bg-black p-4 text-center border-b border-yellow-500">
+        <h1 class="text-xl font-bold tracking-widest text-yellow-500">GLOBAL PRO AUTOMOTRIZ</h1>
+    </nav>
+
+    <div class="max-w-md mx-auto p-6">
+        <div class="flex mb-6 bg-gray-800 rounded-lg overflow-hidden border border-gray-700">
+            <button onclick="switchTab('registrar')" id="tab-registrar" class="w-1/2 py-3 bg-yellow-500 text-black font-bold">REGISTRAR</button>
+            <button onclick="switchTab('historial')" id="tab-historial" class="w-1/2 py-3 hover:bg-gray-700">HISTORIAL</button>
+        </div>
+
+        <div id="section-registrar" class="space-y-4">
+            <input type="text" id="nombre_usuario" placeholder="Nombre del Cliente" class="w-full p-3 bg-gray-800 border border-gray-700 rounded focus:border-yellow-500 outline-none">
+            <input type="text" id="telefono" placeholder="Teléfono" class="w-full p-3 bg-gray-800 border border-gray-700 rounded focus:border-yellow-500 outline-none">
+            <input type="text" id="placa" placeholder="Placa del Vehículo (Ej: AE123BB)" class="w-full p-3 bg-gray-800 border border-gray-700 rounded focus:border-yellow-500 outline-none">
+            <input type="text" id="tecnico" placeholder="Nombre del Técnico" class="w-full p-3 bg-gray-800 border border-gray-700 rounded focus:border-yellow-500 outline-none">
+            <input type="number" id="km" placeholder="Kilometraje Actual" class="w-full p-3 bg-gray-800 border border-gray-700 rounded focus:border-yellow-500 outline-none">
+            <input type="text" id="aceite" placeholder="Tipo de Aceite Utilizado" class="w-full p-3 bg-gray-800 border border-gray-700 rounded focus:border-yellow-500 outline-none">
+            <textarea id="notas" placeholder="Notas de mantenimiento..." class="w-full p-3 bg-gray-800 border border-gray-700 rounded focus:border-yellow-500 outline-none h-24"></textarea>
+            <button onclick="enviarEvento()" id="btn-guardar" class="w-full bg-yellow-500 text-black font-bold py-4 rounded hover:bg-yellow-400 transition shadow-lg">GUARDAR EN HISTORIAL</button>
+        </div>
+
+        <div id="section-historial" class="hidden space-y-4">
+            <div class="flex space-x-2">
+                <input type="text" id="busqueda" placeholder="Buscar por Placa o Teléfono" class="flex-1 p-3 bg-gray-800 border border-gray-700 rounded outline-none focus:border-yellow-500">
+                <button onclick="buscarHistorial()" class="bg-gray-700 px-4 rounded hover:bg-gray-600">🔍</button>
             </div>
-        </header>
-
-        <nav class="flex mb-6 bg-gray-800 rounded-xl p-1 shadow-inner">
-            <button id="tab-tec" onclick="showTab('tecnico')" class="flex-1 py-4 font-bold active-tab transition-all">🛠 REGISTRAR</button>
-            <button id="tab-adm" onclick="showTab('admin')" class="flex-1 py-4 font-bold text-gray-500 transition-all">📊 HISTORIAL</button>
-        </nav>
-
-        <section id="view-tecnico" class="space-y-4 animate-in fade-in duration-500">
-            <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 shadow-2xl">
-                <h2 class="text-lg font-bold mb-6 text-gray-300">Nuevo Servicio</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div>
-                        <label class="text-xs text-yellow-600 font-bold ml-1 uppercase">Datos del Cliente</label>
-                        <input id="tec_nombre_usuario" type="text" placeholder="Nombre del Usuario" class="w-full mt-1 p-3 rounded-lg bg-gray-900 border border-gray-700 outline-none focus:border-yellow-500 transition">
-                    </div>
-                    <div>
-                        <label class="text-xs text-yellow-600 font-bold ml-1 uppercase">Teléfono de Contacto</label>
-                        <input id="tec_telefono" type="tel" placeholder="Ej: 3001234567" class="w-full mt-1 p-3 rounded-lg bg-gray-900 border border-gray-700 outline-none focus:border-yellow-500 transition">
-                    </div>
-                    <div>
-                        <label class="text-xs text-yellow-600 font-bold ml-1 uppercase">Placa del Vehículo</label>
-                        <input id="tec_placa" type="text" placeholder="ABC-123" class="w-full mt-1 p-3 rounded-lg bg-gray-900 border border-gray-700 outline-none focus:border-yellow-500 transition font-black uppercase text-yellow-500 text-xl text-center">
-                    </div>
-                    <div>
-                        <label class="text-xs text-yellow-600 font-bold ml-1 uppercase">Técnico Encargado</label>
-                        <input id="tec_tecnico" type="text" placeholder="Nombre del Mecánico" class="w-full mt-1 p-3 rounded-lg bg-gray-900 border border-gray-700 outline-none focus:border-yellow-500 transition">
-                    </div>
-                    <div>
-                        <label class="text-xs text-yellow-600 font-bold ml-1 uppercase">Kilometraje</label>
-                        <input id="tec_km" type="number" placeholder="000000" class="w-full mt-1 p-3 rounded-lg bg-gray-900 border border-gray-700 outline-none focus:border-yellow-500 transition">
-                    </div>
-                    <div>
-                        <label class="text-xs text-yellow-600 font-bold ml-1 uppercase">Insumo / Aceite</label>
-                        <select id="tec_aceite" class="w-full mt-1 p-3 rounded-lg bg-gray-900 border border-gray-700 outline-none focus:border-yellow-500 transition appearance-none">
-                            <option value="">Seleccione opción...</option>
-                            <option>Mineral 20W50</option>
-                            <option>Semi-Sintético 10W30</option>
-                            <option>Sintético 5W30</option>
-                            <option>Revisión General (Sin aceite)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="mt-5">
-                    <label class="text-xs text-yellow-600 font-bold ml-1 uppercase">Notas y Exigibles</label>
-                    <textarea id="tec_notas" placeholder="Escribe aquí los detalles del servicio y pendientes..." class="w-full mt-1 p-4 rounded-lg bg-gray-900 border border-gray-700 h-32 outline-none focus:border-yellow-500 transition"></textarea>
-                </div>
-
-                <button onclick="enviarEvento()" class="w-full mt-8 bg-yellow-600 hover:bg-yellow-500 text-black font-black py-4 rounded-xl text-lg transition-transform active:scale-95 shadow-lg shadow-yellow-900/20">
-                    <i class="fas fa-save mr-2"></i> GUARDAR EN HISTORIAL
-                </button>
+            <div id="resultado-historial" class="space-y-3">
+                <p class="text-gray-500 text-center italic mt-4">Ingresa una placa para ver los servicios pasados.</p>
             </div>
-        </section>
-
-        <section id="view-admin" class="hidden space-y-6 animate-in slide-in-from-right duration-300">
-            <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700">
-                <div class="flex gap-2">
-                    <input id="busqueda" type="text" placeholder="Buscar Placa o Celular..." class="flex-1 p-4 rounded-xl bg-gray-900 border border-gray-700 outline-none focus:ring-2 focus:ring-yellow-500">
-                    <button onclick="buscarHistorial()" class="bg-yellow-600 text-black px-6 rounded-xl font-bold hover:bg-yellow-500 transition">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div id="resultados" class="space-y-4">
-                <div class="text-center py-20 text-gray-600">
-                    <i class="fas fa-tools text-5xl mb-4 opacity-20"></i>
-                    <p>Ingresa una placa para ver el historial de eventos</p>
-                </div>
-            </div>
-        </section>
+        </div>
     </div>
 
     <script>
-        // REEMPLAZA ESTA URL CON LA QUE TE DA CLOUDFLARE AL PUBLICAR EL WORKER
-        const WORKER_URL = 'taller.estilosgrado33.workers.dev';
+        // LA URL DEBE SER ABSOLUTA Y SIN COMILLAS EXTRAS
+        const WORKER_URL = "https://taller.estilosgrado33.workers.dev";
 
-        function showTab(tab) {
-            document.getElementById('view-tecnico').classList.toggle('hidden', tab !== 'tecnico');
-            document.getElementById('view-admin').classList.toggle('hidden', tab !== 'admin');
-            document.getElementById('tab-tec').classList.toggle('active-tab', tab === 'tecnico');
-            document.getElementById('tab-adm').classList.toggle('active-tab', tab === 'admin');
-            document.getElementById('tab-tec').classList.toggle('text-gray-500', tab !== 'tecnico');
-            document.getElementById('tab-adm').classList.toggle('text-gray-500', tab !== 'admin');
+        function switchTab(tab) {
+            const isReg = tab === 'registrar';
+            document.getElementById('section-registrar').classList.toggle('hidden', !isReg);
+            document.getElementById('section-historial').classList.toggle('hidden', isReg);
+            document.getElementById('tab-registrar').className = isReg ? 'w-1/2 py-3 bg-yellow-500 text-black font-bold' : 'w-1/2 py-3 hover:bg-gray-700';
+            document.getElementById('tab-historial').className = !isReg ? 'w-1/2 py-3 bg-yellow-500 text-black font-bold' : 'w-1/2 py-3 hover:bg-gray-700';
         }
 
         async function enviarEvento() {
-            const btn = event.target;
-            const originalText = btn.innerHTML;
-            btn.innerHTML = "Guardando...";
-            btn.disabled = true;
-
+            const btn = document.getElementById('btn-guardar');
             const data = {
-                accion: "nuevo_evento",
-                nombre_usuario: document.getElementById('tec_nombre_usuario').value,
-                telefono: document.getElementById('tec_telefono').value,
-                placa: document.getElementById('tec_placa').value.toUpperCase().trim(),
-                tecnico: document.getElementById('tec_tecnico').value,
-                km: document.getElementById('tec_km').value,
-                aceite: document.getElementById('tec_aceite').value,
-                notas: document.getElementById('tec_notas').value
+                nombre_usuario: document.getElementById('nombre_usuario').value,
+                telefono: document.getElementById('telefono').value,
+                placa: document.getElementById('placa').value,
+                tecnico: document.getElementById('tecnico').value,
+                km: document.getElementById('km').value,
+                aceite: document.getElementById('aceite').value,
+                notas: document.getElementById('notas').value
             };
 
+            if (!data.placa) return alert("La placa es obligatoria");
+            
+            btn.innerText = "GUARDANDO...";
+            btn.disabled = true;
+
             try {
-                const res = await fetch(WORKER_URL, {
+                const response = await fetch(WORKER_URL, {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
+                    mode: 'cors', // Forzamos modo CORS
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
 
-                if(res.ok) {
-                    alert("✅ Guardado correctamente.");
-                    document.querySelectorAll('input, textarea, select').forEach(el => el.value = "");
-                    showTab('admin');
+                if (response.ok) {
+                    alert("✅ ¡Servicio registrado con éxito!");
+                    location.reload();
+                } else {
+                    throw new Error("Error en servidor");
                 }
-            } catch (e) {
-                alert("❌ Error de conexión: " + e.message);
+            } catch (error) {
+                console.error(error);
+                alert("❌ Error de conexión: " + error.message);
             } finally {
-                btn.innerHTML = originalText;
+                btn.innerText = "GUARDAR EN HISTORIAL";
                 btn.disabled = false;
             }
         }
 
         async function buscarHistorial() {
-            const term = document.getElementById('busqueda').value.trim();
-            if(!term) return;
+            const query = document.getElementById('busqueda').value;
+            const contenedor = document.getElementById('resultado-historial');
+            if (!query) return;
 
-            const contenedor = document.getElementById('resultados');
-            contenedor.innerHTML = "<p class='text-center animate-pulse'>Buscando historial...</p>";
+            contenedor.innerHTML = "<p class='text-center'>Buscando...</p>";
 
             try {
-                const res = await fetch(`${WORKER_URL}?buscar=${term}`);
-                const eventos = await res.json();
-                
-                contenedor.innerHTML = "";
+                const response = await fetch(`${WORKER_URL}?buscar=${query}`);
+                const data = await response.json();
 
-                if(!eventos || eventos.length === 0) {
-                    contenedor.innerHTML = "<div class='bg-red-900/20 border border-red-900 text-red-400 p-4 rounded-xl text-center'>No hay registros para esta placa.</div>";
+                if (data.length === 0) {
+                    contenedor.innerHTML = "<p class='text-center text-red-400'>No se encontraron registros.</p>";
                     return;
                 }
 
-                eventos.forEach(ev => {
-                    const fecha = new Date(ev.fecha_hora).toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-                    contenedor.innerHTML += `
-                        <div class="bg-gray-800 p-5 rounded-2xl border-l-4 border-yellow-600 shadow-lg">
-                            <div class="flex justify-between items-start mb-3">
-                                <div>
-                                    <p class="text-[10px] uppercase tracking-widest text-yellow-600 font-bold">Fecha del Servicio</p>
-                                    <p class="text-sm font-medium text-white">${fecha}</p>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Responsable</p>
-                                    <p class="text-xs text-yellow-200">${ev.tecnico_nombre}</p>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-2 mb-4 bg-gray-900/50 p-3 rounded-lg border border-gray-700">
-                                <div>
-                                    <p class="text-[10px] text-gray-500 uppercase">Kilometraje</p>
-                                    <p class="font-bold text-white">${ev.kilometraje} km</p>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] text-gray-500 uppercase">Aceite/Insumo</p>
-                                    <p class="font-bold text-white">${ev.tipo_aceite || 'N/A'}</p>
-                                </div>
-                            </div>
-                            <div class="text-sm text-gray-300 leading-relaxed italic bg-gray-900 p-3 rounded-lg">
-                                "${ev.notas_exigibles}"
-                            </div>
+                contenedor.innerHTML = data.map(ev => `
+                    <div class="bg-gray-800 p-4 rounded border-l-4 border-yellow-500 shadow-md">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-bold text-yellow-500">${new Date(ev.fecha_hora).toLocaleDateString()}</span>
+                            <span class="text-xs text-gray-400">KM: ${ev.kilometraje}</span>
                         </div>
-                    `;
-                });
-            } catch (e) {
-                contenedor.innerHTML = "<p class='text-center text-red-500'>Error al conectar con el servidor.</p>";
+                        <p class="text-sm"><strong>Técnico:</strong> ${ev.tecnico_nombre}</p>
+                        <p class="text-sm"><strong>Aceite:</strong> ${ev.tipo_aceite}</p>
+                        <p class="mt-2 text-gray-300 italic border-t border-gray-700 pt-2 text-xs">${ev.notas_exigibles || 'Sin notas'}</p>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                contenedor.innerHTML = "<p class='text-center text-red-500'>Error al buscar.</p>";
             }
         }
     </script>

@@ -598,59 +598,116 @@
     </div>
 </div>
 
+<style>
+    #chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 1000; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    #chat-button { width: 60px; height: 60px; background: #eab308; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: none; transition: transform 0.3s; }
+    #chat-button:hover { transform: scale(1.1); }
+    #chat-window { width: 350px; height: 500px; background: #0f172a; position: absolute; bottom: 80px; right: 0; display: none; flex-direction: column; border-radius: 20px; border: 1px solid #334155; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+    #chat-header { background: #eab308; color: black; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+    #chat-messages-ia { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 14px; scroll-behavior: smooth; }
+    .msg { padding: 10px 14px; border-radius: 15px; max-width: 85%; line-height: 1.4; word-wrap: break-word; }
+    .user-msg { background: #334155; align-self: flex-end; color: white; border-bottom-right-radius: 2px; }
+    .ia-msg { background: #1e293b; align-self: flex-start; color: #e2e8f0; border: 1px solid #334155; border-bottom-left-radius: 2px; }
+    #chat-input-area { padding: 15px; background: #1e293b; display: flex; gap: 8px; border-top: 1px solid #334155; }
+    #chat-input-area input { flex: 1; background: #0f172a; border: 1px solid #334155; color: white; padding: 10px; border-radius: 8px; outline: none; }
+    #chat-input-area button { background: #eab308; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; color: black; }
+    #chat-input-area button:disabled { background: #71717a; cursor: not-allowed; }
+</style>
+
+<div id="chat-widget">
+    <button id="chat-button" title="Asistente IA">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="black"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+    </button>
+    <div id="chat-window">
+        <div id="chat-header">
+            <span>Asistente Global Pro 🛠️</span>
+            <button onclick="toggleChat()" style="background:none; border:none; cursor:pointer; font-size: 20px;">×</button>
+        </div>
+        <div id="chat-messages-ia" id="chat-container">
+            <div class="msg ia-msg">¡Hola! Soy tu asistente de Global Pro Automotriz. Si quieres saber qué servicios le hemos hecho a tu vehículo, ¡solo dime la placa!</div>
+        </div>
+        <div id="chat-input-area">
+            <input type="text" id="ia-input" placeholder="Escribe tu placa o duda...">
+            <button id="ia-send-btn" onclick="sendToIA()">Enviar</button>
+        </div>
+    </div>
+</div>
+
 <script>
-    const CHAT_API = "https://TU-WORKER-DE-IA.workers.dev/api/chat"; // <--- PON TU URL AQUÍ
+    // URL Real de tu Worker de IA
+    const CHAT_API = "https://llm-chat-app-template.estilosgrado33.workers.dev/api/chat";
     let historyIA = [];
 
     function toggleChat() {
         const win = document.getElementById('chat-window');
         win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
+        if(win.style.display === 'flex') document.getElementById('ia-input').focus();
     }
-
-    document.getElementById('chat-button').onclick = toggleChat;
 
     async function sendToIA() {
         const input = document.getElementById('ia-input');
+        const btn = document.getElementById('ia-send-btn');
         const text = input.value.trim();
+        
         if(!text) return;
 
-        addMsg('user', text);
+        // Bloquear interfaz
         input.value = "";
+        input.disabled = true;
+        btn.disabled = true;
+
+        addMsg('user', text);
         historyIA.push({ role: "user", content: text });
+
+        // Crear burbuja vacía para la IA
+        let msgEl = addMsg('ia', 'Pensando...');
+        let fullResponse = "";
 
         try {
             const res = await fetch(CHAT_API, {
                 method: 'POST',
-                body: JSON.stringify({ messages: historyIA }),
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ messages: historyIA })
             });
 
-            // Procesar Streaming
+            if (!res.ok) throw new Error("Error en servidor");
+
             const reader = res.body.getReader();
             const decoder = new TextDecoder();
-            let iaText = "";
-            let msgEl = addMsg('ia', '...');
+            msgEl.innerText = ""; // Limpiar el "Pensando..."
 
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) break;
                 
                 const chunk = decoder.decode(value);
-                // Limpieza simple de SSE para mostrar texto
+                // Procesar formato Server-Sent Events (data: ...)
                 const lines = chunk.split('\n');
-                for(let line of lines) {
-                    if(line.startsWith('data:')) {
+                for (let line of lines) {
+                    if (line.startsWith('data:')) {
+                        const dataStr = line.slice(5).trim();
+                        if (dataStr === '[DONE]') break;
                         try {
-                            const data = JSON.parse(line.slice(5));
-                            iaText += data.response || "";
-                            msgEl.innerText = iaText;
-                        } catch(e) {}
+                            const data = JSON.parse(dataStr);
+                            const content = data.response || "";
+                            fullResponse += content;
+                            msgEl.innerText = fullResponse;
+                            // Auto-scroll
+                            const cont = document.getElementById('chat-messages-ia');
+                            cont.scrollTop = cont.scrollHeight;
+                        } catch (e) { console.error("Error parseando SSE", e); }
                     }
                 }
             }
-            historyIA.push({ role: "assistant", content: iaText });
-        } catch(e) {
-            addMsg('ia', 'Lo siento, no puedo conectar ahora.');
+            historyIA.push({ role: "assistant", content: fullResponse });
+
+        } catch (e) {
+            console.error(e);
+            msgEl.innerText = "Lo siento, tengo problemas para conectarme. ¿Puedes intentar más tarde?";
+        } finally {
+            input.disabled = false;
+            btn.disabled = false;
+            input.focus();
         }
     }
 
@@ -663,7 +720,13 @@
         cont.scrollTop = cont.scrollHeight;
         return d;
     }
+
+    // Enviar con tecla Enter
+    document.getElementById('ia-input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') sendToIA();
+    });
 </script>
+
 
 </body>
 </html>

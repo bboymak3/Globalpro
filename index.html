@@ -634,15 +634,23 @@
 </div>
 
 <script>
-    // URL Real de tu Worker de IA
     const CHAT_API = "https://llm-chat-app-template.estilosgrado33.workers.dev/api/chat";
     let historyIA = [];
 
+    // Esta es la función que abre y cierra
     function toggleChat() {
         const win = document.getElementById('chat-window');
-        win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
-        if(win.style.display === 'flex') document.getElementById('ia-input').focus();
+        // Si está oculto o no tiene estilo, lo mostramos
+        if (win.style.display === 'none' || win.style.display === '') {
+            win.style.display = 'flex';
+            document.getElementById('ia-input').focus();
+        } else {
+            win.style.display = 'none';
+        }
     }
+
+    // Aseguramos que el botón amarillo tenga la orden de abrir
+    document.getElementById('chat-button').onclick = toggleChat;
 
     async function sendToIA() {
         const input = document.getElementById('ia-input');
@@ -651,7 +659,6 @@
         
         if(!text) return;
 
-        // Bloquear interfaz
         input.value = "";
         input.disabled = true;
         btn.disabled = true;
@@ -659,8 +666,7 @@
         addMsg('user', text);
         historyIA.push({ role: "user", content: text });
 
-        // Crear burbuja vacía para la IA
-        let msgEl = addMsg('ia', 'Pensando...');
+        let msgEl = addMsg('ia', 'Consultando historial...');
         let fullResponse = "";
 
         try {
@@ -670,18 +676,15 @@
                 body: JSON.stringify({ messages: historyIA })
             });
 
-            if (!res.ok) throw new Error("Error en servidor");
-
             const reader = res.body.getReader();
             const decoder = new TextDecoder();
-            msgEl.innerText = ""; // Limpiar el "Pensando..."
+            msgEl.innerText = ""; 
 
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) break;
                 
                 const chunk = decoder.decode(value);
-                // Procesar formato Server-Sent Events (data: ...)
                 const lines = chunk.split('\n');
                 for (let line of lines) {
                     if (line.startsWith('data:')) {
@@ -689,21 +692,16 @@
                         if (dataStr === '[DONE]') break;
                         try {
                             const data = JSON.parse(dataStr);
-                            const content = data.response || "";
-                            fullResponse += content;
+                            fullResponse += data.response || "";
                             msgEl.innerText = fullResponse;
-                            // Auto-scroll
-                            const cont = document.getElementById('chat-messages-ia');
-                            cont.scrollTop = cont.scrollHeight;
-                        } catch (e) { console.error("Error parseando SSE", e); }
+                            document.getElementById('chat-messages-ia').scrollTop = document.getElementById('chat-messages-ia').scrollHeight;
+                        } catch (e) {}
                     }
                 }
             }
             historyIA.push({ role: "assistant", content: fullResponse });
-
         } catch (e) {
-            console.error(e);
-            msgEl.innerText = "Lo siento, tengo problemas para conectarme. ¿Puedes intentar más tarde?";
+            msgEl.innerText = "Error de conexión. Verifica si el Worker de IA está activo.";
         } finally {
             input.disabled = false;
             btn.disabled = false;
@@ -721,11 +719,9 @@
         return d;
     }
 
-    // Enviar con tecla Enter
-    document.getElementById('ia-input').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') sendToIA();
-    });
+    document.getElementById('ia-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') sendToIA(); });
 </script>
+
 
 
 </body>

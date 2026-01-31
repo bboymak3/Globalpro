@@ -100,31 +100,28 @@
     </table>
 </div>
 
-<script>
-async function verCitas(periodo) {
-    const cuerpo = document.getElementById('cuerpoTabla');
-    cuerpo.innerHTML = "<tr><td colspan='4'>Buscando...</td></tr>";
 
-    try {
-        const res = await fetch(`/api?periodo=${periodo}`);
-        const datos = await res.json();
-        
-        cuerpo.innerHTML = datos.map(c => `
-            <tr>
-                <td>${c.fecha_cita}</td>
-                <td>${c.hora_cita}</td>
-                <td><b>${c.placa}</b></td>
-                <td>${c.servicio}</td>
-            </tr>
-        `).join('') || "<tr><td colspan='4'>No hay citas programadas.</td></tr>";
-    } catch (err) {
-        cuerpo.innerHTML = "<tr><td colspan='4'>Error al cargar.</td></tr>";
-    }
-}
 
-// Cargar las de hoy automáticamente al entrar
-verCitas('hoy');
-</script>
+<div class="controles-agenda" style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+    <button onclick="verCitas('ayer')" style="background: #6c757d; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">⏪ Ayer</button>
+    <button onclick="verCitas('hoy')" style="background: #007bff; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">📌 Hoy</button>
+    <button onclick="verCitas('manana')" style="background: #28a745; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">⏩ Mañana</button>
+    <button onclick="verCitas('mes')" style="background: #17a2b8; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">🗓️ Este Mes</button>
+    <button onclick="verCitas('todos')" style="background: #343a40; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">📂 Ver Todo</button>
+</div>
+
+<table border="1" style="width:100%; border-collapse: collapse; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <thead style="background: #333; color: white;">
+        <tr>
+            <th style="padding: 12px;">Fecha</th>
+            <th style="padding: 12px;">Hora</th>
+            <th style="padding: 12px;">Placa</th>
+            <th style="padding: 12px;">Servicio</th>
+        </tr>
+    </thead>
+    <tbody id="cuerpoTabla" style="text-align: center;">
+        </tbody>
+</table>
 
 </body>
 </html>

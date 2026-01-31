@@ -47,12 +47,10 @@
         <div class="logo-subtext">Taller Mecánico</div>
       </div>
     </a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse desktop-menu" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
         <li class="nav-item"><a class="nav-link" href="#seccion-citas">Agenda tu Cita</a></li>
@@ -72,9 +70,9 @@
       <div class="col-lg-7">
         <span class="hero-badge">Servicio Automotriz Integral</span>
         <h1 class="hero-title">Taller Mecánico Especialista en <span class="text-accent">Diagnóstico y Reparación</span></h1>
-        <p class="hero-subtitle">Expertos en mecánica automotriz y mantenimiento. ¡Tu vehículo en las mejores manos! Servicio a domicilio en todo Santiago.</p>
+        <p class="hero-subtitle">En GlobalPro, somos expertos en mecánica automotriz, electromecánica y mantenimiento. ¡Tu vehículo en las mejores manos! Servicio a domicilio en todo Santiago.</p>
         <div class="btn-group mt-4">
-          <a href="#seccion-citas" class="btn btn-primary me-2">Agendar Cita Ahora</a>
+          <a href="#seccion-citas" class="btn btn-primary me-2">Agendar Cita</a>
           <a href="#servicios" class="btn btn-outline-light">Ver Servicios</a>
         </div>
       </div>
@@ -85,38 +83,37 @@
   </div>
 </section>
 
-<div id="seccion-citas" style="max-width: 450px; margin: 40px auto; padding: 25px; border: 1px solid #ccc; border-radius: 15px; font-family: sans-serif; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-    <h3 style="text-align: center; color: #1e293b; font-weight: bold;">📅 Agendar Cita o Consultar</h3>
+<div id="seccion-citas" style="max-width: 500px; margin: 40px auto; padding: 25px; border: 1px solid #ddd; border-radius: 15px; background: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+    <h3 style="text-align: center; font-weight: bold; color: #333;">📅 Agendar Cita Online</h3>
     <form id="formCita">
-        <input type="text" id="cPlaca" placeholder="Placa (RCM36H)" required style="width:100%; padding:12px; margin:8px 0; border: 1px solid #ddd; border-radius: 8px;">
-        <input type="tel" id="cWhatsapp" placeholder="WhatsApp (Ej: 912345678)" required style="width:100%; padding:12px; margin:8px 0; border: 1px solid #ddd; border-radius: 8px;">
+        <input type="text" id="cPlaca" placeholder="Placa (Ej: RCM36H)" required style="width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:8px;">
+        <input type="tel" id="cWhatsapp" placeholder="WhatsApp (Ej: 912345678)" required style="width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:8px;">
         <div style="display: flex; gap: 10px;">
-            <input type="date" id="cFecha" required style="flex:1; padding:12px; border: 1px solid #ddd; border-radius: 8px;">
-            <input type="time" id="cHora" required style="flex:1; padding:12px; border: 1px solid #ddd; border-radius: 8px;">
+            <input type="date" id="cFecha" required style="flex:1; padding:12px; border:1px solid #ccc; border-radius:8px;">
+            <input type="time" id="cHora" required style="flex:1; padding:12px; border:1px solid #ccc; border-radius:8px;">
         </div>
-        <select id="cServicio" style="width:100%; padding:12px; margin:8px 0; border: 1px solid #ddd; border-radius: 8px;">
+        <select id="cServicio" style="width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:8px;">
             <option value="Mantenimiento General">Mantenimiento General</option>
             <option value="Cambio de Aceite">Cambio de Aceite</option>
             <option value="Frenos">Frenos</option>
-            <option value="Escaneo">Escaneo</option>
+            <option value="Electricidad">Electricidad</option>
         </select>
-        <button type="submit" style="width:100%; padding:15px; background:#28a745; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin-top: 10px;">AGENDAR MI CITA</button>
+        <button type="submit" style="width:100%; padding:15px; background:#28a745; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">ENVIAR SOLICITUD</button>
     </form>
-    <div id="statusCita" style="text-align:center; margin-top:10px; font-weight: bold;"></div>
-
-    <hr style="margin:25px 0; border-top: 1px solid #eee;">
-
-    <h3 style="text-align: center; font-size: 1.1em; color: #64748b;">🔎 Consultar mi Estatus</h3>
-    <div style="display:flex; gap:8px;">
-        <input type="text" id="buscPlaca" placeholder="Tu Placa" style="flex:1; padding:12px; border: 1px solid #ddd; border-radius: 8px;">
-        <button onclick="consultarEstatus()" style="padding:12px 20px; background:#6c757d; color:white; border:none; border-radius: 8px; cursor:pointer;">VER</button>
+    <div id="statusCita" style="text-align:center; margin-top:10px;"></div>
+    <hr>
+    <h4 style="text-align: center; font-size: 1rem;">🔎 Consultar mi Estado</h4>
+    <div style="display:flex; gap:5px;">
+        <input type="text" id="buscPlaca" placeholder="Tu Placa" style="flex:1; padding:10px; border:1px solid #ccc; border-radius:8px;">
+        <button onclick="consultarEstatus()" style="padding:10px; background:#6c757d; color:white; border:none; border-radius:8px;">VER</button>
     </div>
-    <div id="resultadoConsulta" style="text-align:center; margin-top:15px; padding:12px; border-radius:8px;"></div>
+    <div id="resultadoConsulta" style="text-align:center; margin-top:10px; padding:10px; border-radius:8px;"></div>
 </div>
 
 <section class="services-section" id="servicios">
   <div class="container">
     <h2 class="section-title">Nuestros Servicios de Mecánica Automotriz</h2>
+    <p class="section-subtitle">Ofrecemos una solución completa para el mantenimiento y reparación de tu vehículo.</p>
     <div class="row g-4">
       <div class="col-lg-4 col-md-6">
         <div class="service-card">
@@ -130,7 +127,7 @@
         <div class="service-card">
           <div class="service-icon"><i class="fas fa-car-battery"></i></div>
           <h3 class="service-title">Electromecánica</h3>
-          <p>Diagnóstico de fallas eléctricas y reparación de ECU.</p>
+          <p>Electricidad automotriz, reparación de ECU y diagnóstico.</p>
           <a href="https://wa.me/56939026185" class="btn btn-outline-primary mt-3">Cotizar</a>
         </div>
       </div>
@@ -146,8 +143,48 @@
   </div>
 </section>
 
-<section id="resenas" class="py-5 bg-light">
-  <div class="container text-center">
+<section id="servicios-especializados" class="specialized-services-section py-5">
+    <div class="container">
+        <header class="text-center mb-5">
+            <h2 class="main-title">TALLER MECÁNICO ESPECIALIZADO</h2>
+            <p>Servicio automotriz integral con tecnología de vanguardia.</p>
+        </header>
+        <div class="section-card active">
+            <div class="section-content">
+                En nuestro taller mecánico, ofrecemos un servicio automotriz integral que combina experiencia y tecnología avanzada.
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="galeria-de-trabajos" class="gallery-section py-5 bg-light">
+  <div class="container">
+    <h2 class="section-title">Nuestro Trabajo en Detalle</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="gallery-item">
+          <img src="images/reparacion-frenos-domicilio.jpeg" class="img-fluid rounded" alt="Reparación de frenos">
+          <h4 class="mt-2">Frenos a Domicilio</h4>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="gallery-item">
+          <img src="images/reparacion-aire-acondicionado.jpeg" class="img-fluid rounded" alt="Aire acondicionado">
+          <h4 class="mt-2">Aire Acondicionado</h4>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="gallery-item">
+          <img src="images/mantenimiento-vehicular-general.jpeg" class="img-fluid rounded" alt="Mantenimiento general">
+          <h4 class="mt-2">Mantenimiento General</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resenas" class="py-5 bg-light text-center">
+  <div class="container">
     <h2 class="section-title">Lo que dicen nuestros clientes</h2>
     <div class="elfsight-app-4cbd3727-4380-44b3-9cd7-2525ccb8f5d8" data-elfsight-app-lazy></div>
   </div>
@@ -155,45 +192,43 @@
 
 <footer class="bg-black text-white-50 py-4 text-center">
   <div class="container">
-    <p class="mb-0">&copy; 2026 GlobalPro - Taller Mecánico. Todos los derechos reservados.</p>
+    <p>&copy; 2026 GlobalPro - Taller Mecánico. Todos los derechos reservados.</p>
   </div>
 </footer>
 
-<a href="https://wa.me/56939026185" class="whatsapp-float" target="_blank" style="position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 999; box-shadow: 2px 2px 10px rgba(0,0,0,0.2);">
+<a href="https://wa.me/56939026185" class="whatsapp-float" target="_blank" style="position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 999;">
   <i class="fab fa-whatsapp"></i>
 </a>
 
-<div id="globalpro-chat-wrapper" style="position: fixed; bottom: 100px; right: 20px; z-index: 9999; font-family: sans-serif;">
-    <button id="globalpro-btn" type="button" onclick="toggleGlobalChat()" style="width: 60px; height: 60px; background: #eab308; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.4); border: none;">
+<div id="globalpro-chat-wrapper" style="position: fixed; bottom: 100px; right: 20px; z-index: 9999;">
+    <button id="globalpro-btn" type="button" onclick="toggleGlobalChat()" style="width: 60px; height: 60px; background: #eab308; border-radius: 50%; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; display: flex; align-items: center; justify-content: center;">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="black"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
     </button>
-    <div id="globalpro-win" style="width: 350px; height: 450px; background: #1e293b; position: absolute; bottom: 80px; right: 0; display: none; flex-direction: column; border-radius: 15px; border: 1px solid #334155; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
-        <div id="globalpro-header" style="background: #eab308; color: black; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
+    <div id="globalpro-win" style="width: 350px; height: 450px; background: #1e293b; position: absolute; bottom: 80px; right: 0; display: none; flex-direction: column; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+        <div style="background: #eab308; color: black; padding: 15px; font-weight: bold; display: flex; justify-content: space-between;">
             <span>Asistente Global Pro 🛠️</span>
-            <button onclick="toggleGlobalChat()" style="background:none; border:none; cursor:pointer; font-weight:bold; font-size:18px;">✕</button>
+            <button onclick="toggleGlobalChat()" style="background:none; border:none; cursor:pointer; font-weight:bold;">X</button>
         </div>
-        <div id="globalpro-msgs" style="flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 14px; background: #1e293b; color: white;">
-            <div style="background: #0f172a; padding: 10px; border-radius: 10px; align-self: flex-start; border: 1px solid #334155;">¡Hola! Soy tu asistente. Dame tu placa para ver el estado de tu cita.</div>
+        <div id="globalpro-msgs" style="flex: 1; padding: 15px; overflow-y: auto; color: white; font-size: 14px;">
+            <div style="background: #0f172a; padding: 10px; border-radius: 10px;">¡Hola! Soy tu asistente. Dame tu placa para revisar tu cita.</div>
         </div>
-        <div id="globalpro-input-area" style="padding: 10px; background: #0f172a; display: flex; gap: 5px; border-top: 1px solid #334155;">
-            <input type="text" id="gp-input-text" placeholder="Escribe aquí..." style="flex: 1; background: #1e293b; border: 1px solid #334155; color: white; padding: 8px; border-radius: 5px; outline: none;">
-            <button id="gp-send-btn" onclick="sendToIA()" style="background: #eab308; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold;">Enviar</button>
+        <div style="padding: 10px; background: #0f172a; display: flex; gap: 5px;">
+            <input type="text" id="gp-input-text" placeholder="Escribe tu placa..." style="flex: 1; padding: 8px; border-radius: 5px; border: none;">
+            <button onclick="sendToIA()" style="background: #eab308; padding: 8px; border: none; border-radius: 5px; font-weight: bold;">Enviar</button>
         </div>
     </div>
 </div>
 
 <script>
-// FUNCIÓN PARA ABRIR/CERRAR CHAT
 function toggleGlobalChat() {
     const win = document.getElementById('globalpro-win');
     win.style.display = (win.style.display === 'none' || win.style.display === '') ? 'flex' : 'none';
 }
 
-// LÓGICA DE AGENDAR CITA
 document.getElementById('formCita').addEventListener('submit', async (e) => {
     e.preventDefault();
     const status = document.getElementById('statusCita');
-    status.innerText = "⏳ Enviando solicitud...";
+    status.innerText = "⏳ Enviando...";
     const datos = {
         placa: document.getElementById('cPlaca').value.toUpperCase().trim(),
         whatsapp: document.getElementById('cWhatsapp').value.trim(),
@@ -203,20 +238,11 @@ document.getElementById('formCita').addEventListener('submit', async (e) => {
         tipo: 'CITA'
     };
     try {
-        const res = await fetch('/api', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(datos)
-        });
-        if (res.ok) {
-            status.style.color = "green";
-            status.innerText = "✅ ¡Cita enviada con éxito!";
-            e.target.reset();
-        } else { status.innerText = "❌ Error al enviar."; }
-    } catch (err) { status.innerText = "❌ Error de conexión."; }
+        const res = await fetch('/api', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) });
+        if (res.ok) { status.innerHTML = "<span style='color:green'>✅ ¡Cita enviada!</span>"; e.target.reset(); }
+    } catch (err) { status.innerText = "❌ Error."; }
 });
 
-// CONSULTAR ESTATUS
 async function consultarEstatus() {
     const placa = document.getElementById('buscPlaca').value.toUpperCase().trim();
     const resDiv = document.getElementById('resultadoConsulta');
@@ -227,29 +253,19 @@ async function consultarEstatus() {
         const data = await res.json();
         if (data.length > 0) {
             const cita = data[0];
-            let color = cita.estado === 'Aceptada' ? '#d4edda' : (cita.estado === 'Rechazada' ? '#f8d7da' : '#fff3cd');
-            resDiv.style.background = color;
-            resDiv.innerHTML = `Estado: <b>${cita.estado.toUpperCase()}</b><br>Fecha: ${cita.fecha_cita}`;
-        } else {
-            resDiv.style.background = "#f8d7da";
-            resDiv.innerText = "❌ No hay cita registrada.";
-        }
-    } catch (err) { resDiv.innerText = "❌ Error al consultar."; }
+            resDiv.style.background = "#d4edda";
+            resDiv.innerHTML = `Estado: <b>${cita.estado}</b><br>Fecha: ${cita.fecha_cita}`;
+        } else { resDiv.style.background = "#f8d7da"; resDiv.innerText = "❌ No registrada."; }
+    } catch (err) { resDiv.innerText = "❌ Error."; }
 }
 
-// ENVIAR A IA (Placeholder)
 async function sendToIA() {
     const input = document.getElementById('gp-input-text');
     const msgs = document.getElementById('globalpro-msgs');
     if(!input.value) return;
-    
-    // Añadir mensaje usuario
-    msgs.innerHTML += `<div style="background: #334155; padding: 10px; border-radius: 10px; align-self: flex-end;">${input.value}</div>`;
-    const userText = input.value;
+    msgs.innerHTML += `<div style="background: #334155; padding: 10px; border-radius: 10px; margin-top: 5px; align-self: flex-end;">${input.value}</div>`;
     input.value = "";
-
-    // Aquí iría tu fetch a la API de la IA (Cloudflare Worker)
-    msgs.innerHTML += `<div style="background: #0f172a; padding: 10px; border-radius: 10px; align-self: flex-start; border: 1px solid #334155;">Procesando...</div>`;
+    // Lógica de fetch a la IA...
 }
 </script>
 

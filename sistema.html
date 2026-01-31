@@ -2,82 +2,63 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Sistema Global Pro</title>
+    <title>Global Pro - Control Total</title>
     <style>
         body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
         .box { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 25px; }
+        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ccc; border-radius: 6px; font-size: 16px; text-transform: uppercase; }
+        .btn-accion { width: 100%; padding: 15px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-bottom: 10px; color: white; }
+        .btn-negro { background: #222; }
+        .btn-azul { background: #0056b3; }
         
-        /* ESTILO UNIFICADO PARA TODOS LOS CAMPOS DE TEXTO */
-        input[type="text"], input[type="number"], input[type="tel"], select, textarea { 
-            width: 100%; 
-            padding: 15px; 
-            margin: 10px 0; 
-            box-sizing: border-box; 
-            border: 2px solid #ccc; 
-            border-radius: 6px; 
-            font-size: 18px; /* Texto más grande para mejor lectura */
-            text-transform: uppercase; /* Todo a mayúsculas automático */
-        }
-
-        /* BOTONES GRANDES */
-        .btn-accion { 
-            width: 100%; 
-            padding: 18px; 
-            border: none; 
-            border-radius: 6px; 
-            font-weight: bold; 
-            font-size: 16px; 
-            cursor: pointer; 
-            transition: 0.3s; 
-        }
-        .btn-negro { background: #222; color: white; margin-bottom: 10px; }
-        .btn-azul { background: #0056b3; color: white; }
-        .btn-accion:hover { opacity: 0.8; }
+        /* Filtros de colores */
+        .btn-filtro { padding: 10px; border: none; border-radius: 5px; cursor: pointer; color: white; font-weight: bold; flex: 1; }
+        .pendientes { background: #f39c12; }
+        .aprobadas { background: #27ae60; }
+        .rechazadas { background: #c0392b; }
+        .todas { background: #34495e; }
 
         table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; }
         th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
         th { background: #222; color: white; }
-        .btn-ok { background: #28a745; color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 4px; }
-        .btn-no { background: #dc3545; color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 4px; }
     </style>
 </head>
 <body>
 
-    <h1 style="text-align: center; color: #222;">PANEL ADMINISTRATIVO GLOBAL PRO</h1>
+    <h1 style="text-align: center;">⚙️ SISTEMA GLOBAL PRO</h1>
 
     <div class="box">
-        <h2 style="margin-top:0;">🔍 HISTORIAL CLÍNICO DEL VEHÍCULO</h2>
-        <input type="text" id="buscHistorialPlaca" placeholder="INGRESE PLACA PARA CONSULTAR HISTORIAL">
-        <button onclick="consultarHistorial()" class="btn-accion btn-negro">VER TRABAJOS PREVIOS</button>
-        
-        <div id="resHistorial" style="margin-top:15px; display:none; padding:15px; border: 2px solid #eee; background: #fafafa; border-radius: 6px;"></div>
+        <h2>🔍 CONSULTAR TRABAJOS PREVIOS</h2>
+        <input type="text" id="buscHistorialPlaca" placeholder="PLACA DEL VEHÍCULO">
+        <button onclick="consultarHistorial()" class="btn-accion btn-negro">VER HISTORIAL DE OT</button>
+        <div id="resHistorial" style="margin-top:15px; display:none; padding:15px; border: 2px solid #eee; background: #fafafa;"></div>
     </div>
 
     <div class="box">
-        <h2 style="margin-top:0;">📝 REGISTRAR NUEVA ORDEN DE TRABAJO (OT)</h2>
+        <h2>📝 NUEVA ORDEN DE TRABAJO</h2>
         <form id="otForm">
-            <input type="text" id="otPlaca" placeholder="PLACA DEL VEHÍCULO" required>
-            <input type="number" id="otKm" placeholder="KILOMETRAJE ACTUAL" required>
-            <input type="text" id="otTecnico" placeholder="NOMBRE DEL TÉCNICO ASIGNADO" required>
-            <textarea id="otDetalles" placeholder="DETALLES DEL TRABAJO REALIZADO (Repuestos, falla, solución)" rows="4" required></textarea>
+            <input type="text" id="otPlaca" placeholder="PLACA" required>
+            <input type="number" id="otKm" placeholder="KILOMETRAJE" required>
+            <input type="text" id="otTecnico" placeholder="NOMBRE DEL TÉCNICO" required>
+            <textarea id="otDetalles" placeholder="TRABAJO REALIZADO" rows="3" required></textarea>
             <button type="submit" class="btn-accion btn-azul">💾 GUARDAR ORDEN DE TRABAJO</button>
         </form>
     </div>
 
     <div class="box">
-        <h2>📅 AGENDA DE CITAS SOLICITADAS</h2>
+        <h2>📅 AGENDA DE CITAS (FILTRAR POR ESTADO)</h2>
         <div style="display:flex; gap:10px; margin-bottom:15px;">
-            <button onclick="verCitas('ayer')" style="flex:1; padding:12px; cursor:pointer;">Ayer</button>
-            <button onclick="verCitas('hoy')" style="flex:1; padding:12px; cursor:pointer; background:#0056b3; color:white; border:none; border-radius:5px;">Hoy</button>
-            <button onclick="verCitas('manana')" style="flex:1; padding:12px; cursor:pointer;">Mañana</button>
+            <button onclick="verCitasPorEstado('Pendiente')" class="btn-filtro pendientes">PENDIENTES</button>
+            <button onclick="verCitasPorEstado('Aceptada')" class="btn-filtro aprobadas">APROBADAS</button>
+            <button onclick="verCitasPorEstado('Rechazada')" class="btn-filtro rechazadas">RECHAZADAS</button>
+            <button onclick="verCitas('todos')" class="btn-filtro todas">VER TODAS</button>
         </div>
         <table>
             <thead>
                 <tr>
-                    <th>Fecha / Hora</th>
+                    <th>Fecha</th>
                     <th>Placa</th>
                     <th>WhatsApp</th>
-                    <th>Servicio</th>
                     <th>Estado</th>
                     <th>Acción</th>
                 </tr>
@@ -87,26 +68,60 @@
     </div>
 
 <script>
+    // --- CONSULTAR HISTORIAL ---
     async function consultarHistorial() {
         const placa = document.getElementById('buscHistorialPlaca').value.toUpperCase().trim();
         const resDiv = document.getElementById('resHistorial');
-        if(!placa) return alert("Ingrese la placa.");
+        if(!placa) return;
         resDiv.style.display = "block";
         resDiv.innerHTML = "Buscando...";
-        try {
-            const res = await fetch(`/api?placa=${placa}&tipo=historial`);
-            const datos = await res.json();
-            if(datos.length === 0) { 
-                resDiv.innerHTML = "No hay trabajos previos registrados para esta placa."; 
-            } else {
-                resDiv.innerHTML = "<strong>Historial de trabajos:</strong><br><br>" + 
-                    datos.map(t => `<div style="margin-bottom:10px; border-bottom:1px solid #ddd; padding-bottom:5px;">
-                        <b>FECHA: ${t.fecha_hora}</b><br>
-                        TRABAJO: ${t.notas_exigibles} <br>
-                        <small>TÉCNICO: ${t.tecnico_nombre} | KM: ${t.kilometraje}</small>
-                    </div>`).join('');
-            }
-        } catch(e) { resDiv.innerHTML = "Error de conexión."; }
+        const res = await fetch(`/api?placa=${placa}&tipo=historial`);
+        const datos = await res.json();
+        resDiv.innerHTML = datos.length === 0 ? "Sin historial." : 
+            datos.map(t => `<div><b>${t.fecha_hora}:</b> ${t.notas_exigibles} (KM: ${t.kilometraje})</div>`).join('');
+    }
+
+    // --- FILTRAR CITAS POR ESTADO ---
+    async function verCitasPorEstado(estado) {
+        const cuerpo = document.getElementById('cuerpoTablaCitas');
+        cuerpo.innerHTML = "Cargando...";
+        const res = await fetch(`/api?periodo=todos`); // Traemos todas
+        const datos = await res.json();
+        // Filtramos en el cliente para no complicar el cerebro
+        const filtrados = datos.filter(d => d.estado === estado);
+        dibujarTabla(filtrados);
+    }
+
+    async function verCitas(periodo) {
+        const res = await fetch(`/api?periodo=${periodo}`);
+        const datos = await res.json();
+        dibujarTabla(datos);
+    }
+
+    function dibujarTabla(datos) {
+        const cuerpo = document.getElementById('cuerpoTablaCitas');
+        cuerpo.innerHTML = datos.map(c => {
+            const linkWA = `https://wa.me/${c.whatsapp}?text=Hola! Cita aceptada para la placa ${c.placa}`;
+            return `<tr>
+                <td>${c.fecha_cita}</td>
+                <td><b>${c.placa}</b></td>
+                <td><a href="https://wa.me/${c.whatsapp}" target="_blank">WhatsApp</a></td>
+                <td style="font-weight:bold; color:${c.estado==='Aceptada'?'green':(c.estado==='Rechazada'?'red':'orange')}">${c.estado}</td>
+                <td>
+                    <button onclick="cambiarEstado(${c.id}, 'Aceptada'); window.open('${linkWA}')">✔️</button>
+                    <button onclick="cambiarEstado(${c.id}, 'Rechazada')">❌</button>
+                </td>
+            </tr>`;
+        }).join('');
+    }
+
+    async function cambiarEstado(id, nuevoEstado) {
+        await fetch('/api', {
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ id, nuevoEstado })
+        });
+        verCitas('todos');
     }
 
     document.getElementById('otForm').addEventListener('submit', async (e) => {
@@ -118,50 +133,15 @@
             tecnico: document.getElementById('otTecnico').value,
             detalles: document.getElementById('otDetalles').value
         };
-        try {
-            const res = await fetch('/api', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(data)
-            });
-            if(res.ok) { alert("OT Guardada correctamente."); e.target.reset(); }
-        } catch(e) { alert("Error al guardar."); }
+        const res = await fetch('/api', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        });
+        if(res.ok) { alert("OT Guardada"); e.target.reset(); }
     });
 
-    async function verCitas(periodo) {
-        const cuerpo = document.getElementById('cuerpoTablaCitas');
-        cuerpo.innerHTML = "<tr><td colspan='6'>Cargando...</td></tr>";
-        try {
-            const res = await fetch(`/api?periodo=${periodo}`);
-            const datos = await res.json();
-            cuerpo.innerHTML = datos.map(c => {
-                const msj = `Hola! Tu cita para la placa ${c.placa} el día ${c.fecha_cita} ha sido ACEPTADA.`;
-                const linkWA = `https://wa.me/${c.whatsapp}?text=${encodeURIComponent(msj)}`;
-                return `<tr>
-                    <td>${c.fecha_cita} <br> <small>${c.hora_cita}</small></td>
-                    <td><b>${c.placa}</b></td>
-                    <td><a href="https://wa.me/${c.whatsapp}" target="_blank">Enviar WA</a></td>
-                    <td>${c.servicio}</td>
-                    <td>${c.estado}</td>
-                    <td>
-                        <button class="btn-ok" onclick="cambiarEstado(${c.id}, 'Aceptada'); window.open('${linkWA}')">✔️</button>
-                        <button class="btn-no" onclick="cambiarEstado(${c.id}, 'Rechazada')">❌</button>
-                    </td>
-                </tr>`;
-            }).join('');
-        } catch(e) { cuerpo.innerHTML = "<tr><td colspan='6'>Sin datos.</td></tr>"; }
-    }
-
-    async function cambiarEstado(id, nuevoEstado) {
-        await fetch('/api', {
-            method: 'PATCH',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ id, nuevoEstado })
-        });
-        verCitas('hoy');
-    }
-
-    document.addEventListener('DOMContentLoaded', () => verCitas('hoy'));
+    document.addEventListener('DOMContentLoaded', () => verCitas('todos'));
 </script>
 </body>
 </html>

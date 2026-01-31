@@ -1,94 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GlobalPro Taller</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Sistema - Global Pro</title>
+    <style>
+        body { font-family: sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h2, h3 { color: #333; border-bottom: 2px solid #007bff; padding-bottom: 5px; }
+        
+        /* Estilos Formulario OT */
+        .form-group { margin-bottom: 15px; }
+        input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { cursor: pointer; border: none; border-radius: 5px; font-weight: bold; transition: 0.3s; }
+        .btn-guardar { background: #007bff; color: white; padding: 12px; width: 100%; }
+        .btn-guardar:hover { background: #0056b3; }
+
+        /* Estilos Agenda */
+        .filtros { display: flex; gap: 10px; flex-wrap: wrap; margin: 20px 0; }
+        .btn-filtro { padding: 10px 15px; background: #6c757d; color: white; }
+        .btn-hoy { background: #007bff; }
+        .btn-manana { background: #28a745; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { background: #333; color: white; padding: 12px; }
+        td { padding: 10px; border-bottom: 1px solid #ddd; text-align: center; }
+        .placa-resaltada { font-weight: bold; color: #d9534f; }
+    </style>
 </head>
-<body class="bg-slate-900 text-white p-4 font-sans">
-    <div class="max-w-md mx-auto bg-slate-800 p-6 rounded-xl border-t-4 border-yellow-500 shadow-2xl">
-        <h2 class="text-2xl font-black text-center text-yellow-500 mb-6 uppercase tracking-tighter">Global Pro Automotriz</h2>
-        
-        <input type="text" id="placa" placeholder="PLACA" class="w-full p-3 mb-3 bg-slate-700 rounded-lg border border-slate-600 focus:border-yellow-500 outline-none uppercase">
-        <input type="text" id="nombre" placeholder="Nombre del Cliente" class="w-full p-3 mb-3 bg-slate-700 rounded-lg outline-none">
-        <input type="text" id="tecnico" placeholder="Técnico Encargado" class="w-full p-3 mb-3 bg-slate-700 rounded-lg outline-none">
-        <input type="number" id="km" placeholder="Kilometraje" class="w-full p-3 mb-3 bg-slate-700 rounded-lg outline-none">
-        <input type="text" id="aceite" placeholder="Tipo de Aceite" class="w-full p-3 mb-3 bg-slate-700 rounded-lg outline-none">
-        <textarea id="notas" placeholder="Observaciones del servicio..." class="w-full p-3 mb-4 bg-slate-700 rounded-lg h-24 outline-none"></textarea>
-        
-        <button onclick="guardar()" id="btn" class="w-full bg-yellow-500 text-black font-black py-4 rounded-xl hover:bg-yellow-400 active:scale-95 transition">GUARDAR SERVICIO</button>
-        
-        <div class="mt-8 pt-6 border-t border-slate-700">
-            <div class="flex gap-2">
-                <input type="text" id="busqueda" placeholder="BUSCAR PLACA" class="flex-1 p-3 bg-slate-700 rounded-lg border border-slate-600 outline-none uppercase">
-                <button onclick="buscar()" class="bg-slate-600 px-4 rounded-lg">🔍</button>
-            </div>
-            <div id="resultado" class="mt-4 space-y-3"></div>
+<body>
+
+<div class="container">
+    <h2>🛠️ Registro de Orden de Trabajo (OT)</h2>
+    <form id="otForm">
+        <div class="form-group">
+            <input type="text" id="otPlaca" placeholder="PLACA (ej: RCM36H)" required>
         </div>
-    </div>
+        <div class="form-group">
+            <input type="number" id="otKm" placeholder="Kilometraje Actual" required>
+        </div>
+        <div class="form-group">
+            <input type="text" id="otTecnico" placeholder="Nombre del Técnico" required>
+        </div>
+        <div class="form-group">
+            <textarea id="otDetalles" rows="3" placeholder="Descripción del trabajo..." required></textarea>
+        </div>
+        <button type="submit" class="btn-guardar" id="btnGuardarOT">Guardar OT en Sistema</button>
+    </form>
+    <div id="otStatus" style="margin-top:10px; text-align:center;"></div>
 
-    <script>
-        const API_URL = "https://taller.estilosgrado33.workers.dev";
+    <hr style="margin: 40px 0;">
 
-        async function guardar() {
-            const btn = document.getElementById('btn');
-            const data = {
-                placa: document.getElementById('placa').value,
-                nombre_usuario: document.getElementById('nombre').value,
-                tecnico: document.getElementById('tecnico').value,
-                km: document.getElementById('km').value,
-                aceite: document.getElementById('aceite').value,
-                notas: document.getElementById('notas').value
-            };
-
-            if(!data.placa) return alert("La placa es obligatoria");
-            btn.disabled = true; btn.innerText = "PROCESANDO...";
-
-            try {
-                const res = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                if(res.ok) {
-                    alert("✅ ¡Servicio guardado!");
-                    location.reload();
-                } else { throw new Error(); }
-            } catch(e) { 
-                alert("❌ Error de servidor. Revisa los Bindings."); 
-            } finally { 
-                btn.disabled = false; btn.innerText = "GUARDAR SERVICIO"; 
-            }
-        }
-
-        async function buscar() {
-            const q = document.getElementById('busqueda').value;
-            const res = await fetch(`${API_URL}?buscar=${q}`);
-            const data = await res.json();
-            const cont = document.getElementById('resultado');
-            
-            cont.innerHTML = data.length ? data.map(ev => `
-                <div class="bg-slate-900 p-4 rounded-lg border-l-4 border-yellow-500 text-sm shadow-md">
-                    <p class="text-yellow-500 font-bold mb-1">${new Date(ev.fecha_hora).toLocaleDateString()}</p>
-                    <p class="text-slate-300"><strong>KM:</strong> ${ev.kilometraje} | <strong>Aceite:</strong> ${ev.tipo_aceite}</p>
-                    <p class="text-slate-500 text-xs mt-2 italic">${ev.notas_exigibles}</p>
-                </div>
-            `).join('') : "<p class='text-center text-slate-500'>Sin resultados</p>";
-        }
-    </script>
-
-<div class="admin-agenda">
-    <h2>📋 Agenda del Taller</h2>
+    <h2>📋 Agenda de Citas</h2>
     <div class="filtros">
-        <button onclick="verCitas('hoy')">Hoy</button>
-        <button onclick="verCitas('manana')">Mañana</button>
-        <button onclick="verCitas('mes')">Mes</button>
+        <button class="btn-filtro" onclick="verCitas('ayer')">⏪ Ayer</button>
+        <button class="btn-filtro btn-hoy" onclick="verCitas('hoy')">📌 Hoy</button>
+        <button class="btn-filtro btn-manana" onclick="verCitas('manana')">⏩ Mañana</button>
+        <button class="btn-filtro" onclick="verCitas('mes')">🗓️ Mes</button>
+        <button class="btn-filtro" onclick="verCitas('todos')">📂 Ver Todo</button>
     </div>
 
-    <table border="1" id="tablaCitas" style="width:100%; margin-top:20px; border-collapse: collapse;">
+    <table>
         <thead>
-            <tr style="background:#333; color:white;">
+            <tr>
                 <th>Fecha</th>
                 <th>Hora</th>
                 <th>Placa</th>
@@ -96,65 +70,81 @@
             </tr>
         </thead>
         <tbody id="cuerpoTabla">
-            </tbody>
+            <tr><td colspan="4">Selecciona un filtro para ver citas...</td></tr>
+        </tbody>
     </table>
 </div>
 
-
-
 <script>
-/**
- * Función para cargar las citas desde Cloudflare
- * @param {string} periodo - Puede ser 'ayer', 'hoy', 'manana', 'mes' o 'todos'
- */
-async function verCitas(periodo) {
-    const cuerpo = document.getElementById('cuerpoTabla');
-    
-    // Mostramos un mensaje de carga mientras llegan los datos
-    cuerpo.innerHTML = "<tr><td colspan='4' style='padding:20px;'>🔍 Buscando citas de " + periodo + "...</td></tr>";
-
-    try {
-        // Llamamos a la función de Cloudflare que creamos en /functions/api.js
-        const respuesta = await fetch(`/api?periodo=${periodo}`);
+    // --- LÓGICA PARA GUARDAR OT ---
+    document.getElementById('otForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const status = document.getElementById('otStatus');
+        const btn = document.getElementById('btnGuardarOT');
         
-        if (!respuesta.ok) throw new Error("Error en la respuesta del servidor");
+        btn.disabled = true;
+        status.innerText = "⏳ Guardando...";
 
-        const datos = await respuesta.json();
+        const datos = {
+            placa: document.getElementById('otPlaca').value.toUpperCase(),
+            km: document.getElementById('otKm').value,
+            tecnico: document.getElementById('otTecnico').value,
+            detalles: document.getElementById('otDetalles').value
+        };
 
-        // Limpiamos la tabla
-        cuerpo.innerHTML = "";
+        try {
+            // Usamos la misma API pero el Worker sabrá que es una OT por los datos
+            const res = await fetch('/api', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...datos, tipo: 'OT' }) 
+            });
 
-        if (datos.length === 0) {
-            cuerpo.innerHTML = "<tr><td colspan='4' style='padding:20px;'>No hay citas registradas para este periodo.</td></tr>";
-            return;
+            if (res.ok) {
+                status.innerHTML = "<b style='color:green'>✅ OT Guardada correctamente.</b>";
+                e.target.reset();
+            } else {
+                status.innerHTML = "<b style='color:red'>❌ Error al guardar la OT.</b>";
+            }
+        } catch (err) {
+            status.innerHTML = "<b style='color:red'>❌ Error de conexión.</b>";
         }
+        btn.disabled = false;
+    });
 
-        // Dibujamos las filas una por una
-        datos.forEach(cita => {
-            const fila = document.createElement('tr');
-            
-            // Un toque de color: si es hoy, resaltamos la placa
-            const estiloPlaca = periodo === 'hoy' ? 'color: #d9534f; font-weight: bold;' : 'font-weight: bold;';
+    // --- LÓGICA PARA VER CITAS ---
+    async function verCitas(periodo) {
+        const cuerpo = document.getElementById('cuerpoTabla');
+        cuerpo.innerHTML = "<tr><td colspan='4'>🔍 Buscando...</td></tr>";
 
-            fila.innerHTML = `
-                <td style="padding: 10px; border-bottom: 1px solid #ddd;">${cita.fecha_cita}</td>
-                <td style="padding: 10px; border-bottom: 1px solid #ddd;">${cita.hora_cita}</td>
-                <td style="padding: 10px; border-bottom: 1px solid #ddd; ${estiloPlaca}">${cita.placa}</td>
-                <td style="padding: 10px; border-bottom: 1px solid #ddd;">${cita.servicio}</td>
-            `;
-            cuerpo.appendChild(fila);
-        });
+        try {
+            const res = await fetch(`/api?periodo=${periodo}`);
+            const datos = await res.json();
 
-    } catch (error) {
-        console.error("Error al cargar citas:", error);
-        cuerpo.innerHTML = "<tr><td colspan='4' style='padding:20px; color:red;'>❌ Error al conectar con el sistema. Revisa la consola.</td></tr>";
+            cuerpo.innerHTML = "";
+
+            if (datos.length === 0) {
+                cuerpo.innerHTML = "<tr><td colspan='4'>No hay registros.</td></tr>";
+                return;
+            }
+
+            datos.forEach(c => {
+                const fila = `<tr>
+                    <td>${c.fecha_cita}</td>
+                    <td>${c.hora_cita}</td>
+                    <td class="placa-resaltada">${c.placa}</td>
+                    <td>${c.servicio}</td>
+                </tr>`;
+                cuerpo.innerHTML += fila;
+            });
+        } catch (err) {
+            cuerpo.innerHTML = "<tr><td colspan='4' style='color:red;'>❌ Error al cargar datos.</td></tr>";
+        }
     }
-}
 
-// Ejecutar automáticamente al abrir la página para ver lo de hoy
-document.addEventListener('DOMContentLoaded', () => verCitas('hoy'));
+    // Cargar hoy por defecto
+    document.addEventListener('DOMContentLoaded', () => verCitas('hoy'));
 </script>
-
 
 </body>
 </html>

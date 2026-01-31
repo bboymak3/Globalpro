@@ -2,111 +2,113 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Global Pro - Sistema Integral</title>
+    <title>Sistema Global Pro</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; padding: 20px; margin: 0; }
-        .container { max-width: 1000px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h2 { color: #2c3e50; border-bottom: 3px solid #007bff; padding-bottom: 8px; }
+        body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
+        .box { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 25px; }
         
-        /* BUSCADOR DE HISTORIAL */
-        .search-box { background: #f8f9fa; padding: 15px; border: 1px solid #dee2e6; border-radius: 8px; margin-bottom: 15px; display: flex; gap: 10px; align-items: center; }
-        
-        /* FORMULARIO OT */
-        .ot-section { background: #e9ecef; padding: 20px; border-radius: 8px; margin-bottom: 40px; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
-        textarea { grid-column: span 2; }
-        .btn-blue { grid-column: span 2; background: #007bff; color: white; border: none; padding: 15px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        /* ESTILO UNIFICADO PARA TODOS LOS CAMPOS DE TEXTO */
+        input[type="text"], input[type="number"], input[type="tel"], select, textarea { 
+            width: 100%; 
+            padding: 15px; 
+            margin: 10px 0; 
+            box-sizing: border-box; 
+            border: 2px solid #ccc; 
+            border-radius: 6px; 
+            font-size: 18px; /* Texto más grande para mejor lectura */
+            text-transform: uppercase; /* Todo a mayúsculas automático */
+        }
 
-        /* TABLA DE CITAS */
-        .filtros { display: flex; gap: 8px; margin: 20px 0; }
-        .btn-f { padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; background: #6c757d; color: white; font-weight: bold; }
-        .btn-active { background: #007bff; }
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th { background: #2c3e50; color: white; padding: 12px; }
-        td { padding: 10px; border-bottom: 1px solid #eee; text-align: center; }
-        .placa { font-weight: bold; color: #e74c3c; }
+        /* BOTONES GRANDES */
+        .btn-accion { 
+            width: 100%; 
+            padding: 18px; 
+            border: none; 
+            border-radius: 6px; 
+            font-weight: bold; 
+            font-size: 16px; 
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+        .btn-negro { background: #222; color: white; margin-bottom: 10px; }
+        .btn-azul { background: #0056b3; color: white; }
+        .btn-accion:hover { opacity: 0.8; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+        th { background: #222; color: white; }
+        .btn-ok { background: #28a745; color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 4px; }
+        .btn-no { background: #dc3545; color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 4px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1 style="text-align:center;">⚙️ Gestión Global Pro</h1>
+    <h1 style="text-align: center; color: #222;">PANEL ADMINISTRATIVO GLOBAL PRO</h1>
 
-    <div class="search-box">
-        <strong>🔍 Consultar Historial (OT):</strong>
-        <input type="text" id="buscHistorialPlaca" placeholder="Placa del Vehículo" style="flex:1; padding:10px;">
-        <button onclick="consultarHistorial()" style="background:#495057; color:white; padding:10px; border:none; border-radius:5px; cursor:pointer;">VER TRABAJOS</button>
+    <div class="box">
+        <h2 style="margin-top:0;">🔍 HISTORIAL CLÍNICO DEL VEHÍCULO</h2>
+        <input type="text" id="buscHistorialPlaca" placeholder="INGRESE PLACA PARA CONSULTAR HISTORIAL">
+        <button onclick="consultarHistorial()" class="btn-accion btn-negro">VER TRABAJOS PREVIOS</button>
+        
+        <div id="resHistorial" style="margin-top:15px; display:none; padding:15px; border: 2px solid #eee; background: #fafafa; border-radius: 6px;"></div>
     </div>
-    <div id="resultadoHistorial" style="margin-bottom:20px; display:none; padding:15px; background:#fff3cd; border-radius:8px;"></div>
 
-    <div class="ot-section">
-        <h2>📝 Nueva Orden de Trabajo</h2>
+    <div class="box">
+        <h2 style="margin-top:0;">📝 REGISTRAR NUEVA ORDEN DE TRABAJO (OT)</h2>
         <form id="otForm">
-            <div class="form-grid">
-                <input type="text" id="otPlaca" placeholder="PLACA" required>
-                <input type="number" id="otKm" placeholder="KM ACTUAL" required>
-                <input type="text" id="otTecnico" placeholder="TÉCNICO" required>
-                <select id="otServicio">
-                    <option value="Mantenimiento">Mantenimiento</option>
-                    <option value="Cambio de Aceite">Cambio de Aceite</option>
-                    <option value="Frenos">Frenos</option>
-                    <option value="Electricidad">Electricidad</option>
-                </select>
-                <textarea id="otDetalles" rows="3" placeholder="Detalles del trabajo..." required></textarea>
-                <button type="submit" class="btn-blue" id="btnSaveOT">💾 REGISTRAR OT</button>
-            </div>
+            <input type="text" id="otPlaca" placeholder="PLACA DEL VEHÍCULO" required>
+            <input type="number" id="otKm" placeholder="KILOMETRAJE ACTUAL" required>
+            <input type="text" id="otTecnico" placeholder="NOMBRE DEL TÉCNICO ASIGNADO" required>
+            <textarea id="otDetalles" placeholder="DETALLES DEL TRABAJO REALIZADO (Repuestos, falla, solución)" rows="4" required></textarea>
+            <button type="submit" class="btn-accion btn-azul">💾 GUARDAR ORDEN DE TRABAJO</button>
         </form>
-        <div id="otMsg" style="text-align:center; margin-top:10px; font-weight:bold;"></div>
     </div>
 
-    <h2>📅 Agenda de Citas</h2>
-    <div class="filtros">
-        <button class="btn-f" onclick="verCitas('ayer')">Ayer</button>
-        <button class="btn-f btn-active" onclick="verCitas('hoy')">Hoy</button>
-        <button class="btn-f" onclick="verCitas('manana')">Mañana</button>
-        <button class="btn-f" onclick="verCitas('mes')">Mes</button>
+    <div class="box">
+        <h2>📅 AGENDA DE CITAS SOLICITADAS</h2>
+        <div style="display:flex; gap:10px; margin-bottom:15px;">
+            <button onclick="verCitas('ayer')" style="flex:1; padding:12px; cursor:pointer;">Ayer</button>
+            <button onclick="verCitas('hoy')" style="flex:1; padding:12px; cursor:pointer; background:#0056b3; color:white; border:none; border-radius:5px;">Hoy</button>
+            <button onclick="verCitas('manana')" style="flex:1; padding:12px; cursor:pointer;">Mañana</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha / Hora</th>
+                    <th>Placa</th>
+                    <th>WhatsApp</th>
+                    <th>Servicio</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoTablaCitas"></tbody>
+        </table>
     </div>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Fecha</th>
-                <th>Placa</th>
-                <th>WhatsApp</th>
-                <th>Servicio</th>
-                <th>Estado</th>
-                <th>Acción</th>
-            </tr>
-        </thead>
-        <tbody id="cuerpoTablaCitas"></tbody>
-    </table>
-</div>
 
 <script>
-    // --- FUNCIÓN HISTORIAL OT ---
     async function consultarHistorial() {
         const placa = document.getElementById('buscHistorialPlaca').value.toUpperCase().trim();
-        const resDiv = document.getElementById('resultadoHistorial');
-        if(!placa) return alert("Ingresa una placa");
+        const resDiv = document.getElementById('resHistorial');
+        if(!placa) return alert("Ingrese la placa.");
         resDiv.style.display = "block";
         resDiv.innerHTML = "Buscando...";
         try {
             const res = await fetch(`/api?placa=${placa}&tipo=historial`);
             const datos = await res.json();
-            if(datos.length === 0) {
-                resDiv.innerHTML = "No hay historial para esta placa.";
+            if(datos.length === 0) { 
+                resDiv.innerHTML = "No hay trabajos previos registrados para esta placa."; 
             } else {
-                resDiv.innerHTML = "<h4>Trabajos previos:</h4>" + datos.map(t => 
-                    `<div style="border-bottom:1px solid #ccc; padding:5px;">
-                        <b>${t.fecha_hora}:</b> ${t.notas_exigibles} (KM: ${t.kilometraje})
+                resDiv.innerHTML = "<strong>Historial de trabajos:</strong><br><br>" + 
+                    datos.map(t => `<div style="margin-bottom:10px; border-bottom:1px solid #ddd; padding-bottom:5px;">
+                        <b>FECHA: ${t.fecha_hora}</b><br>
+                        TRABAJO: ${t.notas_exigibles} <br>
+                        <small>TÉCNICO: ${t.tecnico_nombre} | KM: ${t.kilometraje}</small>
                     </div>`).join('');
             }
-        } catch(e) { resDiv.innerHTML = "Error al buscar historial."; }
+        } catch(e) { resDiv.innerHTML = "Error de conexión."; }
     }
 
-    // --- GUARDAR OT ---
     document.getElementById('otForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const data = {
@@ -122,11 +124,10 @@
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(data)
             });
-            if(res.ok) { alert("OT Guardada"); e.target.reset(); }
-        } catch(e) { alert("Error al guardar"); }
+            if(res.ok) { alert("OT Guardada correctamente."); e.target.reset(); }
+        } catch(e) { alert("Error al guardar."); }
     });
 
-    // --- VER CITAS ---
     async function verCitas(periodo) {
         const cuerpo = document.getElementById('cuerpoTablaCitas');
         cuerpo.innerHTML = "<tr><td colspan='6'>Cargando...</td></tr>";
@@ -137,18 +138,18 @@
                 const msj = `Hola! Tu cita para la placa ${c.placa} el día ${c.fecha_cita} ha sido ACEPTADA.`;
                 const linkWA = `https://wa.me/${c.whatsapp}?text=${encodeURIComponent(msj)}`;
                 return `<tr>
-                    <td>${c.fecha_cita}</td>
-                    <td class="placa">${c.placa}</td>
-                    <td><a href="https://wa.me/${c.whatsapp}" target="_blank">📱 WhatsApp</a></td>
+                    <td>${c.fecha_cita} <br> <small>${c.hora_cita}</small></td>
+                    <td><b>${c.placa}</b></td>
+                    <td><a href="https://wa.me/${c.whatsapp}" target="_blank">Enviar WA</a></td>
                     <td>${c.servicio}</td>
                     <td>${c.estado}</td>
                     <td>
-                        <button onclick="cambiarEstado(${c.id}, 'Aceptada'); window.open('${linkWA}')" style="background:green; color:white;">✔️</button>
-                        <button onclick="cambiarEstado(${c.id}, 'Rechazada')" style="background:red; color:white;">❌</button>
+                        <button class="btn-ok" onclick="cambiarEstado(${c.id}, 'Aceptada'); window.open('${linkWA}')">✔️</button>
+                        <button class="btn-no" onclick="cambiarEstado(${c.id}, 'Rechazada')">❌</button>
                     </td>
                 </tr>`;
             }).join('');
-        } catch(e) { cuerpo.innerHTML = "Error al cargar citas."; }
+        } catch(e) { cuerpo.innerHTML = "<tr><td colspan='6'>Sin datos.</td></tr>"; }
     }
 
     async function cambiarEstado(id, nuevoEstado) {

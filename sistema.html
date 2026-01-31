@@ -77,5 +77,54 @@
             `).join('') : "<p class='text-center text-slate-500'>Sin resultados</p>";
         }
     </script>
+
+<div class="admin-agenda">
+    <h2>📋 Agenda del Taller</h2>
+    <div class="filtros">
+        <button onclick="verCitas('hoy')">Hoy</button>
+        <button onclick="verCitas('manana')">Mañana</button>
+        <button onclick="verCitas('mes')">Mes</button>
+    </div>
+
+    <table border="1" id="tablaCitas" style="width:100%; margin-top:20px; border-collapse: collapse;">
+        <thead>
+            <tr style="background:#333; color:white;">
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Placa</th>
+                <th>Servicio</th>
+            </tr>
+        </thead>
+        <tbody id="cuerpoTabla">
+            </tbody>
+    </table>
+</div>
+
+<script>
+async function verCitas(periodo) {
+    const cuerpo = document.getElementById('cuerpoTabla');
+    cuerpo.innerHTML = "<tr><td colspan='4'>Buscando...</td></tr>";
+
+    try {
+        const res = await fetch(`/api?periodo=${periodo}`);
+        const datos = await res.json();
+        
+        cuerpo.innerHTML = datos.map(c => `
+            <tr>
+                <td>${c.fecha_cita}</td>
+                <td>${c.hora_cita}</td>
+                <td><b>${c.placa}</b></td>
+                <td>${c.servicio}</td>
+            </tr>
+        `).join('') || "<tr><td colspan='4'>No hay citas programadas.</td></tr>";
+    } catch (err) {
+        cuerpo.innerHTML = "<tr><td colspan='4'>Error al cargar.</td></tr>";
+    }
+}
+
+// Cargar las de hoy automáticamente al entrar
+verCitas('hoy');
+</script>
+
 </body>
 </html>

@@ -10,17 +10,11 @@
         .btn-accion { width: 100%; padding: 15px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-bottom: 10px; color: white; }
         .btn-negro { background: #222; }
         .btn-azul { background: #0056b3; }
-        
-        /* Filtros de colores */
-        .btn-filtro { padding: 10px; border: none; border-radius: 5px; cursor: pointer; color: white; font-weight: bold; flex: 1; }
-        .pendientes { background: #f39c12; }
-        .aprobadas { background: #27ae60; }
-        .rechazadas { background: #c0392b; }
-        .todas { background: #34495e; }
-
+        .btn-filtro { padding: 10px; border: none; border-radius: 5px; cursor: pointer; color: white; font-weight: bold; flex: 1; margin-right: 5px;}
+        .pendientes { background: #f39c12; } .aprobadas { background: #27ae60; } .rechazadas { background: #c0392b; } .todas { background: #34495e; }
         table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
-        th { background: #222; color: white; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; } th { background: #222; color: white; }
+        .link-wa { color: white; background: #25d366; padding: 5px 10px; border-radius: 4px; text-decoration: none; font-weight: bold; display: inline-block; }
     </style>
 </head>
 <body>
@@ -28,9 +22,9 @@
     <h1 style="text-align: center;">⚙️ SISTEMA GLOBAL PRO</h1>
 
     <div class="box">
-        <h2>🔍 CONSULTAR TRABAJOS PREVIOS</h2>
+        <h2>🔍 CONSULTAR HISTORIAL</h2>
         <input type="text" id="buscHistorialPlaca" placeholder="PLACA DEL VEHÍCULO">
-        <button onclick="consultarHistorial()" class="btn-accion btn-negro">VER HISTORIAL DE OT</button>
+        <button onclick="consultarHistorial()" class="btn-accion btn-negro">VER HISTORIAL</button>
         <div id="resHistorial" style="margin-top:15px; display:none; padding:15px; border: 2px solid #eee; background: #fafafa;"></div>
     </div>
 
@@ -41,13 +35,13 @@
             <input type="number" id="otKm" placeholder="KILOMETRAJE" required>
             <input type="text" id="otTecnico" placeholder="NOMBRE DEL TÉCNICO" required>
             <textarea id="otDetalles" placeholder="TRABAJO REALIZADO" rows="3" required></textarea>
-            <button type="submit" class="btn-accion btn-azul">💾 GUARDAR ORDEN DE TRABAJO</button>
+            <button type="submit" class="btn-accion btn-azul">💾 GUARDAR ORDEN</button>
         </form>
     </div>
 
     <div class="box">
-        <h2>📅 AGENDA DE CITAS (FILTRAR POR ESTADO)</h2>
-        <div style="display:flex; gap:10px; margin-bottom:15px;">
+        <h2>📅 AGENDA DE CITAS</h2>
+        <div style="display:flex; margin-bottom:15px;">
             <button onclick="verCitasPorEstado('Pendiente')" class="btn-filtro pendientes">PENDIENTES</button>
             <button onclick="verCitasPorEstado('Aceptada')" class="btn-filtro aprobadas">APROBADAS</button>
             <button onclick="verCitasPorEstado('Rechazada')" class="btn-filtro rechazadas">RECHAZADAS</button>
@@ -58,8 +52,8 @@
                 <tr>
                     <th>Fecha</th>
                     <th>Placa</th>
-                    <th>WhatsApp</th>
                     <th>Estado</th>
+                    <th>WhatsApp</th>
                     <th>Acción</th>
                 </tr>
             </thead>
@@ -68,77 +62,70 @@
     </div>
 
 <script>
-    // --- CONSULTAR HISTORIAL ---
-    async function consultarHistorial() {
-        const placa = document.getElementById('buscHistorialPlaca').value.toUpperCase().trim();
-        const resDiv = document.getElementById('resHistorial');
-        if(!placa) return;
-        resDiv.style.display = "block";
-        resDiv.innerHTML = "Buscando...";
-        const res = await fetch(`/api?placa=${placa}&tipo=historial`);
-        const datos = await res.json();
-        resDiv.innerHTML = datos.length === 0 ? "Sin historial." : 
-            datos.map(t => `<div><b>${t.fecha_hora}:</b> ${t.notas_exigibles} (KM: ${t.kilometraje})</div>`).join('');
-    }
-
-    // --- FILTRAR CITAS POR ESTADO ---
-    async function verCitasPorEstado(estado) {
-        const cuerpo = document.getElementById('cuerpoTablaCitas');
-        cuerpo.innerHTML = "Cargando...";
-        const res = await fetch(`/api?periodo=todos`); // Traemos todas
-        const datos = await res.json();
-        // Filtramos en el cliente para no complicar el cerebro
-        const filtrados = datos.filter(d => d.estado === estado);
-        dibujarTabla(filtrados);
-    }
-
+    // --- LÓGICA DE TABLA Y WHATSAPP ---
     async function verCitas(periodo) {
-        const res = await fetch(`/api?periodo=${periodo}`);
+        const cuerpo = document.getElementById('cuerpoTablaCitas');
+        cuerpo.innerHTML = "<tr><td colspan='5'>Cargando...</td></tr>";
+        
+        // Pide los datos a la ruta /api del Worker
+        const res = await fetch(`/api?periodo=${periodo}`); 
         const datos = await res.json();
         dibujarTabla(datos);
     }
 
+    async function verCitasPorEstado(estado) {
+        const res = await fetch(`/api?periodo=todos`);
+        const datos = await res.json();
+        const filtrados = datos.filter(d => d.estado === estado);
+        dibujarTabla(filtrados);
+    }
+
     function dibujarTabla(datos) {
         const cuerpo = document.getElementById('cuerpoTablaCitas');
+        if (datos.length === 0) {
+            cuerpo.innerHTML = "<tr><td colspan='5'>No hay datos.</td></tr>";
+            return;
+        }
+
         cuerpo.innerHTML = datos.map(c => {
-            const linkWA = `https://wa.me/${c.whatsapp}?text=Hola! Cita aceptada para la placa ${c.placa}`;
+            // AQUI ESTA LA CORRECCION DEL TEXTO DE WHATSAPP
+            const texto = `Hola, te escribimos de Global Pro. Tu cita para la placa ${c.placa} el día ${c.fecha_cita} está ${c.estado}.`;
+            const linkWA = `https://wa.me/${c.whatsapp}?text=${encodeURIComponent(texto)}`;
+
             return `<tr>
                 <td>${c.fecha_cita}</td>
                 <td><b>${c.placa}</b></td>
-                <td><a href="https://wa.me/${c.whatsapp}" target="_blank">WhatsApp</a></td>
                 <td style="font-weight:bold; color:${c.estado==='Aceptada'?'green':(c.estado==='Rechazada'?'red':'orange')}">${c.estado}</td>
+                <td><a href="${linkWA}" target="_blank" class="link-wa">Enviar WA 📱</a></td>
                 <td>
-                    <button onclick="cambiarEstado(${c.id}, 'Aceptada'); window.open('${linkWA}')">✔️</button>
+                    <button onclick="cambiarEstado(${c.id}, 'Aceptada')">✔️</button>
                     <button onclick="cambiarEstado(${c.id}, 'Rechazada')">❌</button>
                 </td>
             </tr>`;
         }).join('');
     }
 
+    // --- OTRAS FUNCIONES (HISTORIAL, CAMBIAR ESTADO, GUARDAR OT) ---
+    async function consultarHistorial() {
+        const placa = document.getElementById('buscHistorialPlaca').value.toUpperCase().trim();
+        const resDiv = document.getElementById('resHistorial');
+        if(!placa) return;
+        resDiv.style.display="block"; resDiv.innerHTML="Buscando...";
+        const res = await fetch(`/api?placa=${placa}&tipo=historial`);
+        const datos = await res.json();
+        resDiv.innerHTML = datos.length ? datos.map(t=>`<div><b>${t.fecha_hora}:</b> ${t.notas_exigibles}</div>`).join('') : "Sin historial.";
+    }
+
     async function cambiarEstado(id, nuevoEstado) {
-        await fetch('/api', {
-            method: 'PATCH',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ id, nuevoEstado })
-        });
+        await fetch('/api', {method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({id, nuevoEstado})});
         verCitas('todos');
     }
 
     document.getElementById('otForm').addEventListener('submit', async (e) => {
         e.preventDefault();
-        const data = {
-            tipo: 'OT',
-            placa: document.getElementById('otPlaca').value.toUpperCase().trim(),
-            km: document.getElementById('otKm').value,
-            tecnico: document.getElementById('otTecnico').value,
-            detalles: document.getElementById('otDetalles').value
-        };
-        const res = await fetch('/api', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data)
-        });
-        if(res.ok) { alert("OT Guardada"); e.target.reset(); }
+        const data = { tipo: 'OT', placa: document.getElementById('otPlaca').value.toUpperCase().trim(), km: document.getElementById('otKm').value, tecnico: document.getElementById('otTecnico').value, detalles: document.getElementById('otDetalles').value };
+        await fetch('/api', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)});
+        alert("OT Guardada"); e.target.reset();
     });
 
     document.addEventListener('DOMContentLoaded', () => verCitas('todos'));

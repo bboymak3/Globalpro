@@ -794,111 +794,91 @@ document.getElementById('formCitaPublico').addEventListener('submit', async (e) 
 });
 </script>
 
-
-<section id="citas-cliente" style="max-width: 500px; margin: 20px auto; font-family: sans-serif; border: 1px solid #ddd; padding: 20px; border-radius: 10px; background: #fff;">
-    <h2 style="text-align: center; color: #333;">📅 Agendar Cita</h2>
-    
-    <form id="formReserva">
-        <input type="text" id="cPlaca" placeholder="Placa del Vehículo (Ej: RCM36H)" required style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:5px;">
-        
-        <input type="tel" id="cWhatsapp" placeholder="Número de WhatsApp (Ej: 04121234567)" required style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:5px;">
-        
-        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-            <input type="date" id="cFecha" required style="flex:1; padding:10px; border:1px solid #ccc; border-radius:5px;">
-            <input type="time" id="cHora" required style="flex:1; padding:10px; border:1px solid #ccc; border-radius:5px;">
+   
+     <div id="seccion-citas" style="max-width: 450px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; font-family: sans-serif; background: #fff;">
+    <h3 style="text-align: center;">📅 Agendar Cita</h3>
+    <form id="formCita">
+        <input type="text" id="cPlaca" placeholder="Placa (RCM36H)" required style="width:90%; padding:10px; margin:5px;">
+        <input type="tel" id="cWhatsapp" placeholder="WhatsApp (04121234567)" required style="width:90%; padding:10px; margin:5px;">
+        <div style="display: flex; justify-content: space-around;">
+            <input type="date" id="cFecha" required style="padding:10px; margin:5px;">
+            <input type="time" id="cHora" required style="padding:10px; margin:5px;">
         </div>
-
-        <select id="cServicio" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:5px;">
+        <select id="cServicio" style="width:95%; padding:10px; margin:5px;">
             <option value="Mantenimiento General">Mantenimiento General</option>
             <option value="Cambio de Aceite">Cambio de Aceite</option>
-            <option value="Frenos / Tren Delantero">Frenos / Tren Delantero</option>
-            <option value="Escaneo / Electricidad">Escaneo / Electricidad</option>
+            <option value="Frenos">Frenos</option>
         </select>
-
-        <button type="submit" id="btnCita" style="width:100%; padding:12px; background:#28a745; color:white; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">Agendar Cita</button>
+        <button type="submit" style="width:100%; padding:12px; background:#28a745; color:white; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">AGENDAR CITA</button>
     </form>
-    <div id="reservaStatus" style="text-align:center; margin-top:10px; font-weight:bold;"></div>
+    <div id="statusCita" style="text-align:center; margin-top:10px;"></div>
 
-    <hr style="margin: 25px 0; border: 0; border-top: 1px solid #eee;">
+    <hr style="margin:20px 0;">
 
-    <h3 style="text-align: center; font-size: 1.1em; color: #555;">🔍 Consultar Estado de Cita</h3>
-    <div style="display: flex; gap: 5px;">
-        <input type="text" id="buscPlaca" placeholder="Introduce tu Placa" style="flex:1; padding:10px; border:1px solid #ccc; border-radius:5px;">
-        <button onclick="consultarEstatus()" style="padding:10px; background:#6c757d; color:white; border:none; border-radius:5px; cursor:pointer;">Consultar</button>
+    <h3 style="text-align: center;">🔎 Consultar mi Estatus</h3>
+    <div style="display:flex; gap:5px;">
+        <input type="text" id="buscPlaca" placeholder="Tu Placa" style="flex:1; padding:10px;">
+        <button onclick="consultarEstatus()" style="padding:10px; background:#6c757d; color:white; border:none; cursor:pointer;">VER</button>
     </div>
-    <div id="consultaResultado" style="text-align:center; margin-top:15px; padding:10px; border-radius:5px;"></div>
-</section>
+    <div id="resultadoConsulta" style="text-align:center; margin-top:10px; font-weight:bold; padding:10px; border-radius:5px;"></div>
+</div>
 
 <script>
-// GUARDAR CITA
-document.getElementById('formReserva').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const status = document.getElementById('reservaStatus');
-    const btn = document.getElementById('btnCita');
-    
-    btn.disabled = true;
-    status.innerText = "⏳ Enviando datos...";
+    // --- FUNCIÓN PARA AGENDAR ---
+    document.getElementById('formCita').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const status = document.getElementById('statusCita');
+        status.innerText = "⏳ Enviando...";
 
-    const datos = {
-        placa: document.getElementById('cPlaca').value.toUpperCase().replace(/\s+/g, ''),
-        whatsapp: document.getElementById('cWhatsapp').value,
-        fecha: document.getElementById('cFecha').value,
-        hora: document.getElementById('cHora').value,
-        servicio: document.getElementById('cServicio').value
-    };
+        const datos = {
+            placa: document.getElementById('cPlaca').value.toUpperCase().trim(),
+            whatsapp: document.getElementById('cWhatsapp').value.trim(),
+            fecha: document.getElementById('cFecha').value,
+            hora: document.getElementById('cHora').value,
+            servicio: document.getElementById('cServicio').value,
+            tipo: 'CITA' // Esto le dice al cerebro que NO es una OT
+        };
 
-    try {
-        const res = await fetch('/api', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(datos)
-        });
-        if (res.ok) {
-            status.style.color = "green";
-            status.innerText = "✅ ¡Cita solicitada! Pronto recibirá respuesta.";
-            e.target.reset();
-        } else {
-            status.style.color = "red";
-            status.innerText = "❌ Error al agendar. Intente más tarde.";
-        }
-    } catch (err) {
-        status.innerText = "❌ Error de conexión.";
+        try {
+            const res = await fetch('/api', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(datos)
+            });
+            if (res.ok) {
+                status.innerHTML = "<span style='color:green'>✅ Solicitud enviada con éxito.</span>";
+                e.target.reset();
+            } else { status.innerHTML = "<span style='color:red'>❌ Error al enviar.</span>"; }
+        } catch (err) { status.innerHTML = "<span style='color:red'>❌ Error de conexión.</span>"; }
+    });
+
+    // --- FUNCIÓN PARA CONSULTAR ESTADO ---
+    async function consultarEstatus() {
+        const placa = document.getElementById('buscPlaca').value.toUpperCase().trim();
+        const resDiv = document.getElementById('resultadoConsulta');
+        if(!placa) return;
+
+        resDiv.innerText = "🔍 Buscando...";
+        resDiv.style.background = "#eee";
+
+        try {
+            const res = await fetch(`/api?placa=${placa}&tipo=consulta`);
+            const data = await res.json();
+
+            if (data.length > 0) {
+                const cita = data[0];
+                let color = cita.estado === 'Aceptada' ? '#d4edda' : (cita.estado === 'Rechazada' ? '#f8d7da' : '#fff3cd');
+                resDiv.style.background = color;
+                resDiv.innerHTML = `Estatus: <b>${cita.estado.toUpperCase()}</b><br><small>Fecha: ${cita.fecha_cita}</small>`;
+            } else {
+                resDiv.style.background = "#f8d7da";
+                resDiv.innerText = "❌ No hay cita con esta placa.";
+            }
+        } catch (err) { resDiv.innerText = "❌ Error al consultar."; }
     }
-    btn.disabled = false;
-});
-
-// CONSULTAR ESTATUS
-async function consultarEstatus() {
-    const placa = document.getElementById('buscPlaca').value.toUpperCase().replace(/\s+/g, '');
-    const resDiv = document.getElementById('consultaResultado');
-    
-    if(!placa) return alert("Por favor ingresa una placa");
-    
-    resDiv.innerText = "Buscando...";
-    resDiv.style.background = "#f8f9fa";
-
-    try {
-        const res = await fetch(`/api?placa=${placa}&tipo=consulta`);
-        const data = await res.json();
-        
-        if(data.length > 0) {
-            const estado = data[0].estado;
-            let color = estado === 'Aceptada' ? '#d4edda' : (estado === 'Rechazada' ? '#f8d7da' : '#fff3cd');
-            let textoColor = estado === 'Aceptada' ? '#155724' : (estado === 'Rechazada' ? '#721c24' : '#856404');
-            
-            resDiv.style.background = color;
-            resDiv.style.color = textoColor;
-            resDiv.innerHTML = `Estatus para <b>${placa}</b>: <br><span style="font-size:1.2em; font-weight:bold;">${estado.toUpperCase()}</span>`;
-        } else {
-            resDiv.style.background = "#eee";
-            resDiv.innerText = "No se encontró ninguna cita con esa placa.";
-        }
-    } catch (err) {
-        resDiv.innerText = "Error al consultar.";
-    }
-}
 </script>
 
+       
 
 
 </body>

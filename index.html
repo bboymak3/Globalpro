@@ -735,6 +735,68 @@
     </div>
 </div>
 
+
+<div id="seccion-citas" style="background: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 400px; margin: 20px auto;">
+    <h3 style="color: #333; text-align: center;">📅 Reserva tu Cita</h3>
+    <form id="formCitaPublico" style="display: flex; flex-direction: column; gap: 10px;">
+        <input type="text" id="c_placa" placeholder="Placa (ej: RCM36H)" required style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+        <input type="date" id="c_fecha" required style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+        <input type="time" id="c_hora" required style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+        <select id="c_servicio" style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+            <option value="Mantenimiento General">Mantenimiento General</option>
+            <option value="Cambio de Aceite">Cambio de Aceite</option>
+            <option value="Frenos / Tren">Frenos / Tren Delantero</option>
+            <option value="Electricidad">Electricidad / Escaneo</option>
+        </select>
+        <button type="submit" id="btnEnviarCita" style="background: #28a745; color: white; padding: 12px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">
+            Agendar Cita
+        </button>
+    </form>
+    <p id="c_mensaje" style="text-align: center; margin-top: 10px; font-weight: bold;"></p>
+</div>
+
+<script>
+document.getElementById('formCitaPublico').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const msg = document.getElementById('c_mensaje');
+    const btn = document.getElementById('btnEnviarCita');
+    
+    btn.disabled = true;
+    msg.innerText = "Procesando...";
+
+    const datos = {
+        placa: document.getElementById('c_placa').value.toUpperCase().trim(),
+        fecha: document.getElementById('c_fecha').value,
+        hora: document.getElementById('c_hora').value,
+        servicio: document.getElementById('c_servicio').value
+    };
+
+    try {
+        // Apuntamos a la nueva carpeta /functions/api.js de Pages
+        const res = await fetch('/api', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(datos)
+        });
+
+        if (res.ok) {
+            msg.style.color = "green";
+            msg.innerText = "✅ Cita registrada exitosamente.";
+            e.target.reset();
+        } else {
+            msg.style.color = "red";
+            msg.innerText = "❌ Error al agendar. Intente luego.";
+        }
+    } catch (err) {
+        msg.innerText = "❌ Error de conexión.";
+    }
+    btn.disabled = false;
+});
+</script>
+
+
+
+
 <script>
     const CHAT_API_URL = "https://llm-chat-app-template.estilosgrado33.workers.dev/api/chat"; 
     let chatHistoryIA = [];

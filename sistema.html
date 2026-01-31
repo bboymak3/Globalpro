@@ -3,179 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Administrativo - Global Pro</title>
+    <title>Panel Global Pro - Sistema Integral</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; margin: 0; padding: 20px; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; padding: 20px; margin: 0; }
         .container { max-width: 1000px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h2 { color: #2c3e50; border-bottom: 3px solid #007bff; padding-bottom: 8px; margin-top: 30px; }
+        h2 { color: #2c3e50; border-bottom: 3px solid #007bff; padding-bottom: 8px; }
         
-        /* SECCIÓN ORDEN DE TRABAJO (OT) */
-        .ot-section { background: #e9ecef; padding: 20px; border-radius: 8px; margin-bottom: 40px; border-left: 5px solid #007bff; }
+        /* BUSCADOR DE HISTORIAL */
+        .search-box { background: #f8f9fa; padding: 15px; border: 1px solid #dee2e6; border-radius: 8px; margin-bottom: 15px; display: flex; gap: 10px; align-items: center; }
+        
+        /* FORMULARIO OT */
+        .ot-section { background: #e9ecef; padding: 20px; border-radius: 8px; margin-bottom: 40px; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
         textarea { grid-column: span 2; }
-        .btn-ot { grid-column: span 2; background: #007bff; color: white; border: none; padding: 15px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s; }
-        .btn-ot:hover { background: #0056b3; }
+        .btn-blue { grid-column: span 2; background: #007bff; color: white; border: none; padding: 15px; border-radius: 6px; font-weight: bold; cursor: pointer; }
 
-        /* SECCIÓN AGENDA DE CITAS */
-        .filtros { display: flex; gap: 8px; margin: 20px 0; flex-wrap: wrap; }
-        .btn-f { padding: 10px 18px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; background: #6c757d; color: white; transition: 0.2s; }
+        /* TABLA DE CITAS */
+        .filtros { display: flex; gap: 8px; margin: 20px 0; }
+        .btn-f { padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; background: #6c757d; color: white; font-weight: bold; }
         .btn-active { background: #007bff; }
-        .btn-f:hover { opacity: 0.8; }
-        
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; background: white; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         th { background: #2c3e50; color: white; padding: 12px; }
-        td { padding: 12px; border-bottom: 1px solid #eee; text-align: center; }
-        .placa { font-weight: bold; color: #e74c3c; font-size: 1.1em; }
-        .btn-check { background: #27ae60; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; margin-right: 5px; }
-        .btn-x { background: #c0392b; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; }
-        .estado-tag { padding: 4px 8px; border-radius: 4px; font-size: 0.85em; font-weight: bold; }
+        td { padding: 10px; border-bottom: 1px solid #eee; text-align: center; }
+        .placa { font-weight: bold; color: #e74c3c; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1 style="text-align:center; color:#2c3e50;">⚙️ Panel Global Pro Automotriz</h1>
+    <h1 style="text-align:center;">⚙️ Gestión Global Pro</h1>
+
+    <div class="search-box">
+        <strong>🔍 Consultar Historial (OT):</strong>
+        <input type="text" id="buscHistorialPlaca" placeholder="Placa del Vehículo" style="flex:1; padding:10px;">
+        <button onclick="consultarHistorial()" style="background:#495057; color:white; padding:10px; border:none; border-radius:5px; cursor:pointer;">VER TRABAJOS</button>
+    </div>
+    <div id="resultadoHistorial" style="margin-bottom:20px; display:none; padding:15px; background:#fff3cd; border-radius:8px;"></div>
 
     <div class="ot-section">
-        <h2>📝 Generar Nueva Orden de Trabajo</h2>
+        <h2>📝 Nueva Orden de Trabajo</h2>
         <form id="otForm">
             <div class="form-grid">
-                <input type="text" id="otPlaca" placeholder="PLACA (Ej: RCM36H)" required>
-                <input type="number" id="otKm" placeholder="KILOMETRAJE ACTUAL" required>
-                <input type="text" id="otTecnico" placeholder="NOMBRE DEL TÉCNICO" required>
+                <input type="text" id="otPlaca" placeholder="PLACA" required>
+                <input type="number" id="otKm" placeholder="KM ACTUAL" required>
+                <input type="text" id="otTecnico" placeholder="TÉCNICO" required>
                 <select id="otServicio">
-                    <option value="Mantenimiento General">Mantenimiento General</option>
+                    <option value="Mantenimiento">Mantenimiento</option>
                     <option value="Cambio de Aceite">Cambio de Aceite</option>
-                    <option value="Frenos / Tren Delantero">Frenos / Tren Delantero</option>
-                    <option value="Escaneo / Electricidad">Escaneo / Electricidad</option>
+                    <option value="Frenos">Frenos</option>
+                    <option value="Electricidad">Electricidad</option>
                 </select>
-                <textarea id="otDetalles" rows="3" placeholder="Descripción detallada del trabajo realizado..." required></textarea>
-                <button type="submit" class="btn-ot" id="btnSaveOT">💾 REGISTRAR TRABAJO EN SISTEMA</button>
+                <textarea id="otDetalles" rows="3" placeholder="Detalles del trabajo..." required></textarea>
+                <button type="submit" class="btn-blue" id="btnSaveOT">💾 REGISTRAR OT</button>
             </div>
         </form>
         <div id="otMsg" style="text-align:center; margin-top:10px; font-weight:bold;"></div>
     </div>
 
-    <h2>📅 Agenda de Solicitudes</h2>
+    <h2>📅 Agenda de Citas</h2>
     <div class="filtros">
         <button class="btn-f" onclick="verCitas('ayer')">Ayer</button>
-        <button class="btn-f btn-active" onclick="verCitas('hoy')" id="btnHoy">Hoy</button>
+        <button class="btn-f btn-active" onclick="verCitas('hoy')">Hoy</button>
         <button class="btn-f" onclick="verCitas('manana')">Mañana</button>
-        <button class="btn-f" onclick="verCitas('mes')">Este Mes</button>
-        <button class="btn-f" onclick="verCitas('todos')">Ver Todo</button>
+        <button class="btn-f" onclick="verCitas('mes')">Mes</button>
     </div>
 
     <table>
         <thead>
             <tr>
-                <th>Fecha/Hora</th>
+                <th>Fecha</th>
                 <th>Placa</th>
                 <th>WhatsApp</th>
                 <th>Servicio</th>
-                <th>Estado Actual</th>
-                <th>Gestión</th>
+                <th>Estado</th>
+                <th>Acción</th>
             </tr>
         </thead>
-        <tbody id="cuerpoTablaCitas">
-            </tbody>
+        <tbody id="cuerpoTablaCitas"></tbody>
     </table>
 </div>
 
 <script>
-    // --- LÓGICA 1: GUARDAR ORDEN DE TRABAJO ---
+    // --- FUNCIÓN HISTORIAL OT ---
+    async function consultarHistorial() {
+        const placa = document.getElementById('buscHistorialPlaca').value.toUpperCase().trim();
+        const resDiv = document.getElementById('resultadoHistorial');
+        if(!placa) return alert("Ingresa una placa");
+        resDiv.style.display = "block";
+        resDiv.innerHTML = "Buscando...";
+        try {
+            const res = await fetch(`/api?placa=${placa}&tipo=historial`);
+            const datos = await res.json();
+            if(datos.length === 0) {
+                resDiv.innerHTML = "No hay historial para esta placa.";
+            } else {
+                resDiv.innerHTML = "<h4>Trabajos previos:</h4>" + datos.map(t => 
+                    `<div style="border-bottom:1px solid #ccc; padding:5px;">
+                        <b>${t.fecha_hora}:</b> ${t.notas_exigibles} (KM: ${t.kilometraje})
+                    </div>`).join('');
+            }
+        } catch(e) { resDiv.innerHTML = "Error al buscar historial."; }
+    }
+
+    // --- GUARDAR OT ---
     document.getElementById('otForm').addEventListener('submit', async (e) => {
         e.preventDefault();
-        const msg = document.getElementById('otMsg');
-        const btn = document.getElementById('btnSaveOT');
-        btn.disabled = true;
-        msg.innerText = "⏳ Guardando en base de datos...";
-
         const data = {
-            tipo: 'OT', 
+            tipo: 'OT',
             placa: document.getElementById('otPlaca').value.toUpperCase().trim(),
             km: document.getElementById('otKm').value,
             tecnico: document.getElementById('otTecnico').value,
             detalles: document.getElementById('otDetalles').value
         };
-
         try {
             const res = await fetch('/api', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(data)
             });
-            if(res.ok) {
-                msg.innerHTML = "<span style='color:green;'>✅ Trabajo registrado con éxito.</span>";
-                e.target.reset();
-            }
-        } catch (e) {
-            msg.innerHTML = "<span style='color:red;'>❌ Error de conexión con el servidor.</span>";
-        }
-        btn.disabled = false;
+            if(res.ok) { alert("OT Guardada"); e.target.reset(); }
+        } catch(e) { alert("Error al guardar"); }
     });
 
-    // --- LÓGICA 2: GESTIÓN DE CITAS ---
+    // --- VER CITAS ---
     async function verCitas(periodo) {
         const cuerpo = document.getElementById('cuerpoTablaCitas');
-        cuerpo.innerHTML = "<tr><td colspan='6'>Cargando agenda...</td></tr>";
-
+        cuerpo.innerHTML = "<tr><td colspan='6'>Cargando...</td></tr>";
         try {
             const res = await fetch(`/api?periodo=${periodo}`);
             const datos = await res.json();
-            cuerpo.innerHTML = "";
-
-            if(datos.length === 0) {
-                cuerpo.innerHTML = "<tr><td colspan='6'>No hay registros para este periodo.</td></tr>";
-                return;
-            }
-
-            datos.forEach(c => {
-                const msj = `Hola! Global Pro te informa que tu cita para la placa ${c.placa} el día ${c.fecha_cita} ha sido ACEPTADA. Te esperamos!`;
+            cuerpo.innerHTML = datos.map(c => {
+                const msj = `Hola! Tu cita para la placa ${c.placa} el día ${c.fecha_cita} ha sido ACEPTADA.`;
                 const linkWA = `https://wa.me/${c.whatsapp}?text=${encodeURIComponent(msj)}`;
-                
-                // Color según estado
-                let colorTag = c.estado === 'Aceptada' ? '#d4edda' : (c.estado === 'Rechazada' ? '#f8d7da' : '#fff3cd');
-                let colorTexto = c.estado === 'Aceptada' ? '#155724' : (c.estado === 'Rechazada' ? '#721c24' : '#856404');
-
-                cuerpo.innerHTML += `
-                    <tr>
-                        <td>${c.fecha_cita}<br><small>${c.hora_cita}</small></td>
-                        <td class="placa">${c.placa}</td>
-                        <td><a href="https://wa.me/${c.whatsapp}" target="_blank" style="text-decoration:none;">📱 ${c.whatsapp}</a></td>
-                        <td>${c.servicio}</td>
-                        <td><span class="estado-tag" style="background:${colorTag}; color:${colorTexto};">${c.estado.toUpperCase()}</span></td>
-                        <td>
-                            <button class="btn-check" title="Aceptar y abrir WhatsApp" onclick="cambiarEstado(${c.id}, 'Aceptada'); window.open('${linkWA}')">✔️</button>
-                            <button class="btn-x" title="Rechazar" onclick="cambiarEstado(${c.id}, 'Rechazada')">❌</button>
-                        </td>
-                    </tr>`;
-            });
-        } catch (e) {
-            cuerpo.innerHTML = "<tr><td colspan='6' style='color:red;'>Error al cargar los datos del servidor.</td></tr>";
-        }
+                return `<tr>
+                    <td>${c.fecha_cita}</td>
+                    <td class="placa">${c.placa}</td>
+                    <td><a href="https://wa.me/${c.whatsapp}" target="_blank">📱 WhatsApp</a></td>
+                    <td>${c.servicio}</td>
+                    <td>${c.estado}</td>
+                    <td>
+                        <button onclick="cambiarEstado(${c.id}, 'Aceptada'); window.open('${linkWA}')" style="background:green; color:white;">✔️</button>
+                        <button onclick="cambiarEstado(${c.id}, 'Rechazada')" style="background:red; color:white;">❌</button>
+                    </td>
+                </tr>`;
+            }).join('');
+        } catch(e) { cuerpo.innerHTML = "Error al cargar citas."; }
     }
 
     async function cambiarEstado(id, nuevoEstado) {
-        try {
-            const res = await fetch('/api', {
-                method: 'PATCH',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ id, nuevoEstado })
-            });
-            if(res.ok) {
-                // Recargamos la tabla para ver el cambio de color
-                const btnActivo = document.querySelector('.btn-active').innerText.toLowerCase();
-                verCitas(btnActivo.includes('hoy') ? 'hoy' : btnActivo);
-            }
-        } catch (e) {
-            alert("Error al actualizar estatus");
-        }
+        await fetch('/api', {
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ id, nuevoEstado })
+        });
+        verCitas('hoy');
     }
 
-    // Al cargar la página, mostrar lo de hoy
     document.addEventListener('DOMContentLoaded', () => verCitas('hoy'));
 </script>
-
 </body>
 </html>

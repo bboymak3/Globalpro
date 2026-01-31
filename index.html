@@ -489,51 +489,10 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-7">
-        <form id="contactForm" class="contact-form needs-validation" novalidate>
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label for="nombre" class="form-label">Nombre Completo</label>
-              <input type="text" class="form-control" id="nombre" required>
-            </div>
-            <div class="col-md-6">
-              <label for="telefono" class="form-label">Teléfono / WhatsApp</label>
-              <input type="tel" class="form-control" id="telefono" required>
-            </div>
-            <div class="col-12">
-              <label for="vehiculo" class="form-label">Vehículo (Marca/Modelo/Año)</label>
-              <input type="text" class="form-control" id="vehiculo" placeholder="Ej: Toyota Yaris 2020" required>
-            </div>
-            <div class="col-md-6">
-              <label for="servicio" class="form-label">Tipo de Servicio</label>
-              <select class="form-select" id="servicio" required>
-                <option value="" selected disabled>Selecciona un servicio...</option>
-                <option value="Mecánica General y Mantenimiento">Mecánica General y Mantenimiento</option>
-                <option value="Electromecánica y Electricidad">Electromecánica y Electricidad</option>
-                <option value="Chapa y Pintura">Chapa y Pintura</option>
-                <option value="Aire Acondicionado">Aire Acondicionado</option>
-                <option value="Frenos y Suspensión">Frenos y Suspensión</option>
-                <option value="Reparación de Transmisión">Reparación de Transmisión</option>
-                <option value="Diagnóstico Computarizado">Diagnóstico Computarizado</option>
-                <option value="Servicio a Domicilio">Servicio a Domicilio</option>
-                <option value="Otro">Otro</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="comuna" class="form-label">Tu Comuna</label>
-              <select class="form-select" id="comuna" required>
-                <option value="" selected disabled>Selecciona tu comuna...</option>
-                <option value="Santiago">Santiago</option><option value="Providencia">Providencia</option><option value="Las Condes">Las Condes</option><option value="Vitacura">Vitacura</option><option value="La Reina">La Reina</option><option value="Peñalolén">Peñalolén</option><option value="La Florida">La Florida</option><option value="Puente Alto">Puente Alto</option><option value="Maipú">Maipú</option><option value="San Bernardo">San Bernardo</option>
-              </select>
-            </div>
-            <div class="col-12">
-              <label for="mensaje" class="form-label">Describe el problema o lo que necesitas</label>
-              <textarea class="form-control" id="mensaje" rows="4" placeholder="Ej: Mi auto no enciende..."></textarea>
-            </div>
-            <div class="col-12">
-              <button type="submit" class="btn btn-primary btn-lg w-100">
-                <i class="fab fa-whatsapp me-2"></i>Enviar por WhatsApp
-              </button>
+
+
+
+       
             </div>
           </div>
         </form>
@@ -694,6 +653,8 @@
         <div id="chat-messages-ia">
             <div class="msg ia-msg">¡Hola! Soy tu asistente de Global Pro. Si quieres saber qué le hicimos a tu carro, ¡dame la placa!</div>
         </div>
+
+
         <div id="chat-input-area">
             <input type="text" id="ia-input" placeholder="Escribe tu duda o placa...">
             <button onclick="sendToIA()">Enviar</button>
@@ -736,24 +697,10 @@
 </div>
 
 
-<div id="seccion-citas" style="background: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 400px; margin: 20px auto;">
-    <h3 style="color: #333; text-align: center;">📅 Reserva tu Cita</h3>
-    <form id="formCitaPublico" style="display: flex; flex-direction: column; gap: 10px;">
-        <input type="text" id="c_placa" placeholder="Placa (ej: RCM36H)" required style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
-        <input type="date" id="c_fecha" required style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
-        <input type="time" id="c_hora" required style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
-        <select id="c_servicio" style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
-            <option value="Mantenimiento General">Mantenimiento General</option>
-            <option value="Cambio de Aceite">Cambio de Aceite</option>
-            <option value="Frenos / Tren">Frenos / Tren Delantero</option>
-            <option value="Electricidad">Electricidad / Escaneo</option>
-        </select>
-        <button type="submit" id="btnEnviarCita" style="background: #28a745; color: white; padding: 12px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">
-            Agendar Cita
-        </button>
-    </form>
-    <p id="c_mensaje" style="text-align: center; margin-top: 10px; font-weight: bold;"></p>
-</div>
+ 
+
+
+
 
 <script>
 document.getElementById('formCitaPublico').addEventListener('submit', async (e) => {

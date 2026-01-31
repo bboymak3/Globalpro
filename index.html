@@ -1,274 +1,61 @@
-<!DOCTYPE html>
-<html lang="es-CL">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GlobalPro - Taller Mecánico en Santiago | Servicio Automotriz Integral</title>
-  <meta name="description" content="Taller mecánico GlobalPro en Santiago. Expertos en mecánica automotriz, electromecánica, chapa y pintura. Ofrecemos servicio a domicilio en toda el Área Metropolitana. ¡Agenda tu cita!">
-  <link rel="canonical" href="https://globalpro.pages.dev/"/>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <link rel="stylesheet" href="css/styles.css"/>
-  
-  <script src="https://elfsightcdn.com/platform.js" async></script>
+export interface Env {
+  AI: any;
+  DB: D1Database;
+}
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "GlobalPro Taller Mecánico",
-    "image": "https://globalpro.pages.dev/images/image1.jpg",
-    "telephone": "+569 39026185",
-    "email": "contacto@globalpro.cl",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Santiago",
-      "addressCountry": "CL"
-    },
-    "url": "https://globalpro.pages.dev",
-    "description": "Taller mecánico especializado en servicio automotriz integral, mecánica general, electromecánica y más. Servicio a domicilio en el Área Metropolitana de Chile.",
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      "opens": "09:00",
-      "closes": "18:00"
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const url = new URL(request.url);
+
+    if (url.pathname === '/api/chat' && request.method === 'POST') {
+      const { messages } = await request.json();
+
+      // 1. Detectar placa en el mensaje
+      const lastUserMessage = messages[messages.length - 1].content.toUpperCase();
+      const placaMatch = lastUserMessage.match(/[A-Z0-9]{6,7}/); 
+
+      let historialPrevio = "";
+
+      if (placaMatch) {
+        const placa = placaMatch[0];
+        
+        // 2. Consulta a D1: Buscamos en la tabla de Eventos (Visitas previas)
+        const { results } = await env.DB.prepare(`
+          SELECT e.fecha_hora, e.notas_exigibles, e.kilometraje, e.tecnico_nombre
+          FROM Eventos e
+          JOIN Clientes c ON c.id = e.cliente_id
+          WHERE c.placa = ?
+          ORDER BY e.id DESC LIMIT 3
+        `).bind(placa).all();
+
+        if (results && results.length > 0) {
+          historialPrevio = `\n[DATOS REALES DEL TALLER para la placa ${placa}: ${JSON.stringify(results)}]`;
+        } else {
+          historialPrevio = `\n[SISTEMA: No existen registros de trabajos previos para la placa ${placa}]`;
+        }
+      }
+
+      // 3. Instrucciones para que la IA use esos datos
+      const systemPrompt = `Eres el asistente técnico de Global Pro Automotriz. 
+      Tu misión es informar a los clientes sobre los trabajos realizados en sus vehículos.
+      Si el sistema te entrega DATOS REALES DEL TALLER, resume los trabajos (qué se hizo, qué fecha y qué técnico) de forma profesional.
+      Si no hay datos, invita al cliente a agendar su primera cita.
+      Usa siempre un tono servicial y técnico. ${historialPrevio}`;
+
+      // 4. Ejecución de la IA
+      const response = await env.AI.run('@cf/meta/llama-3-8b-instruct', {
+        messages: [
+          { role: 'system', content: systemPrompt },
+          ...messages
+        ],
+        stream: true,
+      });
+
+      return new Response(response, {
+        headers: { 'content-type': 'text/event-stream' },
+      });
     }
-  }
-  </script>
-</head>
-<body>
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-  <div class="container nav-container">
-    <a href="#inicio" class="logo">
-      <div class="logo-img">GP</div>
-      <div>
-        <div class="logo-text">GLOBALPRO</div>
-        <div class="logo-subtext">Taller Mecánico</div>
-      </div>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
-        <li class="nav-item"><a class="nav-link" href="#seccion-citas">Agenda tu Cita</a></li>
-        <li class="nav-item">
-          <a href="https://wa.me/56939026185" class="whatsapp-btn" target="_blank">
-            <i class="fab fa-whatsapp me-2"></i> WhatsApp
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<section class="hero-section" id="inicio">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-7">
-        <span class="hero-badge">Servicio Automotriz Integral</span>
-        <h1 class="hero-title">Taller Mecánico Especialista en <span class="text-accent">Diagnóstico y Reparación</span></h1>
-        <p class="hero-subtitle">En GlobalPro, somos expertos en mecánica automotriz, electromecánica y mantenimiento. ¡Tu vehículo en las mejores manos! Servicio a domicilio en todo Santiago.</p>
-        <div class="btn-group mt-4">
-          <a href="#seccion-citas" class="btn btn-primary me-2">Agendar Cita</a>
-          <a href="#servicios" class="btn btn-outline-light">Ver Servicios</a>
-        </div>
-      </div>
-      <div class="col-lg-5">
-        <img src="images/image1.jpg" alt="Taller mecánico profesional GlobalPro" class="img-fluid rounded shadow">
-      </div>
-    </div>
-  </div>
-</section>
-
-<div id="seccion-citas" style="max-width: 500px; margin: 40px auto; padding: 25px; border: 1px solid #ddd; border-radius: 15px; background: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
-    <h3 style="text-align: center; font-weight: bold; color: #333;">📅 Agendar Cita Online</h3>
-    <form id="formCita">
-        <input type="text" id="cPlaca" placeholder="Placa (Ej: RCM36H)" required style="width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:8px;">
-        <input type="tel" id="cWhatsapp" placeholder="WhatsApp (Ej: 912345678)" required style="width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:8px;">
-        <div style="display: flex; gap: 10px;">
-            <input type="date" id="cFecha" required style="flex:1; padding:12px; border:1px solid #ccc; border-radius:8px;">
-            <input type="time" id="cHora" required style="flex:1; padding:12px; border:1px solid #ccc; border-radius:8px;">
-        </div>
-        <select id="cServicio" style="width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:8px;">
-            <option value="Mantenimiento General">Mantenimiento General</option>
-            <option value="Cambio de Aceite">Cambio de Aceite</option>
-            <option value="Frenos">Frenos</option>
-            <option value="Electricidad">Electricidad</option>
-        </select>
-        <button type="submit" style="width:100%; padding:15px; background:#28a745; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">ENVIAR SOLICITUD</button>
-    </form>
-    <div id="statusCita" style="text-align:center; margin-top:10px;"></div>
-    <hr>
-    <h4 style="text-align: center; font-size: 1rem;">🔎 Consultar mi Estado</h4>
-    <div style="display:flex; gap:5px;">
-        <input type="text" id="buscPlaca" placeholder="Tu Placa" style="flex:1; padding:10px; border:1px solid #ccc; border-radius:8px;">
-        <button onclick="consultarEstatus()" style="padding:10px; background:#6c757d; color:white; border:none; border-radius:8px;">VER</button>
-    </div>
-    <div id="resultadoConsulta" style="text-align:center; margin-top:10px; padding:10px; border-radius:8px;"></div>
-</div>
-
-<section class="services-section" id="servicios">
-  <div class="container">
-    <h2 class="section-title">Nuestros Servicios de Mecánica Automotriz</h2>
-    <p class="section-subtitle">Ofrecemos una solución completa para el mantenimiento y reparación de tu vehículo.</p>
-    <div class="row g-4">
-      <div class="col-lg-4 col-md-6">
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-oil-can"></i></div>
-          <h3 class="service-title">Mecánica General</h3>
-          <p>Mantenimiento preventivo, cambio de aceite y revisión técnica.</p>
-          <a href="https://wa.me/56939026185" class="btn btn-outline-primary mt-3">Cotizar</a>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-car-battery"></i></div>
-          <h3 class="service-title">Electromecánica</h3>
-          <p>Electricidad automotriz, reparación de ECU y diagnóstico.</p>
-          <a href="https://wa.me/56939026185" class="btn btn-outline-primary mt-3">Cotizar</a>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-home"></i></div>
-          <h3 class="service-title">Servicio a Domicilio</h3>
-          <p>Mecánico a domicilio y auxilio en carretera en todo Santiago.</p>
-          <a href="https://wa.me/56939026185" class="btn btn-outline-primary mt-3">Cotizar</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="servicios-especializados" class="specialized-services-section py-5">
-    <div class="container">
-        <header class="text-center mb-5">
-            <h2 class="main-title">TALLER MECÁNICO ESPECIALIZADO</h2>
-            <p>Servicio automotriz integral con tecnología de vanguardia.</p>
-        </header>
-        <div class="section-card active">
-            <div class="section-content">
-                En nuestro taller mecánico, ofrecemos un servicio automotriz integral que combina experiencia y tecnología avanzada.
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="galeria-de-trabajos" class="gallery-section py-5 bg-light">
-  <div class="container">
-    <h2 class="section-title">Nuestro Trabajo en Detalle</h2>
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-4">
-        <div class="gallery-item">
-          <img src="images/reparacion-frenos-domicilio.jpeg" class="img-fluid rounded" alt="Reparación de frenos">
-          <h4 class="mt-2">Frenos a Domicilio</h4>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="gallery-item">
-          <img src="images/reparacion-aire-acondicionado.jpeg" class="img-fluid rounded" alt="Aire acondicionado">
-          <h4 class="mt-2">Aire Acondicionado</h4>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="gallery-item">
-          <img src="images/mantenimiento-vehicular-general.jpeg" class="img-fluid rounded" alt="Mantenimiento general">
-          <h4 class="mt-2">Mantenimiento General</h4>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="resenas" class="py-5 bg-light text-center">
-  <div class="container">
-    <h2 class="section-title">Lo que dicen nuestros clientes</h2>
-    <div class="elfsight-app-4cbd3727-4380-44b3-9cd7-2525ccb8f5d8" data-elfsight-app-lazy></div>
-  </div>
-</section>
-
-<footer class="bg-black text-white-50 py-4 text-center">
-  <div class="container">
-    <p>&copy; 2026 GlobalPro - Taller Mecánico. Todos los derechos reservados.</p>
-  </div>
-</footer>
-
-<a href="https://wa.me/56939026185" class="whatsapp-float" target="_blank" style="position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 999;">
-  <i class="fab fa-whatsapp"></i>
-</a>
-
-<div id="globalpro-chat-wrapper" style="position: fixed; bottom: 100px; right: 20px; z-index: 9999;">
-    <button id="globalpro-btn" type="button" onclick="toggleGlobalChat()" style="width: 60px; height: 60px; background: #eab308; border-radius: 50%; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; display: flex; align-items: center; justify-content: center;">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="black"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-    </button>
-    <div id="globalpro-win" style="width: 350px; height: 450px; background: #1e293b; position: absolute; bottom: 80px; right: 0; display: none; flex-direction: column; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
-        <div style="background: #eab308; color: black; padding: 15px; font-weight: bold; display: flex; justify-content: space-between;">
-            <span>Asistente Global Pro 🛠️</span>
-            <button onclick="toggleGlobalChat()" style="background:none; border:none; cursor:pointer; font-weight:bold;">X</button>
-        </div>
-        <div id="globalpro-msgs" style="flex: 1; padding: 15px; overflow-y: auto; color: white; font-size: 14px;">
-            <div style="background: #0f172a; padding: 10px; border-radius: 10px;">¡Hola! Soy tu asistente. Dame tu placa para revisar tu cita.</div>
-        </div>
-        <div style="padding: 10px; background: #0f172a; display: flex; gap: 5px;">
-            <input type="text" id="gp-input-text" placeholder="Escribe tu placa..." style="flex: 1; padding: 8px; border-radius: 5px; border: none;">
-            <button onclick="sendToIA()" style="background: #eab308; padding: 8px; border: none; border-radius: 5px; font-weight: bold;">Enviar</button>
-        </div>
-    </div>
-</div>
-
-<script>
-function toggleGlobalChat() {
-    const win = document.getElementById('globalpro-win');
-    win.style.display = (win.style.display === 'none' || win.style.display === '') ? 'flex' : 'none';
-}
-
-document.getElementById('formCita').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const status = document.getElementById('statusCita');
-    status.innerText = "⏳ Enviando...";
-    const datos = {
-        placa: document.getElementById('cPlaca').value.toUpperCase().trim(),
-        whatsapp: document.getElementById('cWhatsapp').value.trim(),
-        fecha: document.getElementById('cFecha').value,
-        hora: document.getElementById('cHora').value,
-        servicio: document.getElementById('cServicio').value,
-        tipo: 'CITA'
-    };
-    try {
-        const res = await fetch('/api', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) });
-        if (res.ok) { status.innerHTML = "<span style='color:green'>✅ ¡Cita enviada!</span>"; e.target.reset(); }
-    } catch (err) { status.innerText = "❌ Error."; }
-});
-
-async function consultarEstatus() {
-    const placa = document.getElementById('buscPlaca').value.toUpperCase().trim();
-    const resDiv = document.getElementById('resultadoConsulta');
-    if(!placa) return;
-    resDiv.innerText = "🔍 Buscando...";
-    try {
-        const res = await fetch(`/api?placa=${placa}&tipo=consulta`);
-        const data = await res.json();
-        if (data.length > 0) {
-            const cita = data[0];
-            resDiv.style.background = "#d4edda";
-            resDiv.innerHTML = `Estado: <b>${cita.estado}</b><br>Fecha: ${cita.fecha_cita}`;
-        } else { resDiv.style.background = "#f8d7da"; resDiv.innerText = "❌ No registrada."; }
-    } catch (err) { resDiv.innerText = "❌ Error."; }
-}
-
-async function sendToIA() {
-    const input = document.getElementById('gp-input-text');
-    const msgs = document.getElementById('globalpro-msgs');
-    if(!input.value) return;
-    msgs.innerHTML += `<div style="background: #334155; padding: 10px; border-radius: 10px; margin-top: 5px; align-self: flex-end;">${input.value}</div>`;
-    input.value = "";
-    // Lógica de fetch a la IA...
-}
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    return new Response("Not Found", { status: 404 });
+  },
+};

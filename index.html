@@ -795,90 +795,110 @@ document.getElementById('formCitaPublico').addEventListener('submit', async (e) 
 </script>
 
 
+<section id="citas-cliente" style="max-width: 500px; margin: 20px auto; font-family: sans-serif; border: 1px solid #ddd; padding: 20px; border-radius: 10px; background: #fff;">
+    <h2 style="text-align: center; color: #333;">📅 Agendar Cita</h2>
+    
+    <form id="formReserva">
+        <input type="text" id="cPlaca" placeholder="Placa del Vehículo (Ej: RCM36H)" required style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:5px;">
+        
+        <input type="tel" id="cWhatsapp" placeholder="Número de WhatsApp (Ej: 04121234567)" required style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:5px;">
+        
+        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+            <input type="date" id="cFecha" required style="flex:1; padding:10px; border:1px solid #ccc; border-radius:5px;">
+            <input type="time" id="cHora" required style="flex:1; padding:10px; border:1px solid #ccc; border-radius:5px;">
+        </div>
 
+        <select id="cServicio" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:5px;">
+            <option value="Mantenimiento General">Mantenimiento General</option>
+            <option value="Cambio de Aceite">Cambio de Aceite</option>
+            <option value="Frenos / Tren Delantero">Frenos / Tren Delantero</option>
+            <option value="Escaneo / Electricidad">Escaneo / Electricidad</option>
+        </select>
+
+        <button type="submit" id="btnCita" style="width:100%; padding:12px; background:#28a745; color:white; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">Agendar Cita</button>
+    </form>
+    <div id="reservaStatus" style="text-align:center; margin-top:10px; font-weight:bold;"></div>
+
+    <hr style="margin: 25px 0; border: 0; border-top: 1px solid #eee;">
+
+    <h3 style="text-align: center; font-size: 1.1em; color: #555;">🔍 Consultar Estado de Cita</h3>
+    <div style="display: flex; gap: 5px;">
+        <input type="text" id="buscPlaca" placeholder="Introduce tu Placa" style="flex:1; padding:10px; border:1px solid #ccc; border-radius:5px;">
+        <button onclick="consultarEstatus()" style="padding:10px; background:#6c757d; color:white; border:none; border-radius:5px; cursor:pointer;">Consultar</button>
+    </div>
+    <div id="consultaResultado" style="text-align:center; margin-top:15px; padding:10px; border-radius:5px;"></div>
+</section>
 
 <script>
-    const CHAT_API_URL = "https://llm-chat-app-template.estilosgrado33.workers.dev/api/chat"; 
-    let chatHistoryIA = [];
+// GUARDAR CITA
+document.getElementById('formReserva').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const status = document.getElementById('reservaStatus');
+    const btn = document.getElementById('btnCita');
+    
+    btn.disabled = true;
+    status.innerText = "⏳ Enviando datos...";
 
-    // Función para abrir/cerrar corregida
-    function toggleGlobalChat() {
-        const win = document.getElementById('globalpro-win');
-        if (win.style.display === 'none' || win.style.display === '') {
-            win.style.display = 'flex';
-            document.getElementById('gp-input-text').focus();
-        } else {
-            win.style.display = 'none';
-        }
-    }
-
-    // Asignación directa del clic para evitar fallos
-    document.getElementById('globalpro-btn').onclick = toggleGlobalChat;
-
-    // Función para enviar mensaje
-    async function sendToGlobalIA() {
-        const input = document.getElementById('gp-input-text');
-        const text = input.value.trim();
-        if(!text) return;
-
-        addGpMsg('user', text);
-        input.value = "";
-        chatHistoryIA.push({ role: "user", content: text });
-
-        try {
-            const res = await fetch(CHAT_API_URL, {
-                method: 'POST',
-                body: JSON.stringify({ messages: chatHistoryIA }),
-                headers: { 'Content-Type': 'application/json' }
-            });
-
-            const reader = res.body.getReader();
-            const decoder = new TextDecoder();
-            let iaText = "";
-            let msgEl = addGpMsg('ia', '...');
-
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
-                
-                const chunk = decoder.decode(value);
-                const lines = chunk.split('\n');
-                for(let line of lines) {
-                    if(line.startsWith('data:')) {
-                        try {
-                            const data = JSON.parse(line.slice(5));
-                            iaText += data.response || "";
-                            msgEl.innerText = iaText;
-                            const container = document.getElementById('globalpro-msgs');
-                            container.scrollTop = container.scrollHeight;
-                        } catch(e) {}
-                    }
-                }
-            }
-            chatHistoryIA.push({ role: "assistant", content: iaText });
-        } catch(e) {
-            addGpMsg('ia', 'Lo siento, no puedo conectar ahora.');
-        }
-    }
-
-    // Listener para el botón de enviar
-    document.getElementById('gp-send-btn').onclick = sendToGlobalIA;
-
-    // Enviar con Enter
-    document.getElementById('gp-input-text').onkeypress = function(e) {
-        if(e.key === 'Enter') sendToGlobalIA();
+    const datos = {
+        placa: document.getElementById('cPlaca').value.toUpperCase().replace(/\s+/g, ''),
+        whatsapp: document.getElementById('cWhatsapp').value,
+        fecha: document.getElementById('cFecha').value,
+        hora: document.getElementById('cHora').value,
+        servicio: document.getElementById('cServicio').value
     };
 
-    function addGpMsg(role, text) {
-        const cont = document.getElementById('globalpro-msgs');
-        const d = document.createElement('div');
-        d.className = `gp-msg gp-${role}`;
-        d.innerText = text;
-        cont.appendChild(d);
-        cont.scrollTop = cont.scrollHeight;
-        return d;
+    try {
+        const res = await fetch('/api', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(datos)
+        });
+        if (res.ok) {
+            status.style.color = "green";
+            status.innerText = "✅ ¡Cita solicitada! Pronto recibirá respuesta.";
+            e.target.reset();
+        } else {
+            status.style.color = "red";
+            status.innerText = "❌ Error al agendar. Intente más tarde.";
+        }
+    } catch (err) {
+        status.innerText = "❌ Error de conexión.";
     }
+    btn.disabled = false;
+});
+
+// CONSULTAR ESTATUS
+async function consultarEstatus() {
+    const placa = document.getElementById('buscPlaca').value.toUpperCase().replace(/\s+/g, '');
+    const resDiv = document.getElementById('consultaResultado');
+    
+    if(!placa) return alert("Por favor ingresa una placa");
+    
+    resDiv.innerText = "Buscando...";
+    resDiv.style.background = "#f8f9fa";
+
+    try {
+        const res = await fetch(`/api?placa=${placa}&tipo=consulta`);
+        const data = await res.json();
+        
+        if(data.length > 0) {
+            const estado = data[0].estado;
+            let color = estado === 'Aceptada' ? '#d4edda' : (estado === 'Rechazada' ? '#f8d7da' : '#fff3cd');
+            let textoColor = estado === 'Aceptada' ? '#155724' : (estado === 'Rechazada' ? '#721c24' : '#856404');
+            
+            resDiv.style.background = color;
+            resDiv.style.color = textoColor;
+            resDiv.innerHTML = `Estatus para <b>${placa}</b>: <br><span style="font-size:1.2em; font-weight:bold;">${estado.toUpperCase()}</span>`;
+        } else {
+            resDiv.style.background = "#eee";
+            resDiv.innerText = "No se encontró ninguna cita con esa placa.";
+        }
+    } catch (err) {
+        resDiv.innerText = "Error al consultar.";
+    }
+}
 </script>
+
 
 
 </body>

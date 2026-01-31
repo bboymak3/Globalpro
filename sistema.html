@@ -1,23 +1,80 @@
-<div style="max-width: 900px; margin: auto; font-family: sans-serif; padding: 20px;">
-    <h2>📋 Gestión de Citas</h2>
-    
-    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-        <button onclick="verCitas('ayer')" style="padding:10px; cursor:pointer;">Ayer</button>
-        <button onclick="verCitas('hoy')" style="padding:10px; background:#007bff; color:white; border:none; cursor:pointer;">Hoy</button>
-        <button onclick="verCitas('manana')" style="padding:10px; background:#28a745; color:white; border:none; cursor:pointer;">Mañana</button>
-        <button onclick="verCitas('mes')" style="padding:10px; cursor:pointer;">Mes</button>
-        <button onclick="verCitas('todos')" style="padding:10px; cursor:pointer;">Todos</button>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrativo - Global Pro</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; border-bottom: 3px solid #007bff; padding-bottom: 8px; margin-top: 30px; }
+        
+        /* SECCIÓN ORDEN DE TRABAJO (OT) */
+        .ot-section { background: #e9ecef; padding: 20px; border-radius: 8px; margin-bottom: 40px; border-left: 5px solid #007bff; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        textarea { grid-column: span 2; }
+        .btn-ot { grid-column: span 2; background: #007bff; color: white; border: none; padding: 15px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s; }
+        .btn-ot:hover { background: #0056b3; }
+
+        /* SECCIÓN AGENDA DE CITAS */
+        .filtros { display: flex; gap: 8px; margin: 20px 0; flex-wrap: wrap; }
+        .btn-f { padding: 10px 18px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; background: #6c757d; color: white; transition: 0.2s; }
+        .btn-active { background: #007bff; }
+        .btn-f:hover { opacity: 0.8; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; background: white; }
+        th { background: #2c3e50; color: white; padding: 12px; }
+        td { padding: 12px; border-bottom: 1px solid #eee; text-align: center; }
+        .placa { font-weight: bold; color: #e74c3c; font-size: 1.1em; }
+        .btn-check { background: #27ae60; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; margin-right: 5px; }
+        .btn-x { background: #c0392b; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; }
+        .estado-tag { padding: 4px 8px; border-radius: 4px; font-size: 0.85em; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 style="text-align:center; color:#2c3e50;">⚙️ Panel Global Pro Automotriz</h1>
+
+    <div class="ot-section">
+        <h2>📝 Generar Nueva Orden de Trabajo</h2>
+        <form id="otForm">
+            <div class="form-grid">
+                <input type="text" id="otPlaca" placeholder="PLACA (Ej: RCM36H)" required>
+                <input type="number" id="otKm" placeholder="KILOMETRAJE ACTUAL" required>
+                <input type="text" id="otTecnico" placeholder="NOMBRE DEL TÉCNICO" required>
+                <select id="otServicio">
+                    <option value="Mantenimiento General">Mantenimiento General</option>
+                    <option value="Cambio de Aceite">Cambio de Aceite</option>
+                    <option value="Frenos / Tren Delantero">Frenos / Tren Delantero</option>
+                    <option value="Escaneo / Electricidad">Escaneo / Electricidad</option>
+                </select>
+                <textarea id="otDetalles" rows="3" placeholder="Descripción detallada del trabajo realizado..." required></textarea>
+                <button type="submit" class="btn-ot" id="btnSaveOT">💾 REGISTRAR TRABAJO EN SISTEMA</button>
+            </div>
+        </form>
+        <div id="otMsg" style="text-align:center; margin-top:10px; font-weight:bold;"></div>
     </div>
 
-    <table border="1" style="width:100%; border-collapse: collapse; text-align: center;">
-        <thead style="background:#eee;">
+    <h2>📅 Agenda de Solicitudes</h2>
+    <div class="filtros">
+        <button class="btn-f" onclick="verCitas('ayer')">Ayer</button>
+        <button class="btn-f btn-active" onclick="verCitas('hoy')" id="btnHoy">Hoy</button>
+        <button class="btn-f" onclick="verCitas('manana')">Mañana</button>
+        <button class="btn-f" onclick="verCitas('mes')">Este Mes</button>
+        <button class="btn-f" onclick="verCitas('todos')">Ver Todo</button>
+    </div>
+
+    <table>
+        <thead>
             <tr>
                 <th>Fecha/Hora</th>
                 <th>Placa</th>
                 <th>WhatsApp</th>
                 <th>Servicio</th>
-                <th>Estado</th>
-                <th>Acción</th>
+                <th>Estado Actual</th>
+                <th>Gestión</th>
             </tr>
         </thead>
         <tbody id="cuerpoTablaCitas">
@@ -26,55 +83,99 @@
 </div>
 
 <script>
-async function verCitas(periodo) {
-    const cuerpo = document.getElementById('cuerpoTablaCitas');
-    cuerpo.innerHTML = "<tr><td colspan='6'>Cargando...</td></tr>";
+    // --- LÓGICA 1: GUARDAR ORDEN DE TRABAJO ---
+    document.getElementById('otForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const msg = document.getElementById('otMsg');
+        const btn = document.getElementById('btnSaveOT');
+        btn.disabled = true;
+        msg.innerText = "⏳ Guardando en base de datos...";
 
-    try {
-        const res = await fetch(`/api?periodo=${periodo}`);
-        const datos = await res.json();
-        cuerpo.innerHTML = "";
+        const data = {
+            tipo: 'OT', 
+            placa: document.getElementById('otPlaca').value.toUpperCase().trim(),
+            km: document.getElementById('otKm').value,
+            tecnico: document.getElementById('otTecnico').value,
+            detalles: document.getElementById('otDetalles').value
+        };
 
-        if(datos.length === 0) {
-            cuerpo.innerHTML = "<tr><td colspan='6'>No hay citas.</td></tr>";
-            return;
+        try {
+            const res = await fetch('/api', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            });
+            if(res.ok) {
+                msg.innerHTML = "<span style='color:green;'>✅ Trabajo registrado con éxito.</span>";
+                e.target.reset();
+            }
+        } catch (e) {
+            msg.innerHTML = "<span style='color:red;'>❌ Error de conexión con el servidor.</span>";
         }
+        btn.disabled = false;
+    });
 
-        datos.forEach(c => {
-            const msj = `Hola! Global Pro te informa que tu cita para la placa ${c.placa} el dia ${c.fecha_cita} ha sido ACEPTADA. Te esperamos!`;
-            const linkWA = `https://wa.me/${c.whatsapp}?text=${encodeURIComponent(msj)}`;
-            
-            cuerpo.innerHTML += `
-                <tr>
-                    <td>${c.fecha_cita}<br><small>${c.hora_cita}</small></td>
-                    <td style="font-weight:bold;">${c.placa}</td>
-                    <td><a href="https://wa.me/${c.whatsapp}" target="_blank">${c.whatsapp}</a></td>
-                    <td>${c.servicio}</td>
-                    <td style="font-weight:bold;">${c.estado}</td>
-                    <td>
-                        <button onclick="actualizarEstatus(${c.id}, 'Aceptada'); window.open('${linkWA}')" style="background:#28a745; color:white; border:none; padding:5px; border-radius:3px; cursor:pointer;">✔️ Aceptar</button>
-                        <button onclick="actualizarEstatus(${c.id}, 'Rechazada')" style="background:#dc3545; color:white; border:none; padding:5px; border-radius:3px; cursor:pointer;">❌</button>
-                    </td>
-                </tr>`;
-        });
-    } catch (e) {
-        cuerpo.innerHTML = "<tr><td colspan='6'>Error de carga.</td></tr>";
+    // --- LÓGICA 2: GESTIÓN DE CITAS ---
+    async function verCitas(periodo) {
+        const cuerpo = document.getElementById('cuerpoTablaCitas');
+        cuerpo.innerHTML = "<tr><td colspan='6'>Cargando agenda...</td></tr>";
+
+        try {
+            const res = await fetch(`/api?periodo=${periodo}`);
+            const datos = await res.json();
+            cuerpo.innerHTML = "";
+
+            if(datos.length === 0) {
+                cuerpo.innerHTML = "<tr><td colspan='6'>No hay registros para este periodo.</td></tr>";
+                return;
+            }
+
+            datos.forEach(c => {
+                const msj = `Hola! Global Pro te informa que tu cita para la placa ${c.placa} el día ${c.fecha_cita} ha sido ACEPTADA. Te esperamos!`;
+                const linkWA = `https://wa.me/${c.whatsapp}?text=${encodeURIComponent(msj)}`;
+                
+                // Color según estado
+                let colorTag = c.estado === 'Aceptada' ? '#d4edda' : (c.estado === 'Rechazada' ? '#f8d7da' : '#fff3cd');
+                let colorTexto = c.estado === 'Aceptada' ? '#155724' : (c.estado === 'Rechazada' ? '#721c24' : '#856404');
+
+                cuerpo.innerHTML += `
+                    <tr>
+                        <td>${c.fecha_cita}<br><small>${c.hora_cita}</small></td>
+                        <td class="placa">${c.placa}</td>
+                        <td><a href="https://wa.me/${c.whatsapp}" target="_blank" style="text-decoration:none;">📱 ${c.whatsapp}</a></td>
+                        <td>${c.servicio}</td>
+                        <td><span class="estado-tag" style="background:${colorTag}; color:${colorTexto};">${c.estado.toUpperCase()}</span></td>
+                        <td>
+                            <button class="btn-check" title="Aceptar y abrir WhatsApp" onclick="cambiarEstado(${c.id}, 'Aceptada'); window.open('${linkWA}')">✔️</button>
+                            <button class="btn-x" title="Rechazar" onclick="cambiarEstado(${c.id}, 'Rechazada')">❌</button>
+                        </td>
+                    </tr>`;
+            });
+        } catch (e) {
+            cuerpo.innerHTML = "<tr><td colspan='6' style='color:red;'>Error al cargar los datos del servidor.</td></tr>";
+        }
     }
-}
 
-async function actualizarEstatus(id, nuevoEstado) {
-    try {
-        await fetch('/api', {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id, nuevoEstado })
-        });
-        alert("Estado actualizado a: " + nuevoEstado);
-        location.reload(); // Recarga para ver el cambio
-    } catch (e) {
-        alert("Error al actualizar");
+    async function cambiarEstado(id, nuevoEstado) {
+        try {
+            const res = await fetch('/api', {
+                method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ id, nuevoEstado })
+            });
+            if(res.ok) {
+                // Recargamos la tabla para ver el cambio de color
+                const btnActivo = document.querySelector('.btn-active').innerText.toLowerCase();
+                verCitas(btnActivo.includes('hoy') ? 'hoy' : btnActivo);
+            }
+        } catch (e) {
+            alert("Error al actualizar estatus");
+        }
     }
-}
 
-document.addEventListener('DOMContentLoaded', () => verCitas('hoy'));
+    // Al cargar la página, mostrar lo de hoy
+    document.addEventListener('DOMContentLoaded', () => verCitas('hoy'));
 </script>
+
+</body>
+</html>

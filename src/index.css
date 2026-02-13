@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    /* Rojo oscuro tipo sangre */
+    --primary: 0 100% 27%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 0 100% 27%;
+    --radius: 0.625rem;
+    
+    /* Custom Colors - Rojo Sangre Oscuro */
+    --gp-red: #8B0000;
+    --gp-red-dark: #5C0000;
+    --gp-red-light: #A52A2A;
+    --gp-blue: #0056b3;
+    --gp-dark: #141414;
+    --gp-gray: #f8f9fa;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  .text-gp-red {
+    color: var(--gp-red);
+  }
+  .bg-gp-red {
+    background-color: var(--gp-red);
+  }
+  .bg-gp-dark {
+    background-color: var(--gp-dark);
+  }
+  .border-gp-red {
+    border-color: var(--gp-red);
+  }
+  .hover\:text-gp-red:hover {
+    color: var(--gp-red);
+  }
+  .hover\:bg-gp-red-dark:hover {
+    background-color: var(--gp-red-dark);
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+  .animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gp-red);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gp-red-dark);
+}

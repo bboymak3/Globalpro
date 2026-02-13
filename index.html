@@ -20,14 +20,66 @@
   <script src="https://elfsightcdn.com/platform.js" async></script>
 
   <style>
-    /* ESTILOS PARA EL NUEVO VISOR DE IMÁGENES (LIGHTBOX) */
+    /* --- VARIABLES DE COLOR (ROJO SANGRE) --- */
+    :root {
+      /* Rojo Sangre */
+      --gp-blood-red: #a80000; 
+      /* Fondo oscuro */
+      --gp-black: #121212;
+    }
+
+    html { scroll-behavior: smooth; }
+    
+    /* --- CAMBIO GLOBAL DE AZUL A ROJO SANGRE --- */
+    
+    /* Textos primarios */
+    .text-primary { color: var(--gp-blood-red) !important; }
+    
+    /* Botones */
+    .btn-primary {
+      background-color: var(--gp-blood-red);
+      border-color: var(--gp-blood-red);
+      color: white !important;
+    }
+    .btn-primary:hover, .btn-primary:focus {
+      background-color: #820000; /* Un tono más oscuro al pasar mouse */
+      border-color: #820000;
+      box-shadow: 0 0 15px rgba(168, 0, 0, 0.4);
+    }
+    .btn-outline-primary {
+      color: var(--gp-blood-red) !important;
+      border-color: var(--gp-blood-red);
+    }
+    .btn-outline-primary:hover {
+      background-color: var(--gp-blood-red);
+      color: white;
+    }
+
+    /* Fondos y Bordes */
+    .bg-primary { background-color: var(--gp-blood-red) !important; }
+    .border-primary { border-color: var(--gp-blood-red) !important; }
+
+    /* Enlaces Navbar */
+    .nav-link { color: #ccc !important; transition: 0.3s; }
+    .nav-link:hover, .nav-link.active { color: var(--gp-blood-red) !important; }
+
+    /* Forzar que las Alertas Bootstrap (azules por defecto) sean Rojo Sangre */
+    .alert-primary {
+      color: white !important;
+      background-color: var(--gp-blood-red) !important;
+      border-color: var(--gp-blood-red) !important;
+    }
+    .alert-primary .alert-heading {
+      color: white !important;
+    }
+
+    /* --- ESTILOS VISOR IMÁGENES (LIGHTBOX) --- */
     #imageModal {
       display: none; 
       position: fixed; 
       z-index: 2000; 
       padding-top: 60px; 
-      left: 0;
-      top: 0;
+      left: 0; top: 0;
       width: 100%; 
       height: 100%; 
       overflow: auto; 
@@ -48,140 +100,71 @@
       box-shadow: 0 0 20px rgba(255,255,255,0.2);
     }
     
-    @keyframes zoom {
-      from {transform:scale(0)} 
-      to {transform:scale(1)}
-    }
+    @keyframes zoom { from {transform:scale(0)} to {transform:scale(1)} }
     
     .close-modal {
       position: absolute;
-      top: 15px;
-      right: 35px;
-      color: #f1f1f1;
-      font-size: 40px;
-      font-weight: bold;
-      transition: 0.3s;
-      z-index: 2001;
+      top: 15px; right: 35px;
+      color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; z-index: 2001;
     }
-    
-    .close-modal:hover,
-    .close-modal:focus {
-      color: #bbb;
-      text-decoration: none;
-      cursor: pointer;
-    }
+    .close-modal:hover, .close-modal:focus { color: #bbb; text-decoration: none; cursor: pointer; }
 
-    /* ESTILOS PARA LAS TARJETAS DE SERVICIOS (IMAGEN ARRIBA) */
+    /* --- TARJETAS SERVICIOS --- */
     .service-solution-card {
-      border: 1px solid #e0e0e0;
-      border-radius: 10px;
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-      background: white;
-      height: 100%;
+      border: 1px solid #e0e0e0; border-radius: 10px; overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s; background: white; height: 100%;
     }
-    
-    .service-solution-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
+    .service-solution-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
     .img-container {
-      position: relative;
-      overflow: hidden;
-      height: 250px;
-      cursor: pointer;
+      position: relative; overflow: hidden; height: 250px; cursor: pointer;
     }
-
     .img-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
+      width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;
     }
-
-    .img-container:hover img {
-      transform: scale(1.1);
-    }
-
+    .img-container:hover img { transform: scale(1.1); }
     .img-overlay {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s;
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.3s;
     }
+    .img-container:hover .img-overlay { opacity: 1; }
+    .expand-icon { color: white; font-size: 2rem; }
 
-    .img-container:hover .img-overlay {
-      opacity: 1;
+    /* --- BOTONES FLOTANTES --- */
+    .whatsapp-float {
+      position: fixed; bottom: 25px; right: 25px;
+      background-color: #25d366; color: white; width: 60px; height: 60px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+      z-index: 1000; transition: transform 0.3s; text-decoration: none;
     }
+    .whatsapp-float:hover { transform: scale(1.1); color: white; }
 
-    .expand-icon {
-      color: white;
-      font-size: 2rem;
-    }
-
-    /* --- NUEVOS ESTILOS: BOTÓN CHATBOT AMARILLO CON EFECTO PULSO --- */
     .chatbot-float {
-      position: fixed;
-      bottom: 25px;
-      right: 95px; /* Un poco a la izquierda del WhatsApp */
-      background-color: #FFD700; /* Amarillo Dorado */
-      color: #333;
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      z-index: 1000;
-      text-decoration: none;
-      animation: pulse-yellow 2s infinite; /* Animación de pulso */
+      position: fixed; bottom: 25px; right: 95px;
+      background-color: #FFD700; color: #333; width: 55px; height: 55px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 26px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 1000; text-decoration: none;
+      animation: pulse-yellow 2s infinite;
     }
-
     @keyframes pulse-yellow {
-      0% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
-      }
-      70% {
-        transform: scale(1);
-        box-shadow: 0 0 0 15px rgba(255, 215, 0, 0);
-      }
-      100% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
-      }
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
     }
-    
-    .chatbot-float:hover {
-      color: #000;
-      background-color: #fff;
-    }
+    .chatbot-float:hover { color: #000; background-color: #fff; }
 
-    /* --- AJUSTE DEL LOGO EN EL NAVBAR (Imagen dentro del cuadro) --- */
+    /* --- LOGO (AHORA ROJO SANGRE) --- */
     .logo-img {
-      background-color: var(--gp-logo-blue, #0056b3); /* Color azul */
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-      margin-right: 15px;
-      overflow: hidden; /* Para que la imagen no se salga del cuadro */
+      /* Cambiado de azul a rojo sangre */
+      background-color: var(--gp-blood-red); 
+      width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
+      border-radius: 8px; margin-right: 15px; overflow: hidden; 
     }
-    
     .logo-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain; /* Ajusta la imagen al cuadro sin deformarla */
-      padding: 5px;
+      width: 100%; height: 100%; object-fit: contain; padding: 5px;
     }
   </style>
 
@@ -215,7 +198,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container nav-container">
     <a href="#inicio" class="logo d-flex align-items-center text-decoration-none text-white">
-      <!-- LOGO ACTUALIZADO: IMAGEN DENTRO DEL CUADRO AZUL -->
+      <!-- LOGO: CAJA ROJO SANGRE -->
       <div class="logo-img">
         <img src="images/mecanico-a-domicilio-en-santiago.png" alt="Logo GlobalPro">
       </div>
@@ -261,7 +244,6 @@
     <div class="row align-items-center">
       <div class="col-lg-7">
         <span class="hero-badge">Servicio Automotriz Integral</span>
-        <!-- TÍTULO H1 CAMBIADO A LO PEDIDO -->
         <h1 class="hero-title">MECÁNICO A DOMICILIO EN SANTIAGO</h1>
         <p class="hero-subtitle">En GlobalPro, somos expertos en mecánica automotriz, electromecánica y mantenimiento. ¡Tu vehículo en las mejores manos! Servicio a domicilio en todo Santiago.</p>
 
@@ -308,14 +290,14 @@
 <section class="py-5 bg-white" id="soluciones-gp">
   <div class="container">
     
-    <!-- NUEVO CUADRO AZUL DE EMERGENCIA -->
+    <!-- CUADRO DE EMERGENCIA (Ahora ROJO SANGRE) -->
     <div class="alert alert-primary border-2 border-primary shadow-lg p-4 mb-5" role="alert">
       <div class="row align-items-center justify-content-center">
         <div class="col-12 text-center mb-4">
              <img src="images/accidentado-en-la-via-barado-el-carro-no-prende-mecanico-en-la-via-a-domicilio-en-santiago.png" class="img-fluid rounded shadow border border-3 border-primary mx-auto d-block" style="max-height: 400px; object-fit: contain;" alt="Servicio de emergencia en ruta">
         </div>
         <div class="col-12">
-          <h4 class="alert-heading text-uppercase fw-bold text-primary text-center"><i class="fas fa-exclamation-triangle me-2"></i>🚨 Servicio de Emergencia en Ruta 24/7: Auxilio Mecánico para Conductores Varados y Accidentados 🚗💥</h4>
+          <h4 class="alert-heading text-uppercase fw-bold text-center"><i class="fas fa-exclamation-triangle me-2"></i>🚨 Servicio de Emergencia en Ruta 24/7: Auxilio Mecánico para Conductores Varados y Accidentados 🚗💥</h4>
           <p class="mb-0">
             Quedarse varado en medio de la carretera o sufrir un accidente inesperado es una de las situaciones más estresantes para cualquier conductor 🚧. En esos momentos críticos, no solo buscas un técnico, buscas una solución inmediata ⚡. En <strong>Global Pro Automotriz</strong>, hemos diseñado nuestra unidad de respuesta rápida para ofrecer <strong>auxilio mecánico de emergencia</strong> en toda la Región Metropolitana, operando bajo el concepto de <strong>mecánico de emergencia 24/7</strong> 🌙. Si tu vehículo se detuvo por una falla súbita en el motor, un corte de correas o un problema crítico en la caja de cambio, nuestro servicio de <strong>mecánico a domicilio 24 horas</strong> está listo para rescatarte sin que tengas que esperar horas por una grúa 🚑.
           </p>
@@ -329,14 +311,12 @@
         </div>
       </div>
     </div>
-    <!-- FIN CUADRO EMERGENCIA -->
 
     <header class="text-center mb-5">
       <h2 class="section-title">Nuestras Soluciones Automotrices Especializadas</h2>
       <p class="section-subtitle">Haz clic en las imágenes para ampliarlas. Expertos en mecánica a domicilio.</p>
     </header>
 
-    <!-- GRILLA: IMAGEN ARRIBA, TEXTO ABAJO -->
     <div class="row g-4">
       
       <!-- GRUPO 1: EMERGENCIAS -->
@@ -502,7 +482,6 @@
     </div>
   </div>
 </section>
-<!-- FIN SECCIÓN SOLUCIONES PERSUASIVAS -->
 
 <!-- MODAL PARA AMPLIAR IMÁGENES -->
 <div id="imageModal" onclick="closeModal()">
@@ -924,7 +903,7 @@
   </div>
 </section>
 
-<!-- NUEVA SECCIÓN: VÍNCULO A TAPIZADO DE VOLANTES (AGREGADA AL FINAL) -->
+<!-- NUEVA SECCIÓN: VÍNCULO A TAPIZADO DE VOLANTES -->
 <section class="py-5 bg-white">
   <div class="container">
     <div class="alert alert-success border-2 border-success shadow-lg p-4" role="alert">
@@ -958,12 +937,12 @@
   </div>
 </footer>
 
-<!-- NUEVO BOTÓN CHATBOT AMARILLO CON EFECTO PULSO -->
+<!-- BOTÓN CHATBOT AMARILLO -->
 <a href="#" class="chatbot-float" target="_blank" title="Chat con IA">
   <i class="fas fa-robot"></i>
 </a>
 
-<!-- WhatsApp Float -->
+<!-- BOTÓN WHATSAPP -->
 <a href="https://wa.me/56939026185" class="whatsapp-float" target="_blank">
   <i class="fab fa-whatsapp"></i>
 </a>
@@ -973,24 +952,17 @@
 
 <!-- SCRIPT PARA EL LIGHTBOX (VISOR DE IMÁGENES) -->
 <script>
-  // Función para abrir el modal
   function openModal(imgSrc) {
     var modal = document.getElementById("imageModal");
     var modalImg = document.getElementById("modalImg");
     modal.style.display = "block";
     modalImg.src = imgSrc;
   }
-
-  // Función para cerrar el modal
   function closeModal() {
     document.getElementById("imageModal").style.display = "none";
   }
-
-  // Cerrar con tecla ESC
   document.addEventListener('keydown', function(event) {
-    if (event.key === "Escape") {
-      closeModal();
-    }
+    if (event.key === "Escape") { closeModal(); }
   });
 </script>
 

@@ -1,68 +1,390 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es-CL">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Primary Meta Tags -->
-    <title>GlobalPro - Taller Mecánico en Santiago | Mecánico a Domicilio 24/7</title>
-    <meta name="description" content="Taller mecánico GlobalPro en Santiago. Expertos en mecánica automotriz, electromecánica, chapa y pintura. Servicio a domicilio en todo el Área Metropolitana. ¡Agenda tu cita!">
-    <meta name="keywords" content="taller mecánico, taller automotriz, mecánica automotriz, mecánico a domicilio, servicio automotriz, mantenimiento de vehículos, reparación de vehículos, taller de coches, clínica automotriz, electromecánica de vehículos, automecánica, taller de reparación de autos, mantenimiento automotriz, mecánico a domicilio santiago">
-    <meta name="author" content="GlobalPro Taller Mecánico">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://globalpro.cl/" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://globalpro.cl/">
-    <meta property="og:title" content="GlobalPro - Taller Mecánico en Santiago | Mecánico a Domicilio">
-    <meta property="og:description" content="Servicio de auxilio mecánico 24/7, mecánica a domicilio y taller especializado en Santiago. ¡Contáctanos ahora!">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1200&q=80">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://globalpro.cl/">
-    <meta property="twitter:title" content="GlobalPro - Taller Mecánico en Santiago">
-    <meta property="twitter:description" content="Servicio de auxilio mecánico 24/7, mecánica a domicilio y taller especializado en Santiago.">
-    <meta property="twitter:image" content="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1200&q=80">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
-    
-    <!-- Theme Color -->
-    <meta name="theme-color" content="#E40046">
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "GlobalPro Taller Mecánico",
-      "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&q=80",
-      "telephone": "+56939026185",
-      "email": "contacto@globalpro.cl",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Santiago",
-        "addressCountry": "CL"
-      },
-      "url": "https://globalpro.cl",
-      "description": "Taller mecánico especializado en servicio automotriz integral, mecánica general, electromecánica y más. Servicio a domicilio en el Área Metropolitana de Chile.",
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "09:00",
-        "closes": "18:00"
-      },
-      "priceRange": "$$",
-      "areaServed": "Región Metropolitana de Santiago"
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <title>GlobalPro - Taller Mecánico en Santiago | Mecánico a Domicilio 24/7</title>
+  <meta name="description" content="Taller mecánico GlobalPro en Santiago. Expertos en mecánica automotriz, electromecánica, chapa y pintura. Servicio a domicilio en todo el Área Metropolitana. ¡Agenda tu cita!">
+  <meta name="keywords" content="taller mecánico, mecánico a domicilio, auxilio mecánico santiago, globalpro taller, mantenimiento automotriz">
+  <link rel="canonical" href="https://globalpro.cl/"/>
+  
+  <!-- FAVICON -->
+  <link rel="icon" type="image/png" href="images/mecanico-a-domicilio-en-santiago.png"/>
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://globalpro.cl/">
+  <meta property="og:title" content="GlobalPro - Taller Mecánico en Santiago | Mecánico a Domicilio">
+  <meta property="og:description" content="Servicio de auxilio mecánico 24/7, mecánica a domicilio y taller especializado en Santiago. ¡Contáctanos ahora!">
+  <meta property="og:image" content="https://globalpro.cl/images/mecanico-a-domicilio-en-santiago.png">
+  
+  <!-- BOOTSTRAP Y ICONOS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <style>
+    :root {
+      /* COLORES GLOBALES */
+      --gp-red: #E40046; 
+      --gp-red-hover: #b30038;
+      --gp-logo-blue: #0056b3; 
+      --gp-black: #121212;
+      --gp-dark-gray: #1e1e1e;
     }
-    </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+    html { scroll-behavior: smooth; }
+    
+    body {
+      background-color: #f8f9fa; /* Fondo claro general por defecto */
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    
+    /* Navbar */
+    .navbar {
+      background-color: var(--gp-black) !important;
+      border-bottom: 2px solid var(--gp-red);
+      backdrop-filter: blur(10px);
+    }
+    
+    /* --- LOGO --- */
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    .logo-box {
+      background-color: var(--gp-logo-blue);
+      padding: 5px;
+      border-radius: 8px;
+      margin-right: 12px;
+      box-shadow: 0 0 10px rgba(0, 86, 179, 0.5);
+      transition: transform 0.3s ease;
+    }
+    .logo-box:hover { transform: scale(1.05); }
+    .logo-box img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+    .logo-text { color: white !important; font-weight: 700; line-height: 1.1; }
+    .logo-subtext { color: #aaa !important; font-size: 0.75rem; }
+
+    /* --- COLORES (Rojo Coca-Cola) --- */
+    .text-primary { color: var(--gp-red) !important; }
+    
+    .btn-primary {
+      background-color: var(--gp-red);
+      border-color: var(--gp-red);
+    }
+    .btn-primary:hover, .btn-primary:focus {
+      background-color: var(--gp-red-hover);
+      border-color: var(--gp-red-hover);
+      box-shadow: 0 0 15px rgba(228, 0, 70, 0.4);
+    }
+    .btn-outline-primary {
+      color: var(--gp-red);
+      border-color: var(--gp-red);
+    }
+    .btn-outline-primary:hover {
+      background-color: var(--gp-red);
+      color: white;
+    }
+
+    .bg-primary { background-color: var(--gp-red) !important; }
+    .border-primary { border-color: var(--gp-red) !important; }
+
+    .nav-link { color: #ccc !important; transition: 0.3s; }
+    .nav-link:hover, .nav-link.active { color: var(--gp-red) !important; }
+
+    /* --- HERO SECTION (CORREGIDO PARA NO QUEDAR EN BLANCO) --- */
+    .hero-section {
+      /* IMPORTANTE: Color de fondo SOLIDO por si la imagen falla */
+      background-color: var(--gp-black); 
+      /* Gradiente oscuro + Imagen */
+      background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/mantenimiento-vehicular-general.jpeg');
+      background-size: cover;
+      background-position: center;
+      padding-top: 140px;
+      padding-bottom: 100px;
+      color: white; /* Texto blanco */
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .service-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid #eee;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(228, 0, 70, 0.15);
+      border-color: var(--gp-red);
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #25d366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+      z-index: 1000;
+      transition: transform 0.3s;
+      text-decoration: none;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); color: white; }
+
+    .accordion-item { border: 1px solid #e0e0e0; margin-bottom: 10px; border-radius: 8px !important; overflow: hidden; }
+    .accordion-button:not(.collapsed) { background-color: #fff0f3; color: var(--gp-red); box-shadow: none; }
+    .accordion-button:focus { box-shadow: none; border-color: var(--gp-red); }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <!-- LOGO -->
+    <a href="#" class="logo-wrapper">
+      <div class="logo-box">
+        <img src="images/mecanico-a-domicilio-en-santiago.png" alt="Logo GlobalPro">
+      </div>
+      <div>
+        <div class="logo-text text-uppercase">GlobalPro</div>
+        <div class="logo-subtext">Taller Mecánico</div>
+      </div>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+        <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+        <li class="nav-item ms-lg-3">
+          <a href="https://wa.me/56939026185" class="btn btn-outline-light rounded-pill px-4">
+            <i class="fab fa-whatsapp me-2"></i> WhatsApp
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero-section" id="inicio">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <span class="badge bg-primary mb-3 px-3 py-2">Servicio Automotriz Integral</span>
+        <h1 class="display-4 fw-bold mb-3">Expertos en <br><span style="color: var(--gp-red);">Mecánica a Domicilio</span></h1>
+        <p class="lead mb-4">GlobalPro: Tu taller mecánico móvil en Santiago. Diagnóstico, reparación y auxilio 24/7.</p>
+        
+        <div class="d-flex gap-3 flex-wrap mb-5">
+          <a href="#contacto" class="btn btn-primary btn-lg rounded-pill shadow">Agendar Cita</a>
+          <a href="#servicios" class="btn btn-outline-light btn-lg rounded-pill">Ver Servicios</a>
+        </div>
+
+        <div class="row g-3 text-center">
+          <div class="col-4">
+            <h3 class="fw-bold text-white m-0">+1000</h3>
+            <small class="text-white-50">Autos Reparados</small>
+          </div>
+          <div class="col-4">
+            <h3 class="fw-bold text-white m-0">+15</h3>
+            <small class="text-white-50">Años Exp.</small>
+          </div>
+          <div class="col-4">
+            <h3 class="fw-bold text-success m-0">✓</h3>
+            <small class="text-white-50">Garantía</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 d-none d-lg-block text-center">
+        <img src="images/image1.jpg" class="img-fluid rounded-4 shadow-lg border border-3 border-primary" style="max-height: 500px; object-fit: cover;" alt="Mecánico trabajando">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMERGENCIA -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="alert alert-primary border-2 border-primary shadow p-4" role="alert">
+      <div class="row align-items-center">
+        <div class="col-md-4 text-center mb-3 mb-md-0">
+           <img src="images/accidentado-en-la-via-barado-el-carro-no-prende-mecanico-en-la-via-a-domicilio-en-santiago.png" class="img-fluid rounded border border-primary" style="max-height: 250px;" alt="Auxilio">
+        </div>
+        <div class="col-md-8">
+          <h4 class="fw-bold text-primary"><i class="fas fa-exclamation-triangle me-2"></i> AUXILIO MECÁNICO 24/7</h4>
+          <p class="mb-2">¿Te quedaste varado en la autopista? Llegamos a tu ubicación.</p>
+          <a href="https://wa.me/56939026185" class="btn btn-primary fw-bold rounded-pill">
+            <i class="fab fa-whatsapp me-2"></i> Solicitar Ayuda
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios" class="py-5 bg-white">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-primary">Nuestros Servicios</h2>
+      <p class="text-muted">Soluciones integrales para tu vehículo.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="card h-100 border-0 shadow-sm service-card">
+          <div class="card-body text-center p-4">
+            <i class="fas fa-car-battery fs-1 text-primary mb-3"></i>
+            <h5 class="card-title fw-bold">Electricidad</h5>
+            <p class="card-text small text-muted">Baterías, alternadores y diagnóstico computarizado.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card h-100 border-0 shadow-sm service-card">
+          <div class="card-body text-center p-4">
+            <i class="fas fa-oil-can fs-1 text-primary mb-3"></i>
+            <h5 class="card-title fw-bold">Mecánica General</h5>
+            <p class="card-text small text-muted">Mantenimiento preventivo, cambio de aceite y filtros.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card h-100 border-0 shadow-sm service-card">
+          <div class="card-body text-center p-4">
+            <i class="fas fa-compact-disc fs-1 text-primary mb-3"></i>
+            <h5 class="card-title fw-bold">Frenos</h5>
+            <p class="card-text small text-muted">Cambio de pastillas, discos y reparación de ABS.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card h-100 border-0 shadow-sm service-card">
+          <div class="card-body text-center p-4">
+            <i class="fas fa-snowflake fs-1 text-primary mb-3"></i>
+            <h5 class="card-title fw-bold">Aire Acondicionado</h5>
+            <p class="card-text small text-muted">Carga de gas, reparación de compresores y fugas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACORDEÓN -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h3 class="text-center fw-bold mb-4">Preguntas Frecuentes</h3>
+    <div class="accordion" id="faqAccordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+            ¿Atienden todas las comunas de Santiago?
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Sí, nuestro servicio a domicilio cubre todo el Área Metropolitana, desde la zona norte hasta la zona sur.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+            ¿Cuánto cobra el diagnóstico a domicilio?
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            El valor del diagnóstico se descuenta si realizas la reparación con nosotros. Contáctanos por WhatsApp para una cotización exacta.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="py-5" style="background-color: var(--gp-black); color: white;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold text-white">Contáctanos</h2>
+          <p class="text-secondary">Agenda tu cita o solicita un presupuesto.</p>
+        </div>
+        
+        <div class="card bg-white text-dark p-4 rounded-4 shadow">
+          <form id="contactForm">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Teléfono</label>
+                <input type="tel" class="form-control" id="telefono" required>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Mensaje</label>
+                <textarea class="form-control" id="mensaje" rows="3" placeholder="Describe tu problema..." required></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary w-100 fw-bold py-2">
+                  <i class="fab fa-whatsapp me-2"></i> Enviar por WhatsApp
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="text-center py-4 text-secondary" style="background-color: black; font-size: 0.9rem;">
+  <div class="container">
+    <p class="mb-1">&copy; 2024 GlobalPro Taller Mecánico.</p>
+    <div>
+      <a href="#" class="text-secondary me-2"><i class="fab fa-facebook"></i></a>
+      <a href="#" class="text-secondary me-2"><i class="fab fa-instagram"></i></a>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/56939026185" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nombre = document.getElementById('nombre').value;
+    const telefono = document.getElementById('telefono').value;
+    const mensaje = document.getElementById('mensaje').value;
+    
+    const texto = `Hola GlobalPro, soy *${nombre}*.%0A📞 Tel: ${telefono}%0A📝 Mensaje: ${mensaje}`;
+    window.open(`https://wa.me/56939026185?text=${texto}`, '_blank');
+  });
+</script>
+
+</body>
 </html>

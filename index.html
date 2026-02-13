@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- 1. ICONO EN LA URL (FAVICON) - CONFIGURADO -->
+  <link rel="icon" type="image/png" href="images/mecanico-a-domicilio-en-santiago.png"/>
+  <!-- Icono para iOS (cuando se guarda en pantalla de inicio) -->
+  <link rel="apple-touch-icon" href="images/mecanico-a-domicilio-en-santiago.png"/>
+
   <title>GlobalPro - Taller Mecánico en Santiago | Servicio Automotriz Integral</title>
   <meta name="description" content="Taller mecánico GlobalPro en Santiago. Expertos en mecánica automotriz, electromecánica, chapa y pintura. Ofrecemos servicio a domicilio en todo el Área Metropolitana. ¡Agenda tu cita!">
   <link rel="canonical" href="https://globalpro.pages.dev/"/>
@@ -22,7 +28,7 @@
   <style>
     /* --- VARIABLES DE COLOR (ROJO SANGRE) --- */
     :root {
-      /* Rojo Sangre */
+      /* Rojo Sangre Intenso */
       --gp-blood-red: #a80000; 
       /* Fondo oscuro */
       --gp-black: #121212;
@@ -42,8 +48,8 @@
       color: white !important;
     }
     .btn-primary:hover, .btn-primary:focus {
-      background-color: #820000; /* Un tono más oscuro al pasar mouse */
-      border-color: #820000;
+      background-color: #800000; /* Rojo más oscuro al pasar mouse */
+      border-color: #800000;
       box-shadow: 0 0 15px rgba(168, 0, 0, 0.4);
     }
     .btn-outline-primary {
@@ -63,15 +69,13 @@
     .nav-link { color: #ccc !important; transition: 0.3s; }
     .nav-link:hover, .nav-link.active { color: var(--gp-blood-red) !important; }
 
-    /* Forzar que las Alertas Bootstrap (azules por defecto) sean Rojo Sangre */
+    /* Forzar que las Alertas Bootstrap sean Rojo Sangre */
     .alert-primary {
       color: white !important;
       background-color: var(--gp-blood-red) !important;
       border-color: var(--gp-blood-red) !important;
     }
-    .alert-primary .alert-heading {
-      color: white !important;
-    }
+    .alert-primary .alert-heading { color: white !important; }
 
     /* --- ESTILOS VISOR IMÁGENES (LIGHTBOX) --- */
     #imageModal {
@@ -156,9 +160,9 @@
     }
     .chatbot-float:hover { color: #000; background-color: #fff; }
 
-    /* --- LOGO (AHORA ROJO SANGRE) --- */
+    /* --- LOGO EN HEADER (CAJA ROJO SANGRE) --- */
     .logo-img {
-      /* Cambiado de azul a rojo sangre */
+      /* Rojo Sangre */
       background-color: var(--gp-blood-red); 
       width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
       border-radius: 8px; margin-right: 15px; overflow: hidden; 
@@ -173,7 +177,7 @@
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "GlobalPro Taller Mecánico",
-    "image": "https://globalpro.pages.dev/images/image1.jpg",
+    "image": "https://globalpro.pages.dev/images/mecanico-a-domicilio-en-santiago.png",
     "telephone": "+569 39026185",
     "email": "contacto@globalpro.cl",
     "address": {
@@ -290,7 +294,7 @@
 <section class="py-5 bg-white" id="soluciones-gp">
   <div class="container">
     
-    <!-- CUADRO DE EMERGENCIA (Ahora ROJO SANGRE) -->
+    <!-- CUADRO DE EMERGENCIA (Rojo Sangre) -->
     <div class="alert alert-primary border-2 border-primary shadow-lg p-4 mb-5" role="alert">
       <div class="row align-items-center justify-content-center">
         <div class="col-12 text-center mb-4">
@@ -487,6 +491,7 @@
 <div id="imageModal" onclick="closeModal()">
   <span class="close-modal">&times;</span>
   <img class="modal-content" id="modalImg">
+</div>
 </div>
 
 <!-- SERVICIOS DESTACADOS -->
@@ -912,8 +917,8 @@
              <img src="https://tapizadodevolantes.pages.dev/images/forrar-un-volante-con-cuero-forrar-volante-coche-en-santiago-monocromatico.jpg" class="img-fluid rounded shadow border border-3 border-success mx-auto d-block" style="max-height: 400px; object-fit: contain;" alt="Tapizado de Volantes">
         </div>
         <div class="col-12 text-center">
-          <h2 class="text-uppercase fw-bold text-warning mb-3" style="font-size: 2rem;">TAPIZADO DE VOLANTES EN SANTIAGO</h2>
-          <p class="lead mb-4 text-success-900">
+          <h2 class="text-uppercase fw-bold text-dark mb-3" style="font-size: 2rem;">TAPIZADO DE VOLANTES EN SANTIAGO</h2>
+          <p class="lead mb-4">
             Si quieres informacion para el tapizado de volantes en santiago a domicilio entra al siguiente enlace.
           </p>
           <a href="https://tapizadodevolantes.pages.dev" class="btn btn-success btn-lg fw-bold text-white">
@@ -950,7 +955,7 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- SCRIPT PARA EL LIGHTBOX (VISOR DE IMÁGENES) -->
+<!-- SCRIPT PARA EL LIGHTBOX -->
 <script>
   function openModal(imgSrc) {
     var modal = document.getElementById("imageModal");

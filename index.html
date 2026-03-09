@@ -133,6 +133,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-left: 4px solid var(--gp-blood-red);
       height: 100%;
     }
+
+    /* --- NUEVO: Ajuste para imágenes completas --- */
+    .img-wrapper-full {
+      position: relative;
+      width: 100%;
+      /* Altura mínima para que no se vea minúscula, pero permite crecer */
+      min-height: 250px; 
+      max-height: 400px; /* Límite máximo para que no desordenen */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f8f9fa; /* Fondo gris suave por si la imagen tiene mucho espacio vacío */
+      overflow: hidden;
+      margin-bottom: 1rem;
+      border-radius: 10px 10px 0 0;
+    }
+    .img-wrapper-full img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Clave: Mantiene toda la imagen visible */
+      display: block;
+    }
+
   </style>
 
   <script type="application/ld+json">
@@ -481,8 +504,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- Bloque 1 -->
       <div class="col-md-6">
         <div class="gallery-item h-100 bg-white shadow-sm rounded overflow-hidden">
-          <!-- CAMBIO APLICADO: Eliminé altura fija (height: 250px) y puse object-fit: contain -->
-          <img src="images/mecanico-a-domicilio-santiago-247-global-pro-automotriz-reparacion-emergencia-en-ruta.jpg" class="img-fluid w-100" style="object-fit: contain; width: 100%; display: block;" alt="Auxilio Mecánico 24/7 en Santiago">
+          <!-- Ajuste: Nuevo wrapper para visualización completa -->
+          <div class="img-wrapper-full" onclick="openModal('images/mecanico-a-domicilio-santiago-247-global-pro-automotriz-reparacion-emergencia-en-ruta.jpg')">
+            <img src="images/mecanico-a-domicilio-santiago-247-global-pro-automotriz-reparacion-emergencia-en-ruta.jpg" alt="Auxilio Mecánico 24/7 en Santiago">
+          </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-exclamation-triangle me-2"></i> Auxilio de Emergencia: Mecánico a Domicilio 24/7</h5>
             <p class="small text-muted mb-1"><strong>Intención:</strong> Urgencia / Rescate en ruta.</p>
@@ -494,8 +519,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- Bloque 2 -->
       <div class="col-md-6">
         <div class="gallery-item h-100 bg-white shadow-sm rounded overflow-hidden">
-          <!-- CAMBIO APLICADO -->
-          <img src="images/revision-tren-delantero-amortiguadores-suspension-direccion-mecanico-a-domicilio-santiago-24-7.jpg" class="img-fluid w-100" style="object-fit: contain; width: 100%; display: block;" alt="Revisión de tren delantero suspensión y dirección">
+          <!-- Ajuste: Nuevo wrapper para visualización completa -->
+          <div class="img-wrapper-full" onclick="openModal('images/revision-tren-delantero-amortiguadores-suspension-direccion-mecanico-a-domicilio-santiago-24-7.jpg')">
+            <img src="images/revision-tren-delantero-amortiguadores-suspension-direccion-mecanico-a-domicilio-santiago-24-7.jpg" alt="Revisión de tren delantero suspensión y dirección">
+          </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-compact-disc me-2"></i> Especialistas en Seguridad: Frenos y Suspensión</h5>
             <p class="small text-muted mb-1"><strong>Intención:</strong> Mantenimiento Correctivo / Seguridad.</p>
@@ -507,8 +534,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- Bloque 3 -->
       <div class="col-md-6">
         <div class="gallery-item h-100 bg-white shadow-sm rounded overflow-hidden">
-          <!-- CAMBIO APLICADO -->
-          <img src="images/aire-acondicionado-automotriz-a-domicilio-recarga-gas-reparacion-climatizacion-santiago-centro.jpg" class="img-fluid w-100" style="object-fit: contain; width: 100%; display: block;" alt="Aire acondicionado automotriz a domicilio recarga de gas">
+          <!-- Ajuste: Nuevo wrapper para visualización completa -->
+          <div class="img-wrapper-full" onclick="openModal('images/aire-acondicionado-automotriz-a-domicilio-recarga-gas-reparacion-climatizacion-santiago-centro.jpg')">
+            <img src="images/aire-acondicionado-automotriz-a-domicilio-recarga-gas-reparacion-climatizacion-santiago-centro.jpg" alt="Aire acondicionado automotriz a domicilio recarga de gas">
+          </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-snowflake me-2"></i> Climatización: Aire Acondicionado Automotriz</h5>
             <p class="small text-muted mb-1"><strong>Intención:</strong> Confort / Verano.</p>
@@ -520,8 +549,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- Bloque 4 -->
       <div class="col-md-6">
         <div class="gallery-item h-100 bg-white shadow-sm rounded overflow-hidden">
-          <!-- CAMBIO APLICADO -->
-          <img src="images/electrico-automotriz-a-domicilio-24-horas-reparacion-alternador-motor-arranque-baterias-santiago.jpg" class="img-fluid w-100" style="object-fit: contain; width: 100%; display: block;" alt="Eléctrico automotriz a domicilio reparación alternador">
+          <!-- Ajuste: Nuevo wrapper para visualización completa -->
+          <div class="img-wrapper-full" onclick="openModal('images/electrico-automotriz-a-domicilio-24-horas-reparacion-alternador-motor-arranque-baterias-santiago.jpg')">
+            <img src="images/electrico-automotriz-a-domicilio-24-horas-reparacion-alternador-motor-arranque-baterias-santiago.jpg" alt="Eléctrico automotriz a domicilio reparación alternador">
+          </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-bolt me-2"></i> Electricidad y Electrónica: Eléctrico Automotriz</h5>
             <p class="small text-muted mb-1"><strong>Intención:</strong> Fallas eléctricas / Tecnología.</p>
@@ -533,8 +564,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- Bloque 5 -->
       <div class="col-md-6">
         <div class="gallery-item h-100 bg-white shadow-sm rounded overflow-hidden">
-          <!-- CAMBIO APLICADO -->
-          <img src="images/cambio-de-bujias-afinamiento-motor-limpieza-inyectores-mecanica-automotriz-profesional-domicilio.jpg" class="img-fluid w-100" style="object-fit: contain; width: 100%; display: block;" alt="Cambio de bujías afinamiento motor limpieza inyectores">
+          <!-- Ajuste: Nuevo wrapper para visualización completa -->
+          <div class="img-wrapper-full" onclick="openModal('images/cambio-de-bujias-afinamiento-motor-limpieza-inyectores-mecanica-automotriz-profesional-domicilio.jpg')">
+            <img src="images/cambio-de-bujias-afinamiento-motor-limpieza-inyectores-mecanica-automotriz-profesional-domicilio.jpg" alt="Cambio de bujías afinamiento motor limpieza inyectores">
+          </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-oil-can me-2"></i> Mantenimiento Preventivo: Cambio de Aceite y Afinamiento</h5>
             <p class="small text-muted mb-1"><strong>Intención:</strong> Cuidado del vehículo / Vida útil.</p>
@@ -546,8 +579,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- Bloque 6 -->
       <div class="col-md-6">
         <div class="gallery-item h-100 bg-white shadow-sm rounded overflow-hidden">
-          <!-- CAMBIO APLICADO -->
-          <img src="images/mecanico-24-7-pedro-aguirre-cerda-maipu-cerrillos-san-miguel-auxilio-mecanico-domingo.jpg" class="img-fluid w-100" style="object-fit: contain; width: 100%; display: block;" alt="Mecánico 24/7 auxilio mecánico domingo">
+          <!-- Ajuste: Nuevo wrapper para visualización completa -->
+          <div class="img-wrapper-full" onclick="openModal('images/mecanico-24-7-pedro-aguirre-cerda-maipu-cerrillos-san-miguel-auxilio-mecanico-domingo.jpg')">
+            <img src="images/mecanico-24-7-pedro-aguirre-cerda-maipu-cerrillos-san-miguel-auxilio-mecanico-domingo.jpg" alt="Mecánico 24/7 auxilio mecánico domingo">
+          </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-road me-2"></i> Soluciones para el Conductor Varado en la Vía</h5>
             <p class="small text-muted mb-1"><strong>Intención:</strong> Auxilio en ruta / Accidentados.</p>
@@ -559,8 +594,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- Bloque 7 -->
       <div class="col-md-6">
         <div class="gallery-item h-100 bg-white shadow-sm rounded overflow-hidden">
-          <!-- CAMBIO APLICADO -->
-          <img src="images/reparacion-de-culatas-empaquetaduras-motor-automotriz-mecanico-especialista-garantizado-santiago.jpg" class="img-fluid w-100" style="object-fit: contain; width: 100%; display: block;" alt="Reparación de culatas motor automotriz especialista">
+          <!-- Ajuste: Nuevo wrapper para visualización completa -->
+          <div class="img-wrapper-full" onclick="openModal('images/reparacion-de-culatas-empaquetaduras-motor-automotriz-mecanico-especialista-garantizado-santiago.jpg')">
+            <img src="images/reparacion-de-culatas-empaquetaduras-motor-automotriz-mecanico-especialista-garantizado-santiago.jpg" alt="Reparación de culatas motor automotriz especialista">
+          </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-car me-2"></i> Especialidad Chevrolet y Marcas Líderes</h5>
             <p class="small text-muted mb-1"><strong>Intención:</strong> Nicho de marca / Confianza técnica.</p>
@@ -572,8 +609,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- Bloque 8 -->
       <div class="col-md-6">
         <div class="gallery-item h-100 bg-white shadow-sm rounded overflow-hidden">
-          <!-- CAMBIO APLICADO -->
-          <img src="images/scanner-automotriz-profesional-diagnostico-computarizado-borrado-codigos-falla-check-engine-domicilio.jpg" class="img-fluid w-100" style="object-fit: contain; width: 100%; display: block;" alt="Escáner automotriz diagnóstico computarizado">
+          <!-- Ajuste: Nuevo wrapper para visualización completa -->
+          <div class="img-wrapper-full" onclick="openModal('images/scanner-automotriz-profesional-diagnostico-computarizado-borrado-codigos-falla-check-engine-domicilio.jpg')">
+            <img src="images/scanner-automotriz-profesional-diagnostico-computarizado-borrado-codigos-falla-check-engine-domicilio.jpg" alt="Escáner automotriz diagnóstico computarizado">
+          </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-laptop-code me-2"></i> Diagnóstico de Alta Precisión: Escáner Automotriz</h5>
             <p class="small text-muted mb-1"><strong>Intención:</strong> Diagnóstico electrónico.</p>
@@ -585,8 +624,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- Bloque 9 -->
       <div class="col-md-6">
         <div class="gallery-item h-100 bg-white shadow-sm rounded overflow-hidden">
-          <!-- CAMBIO APLICADO -->
-          <img src="images/cambio-de-pastillas-de-freno-a-domicilio-mecanico-frenos-abs-mantenimiento-preventivo-seguridad.jpg" class="img-fluid w-100" style="object-fit: contain; width: 100%; display: block;" alt="Cambio de pastillas de freno a domicilio seguridad">
+          <!-- Ajuste: Nuevo wrapper para visualización completa -->
+          <div class="img-wrapper-full" onclick="openModal('images/cambio-de-pastillas-de-freno-a-domicilio-mecanico-frenos-abs-mantenimiento-preventivo-seguridad.jpg')">
+            <img src="images/cambio-de-pastillas-de-freno-a-domicilio-mecanico-frenos-abs-mantenimiento-preventivo-seguridad.jpg" alt="Cambio de pastillas de freno a domicilio seguridad">
+          </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-map-marker-alt me-2"></i> Servicio Integral en Pedro Aguirre Cerda</h5>
             <p class="small text-muted mb-1"><strong>Intención:</strong> SEO Local / Ubicación.</p>
@@ -598,8 +639,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- Bloque 10 -->
       <div class="col-md-6">
         <div class="gallery-item h-100 bg-white shadow-sm rounded overflow-hidden">
-          <!-- CAMBIO APLICADO -->
-          <img src="images/taller-mecanico-aire-acondicionado-auto-cerca-de-mi-ubicacion-reparacion-calefaccion-vehiculos.jpg" class="img-fluid w-100" style="object-fit: contain; width: 100%; display: block;" alt="Taller mecánico aire acondicionado cerca de mi ubicación">
+          <!-- Ajuste: Nuevo wrapper para visualización completa -->
+          <div class="img-wrapper-full" onclick="openModal('images/taller-mecanico-aire-acondicionado-auto-cerca-de-mi-ubicacion-reparacion-calefaccion-vehiculos.jpg')">
+            <img src="images/taller-mecanico-aire-acondicionado-auto-cerca-de-mi-ubicacion-reparacion-calefaccion-vehiculos.jpg" alt="Taller mecánico aire acondicionado cerca de mi ubicación">
+          </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-wind me-2"></i> Climatización para el Conductor de Santiago</h5>
             <p class="small text-muted mb-1"><strong>Intención:</strong> Reparación de A/C / Confort.</p>
@@ -874,7 +917,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <div class="section-content">
           <div class="content-text">
-            El <span class="highlight">mantenimiento de autos</span> no debe ser una acción reactiva, sino un hábito planificado. El <span class="highlight">mantenimiento preventivo automotriz</span> es la práctica más inteligente y económica a largo plazo. Se basa en intervenciones programadas según el <span class="highlight">kilometraje de revisión</span> o el tiempo recomendado por el fabricante, detallado en el <span class="highlight">manual de servicio</span>. Esto incluye el <span class="highlight">cambio de aceite</span> y <span class="highlight">filtro de aceite</span> para proteger el <span class="highlight">motor</span>, la <span class="highlight">revisión de frenos</span> (<span class="highlight">pastillas de freno</span>, <span class="highlight">discos de freno</span>), la <span class="highlight">alineación y balanceo</span>, la <span class="highlight">rotación de neumáticos</span> y la <span class="highlight">revisión de suspensión</span> (<span class="highlight">amortiguadores</span>, <span class="highlight">bujes</span>). Este enfoque evita que fallas menores se conviertan en <span class="highlight">reparaciones correctivas</span> costosas.
+            El <span class="highlight">mantenimiento de autos</span> no debe ser una acción reactiva, sino un hábito planificado. El <span class="highlight">mantenimiento preventivo automotriz</span> es la práctica más inteligente y económica a largo plazo. Se basa en intervenciones programadas según el <span class="highlight">kilometraje de revisión</span> o el tiempo recomendado por el fabricante, detallado en el <span class="highlight">manual de servicio</span>. Esto incluye el <span class="highlight">cambio de aceite</span> y <span class="highlight">filtro de aceite</span> para proteger el <span class="highlight">motor</span>, la <span class="highlight">revisión de frenos</span> (<span class="highlight">pastillas de freno</span>, <span class="highlight">discos de freno</span>), la <span class="highlight">alineación y balanceo</span>, la <span class="highlight">rotación de neumáticos</span> y la <span class="highlight">revisión de suspensión</span> (<span class="highlight">amortiguadores</span>, <span class="keyword-tag">bujes</span>). Este enfoque evita que fallas menores se conviertan en <span class="highlight">reparaciones correctivas</span> costosas.
           </div>
           <div class="tags-container">
             <span class="keyword-tag">MANTENIMIENTO PREVENTIVO</span>

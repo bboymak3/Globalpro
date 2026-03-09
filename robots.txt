@@ -1,21 +1,10 @@
-# Robots.txt para Global Pro Automotriz - Especialistas en Mecánica a Domicilio 24/7
-# Optimizando la visibilidad para Santiago, Chile
-
 User-agent: *
 Allow: /
 
-# Evitar que Google rastree carpetas privadas o de administración (si usas sistema de citas)
-Disallow: /admin/
-Disallow: /config/
-Disallow: /privado/
-Disallow: /temp/
+# Evitamos que rastreen carpetas de sistema si existieran
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /logs/
 
-# Optimización para buscadores de imágenes
-# Queremos que encuentren nuestras fotos de ayuda en la ruta y alarmas
-User-agent: Googlebot-Image
-Allow: /
-
-# Indicar la ubicación del mapa del sitio para mejorar el SEO local
-Sitemap: globalpro.pages.dev/sitemap.xml
-
-# Notas de rastreo: Priorizar servicios de Emergencia, Frenos, Electricidad y Aire Acondicionado
+# Enlace al mapa del sitio para los buscadores
+Sitemap: https://mecanico247.com/sitemap.xml

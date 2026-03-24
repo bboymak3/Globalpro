@@ -7,99 +7,115 @@ export async function onRequest(context) {
         "Access-Control-Allow-Headers": "Content-Type",
     };
 
-    // Manejo de CORS preflight
     if (request.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
     try {
         // ---------------------------------------------------------
-        // 1. ENDPOINT: CREAR COTIZACIÓN (Desde el Panel)
+        // RUTA A: CREAR COTIZACIÓN (POST)
         // ---------------------------------------------------------
         if (request.method === "POST" && url.searchParams.get("accion") === "crear_cotizacion") {
-            const data = await request.json();
-            
-            // Asegurar cliente
-            await env.DB.prepare("INSERT OR IGNORE INTO Clientes (placa) VALUES (?)").bind(data.placa).run();
-            
-            // Generar token único
-            const token = crypto.randomUUID(); 
-            
-            // Insertar en Cotizaciones
-            const stmt = env.DB.prepare(`
-                INSERT INTO Cotizaciones (cliente_id, placa, tecnico, kilometraje, detalles, monto, whatsapp, estado, token, fecha_creacion)
-                VALUES ((SELECT id FROM Clientes WHERE placa = ?), ?, ?, ?, ?, ?, 'Pendiente', ?, datetime('now'))
-            `);
-            
-            await stmt.bind(data.placa, data.placa, data.tecnico, data.km, data.detalles, data.monto, data.whatsapp, token).run();
-            
-            return new Response(JSON.stringify({ success: true, token: token }), { headers: corsHeaders });
+            try {
+                const data = await request.json();
+
+                // Validación de seguridad en el servidor
+                if (!data.placa || !data.monto || !data.whatsapp) {
+                    return new Response(JSON.stringify({ error: "Faltan datos críticos (placa, monto o whatsapp)" }), { 
+                        status: 400, headers: corsHeaders 
+                    });
+                }
+
+                // 1. Asegurar que el cliente existe en la tabla Clientes
+                await env.DB.prepare("INSERT OR IGNORE INTO Clientes (placa) VALUES (?)").bind(data.placa).run();
+
+                // 2. Crear el Token único
+                const token = crypto.randomUUID(); 
+                
+                // 3. Insertar en Cotizaciones
+                const stmt = env.DB.prepare(`
+                    INSERT INTO Cotizaciones (cliente_id, placa, tecnico, kilometraje, detalles, monto, whatsapp, estado, token, fecha_creacion)
+                    VALUES ((SELECT id FROM Clientes WHERE placa = ?), ?, ?, ?, ?, ?, 'Pendiente', ?, datetime('now'))
+                `);
+                
+                await stmt.bind(
+                    data.placa, 
+                    data.placa, // Guardamos placa también directo para facilidad
+                    data.tecnico || 'No asignado', 
+                    data.km || 0, 
+                    data.detalles || 'Sin detalles', 
+                    data.monto, 
+                    data.whatsapp, 
+                    token
+                ).run();
+                
+                return new Response(JSON.stringify({ success: true, token: token }), { headers: corsHeaders });
+
+            } catch (dbError) {
+                // Esto ayudará a ver el error real en la consola si falla la BD
+                console.error("Error DB:", dbError);
+                return new Response(JSON.stringify({ error: "Error en base de datos: " + dbError.message }), { 
+                    status: 500, headers: corsHeaders 
+                });
+            }
         }
 
         // ---------------------------------------------------------
-        // 2. ENDPOINT: PÁGINA DE APROBACIÓN CON FIRMA (Para el Cliente)
+        // RUTA B: PÁGINA DE APROBACIÓN (GET) - Vista Cliente
         // ---------------------------------------------------------
         if (request.method === "GET" && url.pathname.startsWith("/aprobar")) {
             const token = url.searchParams.get("token");
-            
-            // Buscar cotización
             const { results } = await env.DB.prepare("SELECT * FROM Cotizaciones WHERE token = ?").bind(token).all();
             
             if (results.length === 0) return new Response("Enlace inválido o expirado", { status: 404 });
-            
             const cot = results[0];
 
-            // Si ya está aprobado, mostrar mensaje final
+            // Si ya aprobó
             if (cot.estado === 'Aprobado') {
                 return new Response(`
-                    <!DOCTYPE html>
-                    <body style="font-family:sans-serif; text-align:center; padding:20px; background:#f3f4f6;">
-                        <div style="background:white; padding:30px; border-radius:10px; max-width:400px; margin:50px auto; box-shadow:0 4px 6px rgba(0,0,0,0.1);">
-                            <h1 style="color:green; font-size:50px;">✅</h1>
-                            <h2 style="color:#1f2937;">¡Aprobado!</h2>
-                            <p style="color:#6b7280;">Ya has firmado y autorizado esta orden. El técnico ha sido notificado.</p>
-                        </div>
-                    </body>
+                    <!DOCTYPE html><body style="font-family:sans-serif; text-align:center; padding:20px; background:#f0f9ff;">
+                    <div style="background:white; padding:40px; border-radius:10px; max-w:400px; margin:50px auto; box-shadow:0 10px 25px rgba(0,0,0,0.1);">
+                        <div style="font-size:60px;">✅</div>
+                        <h2 style="color:#0369a1; margin:10px 0;">¡Aprobado!</h2>
+                        <p style="color:#64748b;">Su firma ha sido registrada exitosamente.</p>
+                    </div></body>
                 `, { headers: { "Content-Type": "text/html" } });
             }
 
-            // Si está pendiente, mostrar la interfaz con el Canvas de Firma
-            const html = `
+            // Si falta aprobar (Mostrar Canvas)
+            return new Response(`
             <!DOCTYPE html>
             <html>
             <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-                <title>Autorizar Servicio - GlobalPro</title>
+                <title>Autorizar - GlobalPro</title>
                 <script src="https://cdn.tailwindcss.com"></script>
-                <style>
-                    /* Evitar scroll mientras se firma */
-                    body { overscroll-behavior: none; }
-                    canvas { touch-action: none; cursor: crosshair; }
-                </style>
+                <style>body { overscroll-behavior: none; } canvas { touch-action: none; }</style>
             </head>
             <body class="bg-slate-100 min-h-screen flex items-center justify-center p-4">
-                <div class="bg-white w-full max-w-md rounded-2xl shadow-xl overflow-hidden">
-                    <!-- Header -->
-                    <div class="bg-blue-900 p-6 text-white text-center">
-                        <h2 class="text-xl font-bold">Autorización de Trabajo</h2>
-                        <p class="text-blue-200 text-sm">Placa: ${cot.placa}</p>
-                    </div>
-
+                <div class="bg-white w-full max-w-md rounded-2xl shadow-xl overflow-hidden border-t-8 border-blue-900">
                     <div class="p-6">
-                        <div class="bg-blue-50 p-4 rounded-lg mb-6 text-center">
-                            <p class="text-xs text-blue-500 uppercase font-bold">Monto Estimado</p>
-                            <p class="text-3xl font-black text-blue-900">$${cot.monto}</p>
-                            <p class="text-sm text-gray-600 mt-2 leading-snug">${cot.detalles}</p>
+                        <div class="text-center mb-6">
+                            <h2 class="text-xl font-bold text-slate-800">Orden de Trabajo</h2>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full uppercase font-bold tracking-wide">Placa: ${cot.placa}</span>
                         </div>
 
-                        <p class="text-center text-sm text-gray-500 mb-2">Firme abajo con su dedo para aceptar:</p>
+                        <div class="bg-slate-50 p-4 rounded-xl mb-6 border border-slate-200">
+                            <div class="flex justify-between items-end mb-2">
+                                <span class="text-slate-500 text-sm">Total Estimado</span>
+                                <span class="text-3xl font-black text-slate-900">$${cot.monto}</span>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed">${cot.detalles}</p>
+                            <p class="text-slate-400 text-xs mt-3 text-right">Técnico: ${cot.tecnico} | KM: ${cot.kilometraje}</p>
+                        </div>
+
+                        <p class="text-center text-slate-500 text-sm mb-2 font-medium">Firme abajo con su dedo para autorizar</p>
                         
-                        <!-- CANVAS DE FIRMA -->
-                        <div class="border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 mb-4 relative">
-                            <canvas id="sig-canvas" width="350" height="150" class="w-full h-40 bg-white rounded"></canvas>
-                            <button onclick="limpiarFirma()" class="absolute top-2 right-2 text-xs text-red-500 font-bold bg-white px-2 py-1 border rounded shadow">BORRAR</button>
+                        <div class="relative border-2 border-dashed border-slate-300 rounded-lg bg-white mb-6 shadow-inner">
+                            <canvas id="sig-canvas" width="400" height="200" class="w-full h-48 cursor-crosshair"></canvas>
+                            <button onclick="limpiarFirma()" class="absolute top-2 right-2 bg-red-50 text-red-500 text-xs font-bold px-3 py-1 rounded hover:bg-red-100 border border-red-200">BORRAR</button>
                         </div>
 
-                        <button id="btnFirmar" onclick="enviarFirma()" class="w-full bg-green-600 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-green-500 active:scale-95 transition flex items-center justify-center gap-2">
-                            <span>✍️ FIRMAR Y ACEPTAR</span>
+                        <button id="btnFirmar" onclick="enviarFirma()" class="w-full bg-blue-900 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-blue-800 active:scale-95 transition">
+                            FIRMAR Y ACEPTAR CONDICIONES
                         </button>
                     </div>
                 </div>
@@ -109,27 +125,27 @@ export async function onRequest(context) {
                     const ctx = canvas.getContext('2d');
                     let drawing = false;
 
-                    // Ajustar canvas a pantalla
                     function resizeCanvas() {
-                        const rect = canvas.getBoundingClientRect();
+                        const rect = canvas.parentNode.getBoundingClientRect();
                         canvas.width = rect.width;
-                        canvas.height = rect.height;
-                        ctx.lineWidth = 2;
+                        canvas.height = 200; // Altura fija
+                        ctx.lineWidth = 3;
                         ctx.lineCap = 'round';
                         ctx.strokeStyle = '#000';
                     }
+                    setTimeout(resizeCanvas, 100); // Pequeño delay para asegurar render
                     window.addEventListener('resize', resizeCanvas);
-                    resizeCanvas();
 
-                    // Eventos Mouse/Touch para dibujar
                     function start(e) { drawing = true; ctx.beginPath(); draw(e); }
                     function end() { drawing = false; ctx.beginPath(); }
                     function draw(e) {
                         if (!drawing) return;
                         e.preventDefault();
                         const rect = canvas.getBoundingClientRect();
-                        const x = (e.clientX || e.touches[0].clientX) - rect.left;
-                        const y = (e.clientY || e.touches[0].clientY) - rect.top;
+                        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                        const x = clientX - rect.left;
+                        const y = clientY - rect.top;
                         ctx.lineTo(x, y);
                         ctx.stroke();
                     }
@@ -144,13 +160,11 @@ export async function onRequest(context) {
                     function limpiarFirma() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
 
                     async function enviarFirma() {
-                        // Validar si está vacío (básico)
-                        // Convertir canvas a imagen Base64
                         const imagenBase64 = canvas.toDataURL(); 
-                        
                         const btn = document.getElementById('btnFirmar');
-                        btn.innerText = "ENVIANDO...";
+                        btn.innerHTML = "PROCESANDO...";
                         btn.disabled = true;
+                        btn.classList.add('opacity-75');
 
                         try {
                             const res = await fetch('?token=${token}&confirmar_firma=si', {
@@ -159,40 +173,36 @@ export async function onRequest(context) {
                                 body: JSON.stringify({ firma: imagenBase64 })
                             });
                             if(res.ok) {
-                                document.body.innerHTML = '<div class="text-center p-10"><h1 class="text-6xl text-green-500 mb-4">✅</h1><h2 class="text-2xl font-bold">¡Gracias!</h2><p>Su firma ha sido registrada.</p></div>';
+                                document.body.innerHTML = '<div class="flex flex-col items-center justify-center h-full"><div class="text-6xl mb-4">✅</div><h1 class="text-2xl font-bold text-slate-800">¡Gracias!</h1><p class="text-slate-500">Su autorización ha sido enviada.</p></div>';
                             } else {
-                                alert("Error al guardar firma");
+                                alert("Error de conexión. Intente nuevamente.");
                                 btn.disabled = false;
-                                btn.innerText = "REINTENTAR";
+                                btn.innerHTML = "FIRMAR Y ACEPTAR CONDICIONES";
+                                btn.classList.remove('opacity-75');
                             }
-                        } catch(e) { alert("Error de red"); btn.disabled = false; }
+                        } catch(e) { alert("Error de red"); btn.disabled = false; btn.innerHTML = "REINTENTAR"; }
                     }
                 </script>
             </body>
             </html>
-            `;
-            return new Response(html, { headers: { "Content-Type": "text/html" } });
+            `, { headers: { "Content-Type": "text/html" } });
         }
 
         // ---------------------------------------------------------
-        // 3. ENDPOINT: RECIBIR FIRMA (POST Interno del Canvas)
+        // RUTA C: RECIBIR FIRMA (POST)
         // ---------------------------------------------------------
-        if (request.method === "POST" && url.pathname.startsWith("/aprobar")) {
-            if (url.searchParams.get("confirmar_firma") === "si") {
-                const token = url.searchParams.get("token");
-                const data = await request.json();
-                
-                // Actualizar estado y guardar la imagen
-                await env.DB.prepare("UPDATE Cotizaciones SET estado = 'Aprobado', firma_imagen = ? WHERE token = ?")
-                    .bind(data.firma, token)
-                    .run();
-                
-                return new Response("OK");
-            }
+        if (request.method === "POST" && url.pathname.startsWith("/aprobar") && url.searchParams.get("confirmar_firma") === "si") {
+            const token = url.searchParams.get("token");
+            const data = await request.json();
+            
+            await env.DB.prepare("UPDATE Cotizaciones SET estado = 'Aprobado', firma_imagen = ? WHERE token = ?")
+                .bind(data.firma, token)
+                .run();
+            return new Response("OK");
         }
 
         // ---------------------------------------------------------
-        // 4. ENDPOINT: CONSULTAR ESTADO (Para el Panel)
+        // RUTA D: CONSULTAR ESTADO (GET)
         // ---------------------------------------------------------
         if (request.method === "GET" && url.searchParams.get("tipo") === "estado_aprobacion") {
             const placa = url.searchParams.get("placa");
@@ -200,11 +210,9 @@ export async function onRequest(context) {
             return new Response(JSON.stringify(results), { headers: corsHeaders });
         }
 
-        // --- TU CÓDIGO ORIGINAL (Eventos y Citas) ---
-        // Mantenemos la lógica original para guardar rápido
+        // --- TU CÓDIGO ORIGINAL (Eventos/Citas) ---
         if (request.method === "POST") {
             const data = await request.json();
-            // Si es el guardado rápido (tipo OT)
             if (data.tipo === 'OT') {
                 await env.DB.prepare("INSERT OR IGNORE INTO Clientes (placa) VALUES (?)").bind(data.placa).run();
                 await env.DB.prepare(`
@@ -213,12 +221,9 @@ export async function onRequest(context) {
                 `).bind(data.placa, data.tecnico, data.km, data.notas).run();
                 return new Response(JSON.stringify({ success: true }), { headers: corsHeaders });
             }
-            // Aquí iría tu lógica de Citas si la usas...
         }
-        
-        // ... (Resto de tu lógica GET para Citas si la necesitas) ...
 
-        return new Response("Ok", { headers: corsHeaders });
+        return new Response("OK", { headers: corsHeaders });
 
     } catch (err) {
         return new Response(JSON.stringify({ error: err.message }), { status: 500, headers: corsHeaders });

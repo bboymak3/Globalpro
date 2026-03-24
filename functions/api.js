@@ -17,17 +17,17 @@ export async function onRequest(context) {
             try {
                 const data = await request.json();
 
-                // Validación de seguridad en el servidor
+                // Validación de seguridad
                 if (!data.placa || !data.monto || !data.whatsapp) {
                     return new Response(JSON.stringify({ error: "Faltan datos críticos (placa, monto o whatsapp)" }), { 
                         status: 400, headers: corsHeaders 
                     });
                 }
 
-                // 1. Asegurar que el cliente existe en la tabla Clientes
+                // 1. Asegurar que el cliente existe
                 await env.DB.prepare("INSERT OR IGNORE INTO Clientes (placa) VALUES (?)").bind(data.placa).run();
 
-                // 2. Crear el Token único
+                // 2. Generar Token único (Esto crea la variable automáticamente)
                 const token = crypto.randomUUID(); 
                 
                 // 3. Insertar en Cotizaciones
@@ -38,19 +38,19 @@ export async function onRequest(context) {
                 
                 await stmt.bind(
                     data.placa, 
-                    data.placa, // Guardamos placa también directo para facilidad
+                    data.placa, 
                     data.tecnico || 'No asignado', 
                     data.km || 0, 
                     data.detalles || 'Sin detalles', 
                     data.monto, 
                     data.whatsapp, 
-                    token
+                    token 
                 ).run();
                 
+                // CORRECCIÓN AQUÍ: Devolvemos el token al frontend
                 return new Response(JSON.stringify({ success: true, token: token }), { headers: corsHeaders });
 
             } catch (dbError) {
-                // Esto ayudará a ver el error real en la consola si falla la BD
                 console.error("Error DB:", dbError);
                 return new Response(JSON.stringify({ error: "Error en base de datos: " + dbError.message }), { 
                     status: 500, headers: corsHeaders 
@@ -59,7 +59,7 @@ export async function onRequest(context) {
         }
 
         // ---------------------------------------------------------
-        // RUTA B: PÁGINA DE APROBACIÓN (GET) - Vista Cliente
+        // RUTA B: PÁGINA DE APROBACIÓN (GET)
         // ---------------------------------------------------------
         if (request.method === "GET" && url.pathname.startsWith("/aprobar")) {
             const token = url.searchParams.get("token");
@@ -68,7 +68,6 @@ export async function onRequest(context) {
             if (results.length === 0) return new Response("Enlace inválido o expirado", { status: 404 });
             const cot = results[0];
 
-            // Si ya aprobó
             if (cot.estado === 'Aprobado') {
                 return new Response(`
                     <!DOCTYPE html><body style="font-family:sans-serif; text-align:center; padding:20px; background:#f0f9ff;">
@@ -80,7 +79,6 @@ export async function onRequest(context) {
                 `, { headers: { "Content-Type": "text/html" } });
             }
 
-            // Si falta aprobar (Mostrar Canvas)
             return new Response(`
             <!DOCTYPE html>
             <html>
@@ -128,12 +126,12 @@ export async function onRequest(context) {
                     function resizeCanvas() {
                         const rect = canvas.parentNode.getBoundingClientRect();
                         canvas.width = rect.width;
-                        canvas.height = 200; // Altura fija
+                        canvas.height = 200;
                         ctx.lineWidth = 3;
                         ctx.lineCap = 'round';
                         ctx.strokeStyle = '#000';
                     }
-                    setTimeout(resizeCanvas, 100); // Pequeño delay para asegurar render
+                    setTimeout(resizeCanvas, 100); 
                     window.addEventListener('resize', resizeCanvas);
 
                     function start(e) { drawing = true; ctx.beginPath(); draw(e); }
@@ -210,7 +208,7 @@ export async function onRequest(context) {
             return new Response(JSON.stringify(results), { headers: corsHeaders });
         }
 
-        // --- TU CÓDIGO ORIGINAL (Eventos/Citas) ---
+        // --- CÓDIGO ORIGINAL (Eventos/Citas) ---
         if (request.method === "POST") {
             const data = await request.json();
             if (data.tipo === 'OT') {

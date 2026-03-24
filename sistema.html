@@ -108,6 +108,7 @@
         }
 
         // --- 2. SOLICITAR APROBACIÓN ---
+           // --- 2. SOLICITAR APROBACIÓN (VERSIÓN DEBUG) ---
         async function solicitarAprobacion() {
             const btn = document.getElementById('btnAprobar');
             
@@ -147,26 +148,43 @@
                     body: JSON.stringify(payload)
                 });
                 
+                // IMPRESIONANTE DEBUG AQUÍ:
                 const result = await res.json();
-                console.log("Respuesta servidor:", result);
+                console.log("Respuesta completa del servidor:", result); // Míralo en la consola F12
 
-                if(res.ok && result.token) {
-                    const urlAprobacion = `https://taller.estilosgrado33.workers.dev/aprobar?token=${result.token}`;
-                    const mensaje = `Hola ${nombre}, tu vehículo ${placa} tiene un presupuesto de $${monto}.\n\nPor favor revisa y FIRME la autorización aquí:\n${urlAprobacion}`;
-                    
-                    window.open(`https://wa.me/${whatsappCompleto}?text=${encodeURIComponent(mensaje)}`, '_blank');
-                    alert("✅ WhatsApp abierto. Espera la firma del cliente.");
+                // Lógica flexible para evitar el crash
+                if (res.ok) {
+                    // Caso A: Todo perfecto (viene success y token)
+                    if (result.success && result.token) {
+                        const urlAprobacion = `https://taller.estilosgrado33.workers.dev/aprobar?token=${result.token}`;
+                        const mensaje = `Hola ${nombre}, tu vehículo ${placa} tiene un presupuesto de $${monto}.\n\nPor favor revisa y FIRME la autorización aquí:\n${urlAprobacion}`;
+                        window.open(`https://wa.me/${whatsappCompleto}?text=${encodeURIComponent(mensaje)}`, '_blank');
+                        alert("✅ WhatsApp abierto.");
+                    } 
+                    // Caso B: El servidor dice "success" pero no mandó token (Raro, pero lo manejamos)
+                    else if (result.success && !result.token) {
+                         alert("⚠️ El servidor guardó los datos pero no generó un Token. Revisa el código del Worker.");
+                         console.error("Falta el token en la respuesta:", result);
+                    }
+                    // Caso C: El servidor devolvió otra cosa
+                    else {
+                        alert("⚠️ Respuesta inesperada del servidor: " + JSON.stringify(result));
+                    }
                 } else {
-                    throw new Error(result.error || "Error desconocido del servidor");
+                    // Caso D: El servidor devolvió error HTTP (500, 400, etc)
+                    throw new Error(result.error || "Error HTTP " + res.status);
                 }
             } catch(e) { 
-                console.error(e);
-                alert("❌ Error: " + e.message); 
+                console.error("Error catcheado:", e);
+                alert("❌ Error Crítico: " + e.message); 
             } finally { 
                 btn.disabled = false; 
                 btn.innerText = "📱 ENVIAR COTIZACIÓN Y FIRMAR"; 
             }
         }
+
+
+
 
         // --- 3. BUSCAR ESTADO ---
         async function buscarEstado() {

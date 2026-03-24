@@ -28,15 +28,24 @@
             <div>
                 <label class="text-xs text-slate-400 ml-1">WhatsApp del Cliente (Solo números)</label>
                 <div class="flex">
-                    <select id="codPais" class="bg-slate-600 text-white p-3 rounded-l-lg outline-none border-r border-slate-700">
-                        <option value="56">🇨🇱 +56</option>
-                        <option value="54">🇦🇷 +54</option>
-                        <option value="57">🇨🇴 +57</option>
-                        <option value="52">🇲🇽 +52</option>
-                        <option value="1">🇺🇸 +1</option>
-                        <option value="34">🇪🇸 +34</option>
+                    <!-- SELECTOR DE PAÍS ACTUALIZADO CON VENEZUELA Y MÁS -->
+                    <select id="codPais" class="bg-slate-600 text-white p-3 rounded-l-lg outline-none border-r border-slate-700 text-sm">
+                        <option value="58" selected>🇻🇪 +58 (Venezuela)</option>
+                        <option value="56">🇨🇱 +56 (Chile)</option>
+                        <option value="54">🇦🇷 +54 (Argentina)</option>
+                        <option value="57">🇨🇴 +57 (Colombia)</option>
+                        <option value="52">🇲🇽 +52 (México)</option>
+                        <option value="34">🇪🇸 +34 (España)</option>
+                        <option value="51">🇵🇪 +51 (Perú)</option>
+                        <option value="593">🇪🇨 +593 (Ecuador)</option>
+                        <option value="1">🇺🇸 +1 (USA)</option>
+                        <option value="55">🇧🇷 +55 (Brasil)</option>
+                        <option value="57">🇨🇴 +57 (Colombia)</option>
+                        <option value="507">🇵🇦 +507 (Panamá)</option>
+                        <option value="506">🇨🇷 +506 (Costa Rica)</option>
+                        <!-- Agrega más si necesitas -->
                     </select>
-                    <input type="number" id="whatsapp" placeholder="9 1234 5678" class="flex-1 p-3 bg-slate-700 rounded-r-lg outline-none border border-green-500/50">
+                    <input type="number" id="whatsapp" placeholder="414 123 4567" class="flex-1 p-3 bg-slate-700 rounded-r-lg outline-none border border-green-500/50 placeholder-slate-500">
                 </div>
             </div>
         </div>
@@ -64,7 +73,7 @@
     <script>
         const API_URL = "https://taller.estilosgrado33.workers.dev";
 
-        // --- 1. GUARDADO RÁPIDO (Sin afectar tu flujo normal) ---
+        // --- 1. GUARDADO RÁPIDO ---
         async function guardarRapido() {
             const btn = event.target;
             const data = {
@@ -73,7 +82,7 @@
                 tecnico: document.getElementById('tecnico').value,
                 km: document.getElementById('km').value,
                 notas: document.getElementById('notas').value,
-                tipo: 'OT' // Indica al backend que es guardado directo
+                tipo: 'OT'
             };
 
             if(!data.placa) return alert("La placa es obligatoria");
@@ -87,7 +96,6 @@
                 });
                 if(res.ok) { 
                     alert("✅ Servicio guardado correctamente"); 
-                    // location.reload(); // Comentado para que no te saque de la página mientras pruebas
                 } else { 
                     throw new Error("Error en servidor"); 
                 }
@@ -99,11 +107,10 @@
             }
         }
 
-        // --- 2. SOLICITAR APROBACIÓN (CORREGIDO) ---
+        // --- 2. SOLICITAR APROBACIÓN ---
         async function solicitarAprobacion() {
             const btn = document.getElementById('btnAprobar');
             
-            // Recolección de datos
             const placa = document.getElementById('placa').value.toUpperCase();
             const nombre = document.getElementById('nombre').value;
             const tecnico = document.getElementById('tecnico').value;
@@ -111,9 +118,8 @@
             const detalles = document.getElementById('notas').value;
             const monto = document.getElementById('monto').value;
             const codPais = document.getElementById('codPais').value;
-            let numero = document.getElementById('whatsapp').value.replace(/\D/g,''); // Quitar caracteres no numéricos
+            let numero = document.getElementById('whatsapp').value.replace(/\D/g,''); 
 
-            // Validaciones Estrictas
             if(!placa) return alert("Falta la Placa");
             if(!monto) return alert("Falta el Monto estimado");
             if(!numero) return alert("Falta el número de WhatsApp");
@@ -124,7 +130,6 @@
             btn.innerText = "GENERANDO ENLACE SEGURO...";
 
             try {
-                // Enviamos solo lo que espera el backend para evitar errores desconocidos
                 const payload = {
                     placa: placa,
                     tecnico: tecnico,
@@ -134,7 +139,7 @@
                     whatsapp: whatsappCompleto
                 };
 
-                console.log("Enviando datos:", payload); // Para debug en consola
+                console.log("Enviando datos:", payload); 
 
                 const res = await fetch(`${API_URL}?accion=crear_cotizacion`, {
                     method: 'POST',
@@ -146,14 +151,12 @@
                 console.log("Respuesta servidor:", result);
 
                 if(res.ok && result.token) {
-                    // ÉXITO: Generar Link de WhatsApp
                     const urlAprobacion = `https://taller.estilosgrado33.workers.dev/aprobar?token=${result.token}`;
                     const mensaje = `Hola ${nombre}, tu vehículo ${placa} tiene un presupuesto de $${monto}.\n\nPor favor revisa y FIRME la autorización aquí:\n${urlAprobacion}`;
                     
                     window.open(`https://wa.me/${whatsappCompleto}?text=${encodeURIComponent(mensaje)}`, '_blank');
                     alert("✅ WhatsApp abierto. Espera la firma del cliente.");
                 } else {
-                    // FALLÓ: Mostrar el error real del servidor
                     throw new Error(result.error || "Error desconocido del servidor");
                 }
             } catch(e) { 

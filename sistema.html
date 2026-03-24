@@ -128,7 +128,7 @@
             const detalles = document.getElementById('notas').value;
             const monto = document.getElementById('monto').value;
             const codPais = document.getElementById('codPais').value;
-            let numero = document.getElementById('whatsapp').value.replace(/\D/g,'');
+            let numero = document.getElementById('whatsapp').value.replace(/\D/g,');
 
             let pago_adelanto = 'No', monto_abono = 0, metodo_pago = 'No';
             if (document.getElementById('checkPago').checked) {
@@ -170,10 +170,10 @@
 
         function handleEnter(e) { if (e.key === 'Enter') buscarCotizacion(); }
 
-               async function buscarCotizacion() {
+        async function buscarCotizacion() {
             let q = document.getElementById('busquedaCotizacion').value.trim();
             q = q.toUpperCase();
-            const cont = document.getElementById('resultadoCotizacion');
+            const cont =.getElementById('resultadoCotizacion');
             if(!q) return alert("Escribe una placa");
             cont.innerHTML = "<p class='text-center text-green-400 text-xs animate-pulse'>Buscando...</p>";
             try {
@@ -211,12 +211,24 @@
 
                             <div class="text-lg text-slate-300 mt-4 leading-relaxed border-t border-slate-700 pt-4">${ev.detalles}</div>
                             
-                            <!-- FIRMA GIGANTE (H-24 en lugar de H-8) -->
+                            <!-- FIRMA GIGANTE (H-24 en lugar de H-8) + Botón Maximizar -->
                             <div class="mt-6 flex justify-between items-end bg-slate-900/50 p-4 rounded-xl border border-slate-600">
                                 <div class="flex-1 text-right">
                                     <span class="text-xs text-slate-500 block mb-1">Firma Digital</span>
-                                    <!-- AQUI ESTA EL CAMBIO: h-24 en lugar de h-8 -->
-                                    ${ev.firma_imagen ? `<img src="${ev.firma_imagen}" class="h-99 bg-white rounded shadow-lg border-2 border-white object-contain">` : '<span class="text-slate-600 text-xs">Sin firma</span>'}
+                                    <div class="flex items-center gap-2">
+                                        ${ev.firma_imagen ? `
+                                            <div class="relative group cursor-pointer" onclick="maximizarFirma('${ev.firma_imagen}')">
+                                                <!-- Imagen grande con lupa oculta -->
+                                                <img src="${ev.firma_imagen}" class="h-24 bg-white rounded shadow-lg border-2 border-white object-contain transition-transform active:scale-95">
+                                                
+                                                <!-- Lupa que aparece al pasar el mouse -->
+                                                <div class="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition pointer-events-none">
+                                                    <span class="text-white text-3xl">🔍</span>
+                                                </div>
+                                            </div>
+                                        ` : '<span class="text-slate-600 text-xs">Sin firma</span>'
+                                        }
+                                    </div>
                                 </div>
                             </div>
                             
@@ -227,6 +239,29 @@
                     </div>
                 `).join('');
             } catch(e) { console.error(e); cont.innerHTML = "<p class='text-center text-red-500'>Error al buscar</p>"; }
+        }
+
+        // --- FUNCIÓN NUEVA PARA MAXIMIZAR FIRMA ---
+        function maximizarFirma(imgSrc) {
+            const modal = document.createElement('div');
+            modal.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:9999; display:flex; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(5px);';
+            
+            const imgContainer = document.createElement('div');
+            imgContainer.style.cssText = 'max-width:90%; max-height:90%; background:white; padding:10px; border-radius:12px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;';
+            
+            const img = document.createElement('img');
+            img.src = imgSrc;
+            img.style.cssText = 'max-width:100%; max-height:80vh; object-contain;';
+            
+            const closeBtn = document.createElement('button');
+            closeBtn.innerText = "CERRAR (X)";
+            closeBtn.style.cssText = 'margin-top:20px; padding:10px 30px; background:#ef4444; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:18px;';
+            closeBtn.onclick = () => document.body.removeChild(modal);
+
+            imgContainer.appendChild(img);
+            imgContainer.appendChild(closeBtn);
+            modal.appendChild(imgContainer);
+            document.body.appendChild(modal);
         }
     </script>
 </body>

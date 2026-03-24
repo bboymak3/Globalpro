@@ -24,15 +24,14 @@
                 <input type="number" id="monto" placeholder="0" class="w-full p-3 bg-slate-700 rounded-lg outline-none border border-green-500/50 text-green-400 font-bold text-lg">
             </div>
             
-            <!-- CHECKBOX DE PAGO -->
+            <!-- CHECKBOX Y CAMPOS DE PAGO -->
             <div class="flex items-center gap-3 bg-slate-900/50 p-3 rounded-lg border border-slate-600 cursor-pointer" onclick="togglePaymentFields()">
-                <input type="checkbox" id="checkPago" class="w-5 h-5 text-green-500 rounded bg-slate-700 border-slate-500 focus:ring-green-500 focus:ring-2">
+                <input type="checkbox" id="checkPago" class="w-5 h-5 text-green-500 rounded bg-slate-700 border-slate-500">
                 <label for="checkPago" class="text-sm text-slate-300 select-none">
                     El cliente abonó
                 </label>
             </div>
 
-            <!-- CAMPOS DE ABONO (Ocultos por defecto) -->
             <div id="paymentFields" class="hidden space-y-3 bg-slate-900/30 p-3 rounded-lg border border-slate-700">
                 <div>
                     <label class="text-xs text-slate-400 ml-1">Monto del Abono ($)</label>
@@ -94,15 +93,11 @@
     <script>
         const API_URL = "https://taller.estilosgrado33.workers.dev";
 
-        // Mostrar/Ocultar campos de pago
         function togglePaymentFields() {
             const check = document.getElementById('checkPago');
             const fields = document.getElementById('paymentFields');
-            if (check.checked) {
-                fields.classList.remove('hidden');
-            } else {
-                fields.classList.add('hidden');
-            }
+            if (check.checked) { fields.classList.remove('hidden'); } 
+            else { fields.classList.add('hidden'); }
         }
 
         async function guardarRapido() {
@@ -135,11 +130,7 @@
             const codPais = document.getElementById('codPais').value;
             let numero = document.getElementById('whatsapp').value.replace(/\D/g,'');
 
-            // Datos de pago (Condicionales)
-            let pago_adelanto = 'No';
-            let monto_abono = 0;
-            let metodo_pago = 'No';
-
+            let pago_adelanto = 'No', monto_abono = 0, metodo_pago = 'No';
             if (document.getElementById('checkPago').checked) {
                 pago_adelanto = 'Si';
                 monto_abono = document.getElementById('montoAbono').value || 0;
@@ -153,13 +144,7 @@
 
             try {
                 const payload = { placa, tecnico, km, detalles, monto, whatsapp: whatsappCompleto, pago_adelanto, monto_abono, metodo_pago };
-
-                const res = await fetch(`${API_URL}?accion=crear_cotizacion`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                
+                const res = await fetch(`${API_URL}?accion=crear_cotizacion`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                 const result = await res.json();
                 if (res.ok && result.success && result.token) {
                     const urlAprobacion = `https://taller.estilosgrado33.workers.dev/aprobar?token=${result.token}`;
@@ -185,7 +170,7 @@
 
         function handleEnter(e) { if (e.key === 'Enter') buscarCotizacion(); }
 
-        async function buscarCotizacion() {
+               async function buscarCotizacion() {
             let q = document.getElementById('busquedaCotizacion').value.trim();
             q = q.toUpperCase();
             const cont = document.getElementById('resultadoCotizacion');
@@ -199,29 +184,49 @@
                     return;
                 }
                 cont.innerHTML = data.map(ev => `
-                    <div class="bg-slate-800 rounded-xl overflow-hidden border-2 ${ev.estado === 'Aprobado' ? 'border-green-500' : 'border-yellow-500'} shadow-lg">
-                        <div class="bg-slate-700 p-3 flex justify-between items-center border-b border-slate-600">
-                            <span class="text-white font-bold text-lg">${ev.placa}</span>
-                            <span class="px-3 py-1 rounded-full text-xs font-bold ${ev.estado === 'Aprobado' ? 'bg-green-600 text-white' : 'bg-yellow-600 text-white'}">${ev.estado.toUpperCase()}</span>
+                    <div class="bg-slate-800 rounded-2xl overflow-hidden border-2 ${ev.estado === 'Aprobado' ? 'border-green-500 shadow-green-900/30' : 'border-yellow-500'} shadow-lg">
+                        <div class="bg-slate-700 p-4 flex justify-between items-center border-b border-slate-600">
+                            <span class="text-white font-black text-2xl tracking-wide">${ev.placa}</span>
+                            <span class="px-4 py-2 rounded-full text-sm font-bold ${ev.estado === 'Aprobado' ? 'bg-green-600 text-white' : 'bg-yellow-600 text-white'}">${ev.estado.toUpperCase()}</span>
                         </div>
-                        <div class="p-4">
-                            <div class="flex justify-between items-end mb-3">
-                                <span class="text-slate-400 text-sm">Total</span>
-                                <span class="text-2xl font-black text-green-400">$${ev.monto}</span>
+                        <div class="p-6">
+                            <!-- TOTAL GRANDE -->
+                            <div class="flex justify-between items-end mb-4">
+                                <span class="text-slate-400 text-xl">Total</span>
+                                <span class="text-5xl font-black text-green-400">$${ev.monto}</span>
                             </div>
-                             ${ev.monto_abono > 0 ? `
-                            <div class="mb-2 bg-slate-700/50 p-2 rounded flex justify-between text-xs">
-                                <span class="text-green-400">Abono: $${ev.monto_abono} (${ev.metodo_pago})</span>
+                            
+                            <!-- ABONO GRANDE -->
+                            ${ev.monto_abono > 0 ? `
+                            <div class="bg-green-900/30 p-4 rounded-2xl mb-4 border border-green-500/30">
+                                <div class="flex justify-between items-center text-lg mb-1">
+                                    <span class="text-green-400 font-bold uppercase">Abono Recibido</span>
+                                    <span class="bg-green-600 text-white px-3 py-1 rounded text-sm font-bold">${ev.metodo_pago}</span>
+                                </div>
+                                <div class="flex justify-between text-xl">
+                                    <span class="text-green-300 font-bold">$${ev.monto_abono}</span>
+                                    <span class="text-slate-400">Saldo: $${ev.monto - ev.monto_abono}</span>
+                                </div>
                             </div>` : ''}
-                            <div class="text-xs text-slate-300">${ev.detalles}</div>
-                            <div class="mt-3 flex justify-between items-center">
-                                <span class="text-slate-500 text-[10px]">${new Date(ev.fecha_creacion).toLocaleString()}</span>
-                                ${ev.firma_imagen ? `<img src="${ev.firma_imagen}" class="h-8 bg-white rounded border border-slate-500">` : ''}
+
+                            <div class="text-lg text-slate-300 mt-4 leading-relaxed border-t border-slate-700 pt-4">${ev.detalles}</div>
+                            
+                            <!-- FIRMA GIGANTE (H-24 en lugar de H-8) -->
+                            <div class="mt-6 flex justify-between items-end bg-slate-900/50 p-4 rounded-xl border border-slate-600">
+                                <div class="flex-1 text-right">
+                                    <span class="text-xs text-slate-500 block mb-1">Firma Digital</span>
+                                    <!-- AQUI ESTA EL CAMBIO: h-24 en lugar de h-8 -->
+                                    ${ev.firma_imagen ? `<img src="${ev.firma_imagen}" class="h-24 bg-white rounded shadow-lg border-2 border-white object-contain">` : '<span class="text-slate-600 text-xs">Sin firma</span>'}
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between items-center">
+                                <span class="text-slate-500 text-base font-mono">${new Date(ev.fecha_creacion).toLocaleString()}</span>
                             </div>
                         </div>
                     </div>
                 `).join('');
-            } catch(e) { console.error(e); cont.innerHTML = "Error"; }
+            } catch(e) { console.error(e); cont.innerHTML = "<p class='text-center text-red-500'>Error al buscar</p>"; }
         }
     </script>
 </body>

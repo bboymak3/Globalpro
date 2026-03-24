@@ -9,47 +9,60 @@
     <div class="max-w-lg mx-auto bg-slate-800 p-6 rounded-xl border-t-4 border-yellow-500 shadow-2xl">
         <h2 class="text-2xl font-black text-center text-yellow-500 mb-6 uppercase tracking-tighter">Global Pro Automotriz</h2>
         
-        <!-- CAMPOS COMUNES -->
         <input type="text" id="placa" placeholder="PLACA" class="w-full p-3 mb-3 bg-slate-700 rounded-lg border border-slate-600 focus:border-yellow-500 outline-none uppercase font-bold tracking-widest">
         <input type="text" id="nombre" placeholder="Nombre del Cliente" class="w-full p-3 mb-3 bg-slate-700 rounded-lg outline-none">
         <input type="text" id="tecnico" placeholder="Técnico Encargado" class="w-full p-3 mb-3 bg-slate-700 rounded-lg outline-none">
         <input type="number" id="km" placeholder="Kilometraje" class="w-full p-3 mb-3 bg-slate-700 rounded-lg outline-none">
         <input type="text" id="aceite" placeholder="Tipo de Aceite" class="w-full p-3 mb-3 bg-slate-700 rounded-lg outline-none">
-        <textarea id="notas" placeholder="Detalles del trabajo / Diagnóstico..." class="w-full p-3 mb-4 bg-slate-700 rounded-lg h-24 outline-none"></textarea>
+        <textarea id="notas" placeholder="Detalles del trabajo..." class="w-full p-3 mb-4 bg-slate-700 rounded-lg h-24 outline-none"></textarea>
 
         <hr class="border-slate-700 my-4">
 
-        <!-- CAMPOS ESPECÍFICOS PARA APROBACIÓN -->
         <div class="grid grid-cols-1 gap-3 mb-4">
             <div>
-                <label class="text-xs text-slate-400 ml-1">Monto Total a Cobrar ($)</label>
+                <label class="text-xs text-slate-400 ml-1">Monto Total ($)</label>
                 <input type="number" id="monto" placeholder="0" class="w-full p-3 bg-slate-700 rounded-lg outline-none border border-green-500/50 text-green-400 font-bold text-lg">
             </div>
+            
+            <!-- CHECKBOX DE PAGO -->
+            <div class="flex items-center gap-3 bg-slate-900/50 p-3 rounded-lg border border-slate-600 cursor-pointer" onclick="togglePaymentFields()">
+                <input type="checkbox" id="checkPago" class="w-5 h-5 text-green-500 rounded bg-slate-700 border-slate-500 focus:ring-green-500 focus:ring-2">
+                <label for="checkPago" class="text-sm text-slate-300 select-none">
+                    El cliente abonó
+                </label>
+            </div>
+
+            <!-- CAMPOS DE ABONO (Ocultos por defecto) -->
+            <div id="paymentFields" class="hidden space-y-3 bg-slate-900/30 p-3 rounded-lg border border-slate-700">
+                <div>
+                    <label class="text-xs text-slate-400 ml-1">Monto del Abono ($)</label>
+                    <input type="number" id="montoAbono" placeholder="0" class="w-full p-2 bg-slate-700 rounded border border-slate-600 outline-none">
+                </div>
+                <div>
+                    <label class="text-xs text-slate-400 ml-1">Medio de Pago</label>
+                    <select id="metodoPago" class="w-full p-2 bg-slate-700 rounded border border-slate-600 outline-none">
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Transferencia">Transferencia</option>
+                    </select>
+                </div>
+            </div>
+
             <div>
-                <label class="text-xs text-slate-400 ml-1">WhatsApp del Cliente (Solo números)</label>
+                <label class="text-xs text-slate-400 ml-1">WhatsApp del Cliente</label>
                 <div class="flex">
                     <select id="codPais" class="bg-slate-600 text-white p-3 rounded-l-lg outline-none border-r border-slate-700 text-sm">
-                        <option value="58" selected>🇻🇪 +58 (Venezuela)</option>
-                        <option value="56">🇨🇱 +56 (Chile)</option>
-                        <option value="54">🇦🇷 +54 (Argentina)</option>
-                        <option value="57">🇨🇴 +57 (Colombia)</option>
-                        <option value="52">🇲🇽 +52 (México)</option>
-                        <option value="34">🇪🇸 +34 (España)</option>
-                        <option value="51">🇵🇪 +51 (Perú)</option>
-                        <option value="593">🇪🇨 +593 (Ecuador)</option>
-                        <option value="1">🇺🇸 +1 (USA)</option>
-                        <option value="55">🇧🇷 +55 (Brasil)</option>
-                        <option value="507">🇵🇦 +507 (Panamá)</option>
-                        <option value="506">🇨🇷 +506 (Costa Rica)</option>
+                        <option value="58" selected>🇻🇪 +58</option>
+                        <option value="56">🇨🇱 +56</option>
+                        <option value="54">🇦🇷 +54</option>
+                        <option value="57">🇨🇴 +57</option>
                     </select>
-                    <input type="number" id="whatsapp" placeholder="414 123 4567" class="flex-1 p-3 bg-slate-700 rounded-r-lg outline-none border border-green-500/50 placeholder-slate-500">
+                    <input type="number" id="whatsapp" placeholder="414..." class="flex-1 p-3 bg-slate-700 rounded-r-lg outline-none border border-green-500/50">
                 </div>
             </div>
         </div>
 
-        <!-- BOTONES DE ACCIÓN -->
         <button onclick="guardarRapido()" class="w-full bg-slate-600 text-white font-bold py-3 rounded-xl hover:bg-slate-500 transition mb-3 text-sm">
-            💾 GUARDAR RÁPIDO (Historial)
+            💾 GUARDAR RÁPIDO
         </button>
 
         <button onclick="solicitarAprobacion()" id="btnAprobar" class="w-full bg-green-600 text-white font-black py-4 rounded-xl hover:bg-green-500 active:scale-95 transition shadow-lg shadow-green-900/50 flex items-center justify-center gap-2 mb-6">
@@ -57,36 +70,41 @@
         </button>
         
         <hr class="border-slate-700 mb-4">
-
-        <!-- ZONA DE BÚSQUEDA DUAL -->
-        <h3 class="text-sm font-bold text-slate-300 mb-3 text-center uppercase">Consulta de Registros</h3>
+        <h3 class="text-sm font-bold text-slate-300 mb-3 text-center uppercase">Consulta</h3>
         
-        <!-- Buscador 1: Historial (Antiguo) -->
         <div class="mb-4 bg-slate-900/50 p-3 rounded-lg border border-slate-700">
-            <label class="text-xs text-blue-400 font-bold mb-1 block">HISTORIAL DE SERVICIOS</label>
+            <label class="text-xs text-blue-400 font-bold mb-1 block">HISTORIAL</label>
             <div class="flex gap-2">
-                <input type="text" id="busquedaHistorial" placeholder="Buscar placa o teléfono..." class="flex-1 p-2 bg-slate-700 rounded border border-slate-600 outline-none text-sm">
+                <input type="text" id="busquedaHistorial" placeholder="Buscar..." class="flex-1 p-2 bg-slate-700 rounded border border-slate-600 outline-none text-sm">
                 <button onclick="buscarHistorial()" class="bg-blue-600 px-3 rounded-lg hover:bg-blue-500">🔍</button>
             </div>
             <div id="resultadoHistorial" class="mt-2 space-y-2 text-xs"></div>
         </div>
 
-        <!-- Buscador 2: Cotizaciones (Nuevo) -->
         <div class="bg-slate-900/50 p-3 rounded-lg border border-slate-700">
-            <label class="text-xs text-green-400 font-bold mb-1 block">ESTADO DE APROBACIÓN Y FIRMAS</label>
+            <label class="text-xs text-green-400 font-bold mb-1 block">APROBACIONES Y FIRMAS</label>
             <div class="flex gap-2">
-                <input type="text" id="busquedaCotizacion" onkeypress="handleEnter(event)" placeholder="Buscar Placa (ej: rcm36f)" class="flex-1 p-2 bg-slate-700 rounded border border-slate-600 outline-none text-sm uppercase text-center">
+                <input type="text" id="busquedaCotizacion" onkeypress="handleEnter(event)" placeholder="Placa" class="flex-1 p-2 bg-slate-700 rounded border border-slate-600 outline-none text-sm uppercase text-center">
                 <button onclick="buscarCotizacion()" class="bg-green-600 px-3 rounded-lg hover:bg-green-500">🔍</button>
             </div>
             <div id="resultadoCotizacion" class="mt-2 space-y-3"></div>
         </div>
-
     </div>
 
     <script>
         const API_URL = "https://taller.estilosgrado33.workers.dev";
 
-        // --- 1. GUARDAR RÁPIDO (Historial) ---
+        // Mostrar/Ocultar campos de pago
+        function togglePaymentFields() {
+            const check = document.getElementById('checkPago');
+            const fields = document.getElementById('paymentFields');
+            if (check.checked) {
+                fields.classList.remove('hidden');
+            } else {
+                fields.classList.add('hidden');
+            }
+        }
+
         async function guardarRapido() {
             const btn = event.target;
             const data = {
@@ -98,30 +116,14 @@
                 notas: document.getElementById('notas').value,
                 tipo: 'OT'
             };
-
-            if(!data.placa) return alert("La placa es obligatoria");
+            if(!data.placa) return alert("Falta la Placa");
             btn.disabled = true; btn.innerText = "GUARDANDO...";
-
             try {
-                const res = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                if(res.ok) { 
-                    alert("✅ Guardado en historial"); 
-                } else { 
-                    throw new Error("Error en servidor"); 
-                }
-            } catch(e) { 
-                alert("❌ No se pudo guardar."); 
-            } finally { 
-                btn.disabled = false; 
-                btn.innerText = "💾 GUARDAR RÁPIDO (Historial)"; 
-            }
+                const res = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+                if(res.ok) alert("✅ Guardado"); else throw new Error("Error");
+            } catch(e) { alert("❌ Error"); } finally { btn.disabled = false; btn.innerText = "💾 GUARDAR RÁPIDO"; }
         }
 
-        // --- 2. SOLICITAR APROBACIÓN ---
         async function solicitarAprobacion() {
             const btn = document.getElementById('btnAprobar');
             const placa = document.getElementById('placa').value.toUpperCase();
@@ -131,19 +133,26 @@
             const detalles = document.getElementById('notas').value;
             const monto = document.getElementById('monto').value;
             const codPais = document.getElementById('codPais').value;
-            let numero = document.getElementById('whatsapp').value.replace(/\D/g,''); 
+            let numero = document.getElementById('whatsapp').value.replace(/\D/g,'');
 
-            if(!placa) return alert("Falta la Placa");
-            if(!monto) return alert("Falta el Monto estimado");
-            if(!numero) return alert("Falta el número de WhatsApp");
-            if(numero.length < 8) return alert("El número de WhatsApp parece muy corto");
+            // Datos de pago (Condicionales)
+            let pago_adelanto = 'No';
+            let monto_abono = 0;
+            let metodo_pago = 'No';
 
+            if (document.getElementById('checkPago').checked) {
+                pago_adelanto = 'Si';
+                monto_abono = document.getElementById('montoAbono').value || 0;
+                metodo_pago = document.getElementById('metodoPago').value;
+            }
+
+            if(!placa || !monto || !numero) return alert("Faltan datos obligatorios");
+            
             const whatsappCompleto = `${codPais}${numero}`;
-            btn.disabled = true; 
-            btn.innerText = "GENERANDO ENLACE...";
+            btn.disabled = true; btn.innerText = "GENERANDO...";
 
             try {
-                const payload = { placa, tecnico, km, detalles, monto, whatsapp: whatsappCompleto };
+                const payload = { placa, tecnico, km, detalles, monto, whatsapp: whatsappCompleto, pago_adelanto, monto_abono, metodo_pago };
 
                 const res = await fetch(`${API_URL}?accion=crear_cotizacion`, {
                     method: 'POST',
@@ -152,119 +161,67 @@
                 });
                 
                 const result = await res.json();
-
                 if (res.ok && result.success && result.token) {
                     const urlAprobacion = `https://taller.estilosgrado33.workers.dev/aprobar?token=${result.token}`;
-                    const mensaje = `Hola ${nombre}, tu vehículo ${placa} tiene un presupuesto de $${monto}.\n\nFirme la autorización aquí: ${urlAprobacion}`;
+                    const mensaje = `Hola ${nombre}, tu vehículo ${placa} tiene un presupuesto de $${monto}.\n\nFirme aquí: ${urlAprobacion}`;
                     window.open(`https://wa.me/${whatsappCompleto}?text=${encodeURIComponent(mensaje)}`, '_blank');
-                    alert("✅ Revisa WhatsApp para enviar.");
+                    alert("✅ Abre WhatsApp para enviar.");
                 } else {
                     alert("⚠️ Error: " + (result.error || "Respuesta inesperada"));
                 }
-            } catch(e) { 
-                alert("❌ Error: " + e.message); 
-            } finally { 
-                btn.disabled = false; 
-                btn.innerText = "📱 ENVIAR COTIZACIÓN Y FIRMAR"; 
-            }
+            } catch(e) { alert("❌ Error: " + e.message); } finally { btn.disabled = false; btn.innerText = "📱 ENVIAR COTIZACIÓN Y FIRMAR"; }
         }
 
-        // --- 3. BUSCAR HISTORIAL (Antiguo) ---
         async function buscarHistorial() {
             const q = document.getElementById('busquedaHistorial').value.trim();
             const cont = document.getElementById('resultadoHistorial');
             if(!q) return;
-
             try {
                 const res = await fetch(`${API_URL}?buscar=${q}`);
                 const data = await res.json();
-                
-                cont.innerHTML = data.length ? data.map(ev => `
-                    <div class="bg-slate-800 p-2 rounded border-l-2 border-blue-500">
-                        <p class="text-blue-400 text-[10px] font-bold">${new Date(ev.fecha_hora).toLocaleDateString()}</p>
-                        <p class="text-slate-300">KM: ${ev.kilometraje} | Aceite: ${ev.tipo_aceite}</p>
-                        <p class="text-slate-500 italic">${ev.notas_exigibles}</p>
-                    </div>
-                `).join('') : "<p class='text-center text-slate-500'>Sin resultados</p>";
+                cont.innerHTML = data.length ? data.map(ev => `<div class="bg-slate-800 p-2 rounded border-l-2 border-blue-500"><p class="text-blue-400 text-[10px] font-bold">${new Date(ev.fecha_hora).toLocaleDateString()}</p><p class="text-slate-300">KM: ${ev.kilometraje}</p></div>`).join('') : "<p class='text-center text-slate-500'>Sin resultados</p>";
             } catch(e) { cont.innerHTML = "Error"; }
         }
 
-        // --- 4. BUSCAR COTIZACIÓN (Nuevo - Mejorado Visualmente) ---
         function handleEnter(e) { if (e.key === 'Enter') buscarCotizacion(); }
 
         async function buscarCotizacion() {
             let q = document.getElementById('busquedaCotizacion').value.trim();
-            q = q.toUpperCase(); // Forzar mayúsculas
-            
+            q = q.toUpperCase();
             const cont = document.getElementById('resultadoCotizacion');
             if(!q) return alert("Escribe una placa");
-
-            cont.innerHTML = "<p class='text-center text-green-400 text-xs animate-pulse'>Buscando aprobaciones...</p>";
-
+            cont.innerHTML = "<p class='text-center text-green-400 text-xs animate-pulse'>Buscando...</p>";
             try {
                 const res = await fetch(`${API_URL}?placa=${q}&tipo=estado_aprobacion`);
                 const data = await res.json();
-
                 if(!data || data.length === 0) {
-                    cont.innerHTML = `<div class="text-center p-4 bg-slate-800 rounded border border-slate-600">
-                        <p class="text-slate-400">No hay cotizaciones para <strong class="text-white">${q}</strong></p>
-                        <p class="text-[10px] text-slate-500 mt-1">Asegúrate de que el cliente haya firmado.</p>
-                    </div>`;
+                    cont.innerHTML = `<div class="text-center p-4 bg-slate-800 rounded border border-slate-600"><p class="text-slate-400">No hay datos para <strong class="text-white">${q}</strong></p></div>`;
                     return;
                 }
-
-                // TARJETA GRANDE Y DETALLADA
-                cont.innerHTML = data.map(ev => {
-                    // Formatear fecha de la firma
-                    const fechaFirma = ev.fecha_creacion ? new Date(ev.fecha_creacion).toLocaleString() : 'Pendiente';
-
-                    return `
+                cont.innerHTML = data.map(ev => `
                     <div class="bg-slate-800 rounded-xl overflow-hidden border-2 ${ev.estado === 'Aprobado' ? 'border-green-500' : 'border-yellow-500'} shadow-lg">
-                        <!-- Encabezado -->
                         <div class="bg-slate-700 p-3 flex justify-between items-center border-b border-slate-600">
-                            <span class="text-white font-bold text-lg tracking-wide">${ev.placa}</span>
-                            <span class="px-3 py-1 rounded-full text-xs font-bold ${ev.estado === 'Aprobado' ? 'bg-green-600 text-white' : 'bg-yellow-600 text-white'}">
-                                ${ev.estado.toUpperCase()}
-                            </span>
+                            <span class="text-white font-bold text-lg">${ev.placa}</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-bold ${ev.estado === 'Aprobado' ? 'bg-green-600 text-white' : 'bg-yellow-600 text-white'}">${ev.estado.toUpperCase()}</span>
                         </div>
-
-                        <!-- Cuerpo -->
                         <div class="p-4">
                             <div class="flex justify-between items-end mb-3">
-                                <span class="text-slate-400 text-sm">Total Aprobado</span>
-                                <span class="text-3xl font-black text-green-400">$${ev.monto}</span>
+                                <span class="text-slate-400 text-sm">Total</span>
+                                <span class="text-2xl font-black text-green-400">$${ev.monto}</span>
                             </div>
-
-                            <div class="grid grid-cols-2 gap-2 text-sm mb-3">
-                                <div>
-                                    <span class="text-slate-500 text-xs block">Técnico</span>
-                                    <span class="text-white font-medium">${ev.tecnico}</span>
-                                </div>
-                                <div>
-                                    <span class="text-slate-500 text-xs block">Kilometraje</span>
-                                    <span class="text-white font-medium">${ev.kilometraje} km</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <span class="text-slate-500 text-xs block">Trabajo a realizar</span>
-                                <p class="text-slate-200 text-sm leading-tight">${ev.detalles}</p>
-                            </div>
-
-                            <div class="border-t border-slate-700 pt-2 flex justify-between items-center text-xs">
-                                <span class="text-slate-400">Firmado: ${fechaFirma}</span>
-                                ${ev.firma_imagen 
-                                    ? `<div class="flex items-center gap-2"><span class="text-green-400">✅ Firma Valida</span> <img src="${ev.firma_imagen}" class="h-8 bg-white rounded border border-slate-500"></div>` 
-                                    : '<span class="text-red-400">⚠️ Sin Firma</span>'}
+                             ${ev.monto_abono > 0 ? `
+                            <div class="mb-2 bg-slate-700/50 p-2 rounded flex justify-between text-xs">
+                                <span class="text-green-400">Abono: $${ev.monto_abono} (${ev.metodo_pago})</span>
+                            </div>` : ''}
+                            <div class="text-xs text-slate-300">${ev.detalles}</div>
+                            <div class="mt-3 flex justify-between items-center">
+                                <span class="text-slate-500 text-[10px]">${new Date(ev.fecha_creacion).toLocaleString()}</span>
+                                ${ev.firma_imagen ? `<img src="${ev.firma_imagen}" class="h-8 bg-white rounded border border-slate-500">` : ''}
                             </div>
                         </div>
                     </div>
-                `}).join('');
-
-            } catch(e) {
-                console.error(e);
-                cont.innerHTML = "<p class='text-center text-red-500'>Error al buscar</p>";
-            }
+                `).join('');
+            } catch(e) { console.error(e); cont.innerHTML = "Error"; }
         }
     </script>
 </body>

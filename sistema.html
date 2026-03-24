@@ -6,11 +6,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-900 text-white p-4 font-sans">
-    <div class="max-w-md mx-auto bg-slate-800 p-6 rounded-xl border-t-4 border-yellow-500 shadow-2xl">
+    <div class="max-w-lg mx-auto bg-slate-800 p-6 rounded-xl border-t-4 border-yellow-500 shadow-2xl">
         <h2 class="text-2xl font-black text-center text-yellow-500 mb-6 uppercase tracking-tighter">Global Pro Automotriz</h2>
         
         <!-- CAMPOS COMUNES -->
-        <input type="text" id="placa" placeholder="PLACA" class="w-full p-3 mb-3 bg-slate-700 rounded-lg border border-slate-600 focus:border-yellow-500 outline-none uppercase">
+        <input type="text" id="placa" placeholder="PLACA" class="w-full p-3 mb-3 bg-slate-700 rounded-lg border border-slate-600 focus:border-yellow-500 outline-none uppercase font-bold tracking-widest">
         <input type="text" id="nombre" placeholder="Nombre del Cliente" class="w-full p-3 mb-3 bg-slate-700 rounded-lg outline-none">
         <input type="text" id="tecnico" placeholder="Técnico Encargado" class="w-full p-3 mb-3 bg-slate-700 rounded-lg outline-none">
         <input type="number" id="km" placeholder="Kilometraje" class="w-full p-3 mb-3 bg-slate-700 rounded-lg outline-none">
@@ -23,7 +23,7 @@
         <div class="grid grid-cols-1 gap-3 mb-4">
             <div>
                 <label class="text-xs text-slate-400 ml-1">Monto Total a Cobrar ($)</label>
-                <input type="number" id="monto" placeholder="0" class="w-full p-3 bg-slate-700 rounded-lg outline-none border border-green-500/50 text-green-400 font-bold">
+                <input type="number" id="monto" placeholder="0" class="w-full p-3 bg-slate-700 rounded-lg outline-none border border-green-500/50 text-green-400 font-bold text-lg">
             </div>
             <div>
                 <label class="text-xs text-slate-400 ml-1">WhatsApp del Cliente (Solo números)</label>
@@ -75,10 +75,10 @@
         <div class="bg-slate-900/50 p-3 rounded-lg border border-slate-700">
             <label class="text-xs text-green-400 font-bold mb-1 block">ESTADO DE APROBACIÓN Y FIRMAS</label>
             <div class="flex gap-2">
-                <input type="text" id="busquedaCotizacion" onkeypress="handleEnter(event)" placeholder="Buscar Placa (Ej: RCM36F)" class="flex-1 p-2 bg-slate-700 rounded border border-slate-600 outline-none text-sm uppercase text-center">
+                <input type="text" id="busquedaCotizacion" onkeypress="handleEnter(event)" placeholder="Buscar Placa (ej: rcm36f)" class="flex-1 p-2 bg-slate-700 rounded border border-slate-600 outline-none text-sm uppercase text-center">
                 <button onclick="buscarCotizacion()" class="bg-green-600 px-3 rounded-lg hover:bg-green-500">🔍</button>
             </div>
-            <div id="resultadoCotizacion" class="mt-2 space-y-2 text-xs"></div>
+            <div id="resultadoCotizacion" class="mt-2 space-y-3"></div>
         </div>
 
     </div>
@@ -110,8 +110,6 @@
                 });
                 if(res.ok) { 
                     alert("✅ Guardado en historial"); 
-                    // Opcional: limpiar campos
-                    // document.getElementById('placa').value = '';
                 } else { 
                     throw new Error("Error en servidor"); 
                 }
@@ -191,41 +189,81 @@
             } catch(e) { cont.innerHTML = "Error"; }
         }
 
-        // --- 4. BUSCAR COTIZACIÓN (Nuevo) ---
+        // --- 4. BUSCAR COTIZACIÓN (Nuevo - Mejorado Visualmente) ---
         function handleEnter(e) { if (e.key === 'Enter') buscarCotizacion(); }
 
         async function buscarCotizacion() {
-            const q = document.getElementById('busquedaCotizacion').value.trim();
+            let q = document.getElementById('busquedaCotizacion').value.trim();
+            q = q.toUpperCase(); // Forzar mayúsculas
+            
             const cont = document.getElementById('resultadoCotizacion');
             if(!q) return alert("Escribe una placa");
 
-            cont.innerHTML = "<p class='text-center text-green-400 text-[10px]'>Buscando aprobaciones...</p>";
+            cont.innerHTML = "<p class='text-center text-green-400 text-xs animate-pulse'>Buscando aprobaciones...</p>";
 
             try {
-                // Aseguramos mayúsculas para la búsqueda
                 const res = await fetch(`${API_URL}?placa=${q}&tipo=estado_aprobacion`);
                 const data = await res.json();
 
                 if(!data || data.length === 0) {
-                    cont.innerHTML = `<p class='text-center text-slate-500'>No hay cotizaciones para <strong>${q}</strong></p>`;
+                    cont.innerHTML = `<div class="text-center p-4 bg-slate-800 rounded border border-slate-600">
+                        <p class="text-slate-400">No hay cotizaciones para <strong class="text-white">${q}</strong></p>
+                        <p class="text-[10px] text-slate-500 mt-1">Asegúrate de que el cliente haya firmado.</p>
+                    </div>`;
                     return;
                 }
 
-                cont.innerHTML = data.map(ev => `
-                    <div class="bg-slate-800 p-2 rounded border-l-2 ${ev.estado === 'Aprobado' ? 'border-green-500' : 'border-yellow-500'}">
-                        <div class="flex justify-between">
-                            <span class="font-bold ${ev.estado === 'Aprobado' ? 'text-green-400' : 'text-yellow-500'} text-xs">
+                // TARJETA GRANDE Y DETALLADA
+                cont.innerHTML = data.map(ev => {
+                    // Formatear fecha de la firma
+                    const fechaFirma = ev.fecha_creacion ? new Date(ev.fecha_creacion).toLocaleString() : 'Pendiente';
+
+                    return `
+                    <div class="bg-slate-800 rounded-xl overflow-hidden border-2 ${ev.estado === 'Aprobado' ? 'border-green-500' : 'border-yellow-500'} shadow-lg">
+                        <!-- Encabezado -->
+                        <div class="bg-slate-700 p-3 flex justify-between items-center border-b border-slate-600">
+                            <span class="text-white font-bold text-lg tracking-wide">${ev.placa}</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-bold ${ev.estado === 'Aprobado' ? 'bg-green-600 text-white' : 'bg-yellow-600 text-white'}">
                                 ${ev.estado.toUpperCase()}
                             </span>
-                            ${ev.firma_imagen ? `<img src="${ev.firma_imagen}" class="h-8 bg-white rounded">` : ''}
                         </div>
-                        <p class="text-white font-bold">$${ev.monto}</p>
-                        <p class="text-slate-400">${ev.detalles}</p>
+
+                        <!-- Cuerpo -->
+                        <div class="p-4">
+                            <div class="flex justify-between items-end mb-3">
+                                <span class="text-slate-400 text-sm">Total Aprobado</span>
+                                <span class="text-3xl font-black text-green-400">$${ev.monto}</span>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2 text-sm mb-3">
+                                <div>
+                                    <span class="text-slate-500 text-xs block">Técnico</span>
+                                    <span class="text-white font-medium">${ev.tecnico}</span>
+                                </div>
+                                <div>
+                                    <span class="text-slate-500 text-xs block">Kilometraje</span>
+                                    <span class="text-white font-medium">${ev.kilometraje} km</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <span class="text-slate-500 text-xs block">Trabajo a realizar</span>
+                                <p class="text-slate-200 text-sm leading-tight">${ev.detalles}</p>
+                            </div>
+
+                            <div class="border-t border-slate-700 pt-2 flex justify-between items-center text-xs">
+                                <span class="text-slate-400">Firmado: ${fechaFirma}</span>
+                                ${ev.firma_imagen 
+                                    ? `<div class="flex items-center gap-2"><span class="text-green-400">✅ Firma Valida</span> <img src="${ev.firma_imagen}" class="h-8 bg-white rounded border border-slate-500"></div>` 
+                                    : '<span class="text-red-400">⚠️ Sin Firma</span>'}
+                            </div>
+                        </div>
                     </div>
-                `).join('');
+                `}).join('');
+
             } catch(e) {
                 console.error(e);
-                cont.innerHTML = "Error al buscar";
+                cont.innerHTML = "<p class='text-center text-red-500'>Error al buscar</p>";
             }
         }
     </script>

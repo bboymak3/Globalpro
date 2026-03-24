@@ -28,7 +28,6 @@
             <div>
                 <label class="text-xs text-slate-400 ml-1">WhatsApp del Cliente (Solo números)</label>
                 <div class="flex">
-                    <!-- SELECTOR DE PAÍS ACTUALIZADO CON VENEZUELA Y MÁS -->
                     <select id="codPais" class="bg-slate-600 text-white p-3 rounded-l-lg outline-none border-r border-slate-700 text-sm">
                         <option value="58" selected>🇻🇪 +58 (Venezuela)</option>
                         <option value="56">🇨🇱 +56 (Chile)</option>
@@ -40,10 +39,8 @@
                         <option value="593">🇪🇨 +593 (Ecuador)</option>
                         <option value="1">🇺🇸 +1 (USA)</option>
                         <option value="55">🇧🇷 +55 (Brasil)</option>
-                        <option value="57">🇨🇴 +57 (Colombia)</option>
                         <option value="507">🇵🇦 +507 (Panamá)</option>
                         <option value="506">🇨🇷 +506 (Costa Rica)</option>
-                        <!-- Agrega más si necesitas -->
                     </select>
                     <input type="number" id="whatsapp" placeholder="414 123 4567" class="flex-1 p-3 bg-slate-700 rounded-r-lg outline-none border border-green-500/50 placeholder-slate-500">
                 </div>
@@ -61,10 +58,11 @@
         
         <!-- BUSCADOR -->
         <div class="mt-8 pt-6 border-t border-slate-700">
-            <h3 class="text-sm text-slate-400 mb-2">VERIFICAR APROBACIÓN</h3>
-            <div class="flex gap-2">
-                <input type="text" id="busqueda" placeholder="Buscar Placa" class="flex-1 p-3 bg-slate-700 rounded-lg border border-slate-600 outline-none uppercase">
-                <button onclick="buscarEstado()" class="bg-slate-600 px-4 rounded-lg">🔍</button>
+            <h3 class="text-sm text-slate-400 mb-2 font-bold">VERIFICAR APROBACIÓN</h3>
+            <div class="flex gap-2 mb-4">
+                <input type="text" id="busqueda" onkeypress="handleEnter(event)" placeholder="Buscar Placa (Ej: RCM36F)" class="flex-1 p-3 bg-slate-700 rounded-lg border border-slate-600 outline-none uppercase text-center">
+                <!-- BOTÓN CORREGIDO AQUÍ -->
+                <button onclick="buscarEstado()" class="bg-yellow-600 px-5 rounded-lg text-xl font-bold hover:bg-yellow-500 transition">🔍</button>
             </div>
             <div id="resultado" class="mt-4 space-y-3 text-sm"></div>
         </div>
@@ -94,11 +92,8 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
-                if(res.ok) { 
-                    alert("✅ Servicio guardado correctamente"); 
-                } else { 
-                    throw new Error("Error en servidor"); 
-                }
+                if(res.ok) { alert("✅ Servicio guardado correctamente"); } 
+                else { throw new Error("Error en servidor"); }
             } catch(e) { 
                 alert("❌ No se pudo guardar. Revisa tu conexión."); 
             } finally { 
@@ -108,10 +103,8 @@
         }
 
         // --- 2. SOLICITAR APROBACIÓN ---
-           // --- 2. SOLICITAR APROBACIÓN (VERSIÓN DEBUG) ---
         async function solicitarAprobacion() {
             const btn = document.getElementById('btnAprobar');
-            
             const placa = document.getElementById('placa').value.toUpperCase();
             const nombre = document.getElementById('nombre').value;
             const tecnico = document.getElementById('tecnico').value;
@@ -131,16 +124,7 @@
             btn.innerText = "GENERANDO ENLACE SEGURO...";
 
             try {
-                const payload = {
-                    placa: placa,
-                    tecnico: tecnico,
-                    km: km,
-                    detalles: detalles,
-                    monto: monto,
-                    whatsapp: whatsappCompleto
-                };
-
-                console.log("Enviando datos:", payload); 
+                const payload = { placa, tecnico, km, detalles, monto, whatsapp: whatsappCompleto };
 
                 const res = await fetch(`${API_URL}?accion=crear_cotizacion`, {
                     method: 'POST',
@@ -148,70 +132,87 @@
                     body: JSON.stringify(payload)
                 });
                 
-                // IMPRESIONANTE DEBUG AQUÍ:
                 const result = await res.json();
-                console.log("Respuesta completa del servidor:", result); // Míralo en la consola F12
+                console.log("Respuesta servidor:", result);
 
-                // Lógica flexible para evitar el crash
-                if (res.ok) {
-                    // Caso A: Todo perfecto (viene success y token)
-                    if (result.success && result.token) {
-                        const urlAprobacion = `https://taller.estilosgrado33.workers.dev/aprobar?token=${result.token}`;
-                        const mensaje = `Hola ${nombre}, tu vehículo ${placa} tiene un presupuesto de $${monto}.\n\nPor favor revisa y FIRME la autorización aquí:\n${urlAprobacion}`;
-                        window.open(`https://wa.me/${whatsappCompleto}?text=${encodeURIComponent(mensaje)}`, '_blank');
-                        alert("✅ WhatsApp abierto.");
-                    } 
-                    // Caso B: El servidor dice "success" pero no mandó token (Raro, pero lo manejamos)
-                    else if (result.success && !result.token) {
-                         alert("⚠️ El servidor guardó los datos pero no generó un Token. Revisa el código del Worker.");
-                         console.error("Falta el token en la respuesta:", result);
-                    }
-                    // Caso C: El servidor devolvió otra cosa
-                    else {
-                        alert("⚠️ Respuesta inesperada del servidor: " + JSON.stringify(result));
-                    }
+                if (res.ok && result.success && result.token) {
+                    const urlAprobacion = `https://taller.estilosgrado33.workers.dev/aprobar?token=${result.token}`;
+                    const mensaje = `Hola ${nombre}, tu vehículo ${placa} tiene un presupuesto de $${monto}.\n\nFirme la autorización aquí: ${urlAprobacion}`;
+                    window.open(`https://wa.me/${whatsappCompleto}?text=${encodeURIComponent(mensaje)}`, '_blank');
+                    alert("✅ Abre WhatsApp para enviar el enlace.");
                 } else {
-                    // Caso D: El servidor devolvió error HTTP (500, 400, etc)
-                    throw new Error(result.error || "Error HTTP " + res.status);
+                    alert("⚠️ Error: " + (result.error || "Respuesta inesperada"));
                 }
             } catch(e) { 
-                console.error("Error catcheado:", e);
-                alert("❌ Error Crítico: " + e.message); 
+                console.error(e);
+                alert("❌ Error: " + e.message); 
             } finally { 
                 btn.disabled = false; 
                 btn.innerText = "📱 ENVIAR COTIZACIÓN Y FIRMAR"; 
             }
         }
 
+        // --- 3. MANEJO DE TECLA ENTER ---
+        function handleEnter(e) {
+            if (e.key === 'Enter') {
+                buscarEstado();
+            }
+        }
 
-
-
-        // --- 3. BUSCAR ESTADO ---
+        // --- 4. BUSCAR ESTADO ---
         async function buscarEstado() {
-            const q = document.getElementById('busqueda').value;
-            if(!q) return;
-            
-            const res = await fetch(`${API_URL}?placa=${q}&tipo=estado_aprobacion`);
-            const data = await res.json();
+            const q = document.getElementById('busqueda').value.trim();
             const cont = document.getElementById('resultado');
             
-            if(!data || data.length === 0) {
-                cont.innerHTML = "<p class='text-center text-slate-500'>No hay cotizaciones pendientes para esta placa.</p>";
+            if(!q) {
+                alert("Escribe una placa para buscar");
                 return;
             }
 
-            cont.innerHTML = data.map(ev => `
-                <div class="bg-slate-900 p-4 rounded-lg border-l-4 ${ev.estado === 'Aprobado' ? 'border-green-500' : 'border-yellow-500'} text-sm shadow-md flex justify-between items-center">
-                    <div>
-                        <p class="font-bold ${ev.estado === 'Aprobado' ? 'text-green-400' : 'text-yellow-500'} mb-1">
-                            ${ev.estado.toUpperCase()}
-                        </p>
-                        <p class="text-white">$${ev.monto}</p>
-                        <p class="text-slate-400 text-xs truncate w-48">${ev.detalles}</p>
+            cont.innerHTML = "<p class='text-center text-yellow-500 animate-pulse'>🔍 Buscando en el sistema...</p>";
+
+            try {
+                const res = await fetch(`${API_URL}?placa=${q}&tipo=estado_aprobacion`);
+                const data = await res.json();
+                
+                console.log("Resultado búsqueda:", data); // Debug en F12
+
+                if(!data || data.length === 0) {
+                    cont.innerHTML = `<div class="text-center p-4 bg-slate-900/50 rounded border border-slate-700">
+                        <p class="text-slate-400">No se encontraron cotizaciones para <strong class="text-white">${q}</strong>.</p>
+                        <p class="text-xs text-slate-600 mt-1">Asegúrate de que el cliente haya firmado.</p>
+                    </div>`;
+                    return;
+                }
+
+                // Generar las tarjetas
+                cont.innerHTML = data.map(ev => `
+                    <div class="bg-slate-900 p-4 rounded-lg border-l-4 ${ev.estado === 'Aprobado' ? 'border-green-500 shadow-green-900/20' : 'border-yellow-500'} text-sm shadow-md">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1 pr-3">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="font-bold ${ev.estado === 'Aprobado' ? 'text-green-400' : 'text-yellow-500'}">
+                                        ${ev.estado.toUpperCase()}
+                                    </span>
+                                    ${ev.estado === 'Aprobado' ? '<span class="text-xs bg-green-900 text-green-200 px-1 rounded">FIRMADO</span>' : '<span class="text-xs bg-yellow-900 text-yellow-200 px-1 rounded">PENDIENTE</span>'}
+                                </div>
+                                <p class="text-white font-bold text-xl mb-1">$${ev.monto}</p>
+                                <p class="text-slate-300 text-sm leading-tight mb-2">${ev.detalles}</p>
+                                <p class="text-slate-500 text-xs">Técnico: ${ev.tecnico} | KM: ${ev.kilometraje}</p>
+                            </div>
+                            <div class="flex flex-col items-center justify-center min-w-[60px]">
+                                ${ev.firma_imagen 
+                                    ? `<img src="${ev.firma_imagen}" class="h-14 bg-white rounded border-2 border-green-500 shadow-sm" title="Firma Digital">` 
+                                    : '<span class="text-slate-600 text-[10px] text-center leading-tight">SIN<br>FIRMA</span>'}
+                            </div>
+                        </div>
                     </div>
-                    ${ev.firma_imagen ? `<img src="${ev.firma_imagen}" class="h-10 bg-white rounded border">` : '<span class="text-slate-600 text-xs">Sin firma</span>'}
-                </div>
-            `).join('');
+                `).join('');
+
+            } catch(e) {
+                console.error(e);
+                cont.innerHTML = `<p class="text-center text-red-500">Error: ${e.message}</p>`;
+            }
         }
     </script>
 </body>

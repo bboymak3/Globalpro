@@ -19,7 +19,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="apple-touch-icon" href="images/mecanico-a-domicilio-en-santiago.png"/>
 
   <title>GlobalPro - Taller Mecánico en Santiago | Servicio Automotriz Integral</title>
-  <meta name="description" content="Taller mecánico GlobalPro en Santiago. Expertos en mecánica automotriz, electromecánica, chapa y pintura. Ofrecemos servicio a domicilio en todo el Área Metropolitana. ¡Agenda tu cita!">
+  <!-- MODIFICACIÓN: Meta Descripción con la palabra clave exacta -->
+  <meta name="description" content="Expertos en mecánico a domicilio en Santiago y mecánico a domiciliario. Servicio automotriz integral, electromecánica, chapa y pintura en todo el Área Metropolitana. ¡Agenda tu cita!">
   <link rel="canonical" href="https://mecanico247.com"/>
   
   <!-- BOOTSTRAP CSS -->
@@ -36,7 +37,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <style>
     /* --- VARIABLES DE COLOR (ROJO SANGRE) --- */
-    /* Esto fuerza el color rojo sobre el azul que viene en tu styles.css externo */
     :root {
       --gp-blood-red: #a80000; 
       --gp-black: #121212;
@@ -81,13 +81,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .close-modal:hover, .close-modal:focus { color: #bbb; cursor: pointer; }
 
-    /* --- TARJETAS SERVICIOS (Compatibilidad con tu CSS) --- */
+    /* --- TARJETAS SERVICIOS --- */
     .service-solution-card {
-      border: none; /* Quitamos borde duro para que luzca como tu .service-card */
-      border-radius: 15px; /* Redondeado como tu CSS */
-      overflow: hidden;
+      border: none; border-radius: 15px; overflow: hidden;
       transition: transform 0.3s, box-shadow 0.3s; background: white; height: 100%;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Sombra de tu CSS */
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
     .service-solution-card:hover { 
       transform: translateY(-10px); 
@@ -109,7 +107,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .img-container:hover .img-overlay { opacity: 1; }
     .expand-icon { color: white; font-size: 2rem; }
 
-    /* --- LOGO EN HEADER (CAJA ROJO SANGRE) --- */
+    /* --- LOGO EN HEADER --- */
     .logo-img {
       background-color: var(--gp-blood-red); 
       width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
@@ -120,7 +118,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       width: 100%; height: 100%; object-fit: contain; padding: 5px;
     }
 
-    /* --- ESTILOS PARA NUEVAS SECCIONES (Acordeon y Pilares) --- */
+    /* --- ESTILOS ACORDEON Y PILARES --- */
     .accordion-button:not(.collapsed) {
       background-color: var(--gp-blood-red);
       color: white;
@@ -128,23 +126,55 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .accordion-button:focus {
       box-shadow: 0 0 0 0.25rem rgba(168, 0, 0, 0.25);
     }
-    
     .pillar-card {
       border-left: 4px solid var(--gp-blood-red);
       height: 100%;
     }
 
-    /* --- NUEVO: Ajuste para imágenes completas --- */
+    /* --- ESTILOS NUEVA SECCIÓN SEO --- */
+    .seo-section {
+      background-color: #f8f9fa;
+      padding: 60px 0;
+      border-bottom: 5px solid var(--gp-blood-red);
+    }
+    .seo-h1 {
+      color: var(--gp-blood-red);
+      font-weight: 800;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+    .seo-h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+    .seo-text p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 1.5rem;
+      text-align: justify;
+    }
+    .seo-highlight {
+      color: var(--gp-blood-red);
+      font-weight: bold;
+      background-color: rgba(168, 0, 0, 0.05);
+      padding: 0 5px;
+      border-radius: 4px;
+    }
+
+    /* --- AJUSTE IMÁGENES COMPLETAS --- */
     .img-wrapper-full {
       position: relative;
       width: 100%;
-      /* Altura mínima para que no se vea minúscula, pero permite crecer */
       min-height: 250px; 
-      max-height: 400px; /* Límite máximo para que no desordenen */
+      max-height: 400px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #f8f9fa; /* Fondo gris suave por si la imagen tiene mucho espacio vacío */
+      background-color: #f8f9fa;
       overflow: hidden;
       margin-bottom: 1rem;
       border-radius: 10px 10px 0 0;
@@ -152,12 +182,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .img-wrapper-full img {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* Clave: Mantiene toda la imagen visible */
+      object-fit: contain;
       display: block;
     }
-
   </style>
 
+  <!-- MODIFICACIÓN: Rich Snippets actualizados con la keyword -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -172,7 +202,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "addressCountry": "CL"
     },
     "url": "https://globalpro.pages.dev",
-    "description": "Taller mecánico especializado en servicio automotriz integral, mecánica general, electromecánica y más. Servicio a domicilio en el Área Metropolitana de Chile.",
+    "description": "Servicio experto de mecánico a domicilio y mecánico a domiciliario en Santiago. Taller mecánico especializado en servicio automotriz integral, mecánica general, electromecánica y más en el Área Metropolitana de Chile.",
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -216,6 +246,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="collapse navbar-collapse desktop-menu" id="navbarNav">
       <ul class="navbar-nav ms-auto">
+        <!-- MODIFICACIÓN: Nuevo ítem en el menú apuntando a la sección SEO -->
+        <li class="nav-item">
+          <a class="nav-link" href="#mecanico-domicilio-seo">Mecánico a Domicilio</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="#servicios">Servicios</a>
         </li>
@@ -287,6 +321,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </section>
+
+<!-- ======================================================================= -->
+<!-- MODIFICACIÓN: NUEVA SECCIÓN PRINCIPAL SEO (Insertada aquí después del Hero) -->
+<!-- ======================================================================= -->
+<section class="seo-section" id="mecanico-domicilio-seo">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        
+        <!-- H1 Principial SEO -->
+        <h1 class="seo-h1 text-center">
+          El Mejor <span class="seo-highlight">Mecánico a Domicilio</span> en Santiago: Solución Inmediata
+        </h1>
+
+        <!-- H2 Descriptivo -->
+        <h2 class="seo-h2 text-center">
+          Servicio Profesional de <span class="seo-highlight">Mecánico a Domiciliario</span> para toda la Región Metropolitana
+        </h2>
+
+        <!-- Texto SEO Descriptivo -->
+        <div class="seo-text">
+          <p>
+            En <strong>GlobalPro</strong>, entendemos que tu tiempo es valioso y que una falla mecánica puede detener tu día. Por eso, nos especializamos en ofrecer el servicio de <span class="seo-highlight">mecánico a domicilio</span> más eficiente y confiable de Santiago. Ya no es necesario remolcar tu vehículo ni pasar horas esperando en un taller físico; nuestro equipo de expertos se desplaza hasta donde tú estés, ya sea en tu casa, oficina o en la vía pública si has sufrido un contratiempo.
+          </p>
+          <p>
+             Somos tu <strong>mecánico a domicilio </strong> de confianza, equipado con herramientas de diagnóstico de última generación para resolver problemas desde el mantenimiento preventivo hasta reparaciones complejas de motor y frenos.
+          </p>
+          <p>
+            ¿Por qué elegirnos? Porque combinamos la calidad de un taller formal con la comodidad del servicio a puerta cerrada. Si estás en <strong>Santiago Centro, Providencia, Las Condes, Maipú</strong> o cualquier comuna del Área Metropolitana, nuestro <span class="seo-highlight">mecánico a domicilio en Santiago</span> está listo para atenderte. Ofrecemos transparencia en los presupuestos, garantía en todos nuestros trabajos y una atención personalizada que pone la seguridad de tu vehículo y tu tranquilidad en primer lugar.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ======================================================================= -->
+<!-- FIN NUEVA SECCIÓN SEO -->
+<!-- ======================================================================= -->
+
+
 
 <!-- NUEVA SECCIÓN: SOLUCIONES PERSUASIVAS Y EMERGENCIAS -->
 <section class="py-5 bg-white" id="soluciones-gp">
@@ -1085,89 +1160,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- CONTACTO / COTIZADOR -->
-<section class="contact-section" id="contacto">
-  <div class="container">
-    <div class="row">
-      <!-- COLUMNA IZQUIERDA: Texto y Datos -->
-      <!-- IMPORTANTE: Usamos 'text-white' porque tu CSS .contact-section tiene fondo oscuro -->
-      <div class="col-lg-5 mb-4 mb-lg-0">
-        <h2 class="section-title text-white">Agenda tu Cita o Cotiza con Nosotros</h2>
-        <p class="text-white-50">¡No esperes más! Contáctanos para agendar tu <strong>mantenimiento</strong>, solicitar una <strong>cotización de reparación</strong> o pedir <strong>auxilio mecánico</strong>. Tu <strong>presupuesto de reparación</strong> está a solo un clic.</p>
-        <div class="contact-info">
-          <div class="d-flex align-items-center mb-3">
-            <i class="fas fa-map-marker-alt me-3 text-primary"></i>
-            <span class="text-white">Servicio a domicilio en todo el Área Metropolitana</span>
-          </div>
-          <div class="d-flex align-items-center mb-3">
-            <i class="fas fa-phone me-3 text-primary"></i>
-            <span class="text-white">+569 39026185</span>
-          </div>
-          <div class="d-flex align-items-center mb-3">
-            <i class="fas fa-envelope me-3 text-primary"></i>
-            <span class="text-white">contacto@globalpro.cl</span>
-          </div>
-          <div class="d-flex align-items-center">
-            <i class="fas fa-clock me-3 text-primary"></i>
-            <span class="text-white">Lun-Vie: 9:00 - 18:00 | Sáb: 9:00 - 14:00</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- COLUMNA DERECHA: Formulario -->
-      <!-- Nota: La clase .contact-form en tu CSS pone el fondo blanco, asi que el texto negro del formulario se verá bien -->
-      <div class="col-lg-7">
-        <form id="contactForm" class="contact-form needs-validation" novalidate>
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label for="nombre" class="form-label">Nombre Completo</label>
-              <input type="text" class="form-control" id="nombre" required>
-            </div>
-            <div class="col-md-6">
-              <label for="telefono" class="form-label">Teléfono / WhatsApp</label>
-              <input type="tel" class="form-control" id="telefono" required>
-            </div>
-            <div class="col-12">
-              <label for="vehiculo" class="form-label">Vehículo (Marca/Modelo/Año)</label>
-              <input type="text" class="form-control" id="vehiculo" placeholder="Ej: Toyota Yaris 2020" required>
-            </div>
-            <div class="col-md-6">
-              <label for="servicio" class="form-label">Tipo de Servicio</label>
-              <select class="form-select" id="servicio" required>
-                <option value="" selected disabled>Selecciona un servicio...</option>
-                <option value="Mecánica General y Mantenimiento">Mecánica General y Mantenimiento</option>
-                <option value="Electromecánica y Electricidad">Electromecánica y Electricidad</option>
-                <option value="Chapa y Pintura">Chapa y Pintura</option>
-                <option value="Aire Acondicionado">Aire Acondicionado</option>
-                <option value="Frenos y Suspensión">Frenos y Suspensión</option>
-                <option value="Reparación de Transmisión">Reparación de Transmisión</option>
-                <option value="Diagnóstico Computarizado">Diagnóstico Computarizado</option>
-                <option value="Servicio a Domicilio">Servicio a Domicilio</option>
-                <option value="Otro">Otro</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="comuna" class="form-label">Tu Comuna</label>
-              <select class="form-select" id="comuna" required>
-                <option value="" selected disabled>Selecciona tu comuna...</option>
-                <option value="Santiago">Santiago</option><option value="Providencia">Providencia</option><option value="Las Condes">Las Condes</option><option value="Vitacura">Vitacura</option><option value="La Reina">La Reina</option><option value="Peñalolén">Peñalolén</option><option value="La Florida">La Florida</option><option value="Puente Alto">Puente Alto</option><option value="Maipú">Maipú</option><option value="San Bernardo">San Bernardo</option>
-              </select>
-            </div>
-            <div class="col-12">
-              <label for="mensaje" class="form-label">Describe el problema o lo que necesitas</label>
-              <textarea class="form-control" id="mensaje" rows="4" placeholder="Ej: Mi auto no enciende..."></textarea>
-            </div>
-            <div class="col-12">
-              <button type="submit" class="btn btn-primary btn-lg w-100">
-                <i class="fab fa-whatsapp me-2"></i> Enviar por WhatsApp
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- ELIMINACIÓN: Sección de Contacto/Formulario eliminada según solicitud -->
 
 <!-- NUEVA SECCIÓN: VÍNCULO A TAPIZADO DE VOLANTES -->
 <section class="py-5 bg-white">

@@ -1,6 +1,65 @@
 <!DOCTYPE html>
 <html lang="es-CL">
 <head>
+<div id="floating-counter">
+  <i class="fas fa-users"></i> 
+  <span id="live-count">0</span>
+  <div class="label-visitor">Visitantes</div>
+</div>
+
+<style>
+  #floating-counter {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #FFC107 0%, #ff9800 100%);
+    color: #000;
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 10001; /* Por encima de todo */
+    border: 2px solid #fff;
+    cursor: default;
+    animation: pulse-yellow 2s infinite;
+    transition: transform 0.3s ease;
+  }
+
+  #floating-counter:hover {
+    transform: scale(1.1);
+  }
+
+  .label-visitor {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    display: block;
+    line-height: 1;
+    color: #333;
+  }
+
+  @keyframes pulse-yellow {
+    0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 193, 7, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+  }
+
+  /* Ajuste para móviles para que no tape el menú */
+  @media (max-width: 768px) {
+    #floating-counter {
+      top: 80px; /* Lo bajamos un poco para que no choque con el logo */
+      right: 10px;
+      padding: 8px 14px;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+
+
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "41608a73d5524531804ac808fbf45439"}'></script><!-- End Cloudflare Web Analytics -->
 
 <!-- Google Tag Manager -->
@@ -19,7 +78,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="apple-touch-icon" href="images/mecanico-a-domicilio-en-santiago.png"/>
 
   <title>GlobalPro - Taller Mecánico en Santiago | Servicio Automotriz Integral</title>
-  <meta name="description" content="Taller mecánico GlobalPro en Santiago. Expertos en mecánica automotriz, electromecánica, chapa y pintura. Ofrecemos servicio a domicilio en todo el Área Metropolitana. ¡Agenda tu cita!">
+  <!-- Meta Descripción con la palabra clave exacta -->
+  <meta name="description" content="Expertos en mecánico a domicilio en Santiago y mecánico a domiciliario. Servicio automotriz integral, electromecánica, chapa y pintura en todo el Área Metropolitana. ¡Agenda tu cita!">
   <link rel="canonical" href="https://mecanico247.com"/>
   
   <!-- BOOTSTRAP CSS -->
@@ -36,13 +96,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <style>
     /* --- VARIABLES DE COLOR (ROJO SANGRE) --- */
-    /* Esto fuerza el color rojo sobre el azul que viene en tu styles.css externo */
     :root {
       --gp-blood-red: #a80000; 
       --gp-black: #121212;
     }
 
-    html { scroll-behavior: smooth; }
+    html { 
+      scroll-behavior: smooth; 
+      /* Padding para que el último elemento no quede oculto detrás del footer fijo */
+      scroll-padding-bottom: 120px; /* Aumentado porque la barra es más alta ahora */
+    }
     
     /* --- SOBREESCRITURA DE COLORES --- */
     .text-primary { color: var(--gp-blood-red) !important; }
@@ -81,13 +144,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .close-modal:hover, .close-modal:focus { color: #bbb; cursor: pointer; }
 
-    /* --- TARJETAS SERVICIOS (Compatibilidad con tu CSS) --- */
+    /* --- TARJETAS SERVICIOS --- */
     .service-solution-card {
-      border: none; /* Quitamos borde duro para que luzca como tu .service-card */
-      border-radius: 15px; /* Redondeado como tu CSS */
-      overflow: hidden;
+      border: none; border-radius: 15px; overflow: hidden;
       transition: transform 0.3s, box-shadow 0.3s; background: white; height: 100%;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Sombra de tu CSS */
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
     .service-solution-card:hover { 
       transform: translateY(-10px); 
@@ -109,7 +170,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .img-container:hover .img-overlay { opacity: 1; }
     .expand-icon { color: white; font-size: 2rem; }
 
-    /* --- LOGO EN HEADER (CAJA ROJO SANGRE) --- */
+    /* --- LOGO EN HEADER --- */
     .logo-img {
       background-color: var(--gp-blood-red); 
       width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
@@ -120,7 +181,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       width: 100%; height: 100%; object-fit: contain; padding: 5px;
     }
 
-    /* --- ESTILOS PARA NUEVAS SECCIONES (Acordeon y Pilares) --- */
+    /* --- CORRECCIÓN DE ESPACIO EN BLANCO Y RESPONSIVE --- */
+    body, .navbar, .container, .container-fluid {
+      overflow-x: hidden !important;
+      max-width: 100%;
+    }
+    .nav-container {
+      padding: 0 15px;
+    }
+
+    /* --- ESTILOS ACORDEON Y PILARES --- */
     .accordion-button:not(.collapsed) {
       background-color: var(--gp-blood-red);
       color: white;
@@ -128,23 +198,57 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .accordion-button:focus {
       box-shadow: 0 0 0 0.25rem rgba(168, 0, 0, 0.25);
     }
-    
     .pillar-card {
       border-left: 4px solid var(--gp-blood-red);
       height: 100%;
     }
 
-    /* --- NUEVO: Ajuste para imágenes completas --- */
+    /* --- ESTILOS NUEVA SECCIÓN SEO --- */
+    .seo-section {
+      background-color: #f8f9fa;
+      padding: 60px 0;
+      border-bottom: 5px solid var(--gp-blood-red);
+    }
+    .seo-h1 {
+      color: var(--gp-blood-red);
+      font-weight: 800;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      text-align: center; /* Mantenido centrado */
+    }
+    .seo-h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #333;
+      text-align: center; /* Mantenido centrado */
+    }
+    .seo-text p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 1.5rem;
+      text-align: justify; /* CAMBIO A JUSTIFICADO */
+    }
+    .seo-highlight {
+      color: var(--gp-blood-red);
+      font-weight: bold;
+      background-color: rgba(168, 0, 0, 0.05);
+      padding: 0 5px;
+      border-radius: 4px;
+    }
+
+    /* --- AJUSTE IMÁGENES COMPLETAS --- */
     .img-wrapper-full {
       position: relative;
       width: 100%;
-      /* Altura mínima para que no se vea minúscula, pero permite crecer */
       min-height: 250px; 
-      max-height: 400px; /* Límite máximo para que no desordenen */
+      max-height: 400px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #f8f9fa; /* Fondo gris suave por si la imagen tiene mucho espacio vacío */
+      background-color: #f8f9fa;
       overflow: hidden;
       margin-bottom: 1rem;
       border-radius: 10px 10px 0 0;
@@ -152,12 +256,232 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .img-wrapper-full img {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* Clave: Mantiene toda la imagen visible */
+      object-fit: contain;
       display: block;
     }
 
+    /* --- NUEVO DISEÑO DE LA BARRA INFERIOR (STICKY BAR) --- */
+    .sticky-bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 90px; /* El doble de alto */
+      background-color: var(--gp-black);
+      color: white;
+      display: flex;
+      justify-content: center; /* Centrado para mobile */
+      align-items: center;
+      padding: 0 15px;
+      z-index: 9999;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.6);
+      border-top: 3px solid var(--gp-blood-red);
+    }
+
+    /* Contenedor de los botones grandes */
+    .big-buttons-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 100%; 
+      gap: 10px;
+      height: 100%;
+    }
+
+    /* Botón de Llamada (Rojo) */
+    .btn-massive-call {
+      flex: 1;
+      height: 70px;
+      background-color: #D32F2F; /* Rojo llamativo */
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.5rem; /* Letras grandes */
+      font-weight: 800;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      text-transform: uppercase;
+      transition: transform 0.2s, background-color 0.2s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      animation: pulse-red 2s infinite;
+    }
+
+    @keyframes pulse-red {
+      0% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(211, 47, 47, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0); }
+    }
+
+    .btn-massive-call:hover {
+      transform: scale(1.02);
+      background-color: #b71c1c;
+      color: white;
+    }
+
+    /* Botón de WhatsApp (Verde) */
+    .btn-massive-wa {
+      flex: 1;
+      height: 70px;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: transform 0.2s, background-color 0.2s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+
+    .btn-massive-wa:hover {
+      transform: scale(1.02);
+      background-color: #1ebc57;
+      color: white;
+    }
+
+    /* Botón Chat IA (Centro pequeño) */
+    .btn-small-chat {
+      width: 50px;
+      height: 50px;
+      background-color: #FFC107;
+      color: black;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      text-decoration: none;
+      flex-shrink: 0; /* No se encoge */
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      border: 2px solid white;
+      z-index: 10;
+    }
+    .btn-small-chat:hover {
+      background-color: #ffca2c;
+      transform: scale(1.1);
+    }
+
+    /* Ajustes para Desktop */
+    @media (min-width: 992px) {
+      .sticky-bottom-bar {
+        height: 100px;
+        padding: 0 50px;
+      }
+      .big-buttons-container {
+        max-width: 1200px; /* Limitar ancho en pantallas grandes */
+      }
+      .btn-massive-call, .btn-massive-wa {
+        font-size: 1.8rem;
+        height: 80px;
+      }
+    }
+
+    /* --- ESTILOS DEL FOOTER NORMAL --- */
+    .main-footer {
+      background-color: #000;
+      color: #bbb;
+      padding: 60px 0 20px 0;
+      font-size: 0.9rem;
+      border-top: 4px solid var(--gp-blood-red);
+    }
+    
+    .footer-logo-box {
+      background-color: var(--gp-blood-red);
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    .footer-logo-box i {
+      font-size: 1.8rem;
+      color: white;
+    }
+
+    .footer-title {
+      color: white;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      border-bottom: 2px solid var(--gp-blood-red);
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: #bbb;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .footer-links a:hover {
+      color: var(--gp-blood-red);
+      padding-left: 5px;
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+    
+    .contact-info-item i {
+      color: var(--gp-blood-red);
+      margin-right: 10px;
+      margin-top: 5px;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      width: 35px;
+      height: 35px;
+      background-color: #333;
+      color: white;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+    
+    .social-icons a:hover {
+      background-color: var(--gp-blood-red);
+      transform: translateY(-3px);
+    }
+
+    .copyright-bar {
+      background-color: #0a0a0a;
+      padding: 15px 0;
+      margin-top: 40px;
+      border-top: 1px solid #333;
+      text-align: center;
+      font-size: 0.85rem;
+    }
   </style>
 
+  <!-- Rich Snippets actualizados con la keyword -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -172,7 +496,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "addressCountry": "CL"
     },
     "url": "https://globalpro.pages.dev",
-    "description": "Taller mecánico especializado en servicio automotriz integral, mecánica general, electromecánica y más. Servicio a domicilio en el Área Metropolitana de Chile.",
+    "description": "Servicio experto de mecánico a domicilio y mecánico a domiciliario en Santiago. Taller mecánico especializado en servicio automotriz integral, mecánica general, electromecánica y más en el Área Metropolitana de Chile.",
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -216,6 +540,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="collapse navbar-collapse desktop-menu" id="navbarNav">
       <ul class="navbar-nav ms-auto">
+        <!-- Nuevo ítem en el menú apuntando a la sección SEO -->
+        <li class="nav-item">
+          <a class="nav-link" href="#mecanico-domicilio-seo">Mecánico a Domicilio</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="#servicios">Servicios</a>
         </li>
@@ -288,6 +616,57 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
+<!-- ======================================================================= -->
+<!-- NUEVA SECCIÓN PRINCIPAL SEO -->
+<!-- ======================================================================= -->
+<section class="seo-section" id="mecanico-domicilio-seo">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        
+        <!-- H1 Principial SEO -->
+        <h1 class="seo-h1 text-center">
+          El Mejor <span class="seo-highlight">Mecánico a Domicilio</span> en Santiago: Solución Inmediata
+        </h1>
+
+        <!-- H2 Descriptivo -->
+        <h2 class="seo-h2 text-center">
+          Servicio Profesional de <span class="seo-highlight">Mecánico a Domicilio</span> para toda la Región Metropolitana
+        </h2>
+
+        <!-- Texto SEO Descriptivo -->
+        <div class="seo-text">
+          <p>
+            En <strong>GlobalPro</strong>, entendemos que tu tiempo es valioso y que una falla mecánica puede detener tu día. Por eso, nos especializamos en ofrecer el servicio de <span class="seo-highlight">mecánico a domicilio</span> más eficiente y confiable de Santiago. Ya no es necesario remolcar tu vehículo ni pasar horas esperando en un taller físico; nuestro equipo de expertos se desplaza hasta donde tú estés, ya sea en tu casa, oficina o en la vía pública si has sufrido un contratiempo.
+          </p>
+          <p>
+            Somos tu <strong>taller móvil</strong> de confianza, equipado con herramientas de diagnóstico de última generación para resolver problemas desde el mantenimiento preventivo hasta reparaciones complejas de motor y frenos.
+          </p>
+          <p>
+            ¿Por qué elegirnos? Porque combinamos la calidad de un taller formal con la comodidad del servicio a puerta cerrada. Si estás en <strong>Santiago Centro, Providencia, Las Condes, Maipú</strong> o cualquier comuna del Área Metropolitana, nuestro <span class="seo-highlight">mecánico a domicilio en Santiago</span> está listo para atenderte. Ofrecemos transparencia en los presupuestos, garantía en todos nuestros trabajos y una atención personalizada que pone la seguridad de tu vehículo y tu tranquilidad en primer lugar.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ======================================================================= -->
+<!-- FIN NUEVA SECCIÓN SEO -->
+<!-- ======================================================================= -->
+
+
+<!-- MOVIDO AQUÍ: SECCIÓN DE RESEÑAS (Antes estaba casi al final) -->
+<section id="resenas" class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+    <p class="section-subtitle">Tu confianza es nuestra mejor carta de presentación. Lee las experiencias de quienes ya confían en nuestro trabajo.</p>
+    <!-- Widget de Elfsight para Google Reviews -->
+    <div class="elfsight-app-4cbd3727-4380-44b3-9cd7-2525ccb8f5d8" data-elfsight-app-lazy></div>
+  </div>
+</section>
+
+
 <!-- NUEVA SECCIÓN: SOLUCIONES PERSUASIVAS Y EMERGENCIAS -->
 <section class="py-5 bg-white" id="soluciones-gp">
   <div class="container">
@@ -330,7 +709,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="p-4">
             <h3 class="h5 fw-bold text-primary mb-3"><i class="fas fa-exclamation-circle me-2"></i>Auxilio Mecánico Inmediato: Mecánico a Domicilio 24/7 🚨</h3>
-            <p class="small text-muted">
+            <p class="small text-muted text-justify">
               Si te quedaste varado, no desesperes. En <strong>Global Pro Automotriz</strong> entendemos que las fallas no tienen horario. Ofrecemos un servicio de <strong>mecánico a domicilio 24/7</strong> especializado en rescatar conductores accidentados o con fallas súbitas en la vía. Ya sea un <strong>arreglo alternador a domicilio</strong> o un problema con la caja de cambio, nuestro <strong>mecánico 24 horas</strong> se desplaza hacia tu ubicación. Estamos ubicados en 1080000 Pedro Aguirre Cerda, Región Metropolitana, Chile, pero nuestra flota de <strong>carro taller mecánico</strong> cubre comunas como Estación Central, Maipú y Cerrillos. Si buscas un <strong>mecánico a domicilio cerca de mi</strong> que responda de inmediato, GP es tu solución confiable para volver a la ruta con seguridad 🛣️.
             </p>
           </div>
@@ -346,7 +725,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="p-4">
             <h3 class="h5 fw-bold text-primary mb-3"><i class="fas fa-bolt me-2"></i>Mecánico Automotriz a Domicilio: Expertos en Fallas Eléctricas 🔌</h3>
-            <p class="small text-muted">
+            <p class="small text-muted text-justify">
               ¿Tu vehículo no arranca? El servicio de <strong>mecánico automotriz a domicilio</strong> de Global Automotriz es líder en diagnósticos rápidos. Contamos con <strong>técnico mecánico automotriz</strong> capacitado para realizar <strong>escaner automotriz</strong> en terreno, identificando fallas en el motor auto o el sistema de inyección. Si necesitas un <strong>mecánico electricista de autos a domicilio</strong> para un arreglo de chapa de auto o una falla en las alarmas para autos, llegamos a Vitacura, Huechuraba y todo Santiago. Nuestro <strong>servicio mecánico móvil en Santiago</strong> garantiza que no tengas que pagar una grúa costosa; llevamos el <strong>taller mecánico</strong> directamente a la puerta de tu casa o lugar del accidente 🚙.
             </p>
           </div>
@@ -362,7 +741,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="p-4">
             <h3 class="h5 fw-bold text-primary mb-3"><i class="fas fa-compact-disc me-2"></i>Especialistas en Frenos: Cambio de Pastillas y Reparación ABS 🛑</h3>
-            <p class="small text-muted">
+            <p class="small text-muted text-justify">
               La seguridad es lo primero. Somos especialistas en frenos y ofrecemos la <strong>reparación de frenos día domingo</strong> para aquellos que no pueden esperar al lunes. Si notas ruidos extraños, nuestro servicio de <strong>cambio pastillas de freno a domicilio</strong> es la solución ideal. Trabajamos con <strong>frenos ABS</strong>, <strong>frenos caliper camión</strong> y realizamos la reparación caliper en el lugar. Como referentes en <strong>mecánica automotriz</strong>, en GP nos aseguramos de que tu frenado sea óptimo. No busques más un <strong>auto taller cambio de pastillas</strong> lejos de casa; nuestro <strong>técnico automotriz</strong> se encarga de todo en Pedro Aguirre Cerda y comunas aledañas ⚠️.
             </p>
           </div>
@@ -378,7 +757,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="p-4">
             <h3 class="h5 fw-bold text-primary mb-3"><i class="fas fa-car-crash me-2"></i>Suspensión y Amortiguadores: Suavidad y Control en tu Conducción 🛠️</h3>
-            <p class="small text-muted">
+            <p class="small text-muted text-justify">
               ¿Sientes cada bache en el camino? Es momento de revisar la <strong>suspensión</strong> y los <strong>amortiguadores</strong>. En Global Pro Automotriz, realizamos el <strong>cambio de amortiguadores a domicilio</strong> y contamos con especialistas en <strong>taller mecánico suspensión</strong>. Un <strong>mecánico especialista mecánico</strong> evaluará si necesitas un <strong>cambia de amortiguadores</strong> o una mantención en la dirección. Este <strong>servicio automotriz</strong> es vital para evitar el desgaste prematuro de tus neumáticos. Como un <strong>pro taller</strong> de confianza en la Región Metropolitana, garantizamos repuestos de calidad y una mano de obra impecable por parte de nuestro equipo de <strong>mecánicos a domicilio</strong>.
             </p>
           </div>
@@ -394,7 +773,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="p-4">
             <h3 class="h5 fw-bold text-primary mb-3"><i class="fas fa-snowflake me-2"></i>Aire Acondicionado Automotriz: Recarga y Reparación a Domicilio ❄️</h3>
-            <p class="small text-muted">
+            <p class="small text-muted text-justify">
               No sufras más por el calor. Si buscas un <strong>taller aire acondicionado automotriz cerca de mi</strong>, te ofrecemos algo mejor: <strong>aire acondicionado automotriz a domicilio</strong>. Realizamos la <strong>recarga aire acondicionado auto</strong>, detección de fugas y <strong>reparación aire acondicionado automotriz</strong> sin que muevas tu vehículo. Somos expertos en <strong>a/c auto</strong> y atendemos en Santiago, incluyendo Pedro Aguirre Cerda y Cerrillos. Nuestro <strong>servicio técnico mantenimiento de auto</strong> asegura que el sistema de <strong>aire acondicionado para vehículos a domicilio</strong> funcione perfectamente, mejorando tu experiencia de conducción y la de tu familia 🌬️.
             </p>
           </div>
@@ -410,7 +789,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="p-4">
             <h3 class="h5 fw-bold text-primary mb-3"><i class="fas fa-fan me-2"></i>Mantenimiento de Aire Acondicionado: Soluciones Rápidas para tu Auto 🌡️</h3>
-            <p class="small text-muted">
+            <p class="small text-muted text-justify">
               El sistema de <strong>aire acondicionado auto</strong> requiere cuidado constante. En Global Pro, somos el <strong>taller de aire acondicionado automotriz</strong> en Santiago que llega a tu hogar. Ofrecemos <strong>arreglo aire acondicionado auto</strong>, limpieza de filtros y carga de gas. Si tu <strong>aire acondicionado automotriz</strong> ha dejado de enfriar, nuestro <strong>mecánico automotriz</strong> lo solucionará rápidamente. Atendemos todas las marcas, incluyendo Chevrolet Spark y modelos Nissan. Confía en GP para el <strong>mantenimiento automotriz</strong> de tu climatización; somos el servicio automotriz a domicilio más completo de la capital.
             </p>
           </div>
@@ -426,7 +805,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="p-4">
             <h3 class="h5 fw-bold text-primary mb-3"><i class="fas fa-plug me-2"></i>Eléctrico Automotriz a Domicilio: Alarmas, Alternadores y Baterías 🔋</h3>
-            <p class="small text-muted">
+            <p class="small text-muted text-justify">
               Los problemas eléctricos pueden ser un dolor de cabeza. Nuestro <strong>eléctrico automotriz a domicilio</strong> es especialista en diagnosticar cortes, fallas de arranque y sistemas de carga. Ofrecemos <strong>electricidad automotriz a domicilio 24/7</strong> en toda la Región Metropolitana. Si necesitas la <strong>instalación de alarmas auto santiago</strong> o tienes problemas con tus <strong>alarmas automotriz</strong>, nuestro <strong>eléctrico de auto a domicilio</strong> tiene la solución. Atendemos en Estación Central, Quilicura y San Joaquín, cerca de calle Valdovinos. No arriesgues tu inversión con aficionados; prefiere un <strong>técnico mecánico automotriz</strong> con experiencia real en electricidad automotriz.
             </p>
           </div>
@@ -442,7 +821,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="p-4">
             <h3 class="h5 fw-bold text-primary mb-3"><i class="fas fa-laptop-medical me-2"></i>Escáner y Diagnóstico Electrónico: Tecnología GP al Servicio de tu Motor 💻</h3>
-            <p class="small text-muted">
+            <p class="small text-muted text-justify">
               En la <strong>mecánica automotriz</strong> moderna, el <strong>escaner automotriz</strong> es indispensable. En Global Pro Automotriz, utilizamos tecnología de punta para leer los códigos de falla de tu <strong>motor automotriz</strong>. Como <strong>pro motor servicio automotriz</strong>, identificamos problemas en inyectores, bujías y sensores. Si buscas un <strong>mecánico electricista de autos a domicilio</strong> que sea especialista, llegamos a Vitacura y el centro de Santiago. Realizamos <strong>limpieza de inyectores</strong> y <strong>limpieza inyectores gasolina</strong> para mejorar el rendimiento de tu combustible. Somos el <strong>taller mecánico automotriz cerca de mi ubicación</strong> que combina mecánica tradicional con electrónica avanzada.
             </p>
           </div>
@@ -458,7 +837,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="p-4">
             <h3 class="h5 fw-bold text-primary mb-3"><i class="fas fa-tools me-2"></i>Mantenimiento Automotriz de Confianza: Cambio de Aceite y Afinamiento 🛠️</h3>
-            <p class="small text-muted">
+            <p class="small text-muted text-justify">
               Evita averías mayores con una buena <strong>mantención auto a domicilio</strong>. En Global Pro, realizamos el <strong>cambio de aceite</strong>, revisión de correas y <strong>cambio de bujías</strong> en la comodidad de tu estacionamiento. Nuestro servicio de <strong>mantenimiento automotriz</strong> es integral y profesional. Si te preguntas por un <strong>cambio de aceite auto cerca mio</strong>, nosotros vamos hacia ti. Atendemos <strong>mantenimiento automotriz</strong> para flotas y particulares en Pedro Aguirre Cerda, cerca de Departamental con Autopista Central. Mantén tu <strong>auto mecánico</strong> en perfectas condiciones con los mejores <strong>técnicos mecánicos automotrices</strong> de la zona.
             </p>
           </div>
@@ -474,7 +853,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="p-4">
             <h3 class="h5 fw-bold text-primary mb-3"><i class="fas fa-car me-2"></i>Taller Mecánico Chevrolet y Multimarca: Calidad Garantizada en GP 🚗</h3>
-            <p class="small text-muted">
+            <p class="small text-muted text-justify">
               Si eres dueño de un <strong>Chevrolet Spark</strong> o cualquier modelo de la marca, somos tu <strong>taller mecánico chevrolet</strong> de referencia. Contamos con <strong>mecánico chevrolet a domicilio</strong> y especialistas en nissan y vw. Ofrecemos desde el <strong>cambio de embrague a domicilio</strong> hasta reparaciones de caja de cambio. Global Pro Automotriz es el <strong>taller automotriz</strong> que estabas buscando en la Región Metropolitana. Ubícanos en el mapa global en Avenida Padre Alberto Hurtado. Sea un taller de camiones o de vehículos menores, nuestra <strong>mecánica</strong> destaca por su honestidad y rapidez. ¡Contáctanos y vive la experiencia GP! 🏆
             </p>
           </div>
@@ -489,6 +868,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="imageModal" onclick="closeModal()">
   <span class="close-modal">&times;</span>
   <img class="modal-content" id="modalImg">
+</div>
 </div>
 </div>
 
@@ -510,7 +890,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-exclamation-triangle me-2"></i> Auxilio de Emergencia: Mecánico a Domicilio 24/7</h5>
-            <p class="small text-muted mb-1"><strong>Intención:</strong> Urgencia / Rescate en ruta.</p>
+            <p class="small text-muted mb-1"><strong>mecánica a domicilio en santiago :</strong> Urgencia / Rescate en ruta.</p>
             <p class="small text-justify">¿Te quedaste varado en plena autopista? No desesperes, en Global Pro Automotriz entendemos que las fallas no tienen horario. Ofrecemos el servicio de mecánico a domicilio 24/7 más rápido de la Región Metropolitana. Si buscas un mecánico a domicilio cerca de mi que responda de inmediato en comunas como Maipú, Estación Central o Cerrillos, nuestro equipo de mecánicos a domicilio está listo para el rescate. Ya sea por un arreglo alternador a domicilio o una falla súbita, somos el servicio mecánico móvil en Santiago de confianza. No esperes una grúa por horas; el equipo de GP llega a tu ubicación para devolverte la movilidad.</p>
           </div>
         </div>
@@ -525,7 +905,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-compact-disc me-2"></i> Especialistas en Seguridad: Frenos y Suspensión</h5>
-            <p class="small text-muted mb-1"><strong>Intención:</strong> Mantenimiento Correctivo / Seguridad.</p>
+            <p class="small text-muted mb-1"><strong>mecánica a domicilio en santiago :</strong> Mantenimiento Correctivo / Seguridad.</p>
             <p class="small text-justify">La seguridad de tu familia depende de un sistema de frenado impecable. Somos especialistas en frenos y ofrecemos el cambio pastillas de freno a domicilio con repuestos de alta calidad. Si notas ruidos o vibraciones, nuestro técnico mecánico automotriz revisará desde el frenos ABS hasta el reparación caliper. Además, si tu auto se siente inestable, realizamos el cambio de amortiguadores a domicilio. Como referentes en mecánica automotriz en Pedro Aguirre Cerda, garantizamos que tu suspensión y dirección queden en perfectas condiciones. No busques un taller mecánico lejos de casa, nosotros vamos a tu estacionamiento.</p>
           </div>
         </div>
@@ -540,7 +920,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-snowflake me-2"></i> Climatización: Aire Acondicionado Automotriz</h5>
-            <p class="small text-muted mb-1"><strong>Intención:</strong> Confort / Verano.</p>
+            <p class="small text-muted mb-1"><strong>mecánica a domicilio en santiago :</strong> Confort / Verano.</p>
             <p class="small text-justify">El calor de Santiago puede ser implacable, pero tu viaje no tiene por qué serlo. Si buscas un taller aire acondicionado automotriz cerca de mi, Global Pro Automotriz te ofrece la solución definitiva: aire acondicionado automotriz a domicilio. Realizamos la recarga aire acondicionado auto, detección de fugas y reparación aire acondicionado automotriz en tiempo récord. Somos expertos en a/c auto y atendemos en Santiago Centro, Vitacura y alrededores. No dejes que el mal olor o la falta de frío arruinen tu día; nuestro servicio técnico mantenimiento de auto dejará tu climatización como nueva.</p>
           </div>
         </div>
@@ -549,13 +929,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- Bloque 4 -->
       <div class="col-md-6">
         <div class="gallery-item h-100 bg-white shadow-sm rounded overflow-hidden">
-          <!-- Ajuste: Nuevo wrapper para visualización completa -->
+          <!-- Ajuste: Nuevo wrapper para visualización completo -->
           <div class="img-wrapper-full" onclick="openModal('images/electrico-automotriz-a-domicilio-24-horas-reparacion-alternador-motor-arranque-baterias-santiago.jpg')">
             <img src="images/electrico-automotriz-a-domicilio-24-horas-reparacion-alternador-motor-arranque-baterias-santiago.jpg" alt="Eléctrico automotriz a domicilio reparación alternador">
           </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-bolt me-2"></i> Electricidad y Electrónica: Eléctrico Automotriz</h5>
-            <p class="small text-muted mb-1"><strong>Intención:</strong> Fallas eléctricas / Tecnología.</p>
+            <p class="small text-muted mb-1"><strong>mecánica a domicilio en santiago :</strong> Fallas eléctricas / Tecnología.</p>
             <p class="small text-justify">¿Problemas de encendido o luces? El sistema nervioso de tu vehículo requiere un experto. Contamos con el mejor eléctrico automotriz a domicilio cerca de mi, capacitado para resolver desde alarmas automotriz hasta la instalación de alarmas para autos. Si buscas un electrico de auto a domicilio que sea un verdadero especialista, en GP cubrimos desde Quilicura hasta San Joaquín. Utilizamos escaner automotriz profesional para diagnosticar fallas en el motor automotriz y el sistema de carga, asegurando una reparación eléctrica precisa sin que muevas tu vehículo.</p>
           </div>
         </div>
@@ -570,7 +950,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-oil-can me-2"></i> Mantenimiento Preventivo: Cambio de Aceite y Afinamiento</h5>
-            <p class="small text-muted mb-1"><strong>Intención:</strong> Cuidado del vehículo / Vida útil.</p>
+            <p class="small text-muted mb-1"><strong>mecánica a domicilio en santiago :</strong> Cuidado del vehículo / Vida útil.</p>
             <p class="small text-justify">Prolonga la vida de tu motor con un mantenimiento automotriz de excelencia. En nuestro taller mecánico, o directamente en tu hogar con el servicio de mecánico a domicilio, realizamos el cambio de aceite, revisión de bujias y limpieza de inyectores. Un buen mecánico automotriz sabe que la prevención evita gastos mayores. Realizamos mantención auto a domicilio para marcas como Chevrolet (Spark), Nissan y VW. Si te preguntas por un cambio de aceite auto cerca mio, la respuesta es Global Pro Automotriz, los líderes en servicio de mantenimiento automotriz en la Región Metropolitana.</p>
           </div>
         </div>
@@ -585,7 +965,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-road me-2"></i> Soluciones para el Conductor Varado en la Vía</h5>
-            <p class="small text-muted mb-1"><strong>Intención:</strong> Auxilio en ruta / Accidentados.</p>
+            <p class="small text-muted mb-1"><strong>mecánica a domicilio en santiago :</strong> Auxilio en ruta / Accidentados.</p>
             <p class="small text-justify">Quedarse accidentado en la vía es estresante, pero nuestro auxilio mecánico de emergencia está a una llamada de distancia. Si estás varado por un corte de correas o falla en la caja de cambio, enviamos un mecánico de emergencia 24/7 a tu ubicación exacta, ya sea en Autopista Central o Departamental. Ofrecemos reparación de autos a domicilio con herramientas de nivel profesional. Somos el taller mecánico abierto que necesitas cuando todos los demás han cerrado. Confía en Global Automotriz para sacarte del apuro con eficiencia y honestidad.</p>
           </div>
         </div>
@@ -600,7 +980,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-car me-2"></i> Especialidad Chevrolet y Marcas Líderes</h5>
-            <p class="small text-muted mb-1"><strong>Intención:</strong> Nicho de marca / Confianza técnica.</p>
+            <p class="small text-muted mb-1"><strong>mecánica a domicilio en santiago :</strong> Nicho de marca / Confianza técnica.</p>
             <p class="small text-justify">¿Dueño de un Chevrolet Spark o un Nissan? En Global Pro Automotriz somos especialistas. Ofrecemos servicio de mecánico chevrolet a domicilio y contamos con técnicos expertos en vw y marcas americanas. Realizamos desde el cambio de embrague a domicilio hasta ajustes complejos en el motor auto. Nuestro técnico automotriz entiende las particularidades de cada modelo, asegurando que tu mecánica sea tratada con el conocimiento adecuado. Somos el taller mecánico automotriz cerca de mi ubicación que combina especialización de marca con la comodidad del servicio a domicilio.</p>
           </div>
         </div>
@@ -609,13 +989,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- Bloque 8 -->
       <div class="col-md-6">
         <div class="gallery-item h-100 bg-white shadow-sm rounded overflow-hidden">
-          <!-- Ajuste: Nuevo wrapper para visualización completa -->
+          <!-- Ajuste: Nuevo wrapper para visualización completo -->
           <div class="img-wrapper-full" onclick="openModal('images/scanner-automotriz-profesional-diagnostico-computarizado-borrado-codigos-falla-check-engine-domicilio.jpg')">
             <img src="images/scanner-automotriz-profesional-diagnostico-computarizado-borrado-codigos-falla-check-engine-domicilio.jpg" alt="Escáner automotriz diagnóstico computarizado">
           </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-laptop-code me-2"></i> Diagnóstico de Alta Precisión: Escáner Automotriz</h5>
-            <p class="small text-muted mb-1"><strong>Intención:</strong> Diagnóstico electrónico.</p>
+            <p class="small text-muted mb-1"><strong>mecánica a domicilio en santiago :</strong> Diagnóstico electrónico.</p>
             <p class="small text-justify">Deja de adivinar qué tiene tu auto. Con nuestro servicio de escaner automotriz, identificamos códigos de error en segundos. Como pro motor servicio automotriz, nos enfocamos en que el diagnóstico sea certero antes de cualquier intervención. Si buscas un mecánico especialista mecánico en electrónica, llegamos a Vitacura y todo el sector oriente. Realizamos limpieza inyectores gasolina y ajustes electrónicos para optimizar el rendimiento. Global Pro es sinónimo de tecnología aplicada a la mecánica automotriz moderna, siempre pensando en tu economía.</p>
           </div>
         </div>
@@ -630,7 +1010,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-map-marker-alt me-2"></i> Servicio Integral en Pedro Aguirre Cerda</h5>
-            <p class="small text-muted mb-1"><strong>Intención:</strong> SEO Local / Ubicación.</p>
+            <p class="small text-muted mb-1"><strong>mecánica a domicilio en santiago :</strong>  llegamos a tu / Ubicación.</p>
             <p class="small text-justify">Ubicados estratégicamente en 1080000 Pedro Aguirre Cerda, Región Metropolitana, Chile, en Global Pro Automotriz somos el corazón de la mecánica en el sector sur. Si vives cerca de calle Valdovinos o San Joaquín, y buscas un taller mecanico pedro aguirre cerda, te ofrecemos la mejor atención. Cubrimos todas las necesidades: cambio pastillas de freno, reparación aire acondicionado y mecánica general. Somos el gp de confianza para miles de conductores que valoran la calidad. Visítanos o solicita tu mecánico a domicilio y descubre por qué somos líderes en servicio automotriz.</p>
           </div>
         </div>
@@ -639,13 +1019,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- Bloque 10 -->
       <div class="col-md-6">
         <div class="gallery-item h-100 bg-white shadow-sm rounded overflow-hidden">
-          <!-- Ajuste: Nuevo wrapper para visualización completa -->
+          <!-- Ajuste: Nuevo wrapper para visualización completo -->
           <div class="img-wrapper-full" onclick="openModal('images/taller-mecanico-aire-acondicionado-auto-cerca-de-mi-ubicacion-reparacion-calefaccion-vehiculos.jpg')">
             <img src="images/taller-mecanico-aire-acondicionado-auto-cerca-de-mi-ubicacion-reparacion-calefaccion-vehiculos.jpg" alt="Taller mecánico aire acondicionado cerca de mi ubicación">
           </div>
           <div class="p-4">
             <h5 class="fw-bold text-primary"><i class="fas fa-wind me-2"></i> Climatización para el Conductor de Santiago</h5>
-            <p class="small text-muted mb-1"><strong>Intención:</strong> Reparación de A/C / Confort.</p>
+            <p class="small text-muted mb-1"><strong>mecánica a domicilio en santiago :</strong> Reparación de A/C / Confort.</p>
             <p class="small text-justify">¿El aire de tu auto no enfría? Podría ser una fuga o falta de carga. Nuestro servicio de recarga aire acondicionado auto santiago es el más completo del mercado. Realizamos reparación aire acondicionado auto en cerrillos y toda la zona metropolitana. No arriesgues el compresor de tu aire acondicionado automotriz; deja que un tecnico automotriz a domicilio de GP realice la mantención adecuada. Desde el a/c auto de un city car hasta sistemas de vehículos comerciales, garantizamos frescura en cada kilómetro.</p>
           </div>
         </div>
@@ -917,7 +1297,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <div class="section-content">
           <div class="content-text">
-            El <span class="highlight">mantenimiento de autos</span> no debe ser una acción reactiva, sino un hábito planificado. El <span class="highlight">mantenimiento preventivo automotriz</span> es la práctica más inteligente y económica a largo plazo. Se basa en intervenciones programadas según el <span class="highlight">kilometraje de revisión</span> o el tiempo recomendado por el fabricante, detallado en el <span class="highlight">manual de servicio</span>. Esto incluye el <span class="highlight">cambio de aceite</span> y <span class="highlight">filtro de aceite</span> para proteger el <span class="highlight">motor</span>, la <span class="highlight">revisión de frenos</span> (<span class="highlight">pastillas de freno</span>, <span class="highlight">discos de freno</span>), la <span class="highlight">alineación y balanceo</span>, la <span class="highlight">rotación de neumáticos</span> y la <span class="highlight">revisión de suspensión</span> (<span class="highlight">amortiguadores</span>, <span class="keyword-tag">bujes</span>). Este enfoque evita que fallas menores se conviertan en <span class="highlight">reparaciones correctivas</span> costosas.
+            El <span class="highlight">mantenimiento de autos</span> no debe ser una acción reactiva, sino un hábito planificado. El <span class="highlight">mantenimiento preventivo automotriz</span> es la práctica más inteligente y económica a largo plazo. Se basa en intervenciones programadas según el <span class="highlight">kilometraje de revisión</span> o el tiempo recomendado por el fabricante, detallado en el <span class="highlight">manual de servicio</span>. Esto incluye el <span class="highlight">cambio de aceite</span> y <span class="highlight">filtro de aceite</span> para proteger el <span class="highlight">motor</span>, la <span>revisión de frenos</span> (<span class="highlight">pastillas de freno</span>, <span class="highlight">discos de freno</span>), la <span class="highlight">alineación y balanceo</span>, la <span class="highlight>rotación de neumáticos</span> y la <span class="revisión de suspensión</span> (<span class="highlight">amortiguadores</span>, <span class="keyword-tag">bujes</span>). Este enfoque evita que fallas menores se conviertan en <span class="highlight">reparaciones correctivas</span> costosas.
           </div>
           <div class="tags-container">
             <span class="keyword-tag">MANTENIMIENTO PREVENTIVO</span>
@@ -1075,101 +1455,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- NUEVA SECCIÓN: RESEÑAS DE GOOGLE -->
-<section id="resenas" class="py-5 bg-light">
-  <div class="container text-center">
-    <h2 class="section-title">Lo que dicen nuestros clientes</h2>
-    <p class="section-subtitle">Tu confianza es nuestra mejor carta de presentación. Lee las experiencias de quienes ya confían en nuestro trabajo.</p>
-    <!-- Widget de Elfsight para Google Reviews -->
-    <div class="elfsight-app-4cbd3727-4380-44b3-9cd7-2525ccb8f5d8" data-elfsight-app-lazy></div>
-  </div>
-</section>
-
-<!-- CONTACTO / COTIZADOR -->
-<section class="contact-section" id="contacto">
-  <div class="container">
-    <div class="row">
-      <!-- COLUMNA IZQUIERDA: Texto y Datos -->
-      <!-- IMPORTANTE: Usamos 'text-white' porque tu CSS .contact-section tiene fondo oscuro -->
-      <div class="col-lg-5 mb-4 mb-lg-0">
-        <h2 class="section-title text-white">Agenda tu Cita o Cotiza con Nosotros</h2>
-        <p class="text-white-50">¡No esperes más! Contáctanos para agendar tu <strong>mantenimiento</strong>, solicitar una <strong>cotización de reparación</strong> o pedir <strong>auxilio mecánico</strong>. Tu <strong>presupuesto de reparación</strong> está a solo un clic.</p>
-        <div class="contact-info">
-          <div class="d-flex align-items-center mb-3">
-            <i class="fas fa-map-marker-alt me-3 text-primary"></i>
-            <span class="text-white">Servicio a domicilio en todo el Área Metropolitana</span>
-          </div>
-          <div class="d-flex align-items-center mb-3">
-            <i class="fas fa-phone me-3 text-primary"></i>
-            <span class="text-white">+569 39026185</span>
-          </div>
-          <div class="d-flex align-items-center mb-3">
-            <i class="fas fa-envelope me-3 text-primary"></i>
-            <span class="text-white">contacto@globalpro.cl</span>
-          </div>
-          <div class="d-flex align-items-center">
-            <i class="fas fa-clock me-3 text-primary"></i>
-            <span class="text-white">Lun-Vie: 9:00 - 18:00 | Sáb: 9:00 - 14:00</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- COLUMNA DERECHA: Formulario -->
-      <!-- Nota: La clase .contact-form en tu CSS pone el fondo blanco, asi que el texto negro del formulario se verá bien -->
-      <div class="col-lg-7">
-        <form id="contactForm" class="contact-form needs-validation" novalidate>
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label for="nombre" class="form-label">Nombre Completo</label>
-              <input type="text" class="form-control" id="nombre" required>
-            </div>
-            <div class="col-md-6">
-              <label for="telefono" class="form-label">Teléfono / WhatsApp</label>
-              <input type="tel" class="form-control" id="telefono" required>
-            </div>
-            <div class="col-12">
-              <label for="vehiculo" class="form-label">Vehículo (Marca/Modelo/Año)</label>
-              <input type="text" class="form-control" id="vehiculo" placeholder="Ej: Toyota Yaris 2020" required>
-            </div>
-            <div class="col-md-6">
-              <label for="servicio" class="form-label">Tipo de Servicio</label>
-              <select class="form-select" id="servicio" required>
-                <option value="" selected disabled>Selecciona un servicio...</option>
-                <option value="Mecánica General y Mantenimiento">Mecánica General y Mantenimiento</option>
-                <option value="Electromecánica y Electricidad">Electromecánica y Electricidad</option>
-                <option value="Chapa y Pintura">Chapa y Pintura</option>
-                <option value="Aire Acondicionado">Aire Acondicionado</option>
-                <option value="Frenos y Suspensión">Frenos y Suspensión</option>
-                <option value="Reparación de Transmisión">Reparación de Transmisión</option>
-                <option value="Diagnóstico Computarizado">Diagnóstico Computarizado</option>
-                <option value="Servicio a Domicilio">Servicio a Domicilio</option>
-                <option value="Otro">Otro</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="comuna" class="form-label">Tu Comuna</label>
-              <select class="form-select" id="comuna" required>
-                <option value="" selected disabled>Selecciona tu comuna...</option>
-                <option value="Santiago">Santiago</option><option value="Providencia">Providencia</option><option value="Las Condes">Las Condes</option><option value="Vitacura">Vitacura</option><option value="La Reina">La Reina</option><option value="Peñalolén">Peñalolén</option><option value="La Florida">La Florida</option><option value="Puente Alto">Puente Alto</option><option value="Maipú">Maipú</option><option value="San Bernardo">San Bernardo</option>
-              </select>
-            </div>
-            <div class="col-12">
-              <label for="mensaje" class="form-label">Describe el problema o lo que necesitas</label>
-              <textarea class="form-control" id="mensaje" rows="4" placeholder="Ej: Mi auto no enciende..."></textarea>
-            </div>
-            <div class="col-12">
-              <button type="submit" class="btn btn-primary btn-lg w-100">
-                <i class="fab fa-whatsapp me-2"></i> Enviar por WhatsApp
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- NUEVA SECCIÓN: VÍNCULO A TAPIZADO DE VOLANTES -->
+<!-- NUEVA SECCIÓN: VÍNCULO A TAPIZADO DE VOLANTES (Actualizado con H2 y Texto Nuevo) -->
 <section class="py-5 bg-white">
   <div class="container">
     <div class="alert alert-success border-2 border-success shadow-lg p-4" role="alert">
@@ -1178,7 +1464,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
              <img src="https://tapizadodevolantes.pages.dev/images/forrar-un-volante-con-cuero-forrar-volante-coche-en-santiago-monocromatico.jpg" class="img-fluid rounded shadow border border-3 border-success mx-auto d-block" style="max-height: 400px; object-fit: contain;" alt="Tapizado de Volantes">
         </div>
         <div class="col-12 text-center">
-          <h2 class="text-uppercase fw-bold text-dark mb-3" style="font-size: 2rem;">TAPIZADO DE VOLANTES EN SANTIAGO</h2>
+          
+          <!-- NUEVO H2 -->
+          <h2 class="text-uppercase fw-bold text-dark mb-3" style="font-size: 2rem;">
+           Tapizado de volantes A DOMICILIO en SANTIAGO
+          </h2>
+          
+          <!-- NUEVO TEXTO JUSTIFICADO A LA IZQUIERDA -->
+          <p class="text-justify mb-4" style="font-size: 1.1rem; line-height: 1.6;">
+tapizado de volantes en Santiago para renovar la imagen de tu auto. Trabajamos cuero de alta calidad, mejorando el agarre y estética del volante. Solución rápida y cómoda sin salir de casa.
+          </p>
+          
           <p class="lead mb-4">
             Si quieres informacion para el tapizado de volantes en santiago a domicilio entra al siguiente enlace.
           </p>
@@ -1191,27 +1487,120 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="bg-black text-white-50 py-4 text-center">
+<!-- ======================================================================= -->
+<!-- NUEVO FOOTER NORMAL (PRE-FOOTER) -->
+<!-- ======================================================================= -->
+<footer class="main-footer">
   <div class="container">
-    <p class="mb-0">&copy; 2024 GlobalPro - Taller Mecánico. Todos los derechos reservados.</p>
-    <div class="mt-2">
-      <a href="#" class="text-white-50 me-3"><i class="fab fa-facebook-f"></i></a>
-      <a href="#" class="text-white-50 me-3"><i class="fab fa-instagram"></i></a>
-      <a href="#" class="text-white-50"><i class="fab fa-youtube"></i></a>
+    <div class="row">
+      <!-- COLUMNA 1: SOBRE NOSOTROS -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="footer-logo-box">
+          <i class="fas fa-wrench"></i>
+        </div>
+        <h5 class="footer-title">GlobalPro</h5>
+        <p class="text-justify">
+          Somos líderes en <strong>Mecánico a Domicilio</strong> en Santiago. Ofrecemos servicio automotriz integral con tecnología de punta y profesionales certificados. Tu vehículo en las mejores manos, donde tú estés.
+        </p>
+        <div class="social-icons mt-3">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <!-- COLUMNA 2: ENLACES RÁPIDOS -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <h5 class="footer-title">Enlaces Rápidos</h5>
+        <div class="footer-links">
+          <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#mecanico-domicilio-seo">Mecánico a Domicilio</a></li>
+            <li><a href="#servicios">Nuestros Servicios</a></li>
+            <li><a href="#faq">Preguntas Frecuentes</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- COLUMNA 3: CONTACTO -->
+      <div class="col-lg-4 col-md-12 mb-4">
+        <h5 class="footer-title">Información de Contacto</h5>
+        
+        <div class="contact-info-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <strong>Ubicación:</strong><br>
+            Servicio a Domicilio en todo Santiago<br>
+            Base: Pedro Aguirre Cerda, RM
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <i class="fas fa-phone-alt"></i>
+          <div>
+            <strong>Teléfono:</strong><br>
+            <a href="tel:939026185" style="color:#bbb; text-decoration:none;">+569 39026185</a>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <i class="fas fa-envelope"></i>
+          <div>
+            <strong>Email:</strong><br>
+            <a href="mailto:contacto@globalpro.cl" style="color:#bbb; text-decoration:none;">contacto@globalpro.cl</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BARRA DE COPYRIGHT -->
+  <div class="copyright-bar">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 text-center text-md-start">
+          &copy; 2024 GlobalPro. Todos los derechos reservados.
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          Especialistas en <strong>Mecánico a Domicilio</strong> | Servicio Automotriz Integral
+        </div>
+      </div>
     </div>
   </div>
 </footer>
+<!-- ======================================================================= -->
+<!-- FIN FOOTER NORMAL -->
+<!-- ======================================================================= -->
 
-<!-- BOTÓN CHATBOT AMARILLO -->
-<a href="#" class="chatbot-float" target="_blank" title="Chat con IA">
-  <i class="fas fa-robot"></i>
-</a>
 
-<!-- BOTÓN WHATSAPP -->
-<a href="https://wa.me/56939026185" class="whatsapp-float" target="_blank">
-  <i class="fab fa-whatsapp"></i>
-</a>
+<!-- ======================================================================= -->
+<!-- FOOTER INFERIOR FIJO (STICKY BOTTOM BAR) - NUEVO DISEÑO MASIVO -->
+<!-- ======================================================================= -->
+<div class="sticky-bottom-bar">
+  <div class="big-buttons-container">
+    
+    <!-- Botón Llamada (Rojo Grande) -->
+    <a href="tel:939026185" class="btn-massive-call">
+      <i class="fas fa-phone-alt"></i> LLAMAR
+    </a>
+
+    <!-- Botón Chat IA (Centro Pequeño) -->
+    <a href="#" class="btn-small-chat" target="_blank" title="Chat con IA">
+      <i class="fas fa-robot"></i>
+    </a>
+
+    <!-- Botón WhatsApp (Verde Grande) -->
+    <a href="https://wa.me/56939026185?text=Hola%20te%20escribo%20desde%20la%20pagina%20web%20estoy%20interesado%20en%20tus%20servicios" class="btn-massive-wa" target="_blank">
+      <i class="fab fa-whatsapp"></i> WhatsApp
+    </a>
+
+  </div>
+</div>
+<!-- ======================================================================= -->
+<!-- FIN FOOTER INFERIOR FIJO -->
+<!-- ======================================================================= -->
+
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -1234,5 +1623,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- Custom JS Original -->
 <script src="js/script.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const counterElement = document.getElementById('live-count');
+    
+    // 1. Definimos una base de visitas inicial (ejemplo: 123)
+    let baseVisitas = 123; 
+    
+    // 2. Obtenemos las visitas guardadas en el navegador del usuario
+    let visitasGuardadas = localStorage.getItem('global_total_visits');
+    
+    if (!visitasGuardadas) {
+      // Si es la primera vez que se usa el script, empezamos con la base
+      visitasGuardadas = baseVisitas;
+    } else {
+      visitasGuardadas = parseInt(visitasGuardadas);
+    }
+
+    // 3. Verificamos si es una nueva sesión para aumentar el contador
+    if (!sessionStorage.getItem('session_active')) {
+      visitasGuardadas += 1;
+      localStorage.setItem('global_total_visits', visitasGuardadas);
+      sessionStorage.setItem('session_active', 'true');
+    }
+
+    // 4. Mostramos el número con formato de miles (punto)
+    counterElement.innerText = visitasGuardadas.toLocaleString('es-CL');
+  });
+</script>
+
+
 </body>
 </html>

@@ -1,10 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Página Principal (Home) -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
   <url>
-    <loc>https://mecanico247.com/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://www.mecanico247.com/</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    
+    <image:image>
+      <image:loc>https://www.mecanico247.com/images/mecanico-a-domicilio-santiago-247-global-pro-automotriz.png</image:loc>
+      <image:title>Mecánico a Domicilio Santiago 24/7 Global Pro</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://www.mecanico247.com/images/reparacion-aire-acondicionado-automotriz-a-domicilio-recarga-gas.png</image:loc>
+      <image:title>Reparación de Aire Acondicionado Automotriz a Domicilio</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://www.mecanico247.com/images/cambio-de-pastillas-de-freno-a-domicilio-mecanico-frenos.png</image:loc>
+      <image:title>Cambio de Pastillas de Freno a Domicilio Santiago</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://www.mecanico247.com/images/electrico-automotriz-a-domicilio-24-horas-reparacion-alternador.png</image:loc>
+      <image:title>Eléctrico Automotriz a Domicilio 24 Horas Reparación Alternador</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://www.mecanico247.com/images/reparacion-de-culatas-empaquetaduras-motor.png</image:loc>
+      <image:title>Reparación de Culatas y Empaquetaduras de Motor Santiago</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://www.mecanico247.com/images/scanner-automotriz-profesional-diagnostico-computarizado.png</image:loc>
+      <image:title>Scanner Automotriz Profesional Diagnóstico Computarizado 24/7</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://www.mecanico247.com/images/revision-tren-delantero-amortiguadores-suspension.png</image:loc>
+      <image:title>Revisión de Tren Delantero Amortiguadores y Suspensión</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://www.mecanico247.com/images/cambio-de-bujias-afinamiento-motor-limpieza-inyectores.png</image:loc>
+      <image:title>Cambio de Bujías Afinamiento de Motor y Limpieza de Inyectores</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://www.mecanico247.com/images/carroceria-pintura-reparacion.jpeg</image:loc>
+      <image:title>Servicio de Desabolladura y Pintura Automotriz</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://www.mecanico247.com/images/accidentado-en-la-via-barado-el-carro-no-prende.png</image:loc>
+      <image:title>Auxilio Mecánico en Ruta Santiago - Auto no prende</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://www.mecanico247.com/images/instalacion-de-alarmas-auto-santiago.png</image:loc>
+      <image:title>Instalación de Alarmas y Seguridad Automotriz</image:title>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://www.mecanico247.com/images/reparacion-de-alternador-y-arranque-24-horas.png</image:loc>
+      <image:title>Reparación de Alternadores y Motores de Arranque 24 Horas</image:title>
+    </image:image>
   </url>
+
+  <url>
+    <loc>https://www.mecanico247.com/#servicios</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mecanico247.com/#contacto</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>

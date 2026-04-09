@@ -92,6 +92,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="css/styles.css"/>
   <script src="https://elfsightcdn.com/platform.js" async></script>
 
@@ -463,6 +464,88 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       text-align: center;
       font-size: 0.85rem;
     }
+
+    /* ===== CSS Infinite Scroll Carousel (Conectamos Section) ===== */
+    .conectamos-section {
+      background: #121212;
+      padding: 60px 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .conectamos-section::before,
+    .conectamos-section::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 120px;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .conectamos-section::before {
+      left: 0;
+      background: linear-gradient(to right, #121212, transparent);
+    }
+    .conectamos-section::after {
+      right: 0;
+      background: linear-gradient(to left, #121212, transparent);
+    }
+    .conectamos-heading {
+      color: #fff;
+      font-size: 1.3rem;
+      font-weight: 600;
+      max-width: 800px;
+      margin: 0 auto 40px auto;
+      text-align: center;
+      line-height: 1.6;
+      padding: 0 20px;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee-scroll 30s linear infinite;
+    }
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+    .marquee-logo-item {
+      flex-shrink: 0;
+      padding: 0 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80px;
+    }
+    .marquee-logo-item img {
+      max-height: 60px;
+      width: auto;
+      filter: grayscale(100%);
+      opacity: 0.6;
+      transition: all 0.3s ease;
+    }
+    .marquee-logo-item:hover img {
+      filter: grayscale(0%);
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    .conectamos-subtitle {
+      color: #a80000;
+      font-size: 1rem;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 30px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    @keyframes marquee-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @media (max-width: 768px) {
+      .conectamos-heading { font-size: 1rem; }
+      .marquee-logo-item { padding: 0 15px; height: 60px; }
+      .marquee-logo-item img { max-height: 40px; }
+    }
   </style>
 
   <script type="application/ld+json">
@@ -542,6 +625,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="contacto.html">Contacto</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="blog/index.html">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="vehiculos/index.html">Vehiculos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="faq.html">FAQ</a>
@@ -651,6 +740,173 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="section-subtitle">Tu confianza es nuestra mejor carta de presentación. Lee las experiencias de quienes ya confían en nuestro trabajo.</p>
     <!-- Widget de Elfsight para Google Reviews -->
     <div class="elfsight-app-4cbd3727-4380-44b3-9cd7-2525ccb8f5d8" data-elfsight-app-lazy></div>
+  </div>
+</section>
+
+<!-- SECCIÓN: CONECTAMOS (CSS Infinite Scroll Carousel) -->
+<section class="conectamos-section">
+  <p class="conectamos-heading">Conectamos a propietarios de vehículos con especialistas en mantenciones, revisiones y reparaciones específicas de tu auto en donde lo necesites</p>
+  <div class="marquee-track">
+    <!-- Set 1 -->
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-33795.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-33793.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-33792.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-33791.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-33790.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-39.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-36.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-35.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-33789.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-44.svg" alt="Marca automotriz"></div>
+    <!-- Set 2 (duplicate for seamless loop) -->
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-33795.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-33793.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-33792.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-33791.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-33790.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-39.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-36.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-35.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-33789.svg" alt="Marca automotriz"></div>
+    <div class="marquee-logo-item"><img src="images/imagen/wp-content/uploads/2024/10/Group-44.svg" alt="Marca automotriz"></div>
+  </div>
+  <p class="conectamos-subtitle">Atención a domicilio en las comunas de la RM</p>
+</section>
+
+<!-- SECCIÓN: ¿PARA QUÉ AUTO BUSCAS EL SERVICIO? -->
+<section class="py-5" style="background: linear-gradient(180deg, #f8f9fa 0%, #fff 100%);" id="vehiculos">
+  <div class="container text-center mb-5">
+    <h2 class="text-uppercase fw-bold" style="color: #a80000; font-size: 1.8rem;">¿Para qué auto buscas el servicio?</h2>
+    <p class="text-muted">Toda la información está clasificada por modelo de vehículo para que así sea más fácil encontrar lo que necesitas</p>
+  </div>
+  <div class="container">
+    <div class="row g-4 justify-content-center">
+      <div class="col-6 col-md-4 col-lg-4">
+        <a href="vehiculos/renault-logan.html" class="text-decoration-none">
+        <div class="card border-0 shadow-sm h-100 text-center vehicle-card" style="cursor:pointer;">
+          <img src="images/imagen/wp-content/uploads/2024/10/Renault-logan-300x225.png" class="card-img-top" alt="Renault Logan" style="height: 120px; object-fit: contain; padding: 10px;">
+          <div class="card-body p-2">
+            <h6 class="fw-bold mb-0" style="font-size: .85rem; color: #a80000;">Renault</h6>
+            <small class="text-muted">Logan</small>
+            <div class="mt-1"><small class="text-muted">1.0L - 1.6L</small></div>
+            <div><small class="text-muted">2005 - 2022</small></div>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-4 col-lg-4">
+        <a href="vehiculos/hyundai-grand-i10.html" class="text-decoration-none">
+        <div class="card border-0 shadow-sm h-100 text-center vehicle-card" style="cursor:pointer;">
+          <img src="images/imagen/wp-content/uploads/2024/10/hyundai-grandi10-300x137.png" class="card-img-top" alt="Hyundai Grand i10" style="height: 120px; object-fit: contain; padding: 10px;">
+          <div class="card-body p-2">
+            <h6 class="fw-bold mb-0" style="font-size: .85rem; color: #a80000;">Hyundai</h6>
+            <small class="text-muted">Grand i10</small>
+            <div class="mt-1"><small class="text-muted">1.0L - 1.2L</small></div>
+            <div><small class="text-muted">2013 - 2022</small></div>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-4 col-lg-4">
+        <a href="vehiculos/honda-city.html" class="text-decoration-none">
+        <div class="card border-0 shadow-sm h-100 text-center vehicle-card" style="cursor:pointer;">
+          <img src="images/imagen/wp-content/uploads/2024/10/honda-city-300x225.png" class="card-img-top" alt="Honda City" style="height: 120px; object-fit: contain; padding: 10px;">
+          <div class="card-body p-2">
+            <h6 class="fw-bold mb-0" style="font-size: .85rem; color: #a80000;">Honda</h6>
+            <small class="text-muted">City</small>
+            <div class="mt-1"><small class="text-muted">1.5L</small></div>
+            <div><small class="text-muted">2009 - 2022</small></div>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-4 col-lg-4">
+        <a href="vehiculos/chevrolet-sonic.html" class="text-decoration-none">
+        <div class="card border-0 shadow-sm h-100 text-center vehicle-card" style="cursor:pointer;">
+          <img src="images/imagen/wp-content/uploads/2024/10/chevrolet-sonic-300x198.png" class="card-img-top" alt="Chevrolet Sonic" style="height: 120px; object-fit: contain; padding: 10px;">
+          <div class="card-body p-2">
+            <h6 class="fw-bold mb-0" style="font-size: .85rem; color: #a80000;">Chevrolet</h6>
+            <small class="text-muted">Sonic</small>
+            <div class="mt-1"><small class="text-muted">1.4L - 1.6L</small></div>
+            <div><small class="text-muted">2012 - 2020</small></div>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-4 col-lg-4">
+        <a href="vehiculos/ford-fiesta.html" class="text-decoration-none">
+        <div class="card border-0 shadow-sm h-100 text-center vehicle-card" style="cursor:pointer;">
+          <img src="images/imagen/wp-content/uploads/2024/10/ford-fiesta-300x199.png" class="card-img-top" alt="Ford Fiesta" style="height: 120px; object-fit: contain; padding: 10px;">
+          <div class="card-body p-2">
+            <h6 class="fw-bold mb-0" style="font-size: .85rem; color: #a80000;">Ford</h6>
+            <small class="text-muted">Fiesta</small>
+            <div class="mt-1"><small class="text-muted">1.6L</small></div>
+            <div><small class="text-muted">2005 - 2019</small></div>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-4 col-lg-4">
+        <a href="vehiculos/suzuki-celerio.html" class="text-decoration-none">
+        <div class="card border-0 shadow-sm h-100 text-center vehicle-card" style="cursor:pointer;">
+          <img src="images/imagen/wp-content/uploads/2024/10/suzuki-celerio-300x225.png" class="card-img-top" alt="Suzuki Celerio" style="height: 120px; object-fit: contain; padding: 10px;">
+          <div class="card-body p-2">
+            <h6 class="fw-bold mb-0" style="font-size: .85rem; color: #a80000;">Suzuki</h6>
+            <small class="text-muted">Celerio</small>
+            <div class="mt-1"><small class="text-muted">1.0L - 1.2L</small></div>
+            <div><small class="text-muted">2008 - 2022</small></div>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-4 col-lg-4">
+        <a href="vehiculos/renault-duster.html" class="text-decoration-none">
+        <div class="card border-0 shadow-sm h-100 text-center vehicle-card" style="cursor:pointer;">
+          <img src="images/imagen/wp-content/uploads/2024/10/renault-duster-300x158.png" class="card-img-top" alt="Renault Duster" style="height: 120px; object-fit: contain; padding: 10px;">
+          <div class="card-body p-2">
+            <h6 class="fw-bold mb-0" style="font-size: .85rem; color: #a80000;">Renault</h6>
+            <small class="text-muted">Duster</small>
+            <div class="mt-1"><small class="text-muted">SUV</small></div>
+            <div><small class="text-muted">Todas las versiones</small></div>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-4 col-lg-4">
+        <a href="vehiculos/subaru-forester.html" class="text-decoration-none">
+        <div class="card border-0 shadow-sm h-100 text-center vehicle-card" style="cursor:pointer;">
+          <img src="images/imagen/wp-content/uploads/2024/10/subaru-forester-300x172.png" class="card-img-top" alt="Subaru Forester" style="height: 120px; object-fit: contain; padding: 10px;">
+          <div class="card-body p-2">
+            <h6 class="fw-bold mb-0" style="font-size: .85rem; color: #a80000;">Subaru</h6>
+            <small class="text-muted">Forester</small>
+            <div class="mt-1"><small class="text-muted">SUV</small></div>
+            <div><small class="text-muted">Todas las versiones</small></div>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-4 col-lg-4">
+        <a href="vehiculos/subaru-xv.html" class="text-decoration-none">
+        <div class="card border-0 shadow-sm h-100 text-center vehicle-card" style="cursor:pointer;">
+          <img src="images/imagen/wp-content/uploads/2024/10/subaru-xv-300x225.png" class="card-img-top" alt="Subaru XV" style="height: 120px; object-fit: contain; padding: 10px;">
+          <div class="card-body p-2">
+            <h6 class="fw-bold mb-0" style="font-size: .85rem; color: #a80000;">Subaru</h6>
+            <small class="text-muted">XV</small>
+            <div class="mt-1"><small class="text-muted">Crossover</small></div>
+            <div><small class="text-muted">Todas las versiones</small></div>
+          </div>
+        </div>
+        </a>
+      </div>
+    </div>
+    <div class="text-center mt-4 d-flex flex-wrap justify-content-center gap-3">
+      <a href="vehiculos/index.html" class="btn btn-lg fw-bold text-white" style="background: #333; border: 2px solid #a80000;">
+        <i class="fas fa-car me-2"></i> Ver Todos los Vehiculos (32) <i class="fas fa-arrow-right ms-2"></i>
+      </a>
+      <a href="https://wa.me/56939026185?text=Hola%20necesito%20servicio%20para%20mi%20vehiculo" class="btn btn-lg fw-bold text-white" style="background: #a80000;" target="_blank">
+        <i class="fab fa-whatsapp me-2"></i> Solicitar Servicio <i class="fas fa-arrow-right ms-2"></i>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -1365,6 +1621,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
+<!-- SECCIÓN: MARCAS Y LOGOS -->
+<section class="py-5" style="background: #fff;" id="marcas">
+  <div class="container text-center mb-4">
+    <h2 class="text-uppercase fw-bold" style="color: #a80000; font-size: 1.8rem;">Trabajamos con las Mejores Marcas</h2>
+    <p class="text-muted">Repuestos y accesorios de marcas reconocidas a nivel mundial</p>
+  </div>
+  <div class="container">
+    <div class="swiper logo-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="images/imagen/wp-content/uploads/2024/10/Group-33795.svg" alt="Marca automotriz" class="img-fluid" style="max-height: 70px; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s;"></div>
+        <div class="swiper-slide"><img src="images/imagen/wp-content/uploads/2024/10/Group-33793.svg" alt="Marca automotriz" class="img-fluid" style="max-height: 70px; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s;"></div>
+        <div class="swiper-slide"><img src="images/imagen/wp-content/uploads/2024/10/Group-33792.svg" alt="Marca automotriz" class="img-fluid" style="max-height: 70px; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s;"></div>
+        <div class="swiper-slide"><img src="images/imagen/wp-content/uploads/2024/10/Group-33791.svg" alt="Marca automotriz" class="img-fluid" style="max-height: 70px; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s;"></div>
+        <div class="swiper-slide"><img src="images/imagen/wp-content/uploads/2024/10/Group-33790.svg" alt="Marca automotriz" class="img-fluid" style="max-height: 70px; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s;"></div>
+        <div class="swiper-slide"><img src="images/imagen/wp-content/uploads/2024/10/Group-39.svg" alt="Marca automotriz" class="img-fluid" style="max-height: 70px; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s;"></div>
+        <div class="swiper-slide"><img src="images/imagen/wp-content/uploads/2024/10/Group-36.svg" alt="Marca automotriz" class="img-fluid" style="max-height: 70px; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s;"></div>
+        <div class="swiper-slide"><img src="images/imagen/wp-content/uploads/2024/10/Group-35.svg" alt="Marca automotriz" class="img-fluid" style="max-height: 70px; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s;"></div>
+        <div class="swiper-slide"><img src="images/imagen/wp-content/uploads/2024/10/Group-33789.svg" alt="Marca automotriz" class="img-fluid" style="max-height: 70px; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s;"></div>
+        <div class="swiper-slide"><img src="images/imagen/wp-content/uploads/2024/10/Group-44.svg" alt="Marca automotriz" class="img-fluid" style="max-height: 70px; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- POR QUÉ ELEGIRNOS -->
 <section class="why-us-section py-5">
   <div class="container">
@@ -1571,6 +1851,7 @@ tapizado de volantes en Santiago para renovar la imagen de tu auto. Trabajamos c
             <li><a href="#mecanico-domicilio-seo">Mecánico a Domicilio</a></li>
             <li><a href="#servicios">Nuestros Servicios</a></li>
             <li><a href="#faq">Preguntas Frecuentes</a></li>
+            <li><a href="blog/index.html">Blog</a></li>
             <li><a href="#contacto">Contacto</a></li>
           </ul>
         </div>
@@ -1655,6 +1936,9 @@ tapizado de volantes en Santiago para renovar la imagen de tu auto. Trabajamos c
 <!-- ======================================================================= -->
 
 
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -1703,6 +1987,38 @@ tapizado de volantes en Santiago para renovar la imagen de tu auto. Trabajamos c
 
     // 4. Mostramos el número con formato de miles (punto)
     counterElement.innerText = visitasGuardadas.toLocaleString('es-CL');
+  });
+</script>
+
+<script>
+  // Logo Swiper Carousel
+  new Swiper('.logo-swiper', {
+    slidesPerView: 3,
+    spaceBetween: 20,
+    loop: true,
+    freeMode: true,
+    speed: 7000,
+    autoplay: {
+      delay: 0,
+      disableOnInteraction: false,
+    },
+    breakpoints: {
+      480: { slidesPerView: 4 },
+      768: { slidesPerView: 5 },
+      992: { slidesPerView: 6 },
+    }
+  });
+
+  // Vehicle card hover effect
+  document.querySelectorAll('.vehicle-card').forEach(card => {
+    card.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-5px)';
+      this.style.boxShadow = '0 8px 25px rgba(168,0,0,0.2)';
+    });
+    card.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateY(0)';
+      this.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)';
+    });
   });
 </script>
 

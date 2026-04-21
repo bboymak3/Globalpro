@@ -2395,7 +2395,7 @@ document.getElementById('modal-chat-ia').addEventListener('click', function(e) {
         <i class="fas fa-bell" style="font-size:1.8rem; color:#fff;"></i>
       </div>
       <h3 style="color:#a80000; font-weight:700; margin-bottom:4px; font-size:1.2rem;">Recorda tu Revision</h3>
-      <p style="color:#666; font-size:0.85rem;">Te avisamos por WhatsApp cuando se acerque tu revision tecnica.</p>
+      <p style="color:#666; font-size:0.85rem;">Te avisaremos por WhatsApp a <strong>30, 15 y 7 dias</strong> antes de tu revision tecnica.</p>
     </div>
     <div style="margin-bottom:14px;">
       <label style="display:block; font-weight:600; font-size:0.85rem; color:#4b5563; margin-bottom:5px;"><i class="fas fa-car" style="color:#a80000; margin-right:4px;"></i> Patente</label>
@@ -2406,6 +2406,10 @@ document.getElementById('modal-chat-ia').addEventListener('click', function(e) {
       <div id="rec-mes-info" style="display:none; background:#ecfdf5; border:1px solid #a7f3d0; border-radius:8px; padding:10px 12px; margin-top:8px; font-size:0.85rem; color:#065f46;">
         <i class="fas fa-calendar-check" style="color:#059669; margin-right:6px;"></i>
         <span id="rec-mes-text"></span>
+      </div>
+      <div id="rec-ya-registrado" style="display:none; background:#fffbeb; border:1px solid #fbbf24; border-radius:8px; padding:10px 12px; margin-top:8px; font-size:0.85rem; color:#92400e;">
+        <i class="fas fa-info-circle" style="color:#f59e0b; margin-right:6px;"></i>
+        <span id="rec-ya-registrado-text"></span>
       </div>
     </div>
     <div style="margin-bottom:14px;">
@@ -2452,14 +2456,15 @@ document.querySelectorAll('input[name="rec-modo"]').forEach(function(r) {
 document.getElementById('modal-recordatorio').addEventListener('click', function(e) {
   if (e.target === this) this.style.display = 'none';
 });
-// Detectar mes automatico
+// Detectar mes automatico y si ya esta registrado
 var recDebounce;
 function detectarMesRevision() {
   clearTimeout(recDebounce);
   recDebounce = setTimeout(async function() {
     var pat = document.getElementById('rec-patente').value.trim().toUpperCase().replace(/[\s\.\-·]/g, '');
     var info = document.getElementById('rec-mes-info');
-    if (pat.length < 5) { info.style.display = 'none'; return; }
+    var yaReg = document.getElementById('rec-ya-registrado');
+    if (pat.length < 5) { info.style.display = 'none'; yaReg.style.display = 'none'; return; }
     try {
       var r = await fetch('https://globalprov3.estilosgrado33.workers.dev/api/check?patente=' + encodeURIComponent(pat));
       var d = await r.json();
@@ -2474,7 +2479,14 @@ function detectarMesRevision() {
         document.querySelector('input[name="rec-modo"][value="manual"]').checked = true;
         document.getElementById('rec-mes-manual').style.display = 'block';
       } else { info.style.display = 'none'; }
-    } catch(e) { info.style.display = 'none'; }
+      // Verificar si ya esta registrado en la BD
+      if (d.success && d.registrado && d.registro) {
+        document.getElementById('rec-ya-registrado-text').innerHTML = '<strong>¡Ya te encuentras en nuestra base de datos!</strong><br>Revision: <strong>' + d.registro.nombre_mes + '</strong> | Tel: ' + d.registro.telefono + (d.registro.es_manual ? ' (mes manual)' : '');
+        yaReg.style.display = 'block';
+      } else {
+        yaReg.style.display = 'none';
+      }
+    } catch(e) { info.style.display = 'none'; yaReg.style.display = 'none'; }
   }, 400);
 }
 // Enviar formulario
@@ -2496,9 +2508,11 @@ async function submitRecordatorio() {
     });
     var d = await r.json();
     if (d.success) {
-      showRecResult('success', '<i class="fas fa-check-circle"></i> <strong>Registrado!</strong><br>Patente: ' + d.patente + '<br>Mes de revision: <strong>' + d.nombre_mes + '</strong><br><small>Te avisaremos por WhatsApp.</small>');
+      var msgExtra = d.ya_registrado ? '<br><small style="color:#92400e;"><i class="fas fa-info-circle"></i> Esta patente ya estaba registrada. Datos actualizados.</small>' : '';
+      showRecResult('success', '<i class="fas fa-check-circle"></i> <strong>¡Registrado!</strong><br>Patente: ' + d.patente + '<br>Mes de revision: <strong>' + d.nombre_mes + '</strong><br><small>Recibirás avisos a <strong>30, 15 y 7 días</strong> antes por WhatsApp.</small>' + msgExtra);
       document.getElementById('rec-patente').value = ''; document.getElementById('rec-telefono').value = '';
       document.getElementById('rec-mes-info').style.display = 'none';
+      document.getElementById('rec-ya-registrado').style.display = 'none';
     } else { showRecResult('error', '<i class="fas fa-exclamation-circle"></i> ' + (d.error || 'Error. Intenta de nuevo.')); }
   } catch(e) { showRecResult('error', '<i class="fas fa-wifi"></i> Error de conexion.'); }
   finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-bell"></i> RECORDARME'; }

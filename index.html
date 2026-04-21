@@ -2183,21 +2183,23 @@ tapizado de volantes en Santiago para renovar la imagen de tu auto. Trabajamos c
 <!-- MODAL CHAT IA - CONSULTA VEHICULAR POR PATENTE -->
 <!-- ======================================================================= -->
 <div id="modal-chat-ia" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); z-index:10000; align-items:center; justify-content:center; padding:20px;">
-  <div style="background:#fff; border-radius:16px; max-width:480px; width:100%; padding:30px; position:relative; animation: modalSlideIn 0.3s ease-out;">
-    <button onclick="document.getElementById('modal-chat-ia').style.display='none'" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#999;">&times;</button>
-    <div style="text-align:center; margin-bottom:20px;">
-      <div style="width:70px; height:70px; background:linear-gradient(135deg,#FFC107,#FF9800); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; box-shadow:0 4px 15px rgba(255,152,0,0.4);">
-        <i class="fas fa-robot" style="font-size:2rem; color:#fff;"></i>
+  <div style="background:#fff; border-radius:16px; max-width:560px; width:100%; max-height:90vh; overflow:hidden; display:flex; flex-direction:column; position:relative; animation: modalSlideIn 0.3s ease-out;">
+    <button onclick="document.getElementById('modal-chat-ia').style.display='none'" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#999; z-index:10;">&times;</button>
+    <div style="padding:30px 30px 0 30px; flex-shrink:0;">
+      <div style="text-align:center; margin-bottom:20px;">
+        <div style="width:70px; height:70px; background:linear-gradient(135deg,#FFC107,#FF9800); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; box-shadow:0 4px 15px rgba(255,152,0,0.4);">
+          <i class="fas fa-robot" style="font-size:2rem; color:#fff;"></i>
+        </div>
+        <h3 style="color:#a80000; font-weight:700; margin-bottom:6px;">Consulta tu Vehiculo</h3>
+        <p style="color:#666; font-size:0.9rem;">Ingresa tu patente y revisa el historial completo de trabajos, notas del tecnico, fechas y mas.</p>
       </div>
-      <h3 style="color:#a80000; font-weight:700; margin-bottom:6px;">Consulta tu Vehiculo</h3>
-      <p style="color:#666; font-size:0.9rem;">Ingresa tu patente y revisa el historial completo de trabajos, notas del tecnico, fechas y mas.</p>
+      <form id="form-patente-ia" onsubmit="buscarPatenteIA(event)" style="display:flex; gap:10px;">
+        <input type="text" id="input-patente-ia" placeholder="Ej: ABCD12" required maxlength="10" style="flex:1; padding:14px 18px; border:2px solid #e5e7eb; border-radius:12px; font-size:1.1rem; text-transform:uppercase; outline:none; font-family:inherit;" onfocus="this.style.borderColor='#a80000'" onblur="this.style.borderColor='#e5e7eb'">
+        <button type="submit" style="padding:14px 24px; background:#a80000; color:#fff; border:none; border-radius:12px; font-weight:700; cursor:pointer; font-size:1rem; white-space:nowrap; transition:background 0.2s;" onmouseover="this.style.background='#8b0000'" onmouseout="this.style.background='#a80000'">BUSCAR</button>
+      </form>
     </div>
-    <form id="form-patente-ia" onsubmit="buscarPatenteIA(event)" style="display:flex; gap:10px;">
-      <input type="text" id="input-patente-ia" placeholder="Ej: ABCD12" required maxlength="10" style="flex:1; padding:14px 18px; border:2px solid #e5e7eb; border-radius:12px; font-size:1.1rem; text-transform:uppercase; outline:none; font-family:inherit;" onfocus="this.style.borderColor='#a80000'" onblur="this.style.borderColor='#e5e7eb'">
-      <button type="submit" style="padding:14px 24px; background:#a80000; color:#fff; border:none; border-radius:12px; font-weight:700; cursor:pointer; font-size:1rem; white-space:nowrap; transition:background 0.2s;" onmouseover="this.style.background='#8b0000'" onmouseout="this.style.background='#a80000'">BUSCAR</button>
-    </form>
-    <div id="resultado-patente-ia" style="margin-top:16px; display:none;"></div>
-    <div style="text-align:center; margin-top:16px;">
+    <div id="resultado-patente-ia" style="margin-top:16px; display:none; overflow-y:auto; flex:1; padding:0 30px 20px 30px;"></div>
+    <div style="text-align:center; padding:0 30px 16px 30px; flex-shrink:0;">
       <a href="https://llm-chat-app-template.estilosgrado33.workers.dev" target="_blank" style="color:#a80000; text-decoration:none; font-size:0.85rem; font-weight:600;">
         <i class="fas fa-comments"></i> Abrir chat completo con IA
       </a>
@@ -2216,7 +2218,7 @@ tapizado de volantes en Santiago para renovar la imagen de tu auto. Trabajamos c
   0%, 100% { box-shadow: 0 0 0 0 rgba(255,193,7,0.7); }
   50% { box-shadow: 0 0 0 10px rgba(255,193,7,0); }
 }
-#resultado-patente-ia { max-height:300px; overflow-y:auto; }
+#resultado-patente-ia { max-height:60vh; overflow-y:auto; }
 #resultado-patente-ia .ot-card { background:#f9fafb; border:1px solid #e5e7eb; border-radius:10px; padding:12px; margin-bottom:10px; }
 #resultado-patente-ia .ot-num { font-weight:700; color:#a80000; }
 #resultado-patente-ia .ot-estado { display:inline-block; padding:2px 8px; border-radius:10px; font-size:0.75rem; font-weight:600; }
@@ -2242,31 +2244,131 @@ function buscarPatenteIA(e) {
   .then(function(data) {
     if (data.success && data.vehiculo) {
       var v = data.vehiculo;
-      var html = '<div style="background:#f0f7ff; border-radius:8px; padding:10px; margin-bottom:10px; border-left:3px solid #2563eb;">';
-      html += '<strong style="color:#1e3a8a;">' + v.marca + ' ' + v.modelo + ' (' + (v.anio||'N/A') + ')</strong>';
-      html += '<div style="font-size:0.83rem; color:#1e40af;">Patente: ' + v.patente_placa + ' | Propietario: ' + (v.cliente?.nombre || 'N/A') + '</div>';
-      html += '<div style="font-size:0.83rem; color:#1e40af;">' + v.total_ordenes + ' orden(es) encontrada(s)</div></div>';
+      var html = '';
+      // Header del vehiculo
+      html += '<div style="background:#f0f7ff; border-radius:10px; padding:14px; margin-bottom:12px; border-left:4px solid #2563eb;">';
+      html += '<div style="font-weight:700; color:#1e3a8a; font-size:1.05rem;">' + v.marca + ' ' + v.modelo + ' (' + (v.anio||'N/A') + ')</div>';
+      html += '<div style="font-size:0.83rem; color:#1e40af; margin-top:4px;">Patente: ' + v.patente_placa + '</div>';
+      if (v.cilindrada || v.combustible || v.kilometraje) {
+        html += '<div style="font-size:0.82rem; color:#374151; margin-top:4px;">';
+        var specs = [];
+        if (v.cilindrada) specs.push('Cilindrada: ' + v.cilindrada);
+        if (v.combustible) specs.push('Combustible: ' + v.combustible);
+        if (v.kilometraje) specs.push('KM: ' + v.kilometraje);
+        html += specs.join(' | ');
+        html += '</div>';
+      }
+      html += '<div style="font-size:0.83rem; color:#1e40af; margin-top:4px;">Propietario: ' + (v.cliente?.nombre || 'N/A');
+      if (v.cliente?.rut) html += ' | RUT: ' + v.cliente.rut;
+      html += '</div>';
+      if (v.cliente?.email) html += '<div style="font-size:0.82rem; color:#374151;">Email: ' + v.cliente.email + '</div>';
+      html += '<div style="font-size:0.82rem; color:#1e40af; margin-top:4px;">' + v.total_ordenes + ' orden(es) encontrada(s)</div>';
+      html += '</div>';
+      // Ordenes de trabajo
       for (var i = 0; i < v.ordenes.length; i++) {
         var o = v.ordenes[i];
         var estadoClass = (o.estado==='Cerrada'||o.estado_trabajo==='Cerrada') ? 'badge-ok' : 'badge-pend';
         var num = String(o.numero_orden||0).padStart(6,'0');
+        var monto = Number(o.monto_total||0).toLocaleString('es-CL');
         html += '<div class="ot-card">';
         html += '<div class="ot-num">OT #' + num + ' <span class="ot-estado ' + estadoClass + '">' + (o.estado_trabajo||o.estado||'N/A') + '</span></div>';
-        html += '<div class="dato">Ingreso: ' + (o.fecha_ingreso||'N/A') + '</div>';
-        if (o.fecha_completado) html += '<div class="dato">Cierre: ' + o.fecha_completado + '</div>';
-        if (o.tecnico_nombre) html += '<div class="dato">Tecnico: ' + o.tecnico_nombre + '</div>';
-        html += '<div class="dato">Total: $' + Number(o.monto_total||0).toLocaleString('es-CL') + '</div>';
-        html += '<div class="dato">Trabajos: ' + (o.servicios||'No especificado') + '</div>';
+        html += '<div class="dato">Ingreso: <strong>' + (o.fecha_ingreso||'N/A') + '</strong>' + (o.hora_ingreso ? ' ' + o.hora_ingreso : '') + '</div>';
+        if (o.fecha_completado) html += '<div class="dato">Cierre: <strong>' + o.fecha_completado + '</strong></div>';
+        if (o.tecnico_nombre) html += '<div class="dato">Tecnico: <strong>' + o.tecnico_nombre + '</strong></div>';
+        if (o.recepcionista) html += '<div class="dato">Recepcionista: ' + o.recepcionista + '</div>';
+        if (o.direccion) html += '<div class="dato">Direccion: ' + o.direccion + '</div>';
+        if (o.referencia_direccion) html += '<div class="dato">Ref: ' + o.referencia_direccion + '</div>';
+        // Montos
+        html += '<div style="display:flex; gap:10px; flex-wrap:wrap; margin:6px 0; font-size:0.85rem;">';
+        html += '<span style="color:#a80000; font-weight:700;">Total: $' + monto + '</span>';
+        if (o.monto_abono > 0) html += '<span style="color:#059669; font-weight:600;">Abono: $' + Number(o.monto_abono).toLocaleString('es-CL') + '</span>';
+        if (o.monto_restante > 0) html += '<span style="color:#b91c1c; font-weight:600;">Restante: $' + Number(o.monto_restante).toLocaleString('es-CL') + '</span>';
+        html += '</div>';
+        if (o.metodo_pago) html += '<div class="dato">Pago: ' + o.metodo_pago + '</div>';
+        // Domicilio
+        if (o.distancia_km > 0) {
+          html += '<div style="background:#f0fdf4; padding:6px 8px; border-radius:6px; font-size:0.82rem; margin:4px 0; color:#166534;">';
+          html += '<i class="fas fa-truck" style="margin-right:4px;"></i> Domicilio: ' + Number(o.distancia_km).toFixed(1) + ' km';
+          if (o.cargo_domicilio > 0) html += ' | Cargo: $' + Number(o.cargo_domicilio).toLocaleString('es-CL');
+          html += '</div>';
+        }
+        html += '<div class="dato"><strong>Trabajos:</strong> ' + (o.servicios||'No especificado') + '</div>';
+        if (o.nivel_combustible) html += '<div class="dato">Combustible al ingreso: ' + o.nivel_combustible + '</div>';
+        // Danios
+        if (o.danios_carroceria && o.danios_carroceria.length > 0) {
+          html += '<div style="background:#fef2f2; padding:4px 8px; border-radius:4px; font-size:0.82rem; margin:4px 0; color:#991b1b;">';
+          html += '<i class="fas fa-car-crash" style="margin-right:4px;"></i> Danios: ' + o.danios_carroceria.join(', ');
+          html += '</div>';
+        }
+        // Fotos
+        if (o.fotos && o.fotos.length > 0) {
+          html += '<div style="margin:6px 0;">';
+          html += '<div style="font-size:0.82rem; font-weight:600; color:#374151; margin-bottom:4px;"><i class="fas fa-camera" style="margin-right:4px;"></i> Fotos (' + o.fotos.length + ')</div>';
+          html += '<div style="display:flex; gap:6px; flex-wrap:wrap;">';
+          for (var fi = 0; fi < o.fotos.length; fi++) {
+            var f = o.fotos[fi];
+            var desc = f.descripcion || f.tipo || 'Foto';
+            html += '<div style="text-align:center;">';
+            html += '<img src="' + f.url_imagen + '" alt="' + desc + '" style="width:60px; height:60px; object-fit:cover; border-radius:6px; border:1px solid #e5e7eb; cursor:pointer;" onclick="window.open(this.src,\'_blank\')" loading="lazy">';
+            html += '<div style="font-size:0.7rem; color:#6b7280; max-width:60px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">' + desc + '</div>';
+            html += '</div>';
+          }
+          html += '</div></div>';
+        }
+        // Notas del tecnico
         if (o.notas_tecnico && o.notas_tecnico.length > 0) {
-          html += '<div class="notas-tec"><strong>Notas tecnico:</strong>';
+          html += '<div class="notas-tec">';
+          html += '<div style="font-weight:600; margin-bottom:4px;"><i class="fas fa-sticky-note" style="margin-right:4px;"></i>Notas del tecnico:</div>';
           for (var j = 0; j < o.notas_tecnico.length; j++) {
-            html += '<div>' + o.notas_tecnico[j].nota + '</div>';
+            var n = o.notas_tecnico[j];
+            var fechaN = n.fecha ? n.fecha.replace('T', ' ').substring(0, 16) : '';
+            html += '<div style="margin-bottom:2px;">' + (fechaN ? '<span style="color:#92400e; font-size:0.75rem;">[' + fechaN + ']</span> ' : '') + n.nota + '</div>';
+          }
+          html += '</div>';
+        }
+        // Diagnostico
+        if (o.diagnostico_observaciones) {
+          html += '<div style="background:#eff6ff; border-left:3px solid #3b82f6; padding:6px 8px; border-radius:4px; margin:6px 0; font-size:0.82rem;"><strong>Diagnostico:</strong> ' + o.diagnostico_observaciones + '</div>';
+        }
+        // Notas generales
+        if (o.notas) {
+          html += '<div style="background:#f9fafb; padding:6px 8px; border-radius:4px; margin:6px 0; font-size:0.82rem;"><strong>Notas:</strong> ' + o.notas.replace(/\n/g, '<br>') + '</div>';
+        }
+        // Seguimiento
+        if (o.seguimiento && o.seguimiento.length > 0) {
+          html += '<div style="margin:6px 0;">';
+          html += '<div style="font-size:0.82rem; font-weight:600; color:#374151; margin-bottom:4px;"><i class="fas fa-tasks" style="margin-right:4px;"></i> Seguimiento:</div>';
+          for (var si = 0; si < o.seguimiento.length; si++) {
+            var s = o.seguimiento[si];
+            var fechaS = s.fecha ? s.fecha.replace('T', ' ').substring(0, 16) : '';
+            html += '<div style="font-size:0.8rem; padding:2px 0; border-bottom:1px solid #f3f4f6;">' + (fechaS ? '<span style="color:#6b7280; font-size:0.75rem;">[' + fechaS + ']</span> ' : '') + '<strong>' + s.estado + '</strong>' + (s.obs ? ' - ' + s.obs : '') + '</div>';
+          }
+          html += '</div>';
+        }
+        // Costos adicionales
+        if (o.costos_adicionales && o.costos_adicionales.length > 0) {
+          html += '<div style="margin:6px 0;">';
+          html += '<div style="font-size:0.82rem; font-weight:600; color:#374151; margin-bottom:4px;"><i class="fas fa-receipt" style="margin-right:4px;"></i> Gastos adicionales:</div>';
+          for (var ci = 0; ci < o.costos_adicionales.length; ci++) {
+            var c = o.costos_adicionales[ci];
+            html += '<div style="font-size:0.8rem; padding:2px 0;">' + c.concepto + ' (' + c.categoria + '): <strong>$' + Number(c.monto).toLocaleString('es-CL') + '</strong></div>';
+          }
+          html += '</div>';
+        }
+        // Pagos
+        if (o.pagos && o.pagos.length > 0) {
+          html += '<div style="margin:6px 0;">';
+          html += '<div style="font-size:0.82rem; font-weight:600; color:#374151; margin-bottom:4px;"><i class="fas fa-credit-card" style="margin-right:4px;"></i> Pagos registrados:</div>';
+          for (var pi = 0; pi < o.pagos.length; pi++) {
+            var p = o.pagos[pi];
+            var fechaP = p.fecha ? p.fecha.replace('T', ' ').substring(0, 16) : '';
+            html += '<div style="font-size:0.8rem; padding:2px 0; border-bottom:1px solid #f3f4f6;">$' + Number(p.monto).toLocaleString('es-CL') + ' via ' + p.metodo_pago + (fechaP ? ' [' + fechaP + ']' : '') + (p.observaciones ? ' - ' + p.observaciones : '') + '</div>';
           }
           html += '</div>';
         }
         html += '</div>';
       }
-      html += '<div style="text-align:center; margin-top:10px;"><a href="https://llm-chat-app-template.estilosgrado33.workers.dev" target="_blank" style="color:#a80000; font-weight:600; text-decoration:none;">Ver mas detalles en el chat IA <i class="fas fa-external-link-alt"></i></a></div>';
+      html += '<div style="text-align:center; margin-top:12px;"><a href="https://llm-chat-app-template.estilosgrado33.workers.dev" target="_blank" style="color:#a80000; font-weight:600; text-decoration:none; font-size:0.85rem;"><i class="fas fa-comments"></i> Abrir chat completo con IA <i class="fas fa-external-link-alt"></i></a></div>';
       res.innerHTML = html;
     } else {
       res.innerHTML = '<div style="text-align:center; padding:15px; color:#b91c1c;"><i class="fas fa-search"></i> No se encontraron registros para <strong>' + pat + '</strong></div>';

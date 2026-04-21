@@ -2385,6 +2385,147 @@ document.getElementById('modal-chat-ia').addEventListener('click', function(e) {
 </script>
 
 <!-- ======================================================================= -->
+<!-- MODAL RECORDATORIO REVISION TECNICA -->
+<!-- ======================================================================= -->
+<div id="modal-recordatorio" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); z-index:10000; align-items:center; justify-content:center; padding:15px;">
+  <div style="background:#fff; border-radius:16px; max-width:480px; width:100%; max-height:90vh; overflow-y:auto; padding:28px 24px; position:relative; animation: modalSlideIn 0.3s ease-out;">
+    <button onclick="document.getElementById('modal-recordatorio').style.display='none'" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#999;">&times;</button>
+    <div style="text-align:center; margin-bottom:18px;">
+      <div style="width:60px; height:60px; background:linear-gradient(135deg,#FFC107,#FF9800); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; box-shadow:0 4px 15px rgba(255,152,0,0.4);">
+        <i class="fas fa-bell" style="font-size:1.8rem; color:#fff;"></i>
+      </div>
+      <h3 style="color:#a80000; font-weight:700; margin-bottom:4px; font-size:1.2rem;">Recorda tu Revision</h3>
+      <p style="color:#666; font-size:0.85rem;">Te avisamos por WhatsApp cuando se acerque tu revision tecnica.</p>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="display:block; font-weight:600; font-size:0.85rem; color:#4b5563; margin-bottom:5px;"><i class="fas fa-car" style="color:#a80000; margin-right:4px;"></i> Patente</label>
+      <div style="position:relative;">
+        <i class="fas fa-id-card" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:#9ca3af;"></i>
+        <input type="text" id="rec-patente" placeholder="Ej: ABCD12" required maxlength="10" style="width:100%; padding:12px 12px 12px 38px; border:2px solid #e5e7eb; border-radius:10px; font-size:1rem; text-transform:uppercase; outline:none; font-family:inherit;" oninput="detectarMesRevision()">
+      </div>
+      <div id="rec-mes-info" style="display:none; background:#ecfdf5; border:1px solid #a7f3d0; border-radius:8px; padding:10px 12px; margin-top:8px; font-size:0.85rem; color:#065f46;">
+        <i class="fas fa-calendar-check" style="color:#059669; margin-right:6px;"></i>
+        <span id="rec-mes-text"></span>
+      </div>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="display:block; font-weight:600; font-size:0.85rem; color:#4b5563; margin-bottom:5px;"><i class="fas fa-calendar" style="color:#a80000; margin-right:4px;"></i> Mes de revision</label>
+      <div style="display:flex; gap:8px;">
+        <label style="flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:10px; border:2px solid #e5e7eb; border-radius:8px; cursor:pointer; font-size:0.85rem; font-weight:600; text-align:center; transition:all 0.2s;"><input type="radio" name="rec-modo" value="auto" checked style="accent-color:#a80000;"> Automatico</label>
+        <label style="flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:10px; border:2px solid #e5e7eb; border-radius:8px; cursor:pointer; font-size:0.85rem; font-weight:600; text-align:center; transition:all 0.2s;"><input type="radio" name="rec-modo" value="manual" style="accent-color:#a80000;"> Manual</label>
+      </div>
+      <div id="rec-mes-manual" style="display:none; margin-top:8px;">
+        <select id="rec-select-mes" style="width:100%; padding:10px 12px; border:2px solid #e5e7eb; border-radius:10px; font-size:0.95rem; outline:none; font-family:inherit;">
+          <option value="">-- Selecciona mes --</option>
+          <option value="1">Enero</option><option value="2">Febrero</option><option value="3">Marzo</option>
+          <option value="4">Abril</option><option value="5">Mayo</option><option value="6">Junio</option>
+          <option value="7">Julio</option><option value="8">Agosto</option><option value="9">Septiembre</option>
+          <option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="display:block; font-weight:600; font-size:0.85rem; color:#4b5563; margin-bottom:5px;"><i class="fab fa-whatsapp" style="color:#a80000; margin-right:4px;"></i> Tu WhatsApp</label>
+      <div style="position:relative;">
+        <i class="fas fa-phone" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:#9ca3af;"></i>
+        <input type="tel" id="rec-telefono" placeholder="Ej: +56 9 1234 5678" required style="width:100%; padding:12px 12px 12px 38px; border:2px solid #e5e7eb; border-radius:10px; font-size:1rem; outline:none; font-family:inherit;">
+      </div>
+    </div>
+    <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:16px; padding:10px; background:#f9fafb; border-radius:8px;">
+      <input type="checkbox" id="rec-consent" required style="width:18px; height:18px; margin-top:2px; accent-color:#a80000; flex-shrink:0;">
+      <label for="rec-consent" style="font-size:0.8rem; color:#6b7280; cursor:pointer;">Acepto recibir recordatorios de revision tecnica por WhatsApp. Puedo darme de baja cuando quiera.</label>
+    </div>
+    <button id="rec-submit" onclick="submitRecordatorio()" style="width:100%; padding:14px; background:#a80000; color:#fff; border:none; border-radius:10px; font-size:1rem; font-weight:700; cursor:pointer; transition:background 0.2s; display:flex; align-items:center; justify-content:center; gap:8px;" onmouseover="this.style.background='#8b0000'" onmouseout="this.style.background='#a80000'">
+      <i class="fas fa-bell"></i> RECORDARME
+    </button>
+    <div id="rec-resultado" style="margin-top:12px; display:none; padding:14px; border-radius:10px; font-size:0.88rem;"></div>
+  </div>
+</div>
+<script>
+// Modal recordatorio - radio manual/auto
+document.querySelectorAll('input[name="rec-modo"]').forEach(function(r) {
+  r.addEventListener('change', function() {
+    document.getElementById('rec-mes-manual').style.display = this.value === 'manual' ? 'block' : 'none';
+  });
+});
+// Cerrar modal con click fuera
+document.getElementById('modal-recordatorio').addEventListener('click', function(e) {
+  if (e.target === this) this.style.display = 'none';
+});
+// Detectar mes automatico
+var recDebounce;
+function detectarMesRevision() {
+  clearTimeout(recDebounce);
+  recDebounce = setTimeout(async function() {
+    var pat = document.getElementById('rec-patente').value.trim().toUpperCase().replace(/[\s\.\-·]/g, '');
+    var info = document.getElementById('rec-mes-info');
+    if (pat.length < 5) { info.style.display = 'none'; return; }
+    try {
+      var r = await fetch('https://globalprov3.estilosgrado33.workers.dev/api/check?patente=' + encodeURIComponent(pat));
+      var d = await r.json();
+      if (d.success && d.es_auto) {
+        document.getElementById('rec-mes-text').innerHTML = 'Tu revision vence en <strong>' + d.nombre_mes + '</strong>';
+        info.style.display = 'block';
+        document.querySelector('input[name="rec-modo"][value="auto"]').checked = true;
+        document.getElementById('rec-mes-manual').style.display = 'none';
+      } else if (d.success && d.necesita_manual) {
+        document.getElementById('rec-mes-text').innerHTML = 'Formato nuevo. <strong>Selecciona el mes manualmente.</strong>';
+        info.style.display = 'block';
+        document.querySelector('input[name="rec-modo"][value="manual"]').checked = true;
+        document.getElementById('rec-mes-manual').style.display = 'block';
+      } else { info.style.display = 'none'; }
+    } catch(e) { info.style.display = 'none'; }
+  }, 400);
+}
+// Enviar formulario
+async function submitRecordatorio() {
+  var patente = document.getElementById('rec-patente').value.trim().toUpperCase();
+  var telefono = document.getElementById('rec-telefono').value.trim();
+  var modo = document.querySelector('input[name="rec-modo"]:checked').value;
+  var mesManual = modo === 'manual' ? parseInt(document.getElementById('rec-select-mes').value) : null;
+  var resultado = document.getElementById('rec-resultado');
+  var btn = document.getElementById('rec-submit');
+  if (!patente || !telefono) { showRecResult('error', '<i class="fas fa-exclamation-circle"></i> Completa todos los campos.'); return; }
+  if (modo === 'manual' && (!mesManual || mesManual < 1 || mesManual > 12)) { showRecResult('error', '<i class="fas fa-exclamation-circle"></i> Selecciona un mes.'); return; }
+  if (!document.getElementById('rec-consent').checked) { showRecResult('error', '<i class="fas fa-exclamation-circle"></i> Acepta recibir recordatorios.'); return; }
+  btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Registrando...'; resultado.style.display = 'none';
+  try {
+    var r = await fetch('https://globalprov3.estilosgrado33.workers.dev/api/save-lead', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ patente: patente, telefono: telefono, mes_manual: mesManual || null })
+    });
+    var d = await r.json();
+    if (d.success) {
+      showRecResult('success', '<i class="fas fa-check-circle"></i> <strong>Registrado!</strong><br>Patente: ' + d.patente + '<br>Mes de revision: <strong>' + d.nombre_mes + '</strong><br><small>Te avisaremos por WhatsApp.</small>');
+      document.getElementById('rec-patente').value = ''; document.getElementById('rec-telefono').value = '';
+      document.getElementById('rec-mes-info').style.display = 'none';
+    } else { showRecResult('error', '<i class="fas fa-exclamation-circle"></i> ' + (d.error || 'Error. Intenta de nuevo.')); }
+  } catch(e) { showRecResult('error', '<i class="fas fa-wifi"></i> Error de conexion.'); }
+  finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-bell"></i> RECORDARME'; }
+}
+function showRecResult(type, html) {
+  var el = document.getElementById('rec-resultado');
+  el.style.display = 'block';
+  el.style.background = type === 'success' ? '#ecfdf5' : '#fef2f2';
+  el.style.border = type === 'success' ? '1px solid #a7f3d0' : '1px solid #fecaca';
+  el.style.color = type === 'success' ? '#065f46' : '#991b1b';
+  el.innerHTML = html;
+}
+</script>
+<style>
+.btn-small-bell {
+  width: 50px; height: 50px; background-color: #a80000; color: white; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center; font-size: 1.2rem; text-decoration: none; flex-shrink: 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3); border: 2px solid white; z-index: 10; animation: pulseBell 2s infinite;
+}
+.btn-small-bell:hover { background-color: #d32f2f; transform: scale(1.1); }
+@keyframes pulseBell {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(168,0,0,0.5); }
+  50% { box-shadow: 0 0 0 10px rgba(168,0,0,0); }
+}
+</style>
+
+<!-- ======================================================================= -->
 <!-- FOOTER INFERIOR FIJO (STICKY BOTTOM BAR) - NUEVO DISEÑO MASIVO -->
 <!-- ======================================================================= -->
 <div class="sticky-bottom-bar">
@@ -2398,6 +2539,11 @@ document.getElementById('modal-chat-ia').addEventListener('click', function(e) {
     <!-- Botón Consulta IA por Patente (Centro Pequeño) -->
     <a href="#" class="btn-small-chat" title="Consulta tu vehiculo por patente" onclick="document.getElementById('modal-chat-ia').style.display='flex'; return false;">
       <i class="fas fa-robot"></i>
+    </a>
+
+    <!-- Botón Recordar Revisión (Centro Pequeño) -->
+    <a href="#" class="btn-small-bell" title="Recorda tu revision tecnica" onclick="document.getElementById('modal-recordatorio').style.display='flex'; return false;">
+      <i class="fas fa-bell"></i>
     </a>
 
     <!-- Botón WhatsApp (Verde Grande) -->

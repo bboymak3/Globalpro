@@ -749,6 +749,183 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
+<!-- ======================================================================= -->
+<!-- SECCION: SISTEMA DE ALERTA TEMPRANA REVISION TECNICA -->
+<!-- ======================================================================= -->
+<section id="alerta-revision" style="position:relative; padding:70px 0; overflow:hidden; background: linear-gradient(180deg, #fff5f5 0%, #fff 40%, #f8f9fa 100%);">
+  <!-- Subtle aura decorativa -->
+  <div style="position:absolute; top:-80px; left:50%; transform:translateX(-50%); width:500px; height:300px; background:radial-gradient(ellipse, rgba(168,0,0,0.08) 0%, transparent 70%); pointer-events:none;"></div>
+  <style>
+    @keyframes auraPulse {
+      0%, 100% { opacity:0.5; transform:scale(1); }
+      50% { opacity:1; transform:scale(1.08); }
+    }
+    .alerta-card {
+      position:relative; z-index:2; background:#fff; border:2px solid rgba(168,0,0,0.12);
+      border-radius:24px; padding:45px 36px;
+      box-shadow: 0 8px 40px rgba(168,0,0,0.10), 0 2px 10px rgba(0,0,0,0.06);
+      animation: cardGlow 3s ease-in-out infinite alternate;
+    }
+    @keyframes cardGlow {
+      0% { box-shadow: 0 8px 40px rgba(168,0,0,0.08), 0 2px 10px rgba(0,0,0,0.04); }
+      100% { box-shadow: 0 12px 50px rgba(168,0,0,0.16), 0 4px 15px rgba(0,0,0,0.06); }
+    }
+    .alerta-icon-ring {
+      width:100px; height:100px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+      background: linear-gradient(135deg, #a80000, #ff6b00); margin:0 auto 24px;
+      box-shadow: 0 6px 30px rgba(168,0,0,0.35), 0 0 60px rgba(255,107,0,0.15);
+      animation: iconRing 2.5s ease-in-out infinite;
+    }
+    @keyframes iconRing {
+      0%, 100% { box-shadow: 0 6px 30px rgba(168,0,0,0.35), 0 0 60px rgba(255,107,0,0.15); }
+      50% { box-shadow: 0 8px 40px rgba(168,0,0,0.5), 0 0 80px rgba(255,107,0,0.25); }
+    }
+    .alerta-input {
+      width:100%; padding:16px 16px 16px 46px; border:2px solid #e5e7eb; border-radius:14px;
+      font-size:1.1rem; outline:none; background:#f9fafb; color:#111;
+      font-family:inherit; transition: all 0.3s;
+    }
+    .alerta-input::placeholder { color:#9ca3af; }
+    .alerta-input:focus { border-color:#a80000; box-shadow:0 0 0 4px rgba(168,0,0,0.1); background:#fff; }
+    .alerta-btn {
+      width:100%; padding:18px; border:none; border-radius:14px; font-size:1.3rem; font-weight:800;
+      cursor:pointer; display:flex; align-items:center; justify-content:center; gap:12px;
+      background: linear-gradient(135deg, #a80000, #d32f2f); color:#fff;
+      box-shadow: 0 6px 24px rgba(168,0,0,0.35); transition: all 0.3s; text-transform:uppercase; letter-spacing:0.06em;
+    }
+    .alerta-btn:hover { transform:translateY(-3px); box-shadow: 0 10px 35px rgba(168,0,0,0.45); }
+    .alerta-btn:active { transform:translateY(0); }
+    .alerta-baja-btn {
+      width:100%; padding:14px; border:2px solid #e5e7eb; border-radius:14px;
+      background:#fff; color:#6b7280; font-size:1rem; font-weight:600;
+      cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; transition:all 0.3s;
+    }
+    .alerta-baja-btn:hover { border-color:#dc3545; color:#dc3545; background:#fff5f5; }
+    .alerta-radio-label {
+      flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:14px;
+      border:2px solid #e5e7eb; border-radius:12px; cursor:pointer; font-size:1rem;
+      font-weight:600; text-align:center; transition:all 0.2s; color:#4b5563;
+    }
+    .alerta-radio-label:hover { border-color:#a80000; color:#a80000; }
+    .alerta-radio-label input:checked + span { color:#a80000; }
+    .alerta-benefit {
+      display:flex; align-items:center; gap:16px; padding:14px 0; border-bottom:1px solid #f3f4f6;
+    }
+    .alerta-benefit:last-child { border-bottom:none; }
+    .alerta-benefit-icon {
+      width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center;
+      background:rgba(168,0,0,0.08); color:#a80000; font-size:1.2rem; flex-shrink:0;
+    }
+  </style>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <div class="alerta-card">
+          <!-- Header -->
+          <div style="text-align:center; margin-bottom:35px;">
+            <div class="alerta-icon-ring">
+              <i class="fas fa-bell" style="font-size:2.6rem; color:#fff; filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3));"></i>
+            </div>
+            <h2 style="color:#a80000; font-weight:900; font-size:2.2rem; margin-bottom:10px; letter-spacing:-0.02em;">
+              Recorda tu Revision
+            </h2>
+            <p style="color:#6b7280; font-size:1.15rem; max-width:480px; margin:0 auto; line-height:1.7;">
+              Nunca mas te olvides de la <strong style="color:#a80000;">revision tecnica</strong> de tu vehiculo. Te avisamos por WhatsApp a tiempo.
+            </p>
+          </div>
+
+          <!-- Beneficios -->
+          <div style="margin-bottom:30px; padding:0 8px;">
+            <div class="alerta-benefit">
+              <div class="alerta-benefit-icon"><i class="fas fa-clock"></i></div>
+              <div><span style="color:#111; font-weight:700; font-size:1.05rem;">Alerta a tiempo</span><br><small style="color:#6b7280; font-size:0.95rem;">Te notificamos 30 dias antes de tu revision</small></div>
+            </div>
+            <div class="alerta-benefit">
+              <div class="alerta-benefit-icon"><i class="fas fa-dollar-sign"></i></div>
+              <div><span style="color:#111; font-weight:700; font-size:1.05rem;">Evita multas</span><br><small style="color:#6b7280; font-size:0.95rem;">Circula siempre al dia, sin sorpresas ni pagos innecesarios</small></div>
+            </div>
+            <div class="alerta-benefit">
+              <div class="alerta-benefit-icon"><i class="fab fa-whatsapp"></i></div>
+              <div><span style="color:#111; font-weight:700; font-size:1.05rem;">Notificacion por WhatsApp</span><br><small style="color:#6b7280; font-size:0.95rem;">Recibes el recordatorio directo en tu celular</small></div>
+            </div>
+          </div>
+
+          <hr style="border:none; border-top:1px solid #f3f4f6; margin:28px 0;">
+
+          <!-- Formulario -->
+          <div style="margin-bottom:18px;">
+            <label style="display:block; font-weight:700; font-size:1rem; color:#374151; margin-bottom:8px;">
+              <i class="fas fa-car" style="color:#a80000; margin-right:6px;"></i> Patente del vehiculo
+            </label>
+            <div style="position:relative;">
+              <i class="fas fa-id-card" style="position:absolute; left:16px; top:50%; transform:translateY(-50%); color:#9ca3af; font-size:1.1rem;"></i>
+              <input type="text" id="sec-patente" class="alerta-input" placeholder="Ej: ABCD12" required maxlength="10"
+                     oninput="this.value=this.value.toUpperCase();" onblur="detectarMesRevisionSec()">
+            </div>
+            <div id="sec-mes-info" style="display:none; background:#ecfdf5; border:1px solid #a7f3d0; border-radius:12px; padding:12px 16px; margin-top:10px; font-size:1rem; color:#065f46;">
+              <i class="fas fa-calendar-check" style="margin-right:6px;"></i>
+              <span id="sec-mes-text"></span>
+            </div>
+          </div>
+
+          <div style="margin-bottom:18px;">
+            <label style="display:block; font-weight:700; font-size:1rem; color:#374151; margin-bottom:8px;">
+              <i class="fas fa-calendar" style="color:#a80000; margin-right:6px;"></i> Como determinar el mes
+            </label>
+            <div style="display:flex; gap:10px;">
+              <label class="alerta-radio-label"><input type="radio" name="sec-modo" value="auto" checked style="accent-color:#a80000;"><span>Automatico</span></label>
+              <label class="alerta-radio-label"><input type="radio" name="sec-modo" value="manual" style="accent-color:#a80000;"><span>Manual</span></label>
+            </div>
+            <div id="sec-mes-manual" style="display:none; margin-top:10px;">
+              <select id="sec-select-mes" class="alerta-input" style="padding-left:16px;">
+                <option value="">-- Selecciona mes --</option>
+                <option value="1">Enero</option><option value="2">Febrero</option><option value="3">Marzo</option>
+                <option value="4">Abril</option><option value="5">Mayo</option><option value="6">Junio</option>
+                <option value="7">Julio</option><option value="8">Agosto</option><option value="9">Septiembre</option>
+                <option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-bottom:18px;">
+            <label style="display:block; font-weight:700; font-size:1rem; color:#374151; margin-bottom:8px;">
+              <i class="fab fa-whatsapp" style="color:#a80000; margin-right:6px;"></i> Tu WhatsApp
+            </label>
+            <div style="position:relative;">
+              <i class="fas fa-phone" style="position:absolute; left:16px; top:50%; transform:translateY(-50%); color:#9ca3af; font-size:1.1rem;"></i>
+              <input type="tel" id="sec-telefono" class="alerta-input" placeholder="Ej: +56 9 1234 5678" required>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:flex-start; gap:10px; margin-bottom:24px; padding:14px; background:#f9fafb; border-radius:14px;">
+            <input type="checkbox" id="sec-consent" required style="width:20px; height:20px; margin-top:2px; accent-color:#a80000; flex-shrink:0;">
+            <label for="sec-consent" style="font-size:0.95rem; color:#6b7280; cursor:pointer; line-height:1.5;">Acepto recibir recordatorios de revision tecnica por WhatsApp. Puedo darme de baja cuando quiera.</label>
+          </div>
+
+          <button id="sec-submit" onclick="submitRecordatorioSec()" class="alerta-btn">
+            <i class="fas fa-bell"></i> RECORDARME
+          </button>
+
+          <div id="sec-resultado" style="margin-top:16px; display:none; padding:16px; border-radius:14px; font-size:1rem;"></div>
+
+          <!-- Dar me de baja -->
+          <div style="margin-top:24px; text-align:center;">
+            <p style="color:#9ca3af; font-size:0.95rem; margin-bottom:10px;">No quieres mas recordatorios?</p>
+            <div style="display:flex; gap:10px;">
+              <input type="tel" id="sec-baja-telefono" class="alerta-input" placeholder="+56 9 1234 5678" style="flex:1; padding:14px 16px 14px 16px; font-size:1rem;">
+              <button onclick="darmeDeBajaSec()" class="alerta-baja-btn" style="width:auto; padding:14px 24px; flex-shrink:0;">
+                <i class="fas fa-user-slash"></i> DARME DE BAJA
+              </button>
+            </div>
+            <div id="sec-baja-resultado" style="margin-top:10px; display:none; padding:12px 16px; border-radius:12px; font-size:0.95rem;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SECCIÓN: CONECTAMOS (CSS Infinite Scroll Carousel) -->
 <section class="conectamos-section">
   <p class="conectamos-heading">Conectamos a propietarios de vehículos con especialistas en mantenciones, revisiones y reparaciones específicas de tu auto en donde lo necesites</p>
@@ -1859,185 +2036,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- ======================================================================= -->
-<!-- SECCION: SISTEMA DE ALERTA TEMPRANA REVISION TECNICA -->
-<!-- ======================================================================= -->
-<section id="alerta-revision" style="position:relative; padding:60px 0; overflow:hidden;">
-  <!-- Aura / Fondo animado -->
-  <div style="position:absolute; inset:0; background: linear-gradient(135deg, #1a0a00 0%, #2d0a0a 30%, #0a0a2d 70%, #000 100%); z-index:0;"></div>
-  <div style="position:absolute; top:-100px; left:50%; transform:translateX(-50%); width:600px; height:600px; background:radial-gradient(circle, rgba(168,0,0,0.25) 0%, rgba(255,107,0,0.1) 40%, transparent 70%); animation: auraPulse 4s ease-in-out infinite; z-index:1;"></div>
-  <div style="position:absolute; bottom:-150px; left:-100px; width:400px; height:400px; background:radial-gradient(circle, rgba(255,193,7,0.12) 0%, transparent 60%); animation: auraPulse 5s ease-in-out infinite 1s; z-index:1;"></div>
-  <div style="position:absolute; bottom:-100px; right:-100px; width:350px; height:350px; background:radial-gradient(circle, rgba(168,0,0,0.15) 0%, transparent 60%); animation: auraPulse 4.5s ease-in-out infinite 0.5s; z-index:1;"></div>
-  <style>
-    @keyframes auraPulse {
-      0%, 100% { opacity:0.6; transform:translateX(-50%) scale(1); }
-      50% { opacity:1; transform:translateX(-50%) scale(1.15); }
-    }
-    .alerta-card {
-      position:relative; z-index:2; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
-      border-radius:20px; padding:40px 32px; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
-      box-shadow: 0 0 60px rgba(168,0,0,0.15), 0 0 120px rgba(255,107,0,0.08), inset 0 1px 0 rgba(255,255,255,0.05);
-      animation: cardGlow 3s ease-in-out infinite alternate;
-    }
-    @keyframes cardGlow {
-      0% { box-shadow: 0 0 40px rgba(168,0,0,0.15), 0 0 80px rgba(255,107,0,0.06), inset 0 1px 0 rgba(255,255,255,0.05); }
-      100% { box-shadow: 0 0 80px rgba(168,0,0,0.25), 0 0 140px rgba(255,107,0,0.12), inset 0 1px 0 rgba(255,255,255,0.08); }
-    }
-    .alerta-icon-ring {
-      width:90px; height:90px; border-radius:50%; display:flex; align-items:center; justify-content:center;
-      background: linear-gradient(135deg, #a80000, #ff6b00); margin:0 auto 20px;
-      box-shadow: 0 0 30px rgba(168,0,0,0.5), 0 0 60px rgba(255,107,0,0.2);
-      animation: iconRing 2.5s ease-in-out infinite;
-    }
-    @keyframes iconRing {
-      0%, 100% { box-shadow: 0 0 30px rgba(168,0,0,0.5), 0 0 60px rgba(255,107,0,0.2); }
-      50% { box-shadow: 0 0 50px rgba(168,0,0,0.7), 0 0 90px rgba(255,107,0,0.3); }
-    }
-    .alerta-input {
-      width:100%; padding:14px 14px 14px 42px; border:2px solid rgba(255,255,255,0.12); border-radius:12px;
-      font-size:1rem; outline:none; background:rgba(255,255,255,0.06); color:#fff;
-      font-family:inherit; transition: all 0.3s;
-    }
-    .alerta-input::placeholder { color:rgba(255,255,255,0.35); }
-    .alerta-input:focus { border-color:#ff6b00; box-shadow:0 0 15px rgba(255,107,0,0.2); background:rgba(255,255,255,0.1); }
-    .alerta-btn {
-      width:100%; padding:16px; border:none; border-radius:14px; font-size:1.1rem; font-weight:800;
-      cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;
-      background: linear-gradient(135deg, #a80000, #d32f2f); color:#fff;
-      box-shadow: 0 4px 20px rgba(168,0,0,0.4); transition: all 0.3s; text-transform:uppercase; letter-spacing:0.05em;
-    }
-    .alerta-btn:hover { transform:translateY(-2px); box-shadow: 0 8px 30px rgba(168,0,0,0.5); }
-    .alerta-btn:active { transform:translateY(0); }
-    .alerta-baja-btn {
-      width:100%; padding:12px; border:2px solid rgba(255,255,255,0.15); border-radius:12px;
-      background:transparent; color:rgba(255,255,255,0.6); font-size:0.9rem; font-weight:600;
-      cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; transition:all 0.3s;
-    }
-    .alerta-baja-btn:hover { border-color:#dc3545; color:#dc3545; background:rgba(220,53,69,0.08); }
-    .alerta-radio-label {
-      flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:12px;
-      border:2px solid rgba(255,255,255,0.1); border-radius:10px; cursor:pointer; font-size:0.85rem;
-      font-weight:600; text-align:center; transition:all 0.2s; color:rgba(255,255,255,0.7);
-    }
-    .alerta-radio-label:hover { border-color:rgba(255,107,0,0.4); }
-    .alerta-radio-label input:checked + span { color:#ff6b00; }
-    .alerta-benefit {
-      display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05);
-    }
-    .alerta-benefit:last-child { border-bottom:none; }
-    .alerta-benefit-icon {
-      width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center;
-      background:rgba(255,107,0,0.12); color:#ff6b00; font-size:0.9rem; flex-shrink:0;
-    }
-  </style>
-
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <div class="alerta-card">
-          <!-- Header -->
-          <div style="text-align:center; margin-bottom:30px;">
-            <div class="alerta-icon-ring">
-              <i class="fas fa-bell" style="font-size:2.2rem; color:#fff; filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3));"></i>
-            </div>
-            <h2 style="color:#fff; font-weight:900; font-size:1.8rem; margin-bottom:6px; text-shadow:0 0 20px rgba(168,0,0,0.3);">
-              Recorda tu Revision
-            </h2>
-            <p style="color:rgba(255,255,255,0.65); font-size:0.95rem; max-width:420px; margin:0 auto; line-height:1.6;">
-              Nunca mas te olvides de la <strong style="color:#ff6b00;">revision tecnica</strong> de tu vehiculo. Te avisamos por WhatsApp a tiempo.
-            </p>
-          </div>
-
-          <!-- Beneficios -->
-          <div style="margin-bottom:28px; padding:0 8px;">
-            <div class="alerta-benefit">
-              <div class="alerta-benefit-icon"><i class="fas fa-clock"></i></div>
-              <div><span style="color:#fff; font-weight:600; font-size:0.88rem;">Alerta a tiempo</span><br><small style="color:rgba(255,255,255,0.5); font-size:0.8rem;">Te notificamos 30 dias antes de tu revision</small></div>
-            </div>
-            <div class="alerta-benefit">
-              <div class="alerta-benefit-icon"><i class="fas fa-dollar-sign"></i></div>
-              <div><span style="color:#fff; font-weight:600; font-size:0.88rem;">Evita multas</span><br><small style="color:rgba(255,255,255,0.5); font-size:0.8rem;">Circula siempre al dia, sin sorpresas ni pagos innecesarios</small></div>
-            </div>
-            <div class="alerta-benefit">
-              <div class="alerta-benefit-icon"><i class="fab fa-whatsapp"></i></div>
-              <div><span style="color:#fff; font-weight:600; font-size:0.88rem;">Notificacion por WhatsApp</span><br><small style="color:rgba(255,255,255,0.5); font-size:0.8rem;">Recibes el recordatorio directo en tu celular</small></div>
-            </div>
-          </div>
-
-          <hr style="border:none; border-top:1px solid rgba(255,255,255,0.08); margin:24px 0;">
-
-          <!-- Formulario -->
-          <div style="margin-bottom:16px;">
-            <label style="display:block; font-weight:600; font-size:0.85rem; color:rgba(255,255,255,0.7); margin-bottom:6px;">
-              <i class="fas fa-car" style="color:#ff6b00; margin-right:4px;"></i> Patente del vehiculo
-            </label>
-            <div style="position:relative;">
-              <i class="fas fa-id-card" style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:rgba(255,255,255,0.3);"></i>
-              <input type="text" id="sec-patente" class="alerta-input" placeholder="Ej: ABCD12" required maxlength="10"
-                     oninput="this.value=this.value.toUpperCase();" onblur="detectarMesRevisionSec()">
-            </div>
-            <div id="sec-mes-info" style="display:none; background:rgba(5,150,105,0.15); border:1px solid rgba(5,150,105,0.3); border-radius:10px; padding:10px 14px; margin-top:8px; font-size:0.85rem; color:#6ee7b7;">
-              <i class="fas fa-calendar-check" style="margin-right:6px;"></i>
-              <span id="sec-mes-text"></span>
-            </div>
-          </div>
-
-          <div style="margin-bottom:16px;">
-            <label style="display:block; font-weight:600; font-size:0.85rem; color:rgba(255,255,255,0.7); margin-bottom:6px;">
-              <i class="fas fa-calendar" style="color:#ff6b00; margin-right:4px;"></i> Como determinar el mes
-            </label>
-            <div style="display:flex; gap:8px;">
-              <label class="alerta-radio-label"><input type="radio" name="sec-modo" value="auto" checked style="accent-color:#ff6b00;"><span>Automatico</span></label>
-              <label class="alerta-radio-label"><input type="radio" name="sec-modo" value="manual" style="accent-color:#ff6b00;"><span>Manual</span></label>
-            </div>
-            <div id="sec-mes-manual" style="display:none; margin-top:8px;">
-              <select id="sec-select-mes" class="alerta-input" style="padding-left:14px;">
-                <option value="">-- Selecciona mes --</option>
-                <option value="1">Enero</option><option value="2">Febrero</option><option value="3">Marzo</option>
-                <option value="4">Abril</option><option value="5">Mayo</option><option value="6">Junio</option>
-                <option value="7">Julio</option><option value="8">Agosto</option><option value="9">Septiembre</option>
-                <option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option>
-              </select>
-            </div>
-          </div>
-
-          <div style="margin-bottom:16px;">
-            <label style="display:block; font-weight:600; font-size:0.85rem; color:rgba(255,255,255,0.7); margin-bottom:6px;">
-              <i class="fab fa-whatsapp" style="color:#ff6b00; margin-right:4px;"></i> Tu WhatsApp
-            </label>
-            <div style="position:relative;">
-              <i class="fas fa-phone" style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:rgba(255,255,255,0.3);"></i>
-              <input type="tel" id="sec-telefono" class="alerta-input" placeholder="Ej: +56 9 1234 5678" required>
-            </div>
-          </div>
-
-          <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:20px; padding:10px; background:rgba(255,255,255,0.03); border-radius:10px;">
-            <input type="checkbox" id="sec-consent" required style="width:18px; height:18px; margin-top:2px; accent-color:#ff6b00; flex-shrink:0;">
-            <label for="sec-consent" style="font-size:0.8rem; color:rgba(255,255,255,0.5); cursor:pointer;">Acepto recibir recordatorios de revision tecnica por WhatsApp. Puedo darme de baja cuando quiera.</label>
-          </div>
-
-          <button id="sec-submit" onclick="submitRecordatorioSec()" class="alerta-btn">
-            <i class="fas fa-bell"></i> RECORDARME
-          </button>
-
-          <div id="sec-resultado" style="margin-top:14px; display:none; padding:14px; border-radius:12px; font-size:0.9rem;"></div>
-
-          <!-- Dar me de baja -->
-          <div style="margin-top:20px; text-align:center;">
-            <p style="color:rgba(255,255,255,0.4); font-size:0.8rem; margin-bottom:8px;">No quieres mas recordatorios?</p>
-            <div style="display:flex; gap:8px;">
-              <input type="tel" id="sec-baja-telefono" class="alerta-input" placeholder="+56 9 1234 5678" style="flex:1; padding:10px 14px 10px 14px; font-size:0.88rem;">
-              <button onclick="darmeDeBajaSec()" class="alerta-baja-btn" style="width:auto; padding:10px 20px; flex-shrink:0;">
-                <i class="fas fa-user-slash"></i> DARME DE BAJA
-              </button>
-            </div>
-            <div id="sec-baja-resultado" style="margin-top:8px; display:none; padding:10px 14px; border-radius:10px; font-size:0.85rem;"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 <script>
 // Radio manual/auto para seccion inline
 document.querySelectorAll('input[name="sec-modo"]').forEach(function(r) {

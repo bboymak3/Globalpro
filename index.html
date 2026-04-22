@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="es-CL">
 <head>
-<!-- Botones IA + Campana (top-right) -->
-<div id="floating-top-buttons">
-  <a href="#" class="float-top-btn float-btn-ia" title="Consulta tu vehiculo por patente" onclick="document.getElementById('modal-chat-ia').style.display='flex'; return false;">
-    <i class="fas fa-robot"></i>
-  </a>
-  <a href="#" class="float-top-btn float-btn-bell" title="Recorda tu revision tecnica" onclick="document.getElementById('modal-recordatorio').style.display='flex'; return false;">
-    <i class="fas fa-bell"></i>
-  </a>
-</div>
-
 <style>
   #floating-top-buttons {
     position: fixed;
@@ -64,41 +54,116 @@
     50% { box-shadow: 0 0 0 10px rgba(168, 0, 0, 0); }
   }
 
-  /* Dropdown comunas - hover en desktop */
-  @media (min-width: 992px) {
-    #comunasNavItem {
-      position: relative;
-      z-index: 10003;
-    }
-    #comunasNavItem:hover > .dropdown-menu,
-    #comunasNavItem.show > .dropdown-menu {
-      display: block !important;
-      animation: comunasFadeIn 0.25s ease;
-      z-index: 10003 !important;
-      position: absolute !important;
-    }
-    #comunasNavItem:hover .dropdown-toggle i {
-      transform: rotate(180deg);
-    }
-    #comunasDropdownMenu .dropdown-item {
-      padding: 8px 16px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #e0e0e0 !important;
-      transition: all 0.15s ease;
-      border-radius: 6px;
-      margin: 2px 6px;
-    }
-    #comunasDropdownMenu .dropdown-item:hover {
-      background: #DC2626 !important;
-      color: #fff !important;
-      padding-left: 24px;
-      transform: translateX(4px);
-    }
+  /* ========== NAVBAR NUEVO - SIN OVERFLOW HIDDEN ========== */
+  .navbar {
+    overflow: visible !important;
+    z-index: 1050;
+    padding: 10px 0;
+    background: rgba(0, 0, 0, 0.92) !important;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .navbar-collapse {
+    overflow: visible !important;
+  }
+  .nav-link {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 1.05rem !important;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 10px 14px !important;
+    border-radius: 8px;
+    position: relative;
+  }
+  .nav-link:hover,
+  .nav-link.active {
+    color: #fff !important;
+    background: rgba(220, 38, 38, 0.85) !important;
+    text-shadow: 0 0 10px rgba(220, 38, 38, 0.6);
+    transform: translateY(-1px);
+  }
+  .nav-item {
+    position: relative;
+  }
+  .nav-item::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: #DC2626;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+  .nav-item:hover::after {
+    width: 60%;
+  }
+
+  /* Dropdown comunas - funciona ON TOP en desktop */
+  .navbar-nav .dropdown {
+    position: relative !important;
+    z-index: 1060 !important;
+  }
+  .navbar-nav .dropdown-menu {
+    z-index: 99999 !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    margin-top: 8px !important;
+    border: 2px solid #DC2626;
+    border-radius: 12px;
+    padding: 10px 0;
+    background: rgba(10, 10, 10, 0.97) !important;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 12px 40px rgba(220, 38, 38, 0.25), 0 4px 15px rgba(0,0,0,0.4);
+    max-height: 450px;
+    overflow-y: auto;
+    min-width: 240px;
+    display: none;
+    animation: comunasFadeIn 0.3s ease;
+  }
+  .navbar-nav .dropdown-menu::-webkit-scrollbar {
+    width: 6px;
+  }
+  .navbar-nav .dropdown-menu::-webkit-scrollbar-thumb {
+    background: #DC2626;
+    border-radius: 3px;
+  }
+  .navbar-nav .dropdown-menu .dropdown-item {
+    padding: 9px 18px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #e8e8e8 !important;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+    margin: 2px 6px;
+  }
+  .navbar-nav .dropdown-menu .dropdown-item:hover {
+    background: #DC2626 !important;
+    color: #fff !important;
+    padding-left: 26px;
+    transform: translateX(5px);
   }
   @keyframes comunasFadeIn {
-    from { opacity: 0; transform: translateY(-8px); }
+    from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+  .nav-container {
+    padding: 0 15px;
+  }
+
+  /* Desktop: hover abre comunas */
+  @media (min-width: 992px) {
+    .navbar-nav .dropdown:hover > .dropdown-menu {
+      display: block !important;
+    }
+    .navbar-nav .dropdown:hover .dropdown-toggle i.fa-chevron-down {
+      transform: rotate(180deg);
+    }
   }
 
   @media (max-width: 991px) {
@@ -180,21 +245,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .bg-primary { background-color: var(--gp-blood-red) !important; }
     .border-primary { border-color: var(--gp-blood-red) !important; }
 
-    .nav-link {
-      color: #ffffff !important;
-      font-weight: 700 !important;
-      font-size: 0.95rem !important;
-      transition: all 0.3s;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      padding: 8px 12px !important;
-      border-radius: 6px;
-    }
-    .nav-link:hover, .nav-link.active {
-      color: #fff !important;
-      background: var(--gp-blood-red) !important;
-      text-shadow: 0 0 8px rgba(168, 0, 0, 0.5);
-    }
+    /* .nav-link movido al style principal del navbar arriba */
 
     #imageModal {
       display: none; position: fixed; z-index: 2000; padding-top: 60px; left: 0; top: 0;
@@ -251,18 +302,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       overflow-x: hidden !important;
       max-width: 100%;
     }
-    /* Dropdown comunas SOBRE el navbar */
-    .dropdown-menu {
-      z-index: 10002 !important;
-      position: absolute !important;
-    }
-    .navbar-nav .dropdown {
-      position: relative;
-      z-index: 10002;
-    }
-    .nav-container {
-      padding: 0 15px;
-    }
+    /* Dropdown CSS movido al style principal del navbar arriba */
 
     .accordion-button:not(.collapsed) {
       background-color: var(--gp-blood-red);
@@ -631,6 +671,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </script>
 </head>
 <body>
+<!-- Botones IA + Campana (top-right) -->
+<div id="floating-top-buttons">
+  <a href="#" class="float-top-btn float-btn-ia" title="Consulta tu vehiculo por patente" onclick="document.getElementById('modal-chat-ia').style.display='flex'; return false;">
+    <i class="fas fa-robot"></i>
+  </a>
+  <a href="#" class="float-top-btn float-btn-bell" title="Recorda tu revision tecnica" onclick="document.getElementById('modal-recordatorio').style.display='flex'; return false;">
+    <i class="fas fa-bell"></i>
+  </a>
+</div>
 
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "41608a73d5524531804ac808fbf45439"}'></script><!-- End Cloudflare Web Analytics -->
 <!-- Google Tag Manager (noscript) -->
@@ -641,15 +690,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 
-<!-- NAVBAR -->
+<!-- NAVBAR RECONSTRUIDO -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container nav-container">
     <a href="#inicio" class="logo d-flex align-items-center text-decoration-none text-white">
-      <!-- LOGO: CAJA ROJO SANGRE -->
       <div class="logo-img">
-        <!-- Fallback texto si no carga imagen -->
         <i class="fas fa-wrench"></i>
-        <!-- Si tienes imagen usa esto: <img src="images/mecanico-a-domicilio-en-santiago.png" alt="Logo"> -->
       </div>
       <div>
         <div class="logo-text">GLOBALPRO</div>
@@ -661,21 +707,71 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse desktop-menu" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <!-- Nuevo ítem en el menú apuntando a la sección SEO -->
         <li class="nav-item">
           <a class="nav-link" href="#mecanico-domicilio-seo">Mecánico a Domicilio</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#servicios">Servicios</a>
         </li>
-        <li class="nav-item dropdown" id="comunasNavItem">
-          <a class="nav-link dropdown-toggle" href="#" id="comunasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="display:flex;align-items:center;gap:6px;">
-            Comunas <i class="fas fa-chevron-down" style="font-size:0.65rem;transition:transform 0.3s;"></i>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Comunas <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;transition:transform 0.3s;"></i>
           </a>
-          <ul class="dropdown-menu dropdown-menu-dark" id="comunasDropdownMenu" aria-labelledby="comunasDropdown" style="max-height:420px;overflow-y:auto;min-width:220px;border:2px solid #DC2626;border-radius:12px;padding:8px 0;background:rgba(0,0,0,0.95);backdrop-filter:blur(15px);">
-            <li><a class="dropdown-item" href="comunas/alhue.html">Alhué</a></li><li><a class="dropdown-item" href="comunas/buin.html">Buin</a></li><li><a class="dropdown-item" href="comunas/calera-de-tango.html">Calera de Tango</a></li><li><a class="dropdown-item" href="comunas/cerrillos.html">Cerrillos</a></li><li><a class="dropdown-item" href="comunas/cerro-navia.html">Cerro Navia</a></li><li><a class="dropdown-item" href="comunas/colina.html">Colina</a></li><li><a class="dropdown-item" href="comunas/conchali.html">Conchalí</a></li><li><a class="dropdown-item" href="comunas/curacavi.html">Curacaví</a></li><li><a class="dropdown-item" href="comunas/el-bosque.html">El Bosque</a></li><li><a class="dropdown-item" href="comunas/el-monte.html">El Monte</a></li><li><a class="dropdown-item" href="comunas/estacion-central.html">Estación Central</a></li><li><a class="dropdown-item" href="comunas/huechuraba.html">Huechuraba</a></li><li><a class="dropdown-item" href="comunas/independencia.html">Independencia</a></li><li><a class="dropdown-item" href="comunas/isla-de-maipo.html">Isla de Maipo</a></li><li><a class="dropdown-item" href="comunas/la-cisterna.html">La Cisterna</a></li><li><a class="dropdown-item" href="comunas/la-florida.html">La Florida</a></li><li><a class="dropdown-item" href="comunas/la-granja.html">La Granja</a></li><li><a class="dropdown-item" href="comunas/la-pintana.html">La Pintana</a></li><li><a class="dropdown-item" href="comunas/la-reina.html">La Reina</a></li><li><a class="dropdown-item" href="comunas/las-condes.html">Las Condes</a></li><li><a class="dropdown-item" href="comunas/lampa.html">Lampa</a></li><li><a class="dropdown-item" href="comunas/lo-barnechea.html">Lo Barnechea</a></li><li><a class="dropdown-item" href="comunas/lo-espejo.html">Lo Espejo</a></li><li><a class="dropdown-item" href="comunas/lo-prado.html">Lo Prado</a></li><li><a class="dropdown-item" href="comunas/macul.html">Macul</a></li><li><a class="dropdown-item" href="comunas/maipu.html">Maipú</a></li><li><a class="dropdown-item" href="comunas/maria-pinto.html">María Pinto</a></li><li><a class="dropdown-item" href="comunas/melipilla.html">Melipilla</a></li><li><a class="dropdown-item" href="comunas/nunoa.html">Ñuñoa</a></li><li><a class="dropdown-item" href="comunas/padre-hurtado.html">Padre Hurtado</a></li><li><a class="dropdown-item" href="comunas/paine.html">Paine</a></li><li><a class="dropdown-item" href="comunas/pedro-aguirre-cerda.html">Pedro Aguirre Cerda</a></li><li><a class="dropdown-item" href="comunas/penaflor.html">Peñaflor</a></li><li><a class="dropdown-item" href="comunas/penalolen.html">Peñalolén</a></li><li><a class="dropdown-item" href="comunas/pirque.html">Pirque</a></li><li><a class="dropdown-item" href="comunas/providencia.html">Providencia</a></li><li><a class="dropdown-item" href="comunas/pudahuel.html">Pudahuel</a></li><li><a class="dropdown-item" href="comunas/puente-alto.html">Puente Alto</a></li><li><a class="dropdown-item" href="comunas/quilicura.html">Quilicura</a></li><li><a class="dropdown-item" href="comunas/quinta-normal.html">Quinta Normal</a></li><li><a class="dropdown-item" href="comunas/recoleta.html">Recoleta</a></li><li><a class="dropdown-item" href="comunas/renca.html">Renca</a></li><li><a class="dropdown-item" href="comunas/san-bernardo.html">San Bernardo</a></li><li><a class="dropdown-item" href="comunas/san-joaquin.html">San Joaquín</a></li><li><a class="dropdown-item" href="comunas/san-jose-de-maipo.html">San José de Maipo</a></li><li><a class="dropdown-item" href="comunas/san-miguel.html">San Miguel</a></li><li><a class="dropdown-item" href="comunas/san-pedro.html">San Pedro</a></li><li><a class="dropdown-item" href="comunas/san-ramon.html">San Ramón</a></li><li><a class="dropdown-item" href="comunas/santiago.html">Santiago</a></li><li><a class="dropdown-item" href="comunas/talagante.html">Talagante</a></li><li><a class="dropdown-item" href="comunas/tiltil.html">Tiltil</a></li><li><a class="dropdown-item" href="comunas/vitacura.html">Vitacura</a></li>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="comunas/alhue.html">Alhué</a></li>
+            <li><a class="dropdown-item" href="comunas/buin.html">Buin</a></li>
+            <li><a class="dropdown-item" href="comunas/calera-de-tango.html">Calera de Tango</a></li>
+            <li><a class="dropdown-item" href="comunas/cerrillos.html">Cerrillos</a></li>
+            <li><a class="dropdown-item" href="comunas/cerro-navia.html">Cerro Navia</a></li>
+            <li><a class="dropdown-item" href="comunas/colina.html">Colina</a></li>
+            <li><a class="dropdown-item" href="comunas/conchali.html">Conchalí</a></li>
+            <li><a class="dropdown-item" href="comunas/curacavi.html">Curacaví</a></li>
+            <li><a class="dropdown-item" href="comunas/el-bosque.html">El Bosque</a></li>
+            <li><a class="dropdown-item" href="comunas/el-monte.html">El Monte</a></li>
+            <li><a class="dropdown-item" href="comunas/estacion-central.html">Estación Central</a></li>
+            <li><a class="dropdown-item" href="comunas/huechuraba.html">Huechuraba</a></li>
+            <li><a class="dropdown-item" href="comunas/independencia.html">Independencia</a></li>
+            <li><a class="dropdown-item" href="comunas/isla-de-maipo.html">Isla de Maipo</a></li>
+            <li><a class="dropdown-item" href="comunas/la-cisterna.html">La Cisterna</a></li>
+            <li><a class="dropdown-item" href="comunas/la-florida.html">La Florida</a></li>
+            <li><a class="dropdown-item" href="comunas/la-granja.html">La Granja</a></li>
+            <li><a class="dropdown-item" href="comunas/la-pintana.html">La Pintana</a></li>
+            <li><a class="dropdown-item" href="comunas/la-reina.html">La Reina</a></li>
+            <li><a class="dropdown-item" href="comunas/las-condes.html">Las Condes</a></li>
+            <li><a class="dropdown-item" href="comunas/lampa.html">Lampa</a></li>
+            <li><a class="dropdown-item" href="comunas/lo-barnechea.html">Lo Barnechea</a></li>
+            <li><a class="dropdown-item" href="comunas/lo-espejo.html">Lo Espejo</a></li>
+            <li><a class="dropdown-item" href="comunas/lo-prado.html">Lo Prado</a></li>
+            <li><a class="dropdown-item" href="comunas/macul.html">Macul</a></li>
+            <li><a class="dropdown-item" href="comunas/maipu.html">Maipú</a></li>
+            <li><a class="dropdown-item" href="comunas/maria-pinto.html">María Pinto</a></li>
+            <li><a class="dropdown-item" href="comunas/melipilla.html">Melipilla</a></li>
+            <li><a class="dropdown-item" href="comunas/nunoa.html">Ñuñoa</a></li>
+            <li><a class="dropdown-item" href="comunas/padre-hurtado.html">Padre Hurtado</a></li>
+            <li><a class="dropdown-item" href="comunas/paine.html">Paine</a></li>
+            <li><a class="dropdown-item" href="comunas/pedro-aguirre-cerda.html">Pedro Aguirre Cerda</a></li>
+            <li><a class="dropdown-item" href="comunas/penaflor.html">Peñaflor</a></li>
+            <li><a class="dropdown-item" href="comunas/penalolen.html">Peñalolén</a></li>
+            <li><a class="dropdown-item" href="comunas/pirque.html">Pirque</a></li>
+            <li><a class="dropdown-item" href="comunas/providencia.html">Providencia</a></li>
+            <li><a class="dropdown-item" href="comunas/pudahuel.html">Pudahuel</a></li>
+            <li><a class="dropdown-item" href="comunas/puente-alto.html">Puente Alto</a></li>
+            <li><a class="dropdown-item" href="comunas/quilicura.html">Quilicura</a></li>
+            <li><a class="dropdown-item" href="comunas/quinta-normal.html">Quinta Normal</a></li>
+            <li><a class="dropdown-item" href="comunas/recoleta.html">Recoleta</a></li>
+            <li><a class="dropdown-item" href="comunas/renca.html">Renca</a></li>
+            <li><a class="dropdown-item" href="comunas/san-bernardo.html">San Bernardo</a></li>
+            <li><a class="dropdown-item" href="comunas/san-joaquin.html">San Joaquín</a></li>
+            <li><a class="dropdown-item" href="comunas/san-jose-de-maipo.html">San José de Maipo</a></li>
+            <li><a class="dropdown-item" href="comunas/san-miguel.html">San Miguel</a></li>
+            <li><a class="dropdown-item" href="comunas/san-pedro.html">San Pedro</a></li>
+            <li><a class="dropdown-item" href="comunas/san-ramon.html">San Ramón</a></li>
+            <li><a class="dropdown-item" href="comunas/santiago.html">Santiago</a></li>
+            <li><a class="dropdown-item" href="comunas/talagante.html">Talagante</a></li>
+            <li><a class="dropdown-item" href="comunas/tiltil.html">Tiltil</a></li>
+            <li><a class="dropdown-item" href="comunas/vitacura.html">Vitacura</a></li>
           </ul>
         </li>
         <li class="nav-item">
@@ -688,10 +784,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <a class="nav-link" href="blog/index.html">Blog</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="vehiculos/index.html">Vehiculos</a>
+          <a class="nav-link" href="vehiculos/index.html">Vehículos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="inspeccion-mecanica.html">Inspeccion Mecanica</a>
+          <a class="nav-link" href="inspeccion-mecanica.html">Inspección Mecánica</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="servicios-domicilio.html">Servicios a Domicilio</a>
@@ -701,11 +797,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="politica-privacidad.html">Privacidad</a>
-        </li>
-        <li class="nav-item">
-          <a href="https://wa.me/56939026185" class="whatsapp-btn" target="_blank">
-            <i class="fab fa-whatsapp me-2"></i> WhatsApp
-          </a>
         </li>
       </ul>
     </div>

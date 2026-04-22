@@ -328,11 +328,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       width: 100%; height: 100%; object-fit: contain; padding: 5px;
     }
 
-    body, .container, .container-fluid {
+    body, .container-fluid {
       overflow-x: hidden !important;
       max-width: 100%;
     }
-    /* Dropdown CSS movido al style principal del navbar arriba */
+    /* El container DENTRO del navbar NO debe tener overflow hidden para que el dropdown de comunas salga */
+    .navbar .container,
+    .navbar .container-fluid {
+      overflow: visible !important;
+    }
 
     .accordion-button:not(.collapsed) {
       background-color: var(--gp-blood-red);

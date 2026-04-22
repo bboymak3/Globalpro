@@ -66,18 +66,25 @@
 
   /* Dropdown comunas - hover en desktop */
   @media (min-width: 992px) {
+    #comunasNavItem {
+      position: relative;
+      z-index: 10003;
+    }
     #comunasNavItem:hover > .dropdown-menu,
     #comunasNavItem.show > .dropdown-menu {
       display: block !important;
       animation: comunasFadeIn 0.25s ease;
+      z-index: 10003 !important;
+      position: absolute !important;
     }
     #comunasNavItem:hover .dropdown-toggle i {
       transform: rotate(180deg);
     }
     #comunasDropdownMenu .dropdown-item {
-      padding: 7px 16px;
-      font-size: 0.88rem;
-      font-weight: 500;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #e0e0e0 !important;
       transition: all 0.15s ease;
       border-radius: 6px;
       margin: 2px 6px;
@@ -85,7 +92,8 @@
     #comunasDropdownMenu .dropdown-item:hover {
       background: #DC2626 !important;
       color: #fff !important;
-      padding-left: 22px;
+      padding-left: 24px;
+      transform: translateX(4px);
     }
   }
   @keyframes comunasFadeIn {
@@ -172,8 +180,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .bg-primary { background-color: var(--gp-blood-red) !important; }
     .border-primary { border-color: var(--gp-blood-red) !important; }
 
-    .nav-link { color: #ccc !important; transition: 0.3s; }
-    .nav-link:hover, .nav-link.active { color: var(--gp-blood-red) !important; }
+    .nav-link {
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      font-size: 0.95rem !important;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      padding: 8px 12px !important;
+      border-radius: 6px;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: #fff !important;
+      background: var(--gp-blood-red) !important;
+      text-shadow: 0 0 8px rgba(168, 0, 0, 0.5);
+    }
 
     #imageModal {
       display: none; position: fixed; z-index: 2000; padding-top: 60px; left: 0; top: 0;
@@ -229,6 +250,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     body, .container, .container-fluid {
       overflow-x: hidden !important;
       max-width: 100%;
+    }
+    /* Dropdown comunas SOBRE el navbar */
+    .dropdown-menu {
+      z-index: 10002 !important;
+      position: absolute !important;
+    }
+    .navbar-nav .dropdown {
+      position: relative;
+      z-index: 10002;
     }
     .nav-container {
       padding: 0 15px;

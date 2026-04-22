@@ -43,7 +43,7 @@
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://globalpro.pages.devblog/</loc>
+    <loc>https://globalpro.pages.dev/blog/</loc>
     <lastmod>2026-04-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -409,7 +409,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://globalpro.pages.devmarcas_automotrices/</loc>
+    <loc>https://globalpro.pages.dev/marcas_automotrices/</loc>
     <lastmod>2026-04-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -469,7 +469,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://globalpro.pages.devvehiculos/</loc>
+    <loc>https://globalpro.pages.dev/vehiculos/</loc>
     <lastmod>2026-04-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

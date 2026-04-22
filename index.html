@@ -14,7 +14,7 @@
 <style>
   #floating-top-buttons {
     position: fixed;
-    top: 20px;
+    top: 85px;
     right: 20px;
     display: flex;
     gap: 10px;
@@ -23,13 +23,13 @@
   }
 
   .float-top-btn {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.35rem;
     text-decoration: none;
     color: white;
     border: 2px solid #fff;
@@ -64,15 +64,44 @@
     50% { box-shadow: 0 0 0 10px rgba(168, 0, 0, 0); }
   }
 
+  /* Dropdown comunas - hover en desktop */
+  @media (min-width: 992px) {
+    #comunasNavItem:hover > .dropdown-menu,
+    #comunasNavItem.show > .dropdown-menu {
+      display: block !important;
+      animation: comunasFadeIn 0.25s ease;
+    }
+    #comunasNavItem:hover .dropdown-toggle i {
+      transform: rotate(180deg);
+    }
+    #comunasDropdownMenu .dropdown-item {
+      padding: 7px 16px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: all 0.15s ease;
+      border-radius: 6px;
+      margin: 2px 6px;
+    }
+    #comunasDropdownMenu .dropdown-item:hover {
+      background: #DC2626 !important;
+      color: #fff !important;
+      padding-left: 22px;
+    }
+  }
+  @keyframes comunasFadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   @media (max-width: 991px) {
     #floating-top-buttons {
       top: 90px;
       right: 10px;
     }
     .float-top-btn {
-      width: 42px;
-      height: 42px;
-      font-size: 1rem;
+      width: 44px;
+      height: 44px;
+      font-size: 1.1rem;
     }
   }
 </style>
@@ -611,11 +640,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li class="nav-item">
           <a class="nav-link" href="#servicios">Servicios</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="comunasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Comunas
+        <li class="nav-item dropdown" id="comunasNavItem">
+          <a class="nav-link dropdown-toggle" href="#" id="comunasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="display:flex;align-items:center;gap:6px;">
+            Comunas <i class="fas fa-chevron-down" style="font-size:0.65rem;transition:transform 0.3s;"></i>
           </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="comunasDropdown" style="max-height: 400px; overflow-y: auto;">
+          <ul class="dropdown-menu dropdown-menu-dark" id="comunasDropdownMenu" aria-labelledby="comunasDropdown" style="max-height:420px;overflow-y:auto;min-width:220px;border:2px solid #DC2626;border-radius:12px;padding:8px 0;background:rgba(0,0,0,0.95);backdrop-filter:blur(15px);">
             <li><a class="dropdown-item" href="comunas/alhue.html">Alhué</a></li><li><a class="dropdown-item" href="comunas/buin.html">Buin</a></li><li><a class="dropdown-item" href="comunas/calera-de-tango.html">Calera de Tango</a></li><li><a class="dropdown-item" href="comunas/cerrillos.html">Cerrillos</a></li><li><a class="dropdown-item" href="comunas/cerro-navia.html">Cerro Navia</a></li><li><a class="dropdown-item" href="comunas/colina.html">Colina</a></li><li><a class="dropdown-item" href="comunas/conchali.html">Conchalí</a></li><li><a class="dropdown-item" href="comunas/curacavi.html">Curacaví</a></li><li><a class="dropdown-item" href="comunas/el-bosque.html">El Bosque</a></li><li><a class="dropdown-item" href="comunas/el-monte.html">El Monte</a></li><li><a class="dropdown-item" href="comunas/estacion-central.html">Estación Central</a></li><li><a class="dropdown-item" href="comunas/huechuraba.html">Huechuraba</a></li><li><a class="dropdown-item" href="comunas/independencia.html">Independencia</a></li><li><a class="dropdown-item" href="comunas/isla-de-maipo.html">Isla de Maipo</a></li><li><a class="dropdown-item" href="comunas/la-cisterna.html">La Cisterna</a></li><li><a class="dropdown-item" href="comunas/la-florida.html">La Florida</a></li><li><a class="dropdown-item" href="comunas/la-granja.html">La Granja</a></li><li><a class="dropdown-item" href="comunas/la-pintana.html">La Pintana</a></li><li><a class="dropdown-item" href="comunas/la-reina.html">La Reina</a></li><li><a class="dropdown-item" href="comunas/las-condes.html">Las Condes</a></li><li><a class="dropdown-item" href="comunas/lampa.html">Lampa</a></li><li><a class="dropdown-item" href="comunas/lo-barnechea.html">Lo Barnechea</a></li><li><a class="dropdown-item" href="comunas/lo-espejo.html">Lo Espejo</a></li><li><a class="dropdown-item" href="comunas/lo-prado.html">Lo Prado</a></li><li><a class="dropdown-item" href="comunas/macul.html">Macul</a></li><li><a class="dropdown-item" href="comunas/maipu.html">Maipú</a></li><li><a class="dropdown-item" href="comunas/maria-pinto.html">María Pinto</a></li><li><a class="dropdown-item" href="comunas/melipilla.html">Melipilla</a></li><li><a class="dropdown-item" href="comunas/nunoa.html">Ñuñoa</a></li><li><a class="dropdown-item" href="comunas/padre-hurtado.html">Padre Hurtado</a></li><li><a class="dropdown-item" href="comunas/paine.html">Paine</a></li><li><a class="dropdown-item" href="comunas/pedro-aguirre-cerda.html">Pedro Aguirre Cerda</a></li><li><a class="dropdown-item" href="comunas/penaflor.html">Peñaflor</a></li><li><a class="dropdown-item" href="comunas/penalolen.html">Peñalolén</a></li><li><a class="dropdown-item" href="comunas/pirque.html">Pirque</a></li><li><a class="dropdown-item" href="comunas/providencia.html">Providencia</a></li><li><a class="dropdown-item" href="comunas/pudahuel.html">Pudahuel</a></li><li><a class="dropdown-item" href="comunas/puente-alto.html">Puente Alto</a></li><li><a class="dropdown-item" href="comunas/quilicura.html">Quilicura</a></li><li><a class="dropdown-item" href="comunas/quinta-normal.html">Quinta Normal</a></li><li><a class="dropdown-item" href="comunas/recoleta.html">Recoleta</a></li><li><a class="dropdown-item" href="comunas/renca.html">Renca</a></li><li><a class="dropdown-item" href="comunas/san-bernardo.html">San Bernardo</a></li><li><a class="dropdown-item" href="comunas/san-joaquin.html">San Joaquín</a></li><li><a class="dropdown-item" href="comunas/san-jose-de-maipo.html">San José de Maipo</a></li><li><a class="dropdown-item" href="comunas/san-miguel.html">San Miguel</a></li><li><a class="dropdown-item" href="comunas/san-pedro.html">San Pedro</a></li><li><a class="dropdown-item" href="comunas/san-ramon.html">San Ramón</a></li><li><a class="dropdown-item" href="comunas/santiago.html">Santiago</a></li><li><a class="dropdown-item" href="comunas/talagante.html">Talagante</a></li><li><a class="dropdown-item" href="comunas/tiltil.html">Tiltil</a></li><li><a class="dropdown-item" href="comunas/vitacura.html">Vitacura</a></li>
           </ul>
         </li>

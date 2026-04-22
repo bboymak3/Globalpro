@@ -103,7 +103,7 @@
     width: 60%;
   }
 
-  /* Dropdown comunas - funciona ON TOP en desktop */
+  /* Dropdown comunas - funciona ON TOP en desktop y mobile */
   .navbar-nav .dropdown {
     position: relative !important;
     z-index: 1060 !important;
@@ -123,7 +123,9 @@
     max-height: 450px;
     overflow-y: auto;
     min-width: 240px;
-    display: none;
+  }
+  .navbar-nav .dropdown-menu.show {
+    display: block !important;
     animation: comunasFadeIn 0.3s ease;
   }
   .navbar-nav .dropdown-menu::-webkit-scrollbar {

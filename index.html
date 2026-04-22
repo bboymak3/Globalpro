@@ -1,44 +1,56 @@
 <!DOCTYPE html>
 <html lang="es-CL">
 <head>
-<div id="floating-counter">
-  <i class="fas fa-users"></i> 
-  <span id="live-count">0</span>
-  <div class="label-visitor">Visitantes</div>
+<!-- Botones IA + Campana (top-right) -->
+<div id="floating-top-buttons">
+  <a href="#" class="float-top-btn float-btn-ia" title="Consulta tu vehiculo por patente" onclick="document.getElementById('modal-chat-ia').style.display='flex'; return false;">
+    <i class="fas fa-robot"></i>
+  </a>
+  <a href="#" class="float-top-btn float-btn-bell" title="Recorda tu revision tecnica" onclick="document.getElementById('modal-recordatorio').style.display='flex'; return false;">
+    <i class="fas fa-bell"></i>
+  </a>
 </div>
 
 <style>
-  #floating-counter {
+  #floating-top-buttons {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: linear-gradient(135deg, #FFC107 0%, #ff9800 100%);
-    color: #000;
-    padding: 10px 18px;
-    border-radius: 50px;
-    font-weight: 800;
-    font-size: 1.1rem;
+    display: flex;
+    gap: 10px;
+    z-index: 10001;
+    align-items: center;
+  }
+
+  .float-top-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
-    gap: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    z-index: 10001;
+    justify-content: center;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: white;
     border: 2px solid #fff;
-    cursor: default;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .float-top-btn:hover {
+    transform: scale(1.12);
+  }
+
+  .float-btn-ia {
+    background: linear-gradient(135deg, #FFC107 0%, #ff9800 100%);
+    color: #000;
     animation: pulse-yellow 2s infinite;
-    transition: transform 0.3s ease;
   }
 
-  #floating-counter:hover {
-    transform: scale(1.1);
-  }
-
-  .label-visitor {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    display: block;
-    line-height: 1;
-    color: #333;
+  .float-btn-bell {
+    background: linear-gradient(135deg, #a80000 0%, #d32f2f 100%);
+    animation: pulseBell-float 2s infinite;
   }
 
   @keyframes pulse-yellow {
@@ -47,12 +59,20 @@
     100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
   }
 
+  @keyframes pulseBell-float {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(168, 0, 0, 0.5); }
+    50% { box-shadow: 0 0 0 10px rgba(168, 0, 0, 0); }
+  }
+
   @media (max-width: 768px) {
-    #floating-counter {
+    #floating-top-buttons {
       top: 80px;
       right: 10px;
-      padding: 8px 14px;
-      font-size: 0.9rem;
+    }
+    .float-top-btn {
+      width: 42px;
+      height: 42px;
+      font-size: 1rem;
     }
   }
 </style>
@@ -333,27 +353,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       transform: scale(1.02);
       background-color: #1ebc57;
       color: white;
-    }
-
-    .btn-small-chat {
-      width: 50px;
-      height: 50px;
-      background-color: #FFC107;
-      color: black;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      text-decoration: none;
-      flex-shrink: 0;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-      border: 2px solid white;
-      z-index: 10;
-    }
-    .btn-small-chat:hover {
-      background-color: #ffca2c;
-      transform: scale(1.1);
     }
 
     @media (min-width: 992px) {
@@ -2481,13 +2480,6 @@ tapizado de volantes en Santiago para renovar la imagen de tu auto. Trabajamos c
   from { transform: translateY(30px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-.btn-small-chat {
-  animation: pulseChat 2s infinite;
-}
-@keyframes pulseChat {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255,193,7,0.7); }
-  50% { box-shadow: 0 0 0 10px rgba(255,193,7,0); }
-}
 #resultado-patente-ia { max-height:60vh; overflow-y:auto; }
 #resultado-patente-ia .ot-card { background:#f9fafb; border:1px solid #e5e7eb; border-radius:10px; padding:12px; margin-bottom:10px; }
 #resultado-patente-ia .ot-num { font-weight:700; color:#a80000; }
@@ -2796,38 +2788,15 @@ function showRecResult(type, html) {
   el.innerHTML = html;
 }
 </script>
-<style>
-.btn-small-bell {
-  width: 50px; height: 50px; background-color: #a80000; color: white; border-radius: 50%; display: flex;
-  align-items: center; justify-content: center; font-size: 1.2rem; text-decoration: none; flex-shrink: 0;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3); border: 2px solid white; z-index: 10; animation: pulseBell 2s infinite;
-}
-.btn-small-bell:hover { background-color: #d32f2f; transform: scale(1.1); }
-@keyframes pulseBell {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(168,0,0,0.5); }
-  50% { box-shadow: 0 0 0 10px rgba(168,0,0,0); }
-}
-</style>
-
 <!-- ======================================================================= -->
 <!-- FOOTER INFERIOR FIJO (STICKY BOTTOM BAR) - NUEVO DISEÑO MASIVO -->
 <!-- ======================================================================= -->
 <div class="sticky-bottom-bar">
-  <div class="big-buttons-container">
+  <div class="big-buttons-container" style="gap: 15px;">
     
     <!-- Botón Llamada (Rojo Grande) -->
     <a href="tel:939026185" class="btn-massive-call">
-      <i class="fas fa-phone-alt"></i> LLAMAR
-    </a>
-
-    <!-- Botón Consulta IA por Patente (Centro Pequeño) -->
-    <a href="#" class="btn-small-chat" title="Consulta tu vehiculo por patente" onclick="document.getElementById('modal-chat-ia').style.display='flex'; return false;">
-      <i class="fas fa-robot"></i>
-    </a>
-
-    <!-- Botón Recordar Revisión (Centro Pequeño) -->
-    <a href="#" class="btn-small-bell" title="Recorda tu revision tecnica" onclick="document.getElementById('modal-recordatorio').style.display='flex'; return false;">
-      <i class="fas fa-bell"></i>
+      <i class="fas fa-phone-alt"></i> LLAMAR AHORA
     </a>
 
     <!-- Botón WhatsApp (Verde Grande) -->
@@ -2866,35 +2835,6 @@ function showRecResult(type, html) {
 
 <!-- Custom JS Original -->
 <script src="js/script.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const counterElement = document.getElementById('live-count');
-    
-    // 1. Definimos una base de visitas inicial (ejemplo: 123)
-    let baseVisitas = 123; 
-    
-    // 2. Obtenemos las visitas guardadas en el navegador del usuario
-    let visitasGuardadas = localStorage.getItem('global_total_visits');
-    
-    if (!visitasGuardadas) {
-      // Si es la primera vez que se usa el script, empezamos con la base
-      visitasGuardadas = baseVisitas;
-    } else {
-      visitasGuardadas = parseInt(visitasGuardadas);
-    }
-
-    // 3. Verificamos si es una nueva sesión para aumentar el contador
-    if (!sessionStorage.getItem('session_active')) {
-      visitasGuardadas += 1;
-      localStorage.setItem('global_total_visits', visitasGuardadas);
-      sessionStorage.setItem('session_active', 'true');
-    }
-
-    // 4. Mostramos el número con formato de miles (punto)
-    counterElement.innerText = visitasGuardadas.toLocaleString('es-CL');
-  });
-</script>
 
 <script>
   // Logo Swiper Carousel

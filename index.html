@@ -719,13 +719,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <body>
 <!-- Botones IA + Campana (top-right) -->
 <div id="floating-top-buttons">
-  <a href="#" class="float-top-btn float-btn-ia" title="Consulta tu vehiculo por patente" onclick="document.getElementById('modal-chat-ia').style.display='flex'; return false;">
+  <a href="#" class="float-top-btn float-btn-ia" title="Consulta tu vehiculo por patente" onclick="abrirModalGP('modal-chat-ia'); return false;">
     <i class="fas fa-robot"></i>
   </a>
-  <a href="#" class="float-top-btn float-btn-bell" title="Recorda tu revision tecnica" onclick="document.getElementById('modal-recordatorio').style.display='flex'; return false;">
+  <a href="#" class="float-top-btn float-btn-bell" title="Recorda tu revision tecnica" onclick="abrirModalGP('modal-recordatorio'); return false;">
     <i class="fas fa-bell"></i>
   </a>
-  <a href="#" class="float-top-btn float-btn-agenda" title="Agenda tu visita tecnica" onclick="document.getElementById('modal-agenda-visita').style.display='flex'; return false;">
+  <a href="#" class="float-top-btn float-btn-agenda" title="Agenda tu visita tecnica" onclick="abrirModalGP('modal-agenda-visita'); return false;">
     <i class="fas fa-bolt"></i>
   </a>
 </div>
@@ -885,7 +885,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <div class="btn-group mt-4">
-          <a href="#" class="btn btn-primary me-2" onclick="document.getElementById('modal-agenda-visita').style.display='flex'; return false;">
+          <a href="#" class="btn btn-primary me-2" onclick="abrirModalGP('modal-agenda-visita'); return false;">
             <i class="fas fa-calendar-check me-2"></i> Agenda tu Visita Tecnica
           </a>
           <a href="#servicios" class="btn btn-outline-light">
@@ -1053,7 +1053,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div><span style="color:#111; font-weight:700; font-size:1rem;">Te contactamos</span><br><small style="color:#6b7280;">Confirmacion rapida por telefono</small></div>
             </div>
           </div>
-          <button onclick="document.getElementById('modal-agenda-visita').style.display='flex'" style="width:100%; padding:16px; border:none; border-radius:14px; font-size:1.15rem; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px; background:linear-gradient(135deg,#ff6b00,#ff8c33); color:#fff; box-shadow:0 6px 24px rgba(255,107,0,0.35); transition:all 0.3s; text-transform:uppercase; letter-spacing:0.04em;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 35px rgba(255,107,0,0.45)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 24px rgba(255,107,0,0.35)'">
+          <button onclick="abrirModalGP('modal-agenda-visita')" style="width:100%; padding:16px; border:none; border-radius:14px; font-size:1.15rem; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px; background:linear-gradient(135deg,#ff6b00,#ff8c33); color:#fff; box-shadow:0 6px 24px rgba(255,107,0,0.35); transition:all 0.3s; text-transform:uppercase; letter-spacing:0.04em;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 35px rgba(255,107,0,0.45)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 24px rgba(255,107,0,0.35)'">
             <i class="fas fa-bolt"></i> AGENDAR AHORA
           </button>
         </div>
@@ -2694,7 +2694,7 @@ tapizado de volantes en Santiago para renovar la imagen de tu auto. Trabajamos c
 <!-- ======================================================================= -->
 <div id="modal-chat-ia" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); z-index:10000; align-items:center; justify-content:center; padding:20px;">
   <div style="background:#fff; border-radius:16px; max-width:560px; width:100%; max-height:90vh; overflow:hidden; display:flex; flex-direction:column; position:relative; animation: modalSlideIn 0.3s ease-out;">
-    <button onclick="document.getElementById('modal-chat-ia').style.display='none'" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#999; z-index:10;">&times;</button>
+    <button onclick="cerrarModalGP('modal-chat-ia')" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#999; z-index:10;">&times;</button>
     <div style="padding:30px 30px 0 30px; flex-shrink:0;">
       <div style="text-align:center; margin-bottom:20px;">
         <div style="width:70px; height:70px; background:linear-gradient(135deg,#FFC107,#FF9800); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; box-shadow:0 4px 15px rgba(255,152,0,0.4);">
@@ -2883,7 +2883,7 @@ function buscarPatenteIA(e) {
 }
 // Cerrar modal con click fuera
 document.getElementById('modal-chat-ia').addEventListener('click', function(e) {
-  if (e.target === this) this.style.display = 'none';
+  if (e.target === this) cerrarModalGP('modal-chat-ia');
 });
 </script>
 
@@ -2892,7 +2892,7 @@ document.getElementById('modal-chat-ia').addEventListener('click', function(e) {
 <!-- ======================================================================= -->
 <div id="modal-recordatorio" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); z-index:10000; align-items:center; justify-content:center; padding:15px;">
   <div style="background:#fff; border-radius:16px; max-width:480px; width:100%; max-height:90vh; overflow-y:auto; padding:28px 24px; position:relative; animation: modalSlideIn 0.3s ease-out;">
-    <button onclick="document.getElementById('modal-recordatorio').style.display='none'" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#999;">&times;</button>
+    <button onclick="cerrarModalGP('modal-recordatorio')" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#999;">&times;</button>
     <div style="text-align:center; margin-bottom:18px;">
       <div style="width:60px; height:60px; background:linear-gradient(135deg,#FFC107,#FF9800); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; box-shadow:0 4px 15px rgba(255,152,0,0.4);">
         <i class="fas fa-bell" style="font-size:1.8rem; color:#fff;"></i>
@@ -2957,7 +2957,7 @@ document.querySelectorAll('input[name="rec-modo"]').forEach(function(r) {
 });
 // Cerrar modal con click fuera
 document.getElementById('modal-recordatorio').addEventListener('click', function(e) {
-  if (e.target === this) this.style.display = 'none';
+  if (e.target === this) cerrarModalGP('modal-recordatorio');
 });
 // Detectar mes automatico y si ya esta registrado
 var recDebounce;
@@ -3037,7 +3037,7 @@ function showRecResult(type, html) {
 
     <!-- Header naranja estilo express -->
     <div style="background:linear-gradient(135deg, #ff6b00 0%, #ff8c33 50%, #ffaa55 100%); padding:28px 25px 18px; text-align:center; border-radius:20px 20px 0 0; position:relative;">
-      <button onclick="document.getElementById('modal-agenda-visita').style.display='none'" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.6rem; cursor:pointer; color:rgba(255,255,255,0.9); z-index:10;">&times;</button>
+      <button onclick="cerrarModalGP('modal-agenda-visita')" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.6rem; cursor:pointer; color:rgba(255,255,255,0.9); z-index:10;">&times;</button>
       <div style="width:65px; height:65px; background:rgba(255,255,255,0.2); border-radius:50%; display:inline-flex; align-items:center; justify-content:center; margin-bottom:10px; backdrop-filter:blur(10px); border:2px solid rgba(255,255,255,0.3);">
         <i class="fas fa-bolt" style="font-size:1.7rem; color:#fff;"></i>
       </div>
@@ -3184,7 +3184,43 @@ if (agendaPatenteInput) {
 
 // Cerrar modal con click fuera
 document.getElementById('modal-agenda-visita').addEventListener('click', function(e) {
-  if (e.target === this) this.style.display = 'none';
+  if (e.target === this) cerrarModalGP('modal-agenda-visita');
+});
+
+// ============================================
+// SISTEMA DE MODALES CON HISTORY API (boton Atras)
+// ============================================
+function abrirModalGP(id) {
+  document.getElementById(id).style.display = 'flex';
+  history.pushState({ modalGP: id }, '');
+}
+
+function cerrarModalGP(id) {
+  document.getElementById(id).style.display = 'none';
+  // Si hay un estado de modal en el historial, volver sin navegar
+  if (window.history.state && window.history.state.modalGP) {
+    history.back();
+  }
+}
+
+// Boton Atras del navegador: cerrar modal en vez de salir de la web
+window.addEventListener('popstate', function(e) {
+  var modales = ['modal-agenda-visita', 'modal-chat-ia', 'modal-recordatorio', 'imageModal'];
+  for (var i = 0; i < modales.length; i++) {
+    var el = document.getElementById(modales[i]);
+    if (el && el.style.display !== 'none' && el.style.display !== '') {
+      el.style.display = 'none';
+      // Cerrar mapa agenda si estaba abierto
+      if (modales[i] === 'modal-agenda-visita' && mapaAgendaVisible) {
+        var wrapper = document.getElementById('agenda-mapa-wrapper');
+        var btn = document.getElementById('btn-toggle-mapa-agenda');
+        if (wrapper) wrapper.style.display = 'none';
+        if (btn) { btn.style.background = 'linear-gradient(135deg,#198754,#20c997)'; btn.innerHTML = '<i class="fas fa-map"></i> Mapa'; }
+        mapaAgendaVisible = false;
+      }
+      return;
+    }
+  }
 });
 
 // ============================================
@@ -3418,12 +3454,23 @@ function resetAgendaVisita() {
     var modalImg = document.getElementById("modalImg");
     modal.style.display = "block";
     modalImg.src = imgSrc;
+    history.pushState({ modalGP: 'imageModal' }, '');
   }
   function closeModal() {
-    document.getElementById("imageModal").style.display = "none";
+    cerrarModalGP('imageModal');
   }
   document.addEventListener('keydown', function(event) {
-    if (event.key === "Escape") { closeModal(); }
+    if (event.key === "Escape") {
+      // Cerrar cualquier modal abierto
+      var modales = ['imageModal', 'modal-agenda-visita', 'modal-chat-ia', 'modal-recordatorio'];
+      for (var i = 0; i < modales.length; i++) {
+        var el = document.getElementById(modales[i]);
+        if (el && el.style.display !== 'none' && el.style.display !== '') {
+          cerrarModalGP(modales[i]);
+          return;
+        }
+      }
+    }
   });
 </script>
 

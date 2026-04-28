@@ -948,9 +948,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ======================================================================= -->
 <!-- SECCION: SISTEMA DE ALERTA TEMPRANA REVISION TECNICA -->
 <!-- ======================================================================= -->
-<section id="alerta-revision" style="position:relative; padding:70px 0; overflow:hidden; background: linear-gradient(180deg, #fff5f5 0%, #fff 40%, #f8f9fa 100%);">
-  <!-- Subtle aura decorativa -->
-  <div style="position:absolute; top:-80px; left:50%; transform:translateX(-50%); width:500px; height:300px; background:radial-gradient(ellipse, rgba(168,0,0,0.08) 0%, transparent 70%); pointer-events:none;"></div>
+<section id="alerta-revision" style="position:relative; padding:70px 0; overflow:hidden; background: linear-gradient(180deg, #fff8f0 0%, #fff 30%, #f8f9fa 100%);">
+  <!-- Subtle aura decorativa dual -->
+  <div style="position:absolute; top:-80px; left:25%; transform:translateX(-50%); width:500px; height:300px; background:radial-gradient(ellipse, rgba(255,107,0,0.08) 0%, transparent 70%); pointer-events:none;"></div>
+  <div style="position:absolute; top:-80px; left:75%; transform:translateX(-50%); width:500px; height:300px; background:radial-gradient(ellipse, rgba(168,0,0,0.06) 0%, transparent 70%); pointer-events:none;"></div>
   <style>
     @keyframes auraPulse {
       0%, 100% { opacity:0.5; transform:scale(1); }
@@ -958,13 +959,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
     .alerta-card {
       position:relative; z-index:2; background:#fff; border:2px solid rgba(168,0,0,0.12);
-      border-radius:24px; padding:45px 36px;
+      border-radius:24px; padding:35px 28px;
       box-shadow: 0 8px 40px rgba(168,0,0,0.10), 0 2px 10px rgba(0,0,0,0.06);
       animation: cardGlow 3s ease-in-out infinite alternate;
+      height: 100%;
     }
     @keyframes cardGlow {
       0% { box-shadow: 0 8px 40px rgba(168,0,0,0.08), 0 2px 10px rgba(0,0,0,0.04); }
       100% { box-shadow: 0 12px 50px rgba(168,0,0,0.16), 0 4px 15px rgba(0,0,0,0.06); }
+    }
+    @keyframes cardGlowOrange {
+      0% { box-shadow: 0 8px 40px rgba(255,107,0,0.08), 0 2px 10px rgba(0,0,0,0.04); }
+      100% { box-shadow: 0 12px 50px rgba(255,107,0,0.16), 0 4px 15px rgba(0,0,0,0.06); }
     }
     .alerta-icon-ring {
       width:100px; height:100px; border-radius:50%; display:flex; align-items:center; justify-content:center;
@@ -975,6 +981,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     @keyframes iconRing {
       0%, 100% { box-shadow: 0 6px 30px rgba(168,0,0,0.35), 0 0 60px rgba(255,107,0,0.15); }
       50% { box-shadow: 0 8px 40px rgba(168,0,0,0.5), 0 0 80px rgba(255,107,0,0.25); }
+    }
+    @keyframes iconRingOrange {
+      0%, 100% { box-shadow: 0 6px 30px rgba(255,107,0,0.35), 0 0 60px rgba(255,140,51,0.15); }
+      50% { box-shadow: 0 8px 40px rgba(255,107,0,0.5), 0 0 80px rgba(255,140,51,0.25); }
     }
     .alerta-input {
       width:100%; padding:16px 16px 16px 46px; border:2px solid #e5e7eb; border-radius:14px;
@@ -1015,8 +1025,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </style>
 
   <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-7">
+    <div class="row g-4 justify-content-center">
+
+      <!-- ===== TARJETA 1: AGENDA TU VISITA TÉCNICA ===== -->
+      <div class="col-lg-6 col-md-6">
+        <div class="alerta-card" style="border-color:rgba(255,107,0,0.15); animation-name: cardGlowOrange;">
+          <div style="text-align:center; margin-bottom:30px;">
+            <div style="width:90px; height:90px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#ff6b00,#ff8c33); margin:0 auto 20px; box-shadow:0 6px 30px rgba(255,107,0,0.35); animation: iconRingOrange 2.5s ease-in-out infinite;">
+              <i class="fas fa-bolt" style="font-size:2.2rem; color:#fff; filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3));"></i>
+            </div>
+            <h2 style="color:#e06000; font-weight:900; font-size:1.6rem; margin-bottom:8px; letter-spacing:-0.01em;">Agenda tu Visita Tecnica</h2>
+            <p style="color:#6b7280; font-size:1rem; max-width:400px; margin:0 auto; line-height:1.6;">Solicita un mecanico a domicilio ahora. Tu orden express se aprueba automaticamente.</p>
+          </div>
+          <div style="margin-bottom:24px; padding:0 4px;">
+            <div class="alerta-benefit">
+              <div class="alerta-benefit-icon" style="background:rgba(255,107,0,0.08); color:#e06000;"><i class="fas fa-bolt"></i></div>
+              <div><span style="color:#111; font-weight:700; font-size:1rem;">Orden Express</span><br><small style="color:#6b7280;">Aprobada al instante, sin esperas</small></div>
+            </div>
+            <div class="alerta-benefit">
+              <div class="alerta-benefit-icon" style="background:rgba(255,107,0,0.08); color:#e06000;"><i class="fas fa-home"></i></div>
+              <div><span style="color:#111; font-weight:700; font-size:1rem;">A domicilio</span><br><small style="color:#6b7280;">El tecnico va donde tu vehiculo este</small></div>
+            </div>
+            <div class="alerta-benefit">
+              <div class="alerta-benefit-icon" style="background:rgba(255,107,0,0.08); color:#e06000;"><i class="fas fa-phone-alt"></i></div>
+              <div><span style="color:#111; font-weight:700; font-size:1rem;">Te contactamos</span><br><small style="color:#6b7280;">Confirmacion rapida por telefono</small></div>
+            </div>
+          </div>
+          <button onclick="document.getElementById('modal-agenda-visita').style.display='flex'" style="width:100%; padding:16px; border:none; border-radius:14px; font-size:1.15rem; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px; background:linear-gradient(135deg,#ff6b00,#ff8c33); color:#fff; box-shadow:0 6px 24px rgba(255,107,0,0.35); transition:all 0.3s; text-transform:uppercase; letter-spacing:0.04em;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 35px rgba(255,107,0,0.45)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 24px rgba(255,107,0,0.35)'">
+            <i class="fas fa-bolt"></i> AGENDAR AHORA
+          </button>
+        </div>
+      </div>
+
+      <!-- ===== TARJETA 2: RECORDA TU REVISIÓN (original) ===== -->
+      <div class="col-lg-6 col-md-6">
         <div class="alerta-card">
           <!-- Header -->
           <div style="text-align:center; margin-bottom:35px;">

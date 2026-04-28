@@ -3205,6 +3205,7 @@ function cerrarModalGP(id) {
 
 // Boton Atras del navegador: cerrar modal en vez de salir de la web
 window.addEventListener('popstate', function(e) {
+  // 1) Cerrar modales primero (prioridad alta)
   var modales = ['modal-agenda-visita', 'modal-chat-ia', 'modal-recordatorio', 'imageModal'];
   for (var i = 0; i < modales.length; i++) {
     var el = document.getElementById(modales[i]);
@@ -3219,6 +3220,55 @@ window.addEventListener('popstate', function(e) {
         mapaAgendaVisible = false;
       }
       return;
+    }
+  }
+
+  // 2) Cerrar dropdown de comunas si esta abierto
+  var dropdownComunas = document.querySelector('.dropdown-menu.show');
+  if (dropdownComunas) {
+    var toggleBtn = document.querySelector('.dropdown-toggle');
+    if (toggleBtn) bootstrap.Dropdown.getOrCreateInstance(toggleBtn).hide();
+    return;
+  }
+
+  // 3) Cerrar menu hamburguesa si esta abierto
+  var navbarCollapse = document.getElementById('navbarNav');
+  if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+    var toggler = document.querySelector('.navbar-toggler');
+    if (toggler) bootstrap.Collapse.getOrCreateInstance(navbarCollapse).hide();
+    return;
+  }
+});
+
+// ============================================
+// MENU HAMBURGUESA + DROPDOWN COMUNAS con History API
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+  var navbarCollapse = document.getElementById('navbarNav');
+  if (navbarCollapse) {
+    navbarCollapse.addEventListener('shown.bs.collapse', function() {
+      history.pushState({ gpComponent: 'navbar' }, '');
+    });
+    navbarCollapse.addEventListener('hidden.bs.collapse', function() {
+      if (window.history.state && window.history.state.gpComponent === 'navbar') {
+        history.back();
+      }
+    });
+  }
+
+  // Dropdown de comunas
+  var dropdownToggle = document.querySelector('.dropdown-toggle');
+  if (dropdownToggle) {
+    var dropdownEl = dropdownToggle.nextElementSibling;
+    if (dropdownEl) {
+      dropdownEl.addEventListener('shown.bs.dropdown', function() {
+        history.pushState({ gpComponent: 'dropdown' }, '');
+      });
+      dropdownEl.addEventListener('hidden.bs.dropdown', function() {
+        if (window.history.state && window.history.state.gpComponent === 'dropdown') {
+          history.back();
+        }
+      });
     }
   }
 });

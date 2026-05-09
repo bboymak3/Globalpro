@@ -1,10 +1,9 @@
 # ===================================================
 # robots.txt - GlobalPro Automotriz
-# https://globalpro.pages.dev
+# https://mecanico247.com
 # ===================================================
 
 # Sitemaps
-Sitemap: https://globalpro.pages.dev/sitemap.xml
 Sitemap: https://mecanico247.com/sitemap.xml
 
 # Permitir todo el acceso a los crawlers

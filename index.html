@@ -776,8 +776,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li class="nav-item">
           <a class="nav-link" href="#mecanico-domicilio-seo">Mecánico a Domicilio</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#servicios">Servicios</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#servicios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Servicios <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;transition:transform 0.3s;"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="servicios/cambio-de-aceite-a-domicilio.html">Cambio de Aceite</a></li>
+            <li><a class="dropdown-item" href="servicios/cambio-de-frenos-a-domicilio.html">Cambio de Frenos</a></li>
+            <li><a class="dropdown-item" href="servicios/electricidad-automotriz-a-domicilio.html">Electricidad Automotriz</a></li>
+            <li><a class="dropdown-item" href="servicios/diagnostico-con-scanner-a-domicilio.html">Diagnóstico Scanner</a></li>
+            <li><a class="dropdown-item" href="servicios/aire-acondicionado-automotriz.html">Aire Acondicionado</a></li>
+            <li><a class="dropdown-item" href="servicios/mecanico-24-horas.html">Mecánico 24 Horas</a></li>
+            <li><a class="dropdown-item" href="servicios/mecanico-de-emergencia.html">Mecánico de Emergencia</a></li>
+          </ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -3271,10 +3282,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Dropdown de comunas
-  var dropdownToggle = document.querySelector('.dropdown-toggle');
-  if (dropdownToggle) {
-    var dropdownEl = dropdownToggle.nextElementSibling;
+  // Dropdowns (Comunas y Servicios)
+  var dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+  dropdownToggles.forEach(function(toggle) {
+    var dropdownEl = toggle.nextElementSibling;
     if (dropdownEl) {
       dropdownEl.addEventListener('shown.bs.dropdown', function() {
         history.pushState({ gpComponent: 'dropdown' }, '');
@@ -3285,7 +3296,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     }
-  }
+  });
 });
 
 // ============================================

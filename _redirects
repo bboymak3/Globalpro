@@ -4,9 +4,8 @@
 # Esto evita contenido duplicado y consolida autoridad SEO
 # ===================================================
 
-# Sitemap y robots desde GitHub raw
-/sitemap.xml https://raw.githubusercontent.com/bboymak3/globalpro/main/sitemap.xml 200
-/robots.txt https://raw.githubusercontent.com/bboymak3/globalpro/main/robots.txt 200
+# NOTA: sitemap.xml y robots.txt se sirven directamente
+# desde los archivos locales (ya no desde GitHub raw)
 
 # ===================================================
 # REDIRECCIONES 301 - URLs FANTASMA (prefijos inexistentes)

@@ -6,19 +6,30 @@
 # Sitemaps
 Sitemap: https://mecanico247.com/sitemap.xml
 
-# Permitir todo el acceso a los crawlers
+# ===================================================
+# REGLAS PARA TODOS LOS CRAWLERS (incluido Googlebot)
+# Permitir solo las rutas válidas del sitio
+# Bloquear prefijos inexistentes que generaron URLs basura
+# ===================================================
 User-agent: *
 Allow: /
+Allow: /comunas/
+Allow: /vehiculos/
+Allow: /servicios/
+Allow: /blog/
+Allow: /marcas_automotrices/
 
 # Archivos y carpetas que NO se deben indexar
 Disallow: /css/
 Disallow: /js/
-Disallow: /images/icons/
+Disallow: /images/
 Disallow: /assets/
 
 # ===================================================
 # URLS FANTASMA - prefijos inexistentes que Google indexó
 # por enlaces relativos. Bloquear para que se desindexen.
+# IMPORTANTE: Estas reglas aplican a TODOS los crawlers
+# incluyendo Googlebot (no hay override de Allow: /)
 # ===================================================
 Disallow: /taxis/
 Disallow: /aire-acondicionado/
@@ -59,11 +70,3 @@ Disallow: /
 
 User-agent: YandexBot
 Crawl-delay: 10
-
-# Permitir Googlebot sin restricciones
-User-agent: Googlebot
-Allow: /
-
-# Permitir Bingbot sin restricciones
-User-agent: Bingbot
-Allow: /

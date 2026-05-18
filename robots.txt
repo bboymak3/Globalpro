@@ -12,24 +12,33 @@ Sitemap: https://mecanico247.com/sitemap.xml
 # Bloquear prefijos inexistentes que generaron URLs basura
 # ===================================================
 User-agent: *
-Allow: /
+Allow: /$
 Allow: /comunas/
 Allow: /vehiculos/
 Allow: /servicios/
 Allow: /blog/
 Allow: /marcas_automotrices/
+Allow: /contacto
+Allow: /faq
+Allow: /quienes-somos
+Allow: /politica-privacidad
+Allow: /inspeccion-mecanica
+Allow: /servicios-domicilio
+Allow: /sitemap.xml
+Allow: /robots.txt
 
-# Archivos y carpetas que NO se deben indexar
+# Archivos y carpetas que NO se deben rastrear
 Disallow: /css/
 Disallow: /js/
 Disallow: /images/
 Disallow: /assets/
+Disallow: /images/imagen/
 
 # ===================================================
 # URLS FANTASMA - prefijos inexistentes que Google indexó
 # por enlaces relativos. Bloquear para que se desindexen.
 # IMPORTANTE: Estas reglas aplican a TODOS los crawlers
-# incluyendo Googlebot (no hay override de Allow: /)
+# incluyendo Googlebot
 # ===================================================
 Disallow: /taxis/
 Disallow: /aire-acondicionado/
@@ -48,6 +57,17 @@ Disallow: /reparacion/
 Disallow: /auxilio/
 Disallow: /24horas/
 Disallow: /urgencia/
+
+# Patrones adicionales de URLs basura (combinaciones)
+Disallow: /comunas/comunas/
+Disallow: /vehiculos/comunas/
+Disallow: /vehiculos/vehiculos/
+Disallow: /comunas/vehiculos/
+Disallow: /servicios/comunas/
+Disallow: /servicios/vehiculos/
+Disallow: /blog/comunas/
+Disallow: /blog/vehiculos/
+Disallow: /marcas/vehiculos/
 
 # Bloquear bots maliciosos o innecesarios
 User-agent: AhrefsBot

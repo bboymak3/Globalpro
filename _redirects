@@ -30,6 +30,21 @@
 /24horas/*  /  301
 /urgencia/*  /  301
 
+# ===================================================
+# PATRONES ADICIONALES DE URLs BASURA (combinaciones)
+# Estas rutas nunca existieron en el sitio
+# ===================================================
+/comunas/comunas/*  /  301
+/vehiculos/comunas/*  /  301
+/vehiculos/vehiculos/*  /  301
+/comunas/vehiculos/*  /  301
+/servicios/comunas/*  /  301
+/servicios/vehiculos/*  /  301
+/blog/comunas/*  /  301
+/blog/vehiculos/*  /  301
+/marcas/vehiculos/*  /  301
+
+
 # Redirecciones 301: .html -> sin .html
 /blog/globalpro-mecanico-a-domicilio-abastecimiento-en-servicios-automotrices-de-chile-una-pieza-fundamental-y-la-estrategia-para-obtenerlos.html  /blog/globalpro-mecanico-a-domicilio-abastecimiento-en-servicios-automotrices-de-chile-una-pieza-fundamental-y-la-estrategia-para-obtenerlos  301
 /blog/globalpro-mecanico-a-domicilio-aftermarket-al-rescate-como-enfrentar-las-fallas-mas-comunes-en-la-revision-tecnica.html  /blog/globalpro-mecanico-a-domicilio-aftermarket-al-rescate-como-enfrentar-las-fallas-mas-comunes-en-la-revision-tecnica  301

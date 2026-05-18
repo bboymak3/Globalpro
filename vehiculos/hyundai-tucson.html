@@ -277,6 +277,66 @@
     </div>
   </div>
 </section>
+
+<!-- ======================================================================= -->
+<!-- GOOGLE BUSINESS PROFILE - BOTON -->
+<!-- ======================================================================= -->
+<section class="py-4" style="background: linear-gradient(135deg, #fff8f0 0%, #fff 100%); position: relative; overflow: hidden;">
+  <div style="position:absolute; top:-50px; left:50%; transform:translateX(-50%); width:600px; height:200px; background:radial-gradient(ellipse, rgba(255,193,7,0.10) 0%, transparent 70%); pointer-events:none;"></div>
+  <div class="container" style="position:relative; z-index:2;">
+    <div class="text-center">
+      <div style="display:inline-flex; align-items:center; gap:12px; background:#fff; border:2px solid #FFC107; border-radius:16px; padding:18px 30px; box-shadow:0 6px 25px rgba(255,193,7,0.15); transition:all 0.3s; cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 35px rgba(255,193,7,0.25)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 6px 25px rgba(255,193,7,0.15)'" onclick="document.getElementById('modal-google-profile').style.display='flex'">
+        <div style="width:55px; height:55px; background:linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335); border-radius:14px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <i class="fab fa-google" style="font-size:1.6rem; color:#fff;"></i>
+        </div>
+        <div style="text-align:left;">
+          <div style="font-weight:800; font-size:1.1rem; color:#1a1a1a;">Ver Nuestro Perfil de Google</div>
+          <div style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+            <span style="color:#FBBC05; font-size:1.1rem;">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </span>
+            <span style="font-weight:700; color:#1a1a1a; font-size:0.95rem;">4.9</span>
+            <span style="color:#666; font-size:0.85rem;">| 155+ opiniones verificadas</span>
+          </div>
+        </div>
+        <i class="fas fa-external-link-alt" style="color:#4285F4; font-size:1rem; margin-left:8px;"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal Google Profile -->
+<div id="modal-google-profile" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:10000; justify-content:center; align-items:center; padding:20px;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#fff; border-radius:20px; max-width:500px; width:100%; padding:0; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.3); animation:modalSlideIn 0.3s ease;">
+    <div style="background:linear-gradient(135deg, #4285F4, #34A853); padding:25px 30px; display:flex; align-items:center; justify-content:space-between;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div style="width:45px; height:45px; background:#fff; border-radius:12px; display:flex; align-items:center; justify-content:center;">
+          <i class="fab fa-google" style="font-size:1.3rem; background:linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335); -webkit-background-clip:text; -webkit-text-fill-color:transparent;"></i>
+        </div>
+        <div style="color:#fff;">
+          <div style="font-weight:800; font-size:1.1rem;">GlobalPro Automotriz</div>
+          <div style="font-size:0.85rem; opacity:0.9;">Taller Mecanico a Domicilio</div>
+        </div>
+      </div>
+      <button onclick="document.getElementById('modal-google-profile').style.display='none'" style="background:rgba(255,255,255,0.2); border:none; color:#fff; width:35px; height:35px; border-radius:50%; font-size:1.2rem; cursor:pointer; display:flex; align-items:center; justify-content:center;">&times;</button>
+    </div>
+    <div style="padding:25px 30px; text-align:center;">
+      <div style="margin-bottom:20px;">
+        <span style="color:#FBBC05; font-size:2rem;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+        <div style="font-size:2.5rem; font-weight:900; color:#1a1a1a; margin-top:5px;">4.9</div>
+        <div style="color:#666; font-size:0.9rem;">Basado en 155+ opiniones verificadas</div>
+      </div>
+      <div style="background:#f8f9fa; border-radius:12px; padding:15px; margin-bottom:20px; text-align:left;">
+        <div style="font-weight:700; color:#333; margin-bottom:8px; font-size:0.95rem;"><i class="fas fa-quote-left" style="color:#a80000; margin-right:6px;"></i>Opiniones destacadas</div>
+        <div style="font-size:0.85rem; color:#555; line-height:1.6; font-style:italic;">"Excelente servicio, llegaron rapido y resolvieron el problema en el acto. 100% recomendado." - Cliente verificado</div>
+      </div>
+      <a href="https://search.google.com/local/writereview?placeid=ChIJ8-Ss6LLFYpYRnFkh8v_5XEQ" target="_blank" style="display:inline-flex; align-items:center; gap:8px; background:#4285F4; color:#fff; padding:12px 30px; border-radius:50px; text-decoration:none; font-weight:700; font-size:1rem; box-shadow:0 4px 15px rgba(66,133,244,0.3); transition:all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        <i class="fab fa-google"></i> Ver en Google Maps
+      </a>
+    </div>
+  </div>
+</div>
+
 <section class="py-5 bg-light">
   <div class="container">
     <div class="row justify-content-center">
@@ -521,6 +581,70 @@
     </div>
   </div>
 </section>
+
+<!-- ======================================================================= -->
+<!-- CAMBIO DE ACEITE - SECCIÓN DESTACADA MODAL -->
+<!-- ======================================================================= -->
+<section class="py-5" id="cambio-aceite-modal">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 15px 50px rgba(168,0,0,0.4), 0 0 0 3px #a80000; position: relative; background: linear-gradient(135deg, #1a0000 0%, #121212 40%, #2a0000 100%);">
+          <!-- Barra superior roja animada -->
+          <div style="background: linear-gradient(90deg, #a80000, #ff1a1a, #a80000); padding: 6px 0; text-align: center; animation: shimmerBar 3s ease-in-out infinite;">
+            <span style="color: #fff; font-weight: 800; font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase;"><i class="fas fa-fire"></i> Servicio Más Buscado <i class="fas fa-fire"></i></span>
+          </div>
+          <!-- Contenido principal -->
+          <div style="padding: 40px 30px; text-align: center; position: relative;">
+            <!-- Iconos decorativos flotantes -->
+            <div style="position: absolute; top: 15px; left: 25px; opacity: 0.15; font-size: 3rem; color: #a80000;"><i class="fas fa-oil-can"></i></div>
+            <div style="position: absolute; top: 15px; right: 25px; opacity: 0.15; font-size: 3rem; color: #a80000;"><i class="fas fa-tools"></i></div>
+            <div style="position: absolute; bottom: 15px; left: 25px; opacity: 0.1; font-size: 2.5rem; color: #ff1a1a;"><i class="fas fa-car"></i></div>
+            <div style="position: absolute; bottom: 15px; right: 25px; opacity: 0.1; font-size: 2.5rem; color: #ff1a1a;"><i class="fas fa-cog"></i></div>
+
+            <!-- Icono central grande -->
+            <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #a80000, #ff1a1a); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; box-shadow: 0 0 40px rgba(168,0,0,0.6), 0 0 80px rgba(168,0,0,0.2); animation: pulseIcon 2.5s ease-in-out infinite;">
+              <i class="fas fa-oil-can" style="font-size: 2.8rem; color: #fff;"></i>
+            </div>
+
+            <!-- H2 enorme estilo H1 -->
+            <h2 style="font-size: 3rem; font-weight: 900; text-transform: uppercase; color: #fff; letter-spacing: 2px; margin-bottom: 8px; line-height: 1.15; text-shadow: 0 0 30px rgba(168,0,0,0.5), 2px 2px 4px rgba(0,0,0,0.8);">
+              <i class="fas fa-oil-can" style="color: #ff1a1a; font-size: 2.5rem; margin-right: 10px;"></i>
+              Cambio de Aceite
+              <i class="fas fa-oil-can" style="color: #ff1a1a; font-size: 2.5rem; margin-left: 10px;"></i>
+            </h2>
+            <h2 style="font-size: 2.2rem; font-weight: 800; text-transform: uppercase; color: #ff1a1a; letter-spacing: 4px; margin-bottom: 25px; text-shadow: 0 0 20px rgba(255,26,26,0.4);">
+              Hyundai Tucson
+            </h2>
+
+            <!-- Separador decorativo -->
+            <div style="width: 120px; height: 4px; background: linear-gradient(90deg, transparent, #a80000, transparent); margin: 0 auto 25px; border-radius: 2px;"></div>
+
+            <!-- Texto descriptivo con estilo -->
+            <p style="font-size: 1.25rem; line-height: 1.9; color: #e0e0e0; max-width: 800px; margin: 0 auto 30px; font-weight: 500;">
+              Si buscas <strong style="color: #ff1a1a; font-size: 1.35rem; text-shadow: 0 0 10px rgba(255,26,26,0.3);">cambio de aceite cerca mio</strong> para tu Hyundai Tucson, <strong style="color: #fff;">GlobalPro</strong> es tu mejor opción. Nuestro servicio a domicilio incluye aceite sintético y semi-sintético de primera calidad, reemplazo de filtro y revisión completa de niveles. Sin filas, sin taller: vamos a tu casa u oficina con todo el equipamiento. Agenda en minutos por WhatsApp y mantiene tu motor protegido.
+            </p>
+
+            <!-- Badges de beneficios -->
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 30px;">
+              <span style="background: rgba(168,0,0,0.25); border: 1px solid #a80000; color: #ff6666; padding: 8px 18px; border-radius: 50px; font-weight: 700; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;"><i class="fas fa-home"></i> A Domicilio</span>
+              <span style="background: rgba(168,0,0,0.25); border: 1px solid #a80000; color: #ff6666; padding: 8px 18px; border-radius: 50px; font-weight: 700; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;"><i class="fas fa-tint"></i> Sintético Premium</span>
+              <span style="background: rgba(168,0,0,0.25); border: 1px solid #a80000; color: #ff6666; padding: 8px 18px; border-radius: 50px; font-weight: 700; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;"><i class="fas fa-filter"></i> Filtro Incluido</span>
+              <span style="background: rgba(168,0,0,0.25); border: 1px solid #a80000; color: #ff6666; padding: 8px 18px; border-radius: 50px; font-weight: 700; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;"><i class="fas fa-clock"></i> Agenda Rápido</span>
+            </div>
+
+            <!-- Botón CTA grande -->
+            <a href="https://wa.me/56939026185?text=Hola%20necesito%20un%20cambio%20de%20aceite%20para%20mi%20Hyundai%20Tucson" target="_blank" style="display: inline-flex; align-items: center; gap: 12px; background: linear-gradient(135deg, #25D366, #128c7e); color: #fff; font-size: 1.3rem; font-weight: 800; padding: 18px 45px; border-radius: 60px; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 8px 30px rgba(37,211,102,0.4); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px) scale(1.03)';this.style.boxShadow='0 12px 40px rgba(37,211,102,0.5)'" onmouseout="this.style.transform='translateY(0) scale(1)';this.style.boxShadow='0 8px 30px rgba(37,211,102,0.4)'">
+              <i class="fab fa-whatsapp" style="font-size: 1.6rem;"></i>
+              Agenda Tu Cambio de Aceite Ya
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <section class="py-5">
   <div class="container">

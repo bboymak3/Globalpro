@@ -16,6 +16,28 @@ Disallow: /js/
 Disallow: /images/icons/
 Disallow: /assets/
 
+# ===================================================
+# URLS FANTASMA - prefijos inexistentes que Google indexó
+# por enlaces relativos. Bloquear para que se desindexen.
+# ===================================================
+Disallow: /taxis/
+Disallow: /aire-acondicionado/
+Disallow: /frenos/
+Disallow: /marcas/
+Disallow: /diagnostico/
+Disallow: /emergencias/
+Disallow: /mecanica/
+Disallow: /aceite/
+Disallow: /electricidad/
+Disallow: /scanner/
+Disallow: /mecanico/
+Disallow: /servicio/
+Disallow: /autos/
+Disallow: /reparacion/
+Disallow: /auxilio/
+Disallow: /24horas/
+Disallow: /urgencia/
+
 # Bloquear bots maliciosos o innecesarios
 User-agent: AhrefsBot
 Crawl-delay: 10

@@ -8,6 +8,29 @@
 /sitemap.xml https://raw.githubusercontent.com/bboymak3/globalpro/main/sitemap.xml 200
 /robots.txt https://raw.githubusercontent.com/bboymak3/globalpro/main/robots.txt 200
 
+# ===================================================
+# REDIRECCIONES 301 - URLs FANTASMA (prefijos inexistentes)
+# Google indexó URLs con prefijos falsos generados por
+# enlaces relativos. Estas reglas redirigen al homepage.
+# ===================================================
+/taxis/*  /  301
+/aire-acondicionado/*  /  301
+/frenos/*  /  301
+/marcas/*  /  301
+/diagnostico/*  /  301
+/emergencias/*  /  301
+/mecanica/*  /  301
+/aceite/*  /  301
+/electricidad/*  /  301
+/scanner/*  /  301
+/mecanico/*  /  301
+/servicio/*  /  301
+/autos/*  /  301
+/reparacion/*  /  301
+/auxilio/*  /  301
+/24horas/*  /  301
+/urgencia/*  /  301
+
 # Redirecciones 301: .html -> sin .html
 /blog/globalpro-mecanico-a-domicilio-abastecimiento-en-servicios-automotrices-de-chile-una-pieza-fundamental-y-la-estrategia-para-obtenerlos.html  /blog/globalpro-mecanico-a-domicilio-abastecimiento-en-servicios-automotrices-de-chile-una-pieza-fundamental-y-la-estrategia-para-obtenerlos  301
 /blog/globalpro-mecanico-a-domicilio-aftermarket-al-rescate-como-enfrentar-las-fallas-mas-comunes-en-la-revision-tecnica.html  /blog/globalpro-mecanico-a-domicilio-aftermarket-al-rescate-como-enfrentar-las-fallas-mas-comunes-en-la-revision-tecnica  301

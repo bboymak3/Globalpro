@@ -156,7 +156,7 @@
   }
 
   /* ========== DESKTOP (>=992px): dropdown flotante ON TOP ========== */
-  @medium (min-width: 992px) {
+  @media (min-width: 992px) {
     .navbar-nav .dropdown-menu {
       z-index: 99999 !important;
       position: absolute !important;
@@ -190,7 +190,7 @@
   }
 
   /* ========== MOBILE (<992px): dropdown fluye dentro del menu colapsado ========== */
-  @medium (max-width: 991px) {
+  @media (max-width: 991px) {
     .navbar-nav .dropdown-menu {
       position: static !important;
       background: rgba(220, 38, 38, 0.12) !important;
@@ -530,7 +530,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       color: white;
     }
 
-    @medium (min-width: 992px) {
+    @media (min-width: 992px) {
       .sticky-bottom-bar {
         height: 100px;
         padding: 0 50px;
@@ -640,14 +640,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     /* ===== CSS Infinite Scroll Carousel (We connect Section) ===== */
-    .we connect-section {
+    .conectamos-section {
       background: #121212;
       padding: 60px 0;
       overflow: hidden;
       position: relative;
     }
-    .we connect-section::before,
-    .we connect-section::after {
+    .conectamos-section::before,
+    .conectamos-section::after {
       content: '';
       position: absolute;
       top: 0;
@@ -656,15 +656,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       z-index: 2;
       pointer-events: none;
     }
-    .we connect-section::before {
+    .conectamos-section::before {
       left: 0;
       background: linear-gradient(to right, #121212, transparent);
     }
-    .we connect-section::after {
+    .conectamos-section::after {
       right: 0;
       background: linear-gradient(to left, #121212, transparent);
     }
-    .we connect-heading {
+    .conectamos-heading {
       color: #fff;
       font-size: 1.3rem;
       font-weight: 600;
@@ -702,7 +702,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       opacity: 1;
       transform: scale(1.1);
     }
-    .we connect-subtitle {
+    .conectamos-subtitle {
       color: #a80000;
       font-size: 1rem;
       font-weight: 700;
@@ -715,8 +715,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
-    @medium (max-width: 768px) {
-      .we connect-heading { font-size: 1rem; }
+    @media (max-width: 768px) {
+      .conectamos-heading { font-size: 1rem; }
       .marquee-logo-item { padding: 0 15px; height: 60px; }
       .marquee-logo-item img { max-height: 40px; }
     }
@@ -837,20 +837,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#mechanic-home service-seo">Mobile Mechanic</a>
+          <a class="nav-link" href="#mobile-mechanic-seo">Mobile Mechanic</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#services" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Services <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;transition:transform 0.3s;"></i>
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/en/services/oil-change-at-home">Oil Change</a></li>
-            <li><a class="dropdown-item" href="/en/services/brake-repair-at-home">Cambio de Brakes</a></li>
-            <li><a class="dropdown-item" href="/services/electrical-automotive-a-home service">Electrical Automotive</a></li>
-            <li><a class="dropdown-item" href="/en/services/diagnostic-scan-at-home">Diagnosis Scanner</a></li>
-            <li><a class="dropdown-item" href="/services/aire-conditioning-automotive">Air Conditioning</a></li>
-            <li><a class="dropdown-item" href="/en/services/24-hour-mechanic">Mechanic 24 Horas</a></li>
-            <li><a class="dropdown-item" href="/services/mechanic-de-emergency">Mechanic de Emergency</a></li>
+            <li><a class="dropdown-item" href="/en/servicios/oil-change-at-home">Oil Change</a></li>
+            <li><a class="dropdown-item" href="/en/servicios/brake-repair-at-home">Brake Repair</a></li>
+            <li><a class="dropdown-item" href="/en/servicios/electrical-automotive-a-home service">Electrical Automotive</a></li>
+            <li><a class="dropdown-item" href="/en/servicios/diagnostic-scan-at-home">Diagnosis Scanner</a></li>
+            <li><a class="dropdown-item" href="/en/servicios/aire-conditioning-automotive">Air Conditioning</a></li>
+            <li><a class="dropdown-item" href="/en/servicios/24-hour-mechanic">Mechanic 24 Horas</a></li>
+            <li><a class="dropdown-item" href="/en/servicios/mechanic-de-emergency">Mechanic de Emergency</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -858,58 +858,58 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             Areas <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;transition:transform 0.3s;"></i>
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/en/commonas/alhue">Alhué</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/buin">Buin</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/calera-de-tango">Calera de Tango</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/cerrillos">Cerrillos</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/cerro-navia">Cerro Navia</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/colina">Colina</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/conchali">Conchalí</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/curacavi">Curacaví</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/el-bosque">El Bosque</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/el-monte">El Monte</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/estacion-central">Estación Central</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/huechuraba">Huechuraba</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/independsncia">Independsncia</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/isla-de-maipo">Isla de Maipo</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/la-cisterna">La Cisterna</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/la-florida">La Florida</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/la-granja">La Granja</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/la-pintana">La Pintana</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/la-reina">La Reina</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/las-condes">Las Condes</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/lampa">Lampa</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/lo-barnechea">Lo Barnechea</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/lo-espejo">Lo Espejo</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/lo-prado">Lo Prado</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/macul">Macul</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/maipu">Maipú</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/maria-pinto">María Pinto</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/melipilla">Melipilla</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/nunoa">Ñuñoa</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/padre-hurtado">Padre Hurtado</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/paine">Paine</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/pedro-aguirre-cerda">Pedro Aguirre Cerda</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/penaflor">Peñaflor</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/penalolen">Peñalolén</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/pirque">Pirque</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/providencia">Providencia</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/pudahuel">Pudahuel</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/puente-high">Puente High</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/quilicura">Quilicura</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/quinta-normal">Quinta Normal</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/recoleta">Recoleta</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/renca">Renca</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/san-bernardo">San Bernardo</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/san-joaquin">San Joaquín</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/san-jose-de-maipo">San José de Maipo</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/san-miguel">San Miguel</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/san-pedro">San Pedro</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/san-ramon">San Ramón</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/santiago">Santiago</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/talagante">Talagante</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/tiltil">Tiltil</a></li>
-            <li><a class="dropdown-item" href="/en/commonas/vitacura">Vitacura</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/alhue">Alhué</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/buin">Buin</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/calera-de-tango">Calera de Tango</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/cerrillos">Cerrillos</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/cerro-navia">Cerro Navia</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/colina">Colina</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/conchali">Conchalí</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/curacavi">Curacaví</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/el-bosque">El Bosque</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/el-monte">El Monte</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/estacion-central">Estación Central</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/huechuraba">Huechuraba</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/independsncia">Independencia</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/isla-de-maipo">Isla de Maipo</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/la-cisterna">La Cisterna</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/la-florida">La Florida</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/la-granja">La Granja</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/la-pintana">La Pintana</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/la-reina">La Reina</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/las-condes">Las Condes</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/lampa">Lampa</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/lo-barnechea">Lo Barnechea</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/lo-espejo">Lo Espejo</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/lo-prado">Lo Prado</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/macul">Macul</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/maipu">Maipú</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/maria-pinto">María Pinto</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/melipilla">Melipilla</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/nunoa">Ñuñoa</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/padre-hurtado">Padre Hurtado</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/paine">Paine</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/pedro-aguirre-cerda">Pedro Aguirre Cerda</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/penaflor">Peñaflor</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/penalolen">Peñalolén</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/pirque">Pirque</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/providencia">Providencia</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/pudahuel">Pudahuel</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/puente-high">Puente Alto</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/quilicura">Quilicura</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/quinta-normal">Quinta Normal</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/recoleta">Recoleta</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/renca">Renca</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/san-bernardo">San Bernardo</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/san-joaquin">San Joaquín</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/san-jose-de-maipo">San José de Maipo</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/san-miguel">San Miguel</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/san-pedro">San Pedro</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/san-ramon">San Ramón</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/santiago">Santiago</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/talagante">Talagante</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/tiltil">Tiltil</a></li>
+            <li><a class="dropdown-item" href="/en/comunas/vitacura">Vitacura</a></li>
           </ul>
         </li>
         <li class="nav-item">
@@ -1256,8 +1256,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- SECCIÓN: CONECTAMOS (CSS Infinite Scroll Carousel) -->
-<section class="we connect-section">
-  <p class="we connect-heading">We connect a propietarios de vehicles con specialists en maintenancees, inspectiones y repaires specific de your car en donde lo necesites</p>
+<section class="conectamos-section">
+  <p class="conectamos-heading">We connect a propietarios de vehicles con specialists en maintenancees, inspectiones y repaires specific de your car en donde lo necesites</p>
   <div class="marquee-track">
     <!-- Set 1 -->
     <div class="marquee-logo-item"><img src="/images/imagen/wp-content/uploads/2024/10/Group-33795.svg" alt="Marca automotive"></div>
@@ -1282,7 +1282,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="marquee-logo-item"><img src="/images/imagen/wp-content/uploads/2024/10/Group-33789.svg" alt="Marca automotive"></div>
     <div class="marquee-logo-item"><img src="/images/imagen/wp-content/uploads/2024/10/Group-44.svg" alt="Marca automotive"></div>
   </div>
-  <p class="we connect-subtitle">Attention a home service en las commonas de la RM</p>
+  <p class="conectamos-subtitle">Attention a home service en las commonas de la RM</p>
 </section>
 
 <!-- SECCIÓN: ¿PARA QUÉ AUTO BUSCAS EL SERVICIO? -->
@@ -1464,7 +1464,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="row g-4 justify-content-center">
       <!-- 1. Oil Change -->
       <div class="col-lg-4 col-md-6">
-        <a href="/en/services/oil-change-at-home" style="text-decoration:none; color:inherit; display:block; height:100%;">
+        <a href="/en/servicios/oil-change-at-home" style="text-decoration:none; color:inherit; display:block; height:100%;">
           <div class="p-4 rounded h-100" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,193,7,0.3); border-radius: 16px !important; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)';this.style.borderColor='#FFC107';this.style.boxShadow='0 12px 35px rgba(255,193,7,0.2)';this.style.background='rgba(255,193,7,0.08)'" onmouseout="this.style.transform='translateY(0)';this.style.borderColor='rgba(255,193,7,0.3)';this.style.boxShadow='none';this.style.background='rgba(255,255,255,0.05)'">
             <div style="width:70px; height:70px; background:linear-gradient(135deg,#FFC107,#FF9800); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; box-shadow:0 4px 15px rgba(255,193,7,0.4);">
               <i class="fas fa-oil-can" style="font-size:1.8rem; color:#000;"></i>
@@ -1477,14 +1477,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </a>
       </div>
-      <!-- 2. Cambio de Brakes -->
+      <!-- 2. Brake Repair -->
       <div class="col-lg-4 col-md-6">
-        <a href="/en/services/brake-repair-at-home" style="text-decoration:none; color:inherit; display:block; height:100%;">
+        <a href="/en/servicios/brake-repair-at-home" style="text-decoration:none; color:inherit; display:block; height:100%;">
           <div class="p-4 rounded h-100" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(211,47,47,0.3); border-radius: 16px !important; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)';this.style.borderColor='#D32F2F';this.style.boxShadow='0 12px 35px rgba(211,47,47,0.2)';this.style.background='rgba(211,47,47,0.08)'" onmouseout="this.style.transform='translateY(0)';this.style.borderColor='rgba(211,47,47,0.3)';this.style.boxShadow='none';this.style.background='rgba(255,255,255,0.05)'">
             <div style="width:70px; height:70px; background:linear-gradient(135deg,#D32F2F,#a80000); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; box-shadow:0 4px 15px rgba(211,47,47,0.4);">
               <i class="fas fa-compact-disc" style="font-size:1.8rem; color:#fff;"></i>
             </div>
-            <h3 style="font-weight:700; font-size:1.25rem; color:#D32F2F; margin-bottom:10px; text-align:center;">Cambio de Brakes at Home</h3>
+            <h3 style="font-weight:700; font-size:1.25rem; color:#D32F2F; margin-bottom:10px; text-align:center;">Brake Repair at Home</h3>
             <p style="font-size:0.9rem; color:#bbb; line-height:1.7; text-align:center;">Pads, rotors, fluid y ABS. Measurement digital del thickness. Tu safety es lo firsto, we serve en tu location.</p>
             <div style="text-align:center; margin-top:12px;">
               <span style="background:#D32F2F; color:#fff; padding:6px 18px; border-radius:50px; font-size:0.85rem; font-weight:700;">Ver Detalles <i class="fas fa-arrow-right ms-1"></i></span>
@@ -1494,7 +1494,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <!-- 3. Electrical Automotive -->
       <div class="col-lg-4 col-md-6">
-        <a href="/services/electrical-automotive-a-home service" style="text-decoration:none; color:inherit; display:block; height:100%;">
+        <a href="/en/servicios/electrical-automotive-a-home service" style="text-decoration:none; color:inherit; display:block; height:100%;">
           <div class="p-4 rounded h-100" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(33,150,243,0.3); border-radius: 16px !important; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)';this.style.borderColor='#2196F3';this.style.boxShadow='0 12px 35px rgba(33,150,243,0.2)';this.style.background='rgba(33,150,243,0.08)'" onmouseout="this.style.transform='translateY(0)';this.style.borderColor='rgba(33,150,243,0.3)';this.style.boxShadow='none';this.style.background='rgba(255,255,255,0.05)'">
             <div style="width:70px; height:70px; background:linear-gradient(135deg,#2196F3,#1565C0); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; box-shadow:0 4px 15px rgba(33,150,243,0.4);">
               <i class="fas fa-bolt" style="font-size:1.8rem; color:#fff;"></i>
@@ -1509,7 +1509,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <!-- 4. Diagnosis Scanner -->
       <div class="col-lg-4 col-md-6">
-        <a href="/en/services/diagnostic-scan-at-home" style="text-decoration:none; color:inherit; display:block; height:100%;">
+        <a href="/en/servicios/diagnostic-scan-at-home" style="text-decoration:none; color:inherit; display:block; height:100%;">
           <div class="p-4 rounded h-100" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(76,175,80,0.3); border-radius: 16px !important; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)';this.style.borderColor='#4CAF50';this.style.boxShadow='0 12px 35px rgba(76,175,80,0.2)';this.style.background='rgba(76,175,80,0.08)'" onmouseout="this.style.transform='translateY(0)';this.style.borderColor='rgba(76,175,80,0.3)';this.style.boxShadow='none';this.style.background='rgba(255,255,255,0.05)'">
             <div style="width:70px; height:70px; background:linear-gradient(135deg,#4CAF50,#2E7D32); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; box-shadow:0 4px 15px rgba(76,175,80,0.4);">
               <i class="fas fa-barcode" style="font-size:1.8rem; color:#fff;"></i>
@@ -1524,7 +1524,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <!-- 5. Air Conditioning -->
       <div class="col-lg-4 col-md-6">
-        <a href="/services/aire-conditioning-automotive" style="text-decoration:none; color:inherit; display:block; height:100%;">
+        <a href="/en/servicios/aire-conditioning-automotive" style="text-decoration:none; color:inherit; display:block; height:100%;">
           <div class="p-4 rounded h-100" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(0,188,212,0.3); border-radius: 16px !important; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)';this.style.borderColor='#00BCD4';this.style.boxShadow='0 12px 35px rgba(0,188,212,0.2)';this.style.background='rgba(0,188,212,0.08)'" onmouseout="this.style.transform='translateY(0)';this.style.borderColor='rgba(0,188,212,0.3)';this.style.boxShadow='none';this.style.background='rgba(255,255,255,0.05)'">
             <div style="width:70px; height:70px; background:linear-gradient(135deg,#00BCD4,#0097A7); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; box-shadow:0 4px 15px rgba(0,188,212,0.4);">
               <i class="fas fa-snowflake" style="font-size:1.8rem; color:#fff;"></i>
@@ -1539,7 +1539,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <!-- 6. Mechanic 24 Horas -->
       <div class="col-lg-4 col-md-6">
-        <a href="/en/services/24-hour-mechanic" style="text-decoration:none; color:inherit; display:block; height:100%;">
+        <a href="/en/servicios/24-hour-mechanic" style="text-decoration:none; color:inherit; display:block; height:100%;">
           <div class="p-4 rounded h-100" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,152,0,0.3); border-radius: 16px !important; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)';this.style.borderColor='#FF9800';this.style.boxShadow='0 12px 35px rgba(255,152,0,0.2)';this.style.background='rgba(255,152,0,0.08)'" onmouseout="this.style.transform='translateY(0)';this.style.borderColor='rgba(255,152,0,0.3)';this.style.boxShadow='none';this.style.background='rgba(255,255,255,0.05)'">
             <div style="width:70px; height:70px; background:linear-gradient(135deg,#FF9800,#E65100); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; box-shadow:0 4px 15px rgba(255,152,0,0.4);">
               <i class="fas fa-clock" style="font-size:1.8rem; color:#fff;"></i>
@@ -1554,7 +1554,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <!-- 7. Mechanic de Emergency -->
       <div class="col-lg-4 col-md-6 offset-lg-4">
-        <a href="/services/mechanic-de-emergency" style="text-decoration:none; color:inherit; display:block; height:100%;">
+        <a href="/en/servicios/mechanic-de-emergency" style="text-decoration:none; color:inherit; display:block; height:100%;">
           <div class="p-4 rounded h-100" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(168,0,0,0.4); border-radius: 16px !important; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)';this.style.borderColor='#a80000';this.style.boxShadow='0 12px 35px rgba(168,0,0,0.25)';this.style.background='rgba(168,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)';this.style.borderColor='rgba(168,0,0,0.4)';this.style.boxShadow='none';this.style.background='rgba(255,255,255,0.05)'">
             <div style="width:70px; height:70px; background:linear-gradient(135deg,#a80000,#d32f2f); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; box-shadow:0 4px 15px rgba(168,0,0,0.5);">
               <i class="fas fa-exclamation-triangle" style="font-size:1.8rem; color:#fff;"></i>
@@ -3076,7 +3076,7 @@ tapizado de steering wheels in Santiago para renovar la imagen de your car. Tral
         <div class="footer-links">
           <ul>
             <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#mechanic-home service-seo">Mobile Mechanic</a></li>
+            <li><a href="#mobile-mechanic-seo">Mobile Mechanic</a></li>
             <li><a href="#services">Our Services</a></li>
             <li><a href="#faq">Frequently Asked Questions</a></li>
             <li><a href="/en/blog/">Blog</a></li>
@@ -3102,7 +3102,7 @@ tapizado de steering wheels in Santiago para renovar la imagen de your car. Tral
           <i class="fas fa-phone-alt"></i>
           <div>
             <strong>Phone:</strong><br>
-            <a href="tel:939026185" style="color:#bbb; text-decoration:none;">+569 39026185</a>
+            <a href="tel:+56939026185" style="color:#bbb; text-decoration:none;">+569 39026185</a>
           </div>
         </div>
 
@@ -3609,12 +3609,12 @@ function showRecResult(type, html) {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
-@medium (max-width: 480px) {
+@media (max-width: 480px) {
   #modal-schedule-visita > div:first-child { max-height:95vh; }
   #modal-schedule-visita input[type="text"].form-control[style*="text-align:center"] { font-size:1.3rem !important; letter-spacing:3px !important; }
   #schedule-mapa-container { height: 260px; width: 100%; }
 }
-@medium (max-width: 480px) {
+@media (max-width: 480px) {
   #schedule-mapa-container { height: 200px; }
 }
 </style>
@@ -3922,7 +3922,7 @@ function resetScheduleVisita() {
   <div class="big-buttons-container" style="gap: 15px;">
     
     <!-- Botón Llamada (Rojo Large) -->
-    <a href="tel:939026185" class="btn-moresive-call">
+    <a href="tel:+56939026185" class="btn-moresive-call">
       <i class="fas fa-phone-alt"></i> CALL NOW
     </a>
 

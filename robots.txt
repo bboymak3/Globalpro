@@ -40,9 +40,8 @@ Allow: /sitemap.xml
 Allow: /robots.txt
 
 # Archivos y carpetas que NO se deben rastrear
-Disallow: /css/
-Disallow: /js/
-Disallow: /images/
+# NOTA: Se permite acceso a /css/, /js/ e /images/ para que Google
+# pueda renderizar correctamente la página e indexar imágenes.
 Disallow: /assets/
 Disallow: /images/imagen/
 

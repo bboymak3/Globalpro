@@ -545,6 +545,55 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="alternate" hreflang="es" href="https://mecanico247.com/politica-privacidad" />
 <link rel="alternate" hreflang="en" href="https://mecanico247.com/en/privacy-policy" />
 <link rel="alternate" hreflang="x-default" href="https://mecanico247.com/politica-privacidad" />
+<style>
+/* Language Switcher Styles */
+#lang-switcher a, #lang-switcher span {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+#lang-switcher a:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+#lang-switcher a::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: width 0.4s, height 0.4s, top 0.4s, left 0.4s;
+}
+#lang-switcher a:hover::after {
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+}
+@keyframes langPulse {
+  0% { box-shadow: 0 0 0 0 rgba(168, 0, 0, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(168, 0, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(168, 0, 0, 0); }
+}
+@keyframes langPulseEN {
+  0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.4); }
+  70% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+}
+#lang-switcher .lang-active-es {
+  background: linear-gradient(135deg, #a80000 0%, #d32f2f 100%) !important;
+  animation: langPulse 2s infinite;
+  color: #fff !important;
+}
+#lang-switcher .lang-active-en {
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d2d5e 100%) !important;
+  animation: langPulseEN 2s infinite;
+  color: #FFC107 !important;
+}
+</style>
 </head>
 <body>
 
@@ -1145,8 +1194,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 
 <div id="lang-switcher" style="position:fixed; top:150px; right:15px; z-index:10002; display:flex; gap:4px;">
-  <span style="background:#a80000; color:#fff; padding:6px 12px; border-radius:6px; font-size:0.8rem; font-weight:700;">🇪🇸 ES</span>
-  <a href="/en/privacy-policy" style="background:#1a1a2e; color:#FFC107; padding:6px 12px; border-radius:6px; font-size:0.8rem; font-weight:700; text-decoration:none;">🇬🇧 EN</a>
+  <span class="lang-active-es" style="background:linear-gradient(135deg, #a80000, #d32f2f); color:#fff; padding:6px 12px; border-radius:6px; font-size:0.8rem; font-weight:700;">🇪🇸 ES</span>
+  <a href="/en/privacy-policy" class="" style="background:#1a1a2e; color:#FFC107; padding:6px 12px; border-radius:6px; font-size:0.8rem; font-weight:700; text-decoration:none;" onmouseover="this.style.background='linear-gradient(135deg, #2d2d5e, #4a4a8a)'" onmouseout="this.style.background='#1a1a2e'">🇬🇧 EN</a>
 </div>
 <script>
 // Language detection: redirect to English version if browser is in English

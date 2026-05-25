@@ -427,6 +427,9 @@
   #resultado-patente-ia .notas-tec { background: #fffdf5; border-left: 3px solid #ffc800; padding: 6px 8px; border-radius: 4px; margin-top: 6px; font-size: 0.82rem; }
 
 </style>
+<link rel="alternate" hreflang="es" href="https://mecanico247.com/servicios/mecanico-24-horas" />
+<link rel="alternate" hreflang="en" href="https://mecanico247.com/en/servicios/24-hour-mechanic" />
+<link rel="alternate" hreflang="x-default" href="https://mecanico247.com/servicios/mecanico-24-horas" />
 </head>
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NK35S8FG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -629,6 +632,26 @@ gsap.from(".section-title",{scrollTrigger:{trigger:".services-section",start:"to
 <script>
 function buscarPatenteIA(e){e.preventDefault();var pat=document.getElementById("input-patente-ia").value.trim().toUpperCase();if(!pat)return;var res=document.getElementById("resultado-patente-ia");res.style.display="block";res.innerHTML='<div style="text-align:center;padding:20px;color:#999;"><i class="fas fa-spinner fa-spin"></i> Buscando...</div>';fetch("https://llm-chat-app-template.estilosgrado33.workers.dev/api/consultar",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({patente:pat})}).then(function(r){return r.json()}).then(function(data){if(data.success&&data.vehiculo){var v=data.vehiculo;var html='<div style="background:#f0f7ff;border-radius:8px;padding:10px;margin-bottom:10px;border-left:3px solid #2563eb;">';html+='<strong style="color:#1e3a8a;">'+v.marca+" "+v.modelo+" ("+(v.anio||"N/A")+")</strong>";html+='<div style="font-size:0.83rem;color:#1e40af;">Patente: '+v.patente_placa+" | Propietario: "+(v.cliente?.nombre||"N/A")+"</div>";html+='<div style="font-size:0.83rem;color:#1e40af;">'+v.total_ordenes+" orden(es) encontrada(s)</div></div>";for(var i=0;i<v.ordenes.length;i++){var o=v.ordenes[i];var estadoClass=(o.estado==="Cerrada"||o.estado_trabajo==="Cerrada")?"badge-ok":"badge-pend";var num=String(o.numero_orden||0).padStart(6,"0");html+='<div class="ot-card">';html+='<div class="ot-num">OT #'+num+' <span class="ot-estado '+estadoClass+'">'+(o.estado_trabajo||o.estado||"N/A")+"</span></div>";html+='<div class="dato">Ingreso: '+(o.fecha_ingreso||"N/A")+"</div>";if(o.fecha_completado)html+='<div class="dato">Cierre: '+o.fecha_completado+"</div>";html+="</div>"}res.innerHTML=html}else{res.innerHTML='<div style="text-align:center;padding:20px;color:#999;">No se encontro informacion para la patente '+pat+"</div>"}}).catch(function(){res.innerHTML='<div style="text-align:center;padding:20px;color:#d32f2f;">Error al consultar. Intenta nuevamente.</div>'})}
 document.getElementById("modal-chat-ia").addEventListener("click",function(e){if(e.target===this)this.style.display="none"});
+</script>
+<div id="lang-switcher" style="position:fixed; top:80px; right:15px; z-index:9999; display:flex; gap:4px;">
+  <span style="background:#a80000; color:#fff; padding:6px 12px; border-radius:6px; font-size:0.8rem; font-weight:700;">🇪🇸 ES</span>
+  <a href="/en/servicios/24-hour-mechanic" style="background:#1a1a2e; color:#FFC107; padding:6px 12px; border-radius:6px; font-size:0.8rem; font-weight:700; text-decoration:none;">🇬🇧 EN</a>
+</div>
+<script>
+// Language detection: redirect to English version if browser is in English
+(function() {
+  if (sessionStorage.getItem('lang_choice')) return;
+  var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+  if (lang.startsWith('en') && !window.location.pathname.startsWith('/en/')) {
+    var enPath = '/en' + window.location.pathname;
+    // Check if user hasn't manually chosen Spanish
+    if (!document.referrer.includes(window.location.hostname) || !document.referrer.includes('/en/')) {
+      // Set a flag and suggest redirect
+      sessionStorage.setItem('lang_suggested', 'en');
+    }
+  }
+  sessionStorage.setItem('lang_choice', 'es');
+})();
 </script>
 </body>
 </html>

@@ -430,6 +430,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   #resultado-patente-ia .dato { font-size: 0.85rem; margin-bottom: 3px; color: #374151; }
   #resultado-patente-ia .notas-tec { background: #fffdf5; border-left: 3px solid #ffc800; padding: 6px 8px; border-radius: 4px; margin-top: 6px; font-size: 0.82rem; }
 </style>
+<link rel="alternate" hreflang="es" href="https://mecanico247.com/comunas/lo-prado" />
+<link rel="alternate" hreflang="en" href="https://mecanico247.com/en/comunas/lo-prado" />
+<link rel="alternate" hreflang="x-default" href="https://mecanico247.com/comunas/lo-prado" />
 </head>
 <body>
 
@@ -2046,5 +2049,25 @@ document.getElementById('modal-chat-ia').addEventListener('click', function(e) {
 });
 </script>
 
+<div id="lang-switcher" style="position:fixed; top:80px; right:15px; z-index:9999; display:flex; gap:4px;">
+  <span style="background:#a80000; color:#fff; padding:6px 12px; border-radius:6px; font-size:0.8rem; font-weight:700;">🇪🇸 ES</span>
+  <a href="/en/comunas/lo-prado" style="background:#1a1a2e; color:#FFC107; padding:6px 12px; border-radius:6px; font-size:0.8rem; font-weight:700; text-decoration:none;">🇬🇧 EN</a>
+</div>
+<script>
+// Language detection: redirect to English version if browser is in English
+(function() {
+  if (sessionStorage.getItem('lang_choice')) return;
+  var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+  if (lang.startsWith('en') && !window.location.pathname.startsWith('/en/')) {
+    var enPath = '/en' + window.location.pathname;
+    // Check if user hasn't manually chosen Spanish
+    if (!document.referrer.includes(window.location.hostname) || !document.referrer.includes('/en/')) {
+      // Set a flag and suggest redirect
+      sessionStorage.setItem('lang_suggested', 'en');
+    }
+  }
+  sessionStorage.setItem('lang_choice', 'es');
+})();
+</script>
 </body>
 </html>

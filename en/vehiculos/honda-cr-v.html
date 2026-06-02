@@ -339,65 +339,6 @@
   </div>
 </section>
 
-<!-- ======================================================================= -->
-<!-- GOOGLE BUSINESS PROFILE - BOTON -->
-<!-- ======================================================================= -->
-<section class="py-4" style="background: linear-gradient(135deg, #fff8f0 0%, #fff 100%); position: relative; overflow: hidden;">
-  <div style="position:absolute; top:-50px; left:50%; transform:translateX(-50%); width:600px; height:200px; background:radial-gradient(ellipse, rgba(255,193,7,0.10) 0%, transparent 70%); pointer-events:none;"></div>
-  <div class="container" style="position:relative; z-index:2;">
-    <div class="text-center">
-      <div style="display:inline-flex; align-items:center; gap:12px; background:#fff; border:2px solid #FFC107; border-radius:16px; padding:18px 30px; box-shadow:0 6px 25px rgba(255,193,7,0.15); transition:all 0.3s; cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 35px rgba(255,193,7,0.25)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 6px 25px rgba(255,193,7,0.15)'" onclick="document.getElementById('modal-google-profile').style.display='flex'">
-        <div style="width:55px; height:55px; background:linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335); border-radius:14px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-          <i class="fab fa-google" style="font-size:1.6rem; color:#fff;"></i>
-        </div>
-        <div style="text-align:left;">
-          <div style="font-weight:800; font-size:1.1rem; color:#1a1a1a;">Ver Nuestro Perfil de Google</div>
-          <div style="display:flex; align-items:center; gap:6px; margin-top:4px;">
-            <span style="color:#FBBC05; font-size:1.1rem;">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-            </span>
-            <span style="font-weight:700; color:#1a1a1a; font-size:0.95rem;">4.9</span>
-            <span style="color:#666; font-size:0.85rem;">| 155+ opiniones verifieds</span>
-          </div>
-        </div>
-        <i class="fas fa-externall-link-alt" style="color:#4285F4; font-size:1rem; margin-left:8px;"></i>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Modal Google Profile -->
-<div id="modal-google-profile" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:10000; justify-content:center; align-items:center; padding:20px;" onclick="if(event.target===this)this.style.display='none'">
-  <div style="background:#fff; border-radius:20px; max-width:500px; width:100%; padding:0; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.3); animation:modalSlideIn 0.3s ease;">
-    <div style="background:linear-gradient(135deg, #4285F4, #34A853); padding:25px 30px; display:flex; align-items:center; justify-content:space-between;">
-      <div style="display:flex; align-items:center; gap:12px;">
-        <div style="width:45px; height:45px; background:#fff; border-radius:12px; display:flex; align-items:center; justify-content:center;">
-          <i class="fab fa-google" style="font-size:1.3rem; background:linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335); -webkit-background-clip:text; -webkit-text-fill-color:transparent;"></i>
-        </div>
-        <div style="color:#fff;">
-          <div style="font-weight:800; font-size:1.1rem;">GlobalPro Automotive</div>
-          <div style="font-size:0.85rem; opacity:0.9;">Shop Mobile Mechanic</div>
-        </div>
-      </div>
-      <button onclick="document.getElementById('modal-google-profile').style.display='none'" style="background:rgba(255,255,255,0.2); border:none; color:#fff; width:35px; height:35px; border-radius:50%; font-size:1.2rem; cursor:pointer; display:flex; align-items:center; justify-content:center;">&times;</button>
-    </div>
-    <div style="padding:25px 30px; text-align:center;">
-      <div style="margin-bottom:20px;">
-        <span style="color:#FBBC05; font-size:2rem;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
-        <div style="font-size:2.5rem; font-weight:900; color:#1a1a1a; margin-top:5px;">4.9</div>
-        <div style="color:#666; font-size:0.9rem;">Basado en 155+ opiniones verifieds</div>
-      </div>
-      <div style="background:#f8f9fa; border-radius:12px; padding:15px; margin-bottom:20px; text-align:left;">
-        <div style="font-weight:700; color:#333; margin-bottom:8px; font-size:0.95rem;"><i class="fas fa-quote-left" style="color:#a80000; margin-right:6px;"></i>Opiniones destaeachs</div>
-        <div style="font-size:0.85rem; color:#555; line-height:1.6; font-style:italic;">"Excelente service, llegaron fast y resolvieron el problem en el acto. 100% recommended." - Cliente verified</div>
-      </div>
-      <a href="https://search.google.com/local/writereview?placeid=ChIJ8-Ss6LLFYpYRnFkh8v_5XEQ" target="_blank" style="display:inline-flex; align-items:center; gap:8px; background:#4285F4; color:#fff; padding:12px 30px; border-radius:50px; text-decoration:none; font-weight:700; font-size:1rem; box-shadow:0 4px 15px rgba(66,133,244,0.3); transition:all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
-        <i class="fab fa-google"></i> Ver en Google Maps
-      </a>
-    </div>
-  </div>
-</div>
-
 <section class="py-5 bg-light">
   <div class="container">
     <div class="row justify-content-center">
@@ -1237,6 +1178,183 @@ function loadMoreVehicles(slug){
   if(shown === 0 && btn) btn.style.display = 'none';
 }
 </script>
+
+<section id="resenas" class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="section-title">What Our Customers Say</h2>
+    <p class="section-subtitle">Your trust is our best recommendation. Read the experiences of those who already trust our work.</p>
+    <div style="margin-top:25px;">
+    <!-- Badge de rating -->
+    <div style="display:inline-flex; align-items:center; gap:12px; background:#fff; border:2px solid #e8eaed; border-radius:16px; padding:14px 24px; margin-bottom:25px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <span style="font-size:2.2rem; font-weight:900; color:#202124;">4.9</span>
+      <div>
+        <div style="color:#FBBC05; font-size:1.1rem;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div style="font-size:0.8rem; color:#70757a; font-weight:600;">Based on 155+ Google reviews</div>
+      </div>
+      <i class="fab fa-google" style="font-size:1.5rem; color:#4285F4;"></i>
+    </div>
+    <!-- Reseñas Google Maps en grilla -->
+    <div class="reviews-grid">
+    <div class="google-review-card">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+        <div style="width:40px; height:40px; border-radius:50%; background:#4285F4; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1rem; flex-shrink:0;">E</div>
+        <div style="text-align:left;">
+          <div style="font-weight:700; font-size:0.9rem; color:#202124;">Eduardo Muñoz</div>
+          <div style="font-size:0.75rem; color:#70757a;">1 day ago</div>
+        </div>
+        <i class="fab fa-google" style="margin-left:auto; color:#4285F4; font-size:1rem; opacity:0.6;"></i>
+      </div>
+      <span style="color:#FBBC05; font-size:0.85rem; letter-spacing:1px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+      <p style="margin:8px 0 0; font-size:0.85rem; color:#333; line-height:1.6; text-align:left; font-style:italic;">"I had a problem with my car, the driver's seatbelt wouldn't latch. They replaced it and everything works perfectly. Thank you for your service."</p>
+    </div>
+    <div class="google-review-card">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+        <div style="width:40px; height:40px; border-radius:50%; background:#EA4335; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1rem; flex-shrink:0;">L</div>
+        <div style="text-align:left;">
+          <div style="font-weight:700; font-size:0.9rem; color:#202124;">Luc</div>
+          <div style="font-size:0.75rem; color:#70757a;">3 days ago</div>
+        </div>
+        <i class="fab fa-google" style="margin-left:auto; color:#4285F4; font-size:1rem; opacity:0.6;"></i>
+      </div>
+      <span style="color:#FBBC05; font-size:0.85rem; letter-spacing:1px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+      <p style="margin:8px 0 0; font-size:0.85rem; color:#333; line-height:1.6; text-align:left; font-style:italic;">"Great experience, excellent work, punctual delivery, good communication and responsible. I recommend 100%."</p>
+    </div>
+    <div class="google-review-card">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+        <div style="width:40px; height:40px; border-radius:50%; background:#FBBC05; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1rem; flex-shrink:0;">A</div>
+        <div style="text-align:left;">
+          <div style="font-weight:700; font-size:0.9rem; color:#202124;">Alberto Ossandon</div>
+          <div style="font-size:0.75rem; color:#70757a;">5 days ago</div>
+        </div>
+        <i class="fab fa-google" style="margin-left:auto; color:#4285F4; font-size:1rem; opacity:0.6;"></i>
+      </div>
+      <span style="color:#FBBC05; font-size:0.85rem; letter-spacing:1px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+      <p style="margin:8px 0 0; font-size:0.85rem; color:#333; line-height:1.6; text-align:left; font-style:italic;">"Very good service from Global Pro. José was very friendly and clearly knows what he's doing. Scanned the car, clearly explained the issues, and was transparent with the diagnosis. Highly recommended."</p>
+    </div>
+    <div class="google-review-card">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+        <div style="width:40px; height:40px; border-radius:50%; background:#34A853; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1rem; flex-shrink:0;">C</div>
+        <div style="text-align:left;">
+          <div style="font-weight:700; font-size:0.9rem; color:#202124;">Claudio Quezada</div>
+          <div style="font-size:0.75rem; color:#70757a;">5 days ago</div>
+        </div>
+        <i class="fab fa-google" style="margin-left:auto; color:#4285F4; font-size:1rem; opacity:0.6;"></i>
+      </div>
+      <span style="color:#FBBC05; font-size:0.85rem; letter-spacing:1px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+      <p style="margin:8px 0 0; font-size:0.85rem; color:#333; line-height:1.6; text-align:left; font-style:italic;">"Excellent attention. They accommodated my schedule. Gregorio is a great professional, solved the car problem with very educational guidance."</p>
+    </div>
+    <div class="google-review-card">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+        <div style="width:40px; height:40px; border-radius:50%; background:#a80000; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1rem; flex-shrink:0;">M</div>
+        <div style="text-align:left;">
+          <div style="font-weight:700; font-size:0.9rem; color:#202124;">Marcelo Fuentes</div>
+          <div style="font-size:0.75rem; color:#70757a;">6 days ago</div>
+        </div>
+        <i class="fab fa-google" style="margin-left:auto; color:#4285F4; font-size:1rem; opacity:0.6;"></i>
+      </div>
+      <span style="color:#FBBC05; font-size:0.85rem; letter-spacing:1px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+      <p style="margin:8px 0 0; font-size:0.85rem; color:#333; line-height:1.6; text-align:left; font-style:italic;">"Thank you for preparing the air conditioning in my car. Good attention, fast and good prices."</p>
+    </div>
+    <div class="google-review-card">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+        <div style="width:40px; height:40px; border-radius:50%; background:#FF6D00; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1rem; flex-shrink:0;">E</div>
+        <div style="text-align:left;">
+          <div style="font-weight:700; font-size:0.9rem; color:#202124;">Emilio Ravena</div>
+          <div style="font-size:0.75rem; color:#70757a;">1 week ago</div>
+        </div>
+        <i class="fab fa-google" style="margin-left:auto; color:#4285F4; font-size:1rem; opacity:0.6;"></i>
+      </div>
+      <span style="color:#FBBC05; font-size:0.85rem; letter-spacing:1px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+      <p style="margin:8px 0 0; font-size:0.85rem; color:#333; line-height:1.6; text-align:left; font-style:italic;">"100% recommended for emergencies. Honest, they explain the fault and repair it on the spot when possible. Very good work."</p>
+    </div>
+    <div class="google-review-card">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+        <div style="width:40px; height:40px; border-radius:50%; background:#7B1FA2; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1rem; flex-shrink:0;">I</div>
+        <div style="text-align:left;">
+          <div style="font-weight:700; font-size:0.9rem; color:#202124;">Iván Rivera</div>
+          <div style="font-size:0.75rem; color:#70757a;">2 months ago</div>
+        </div>
+        <i class="fab fa-google" style="margin-left:auto; color:#4285F4; font-size:1rem; opacity:0.6;"></i>
+      </div>
+      <span style="color:#FBBC05; font-size:0.85rem; letter-spacing:1px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+      <p style="margin:8px 0 0; font-size:0.85rem; color:#333; line-height:1.6; text-align:left; font-style:italic;">"I contacted them on a Sunday evening, by Monday 08:00 they were at my home and by 15:00 my car was running perfectly. Excellent service."</p>
+    </div>
+    <div class="google-review-card">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+        <div style="width:40px; height:40px; border-radius:50%; background:#00897B; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1rem; flex-shrink:0;">C</div>
+        <div style="text-align:left;">
+          <div style="font-weight:700; font-size:0.9rem; color:#202124;">Christian Andrés Ríos</div>
+          <div style="font-size:0.75rem; color:#70757a;">2 months ago</div>
+        </div>
+        <i class="fab fa-google" style="margin-left:auto; color:#4285F4; font-size:1rem; opacity:0.6;"></i>
+      </div>
+      <span style="color:#FBBC05; font-size:0.85rem; letter-spacing:1px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+      <p style="margin:8px 0 0; font-size:0.85rem; color:#333; line-height:1.6; text-align:left; font-style:italic;">"Excellent attention, they identified the problem and how to fix it from one day to the next. Very honest and professional. Recommended."</p>
+    </div>
+    <div class="google-review-card">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+        <div style="width:40px; height:40px; border-radius:50%; background:#4285F4; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1rem; flex-shrink:0;">J</div>
+        <div style="text-align:left;">
+          <div style="font-weight:700; font-size:0.9rem; color:#202124;">Juan Ignacio Errázuriz</div>
+          <div style="font-size:0.75rem; color:#70757a;">2 months ago</div>
+        </div>
+        <i class="fab fa-google" style="margin-left:auto; color:#4285F4; font-size:1rem; opacity:0.6;"></i>
+      </div>
+      <span style="color:#FBBC05; font-size:0.85rem; letter-spacing:1px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+      <p style="margin:8px 0 0; font-size:0.85rem; color:#333; line-height:1.6; text-align:left; font-style:italic;">"Had a problem with my car door latch on a weekend. They came Sunday morning and fixed it perfectly. Very reasonable price."</p>
+    </div>
+    <div class="google-review-card">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+        <div style="width:40px; height:40px; border-radius:50%; background:#EA4335; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1rem; flex-shrink:0;">C</div>
+        <div style="text-align:left;">
+          <div style="font-weight:700; font-size:0.9rem; color:#202124;">Catalina Gotan</div>
+          <div style="font-size:0.75rem; color:#70757a;">2 months ago</div>
+        </div>
+        <i class="fab fa-google" style="margin-left:auto; color:#4285F4; font-size:1rem; opacity:0.6;"></i>
+      </div>
+      <span style="color:#FBBC05; font-size:0.85rem; letter-spacing:1px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+      <p style="margin:8px 0 0; font-size:0.85rem; color:#333; line-height:1.6; text-align:left; font-style:italic;">"Arrived very quickly and managed to detect the fault in my car. Recommended."</p>
+    </div>
+      </div>
+    <!-- Botones CTA -->
+    <div style="margin-top:25px; display:flex; flex-wrap:wrap; justify-content:center; gap:12px;">
+      <a href="https://www.google.com/maps/place/Mec%C3%A1nico+A+Domicilio+24%2F7+%F0%9F%94%A7+%7C+Global+Pro+Automotriz/@-33.4985,-70.6355,15z/data=!4m8!3m7!1s0x9662c4e7e72e6b63:0xa5a8efc1e2c5a23e!8m2!3d-33.4985!4d-70.6355!9m1!1b1!16s%2Fg%2F11t5bkm9kj5" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; background:#4285F4; color:#fff; padding:12px 28px; border-radius:50px; text-decoration:none; font-weight:700; font-size:0.95rem; box-shadow:0 4px 15px rgba(66,133,244,0.3); transition:all 0.3s;">
+        <i class="fab fa-google"></i> View on Google Maps
+      </a>
+      <a href="https://search.google.com/local/writereview?placeid=ChIJ8-Ss6LLFYpYRnFkh8v_5XEQ" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; background:#fff; color:#a80000; padding:12px 28px; border-radius:50px; text-decoration:none; font-weight:700; font-size:0.95rem; border:2px solid #a80000; transition:all 0.3s;">
+        <i class="fas fa-star"></i> Write a Review
+      </a>
+    </div>
+  </div>
+  <style>
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      padding: 0;
+    }
+    .google-review-card {
+      background: #fff;
+      border: 1px solid #e8eaed;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .google-review-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    @media (max-width: 768px) {
+      .reviews-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+      .google-review-card { padding: 16px; }
+    }
+    @media (max-width: 480px) {
+      .reviews-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+  </div>
+</section>
 
 <footer class="main-footer">
   <div class="container">

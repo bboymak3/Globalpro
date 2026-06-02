@@ -45,6 +45,10 @@ Allow: /robots.txt
 Disallow: /assets/
 Disallow: /images/imagen/
 
+# Bloquear URLs con extension .html (ya redirigen 301 a URLs limpias)
+# Esto acelera la desindexacion de las URLs antiguas con .html
+Disallow: /*.html
+
 # ===================================================
 # URLS FANTASMA - prefijos inexistentes que Google indexó
 # por enlaces relativos. Bloquear para que se desindexen.
@@ -79,6 +83,7 @@ Disallow: /servicios/vehiculos/
 Disallow: /blog/comunas/
 Disallow: /blog/vehiculos/
 Disallow: /marcas/vehiculos/
+Disallow: /marcas_automotrices/marcas_automotrices/
 
 # Bloquear bots maliciosos o innecesarios
 User-agent: AhrefsBot
